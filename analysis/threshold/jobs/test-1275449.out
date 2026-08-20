@@ -1,0 +1,25 @@
+Running on megofl04.icepp.s.u-tokyo.ac.jp at 2026年  7月 31日 金曜日 08:46:36 JST
+================================================================
+=====>  ../result/threshold/threshold_2GeV.root
+=========== PedestalExtract ============
+ HIGH GAIN PEDESTAL ... ...
+ channel count(15um:10um) : 1728 , 5184
+ mean of pedestal High : 422.523 , 419.14
+ sigma of pedestal High: 4.63174 , 3.79367
+ LOW GAIN PEDESTAL ... ...
+ channel count(15um:10um) : 1728 , 5184
+ mean of pedestal Low : 418.999 , 415.412
+ sigma of pedestal Low: 2.61743 , 2.49365
+made save TTree
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/ps/decode/e-/2GeV/ECAL_Run80_20230524_074802.root
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/ps/decode/e-/2GeV/ECAL_Run81_20230524_113448.root
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/ps/decode/e-/2GeV/ECAL_Run82_20230524_123530.root
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/ps/decode/e-/2GeV/ECAL_Run83_20230524_144617.root
+0/4
+1/4
+2/4
+3/4
+2GeV
+Exit status: 0
+================================================================
+End of run is 2026年  7月 31日 金曜日 09:01:45 JST

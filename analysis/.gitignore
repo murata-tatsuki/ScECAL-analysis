@@ -1,0 +1,6 @@
+*.err
+*.out
+*.o
+*.png
+*.root
+tmp/*.txt

@@ -1,0 +1,26 @@
+Running on megofl05.icepp.s.u-tokyo.ac.jp at 2026年  8月 17日 月曜日 21:20:20 JST
+================================================================
+=====>  ../result/discrepancy/simulation/HighGain/threshold/200mm/3GeV_200mm.root
+0/1
+fitting histograms ... 
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      351.053
+NDf                       =           51
+Edm                       =  8.89862e-07
+NCalls                    =           56
+Constant                  =      4460.07   +/-   17.6492     
+Mean                      =      82.6474   +/-   0.0290377   
+Sigma                     =      8.89816   +/-   0.0215609    	 (limited)
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      31.4498
+NDf                       =           24
+Edm                       =  3.77374e-07
+NCalls                    =           71
+Constant                  =      4472.16   +/-   20.8666     
+Mean                      =      82.2427   +/-   0.0401049   
+Sigma                     =      8.85893   +/-   0.0502856    	 (limited)
+Exit status: 0
+================================================================
+End of run is 2026年  8月 17日 月曜日 21:24:55 JST

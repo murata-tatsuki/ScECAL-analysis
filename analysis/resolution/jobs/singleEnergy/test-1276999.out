@@ -1,0 +1,30 @@
+Running on megofl08.icepp.s.u-tokyo.ac.jp at 2026年  8月  4日 火曜日 05:19:50 JST
+================================================================
+=====>  ../result/resolution/data/5mm/200GeV_5mm.root
+0/2
+1/2
+fitting histograms ... 
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      2025.26
+NDf                       =         1372
+Edm                       =  4.69444e-08
+NCalls                    =          850
+Constant                  =      79.4948   +/-   43.8669     
+Mean                      =        40768   +/-   2442.64     
+Sigma                     =      12109.7   +/-   1013.99      	 (limited)
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      4062.23
+NDf                       =          641
+Edm                       =  4.72051e-05
+NCalls                    =         1101
+Constant                  =      23.9877   +/-   12.1876     
+Mean                      =       6692.5   +/-   792.605     
+Sigma                     =         2669   +/-   236.147      	 (limited)
+0/2
+1/2
+fitting histograms ... 
+Exit status: 0
+================================================================
+End of run is 2026年  8月  4日 火曜日 07:10:55 JST

@@ -1,0 +1,84 @@
+Running on megofl05.icepp.s.u-tokyo.ac.jp at 2026年  8月  4日 火曜日 05:01:14 JST
+================================================================
+=====>  ../result/resolution/data/20mm/250GeV_20mm.root
+0/2
+1/2
+fitting histograms ... 
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =         6092
+NDf                       =         2487
+Edm                       =   3.4866e-07
+NCalls                    =           77
+Constant                  =      102.993   +/-   0.470522    
+Mean                      =      10039.4   +/-   1.25571     
+Sigma                     =      314.523   +/-   0.935751     	 (limited)
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      1065.35
+NDf                       =          940
+Edm                       =  6.05243e-07
+NCalls                    =           72
+Constant                  =       103.18   +/-   0.530721    
+Mean                      =      10087.5   +/-   1.71442     
+Sigma                     =      324.883   +/-   2.19994      	 (limited)
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      3305.03
+NDf                       =          680
+Edm                       =  2.01735e-06
+NCalls                    =           87
+Constant                  =      984.317   +/-   4.50866     
+Mean                      =      969.882   +/-   0.117778    
+Sigma                     =      34.2261   +/-   0.103442     	 (limited)
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      137.948
+NDf                       =           99
+Edm                       =  2.05632e-07
+NCalls                    =           54
+Constant                  =      1037.01   +/-   5.22411     
+Mean                      =      969.986   +/-   0.14704     
+Sigma                     =      31.6844   +/-   0.176169     	 (limited)
+0/2
+1/2
+fitting histograms ... 
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      3358.88
+NDf                       =         1752
+Edm                       =  4.71506e-10
+NCalls                    =           78
+Constant                  =      104.461   +/-   0.466668    
+Mean                      =      10054.5   +/-   1.16506     
+Sigma                     =      299.914   +/-   0.830887     	 (limited)
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      997.047
+NDf                       =          896
+Edm                       =  2.75072e-07
+NCalls                    =           72
+Constant                  =      102.674   +/-   0.539862    
+Mean                      =        10093   +/-   1.72361     
+Sigma                     =      316.832   +/-   2.26442      	 (limited)
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      410.902
+NDf                       =          187
+Edm                       =  8.30897e-09
+NCalls                    =           65
+Constant                  =      1024.65   +/-   4.4618      
+Mean                      =      970.405   +/-   0.112951    
+Sigma                     =      31.6852   +/-   0.0838881    	 (limited)
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      118.763
+NDf                       =           92
+Edm                       =  7.70252e-06
+NCalls                    =           63
+Constant                  =      1032.43   +/-   5.35311     
+Mean                      =      970.236   +/-   0.156351    
+Sigma                     =      31.1383   +/-   0.196379     	 (limited)
+Exit status: 0
+================================================================
+End of run is 2026年  8月  4日 火曜日 06:39:47 JST

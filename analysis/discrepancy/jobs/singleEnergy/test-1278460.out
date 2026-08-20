@@ -1,0 +1,45 @@
+Running on megofl05.icepp.s.u-tokyo.ac.jp at 2026年  8月 17日 月曜日 19:52:53 JST
+================================================================
+=====>  ../result/discrepancy/data/200mm/1GeV_200mm.root
+0/2
+1/2
+fitting histograms ... 
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =       121.21
+NDf                       =           99
+Edm                       =  7.26599e-09
+NCalls                    =           82
+Constant                  =       12.846   +/-   0.61221     
+Mean                      =      473.479   +/-   2.35317     
+Sigma                     =      29.8694   +/-   2.15599      	 (limited)
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      95.3782
+NDf                       =           68
+Edm                       =  1.19372e-07
+NCalls                    =           86
+Constant                  =      14.0392   +/-   0.703069    
+Mean                      =       471.33   +/-   1.58103     
+Sigma                     =      24.0466   +/-   1.67547      	 (limited)
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      1068.46
+NDf                       =           52
+Edm                       =  8.56646e-09
+NCalls                    =           67
+Constant                  =      729.171   +/-   6.9727      
+Mean                      =       27.205   +/-   0.104846    
+Sigma                     =      10.0458   +/-   0.0715041    	 (limited)
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      137.526
+NDf                       =           24
+Edm                       =  1.51022e-05
+NCalls                    =           55
+Constant                  =      749.321   +/-   8.3652      
+Mean                      =      29.4113   +/-   0.110663    
+Sigma                     =      9.62916   +/-   0.149688     	 (limited)
+Exit status: 0
+================================================================
+End of run is 2026年  8月 17日 月曜日 20:01:04 JST

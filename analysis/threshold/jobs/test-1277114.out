@@ -1,0 +1,121 @@
+Running on megofl04.icepp.s.u-tokyo.ac.jp at 2026年  8月  5日 水曜日 15:38:01 JST
+================================================================
+=====>  ../result/threshold/threshold.root
+=========== PedestalExtract ============
+ HIGH GAIN PEDESTAL ... ...
+ channel count(15um:10um) : 1728 , 5184
+ mean of pedestal High : 422.523 , 419.14
+ sigma of pedestal High: 4.63174 , 3.79367
+ LOW GAIN PEDESTAL ... ...
+ channel count(15um:10um) : 1728 , 5184
+ mean of pedestal Low : 418.999 , 415.412
+ sigma of pedestal Low: 2.61743 , 2.49365
+made save TTree
+100 GeV
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/sps/decode/e-/100GeV/ECAL_Run105_20230430_081224.root
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/sps/decode/e-/100GeV/ECAL_Run106_20230430_093819.root
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/sps/decode/e-/100GeV/ECAL_Run107_20230430_111425.root
+0/3
+1/3
+2/3
+10 GeV
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/sps/decode/e-/10GeV/ECAL_Run110_20230430_133718.root
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/sps/decode/e-/10GeV/ECAL_Run111_20230430_150449.root
+0/2
+1/2
+120 GeV
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/sps/decode/e-/120GeV/ECAL_Run108_20230430_114856.root
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/sps/decode/e-/120GeV/ECAL_Run109_20230430_123530.root
+0/2
+1/2
+150 GeV
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/sps/decode/e-/150GeV/ECAL_Run184_20230503_194313.root
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/sps/decode/e-/150GeV/ECAL_Run185_20230503_205939.root
+0/2
+1/2
+200 GeV
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/sps/decode/e-/200GeV/ECAL_Run186_20230503_215243.root
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/sps/decode/e-/200GeV/ECAL_Run187_20230503_231855.root
+0/2
+1/2
+20 GeV
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/sps/decode/e-/20GeV/ECAL_Run96_20230429_211649.root
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/sps/decode/e-/20GeV/ECAL_Run97_20230430_002956.root
+0/2
+1/2
+250 GeV
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/sps/decode/e-/250GeV/ECAL_Run188_20230504_013115.root
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/sps/decode/e-/250GeV/ECAL_Run189_20230504_022223.root
+0/2
+1/2
+30 GeV
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/sps/decode/e-/30GeV/ECAL_Run137_20230501_130356.root
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/sps/decode/e-/30GeV/ECAL_Run138_20230501_140011.root
+0/2
+1/2
+40 GeV
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/sps/decode/e-/40GeV/ECAL_Run98_20230430_020530.root
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/sps/decode/e-/40GeV/ECAL_Run99_20230430_030947.root
+0/2
+1/2
+50 GeV
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/sps/decode/e-/50GeV/ECAL_Run135_20230501_103620.root
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/sps/decode/e-/50GeV/ECAL_Run136_20230501_114221.root
+0/2
+1/2
+60 GeV
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/sps/decode/e-/60GeV/ECAL_Run100_20230430_040636.root
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/sps/decode/e-/60GeV/ECAL_Run101_20230430_044521.root
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/sps/decode/e-/60GeV/ECAL_Run102_20230430_051831.root
+0/3
+1/3
+2/3
+70 GeV
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/sps/decode/e-/70GeV/ECAL_Run133_20230501_080948.root
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/sps/decode/e-/70GeV/ECAL_Run134_20230501_091302.root
+0/2
+1/2
+80 GeV
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/sps/decode/e-/80GeV/ECAL_Run103_20230430_062200.root
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/sps/decode/e-/80GeV/ECAL_Run104_20230430_071025.root
+0/2
+1/2
+0.5 GeV
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/ps/decode/e-/0.5GeV/ECAL_Run86_20230524_224927.root
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/ps/decode/e-/0.5GeV/ECAL_Run91_20230525_090012.root
+0/2
+1/2
+1 GeV
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/ps/decode/e-/1GeV/ECAL_Run84_20230524_154453.root
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/ps/decode/e-/1GeV/ECAL_Run85_20230524_180935.root
+0/2
+1/2
+2 GeV
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/ps/decode/e-/2GeV/ECAL_Run80_20230524_074802.root
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/ps/decode/e-/2GeV/ECAL_Run81_20230524_113448.root
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/ps/decode/e-/2GeV/ECAL_Run82_20230524_123530.root
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/ps/decode/e-/2GeV/ECAL_Run83_20230524_144617.root
+0/4
+1/4
+2/4
+3/4
+3 GeV
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/ps/decode/e-/3GeV/ECAL_Run78_20230524_034813.root
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/ps/decode/e-/3GeV/ECAL_Run79_20230524_043101.root
+0/2
+1/2
+4 GeV
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/ps/decode/e-/4GeV/ECAL_Run77_20230524_004400.root
+0/1
+5 GeV
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/ps/decode/e-/5GeV/ECAL_Run63_20230522_162547.root
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/ps/decode/e-/5GeV/ECAL_Run64_20230522_175643.root
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/ps/decode/e-/5GeV/ECAL_Run75_20230523_191602.root
+/megraid01/users/data_beamtest/ECAL_data/analysed/2023/ps/decode/e-/5GeV/ECAL_Run76_20230523_213529.root
+0/4
+1/4
+2/4
+3/4
+Exit status: 0
+================================================================
+End of run is 2026年  8月  5日 水曜日 16:27:57 JST

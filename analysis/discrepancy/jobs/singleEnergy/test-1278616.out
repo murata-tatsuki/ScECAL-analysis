@@ -1,0 +1,38 @@
+Running on megofl05.icepp.s.u-tokyo.ac.jp at 2026年  8月 18日 火曜日 04:58:07 JST
+================================================================
+=====>  ../result/discrepancy/data/LowGain/200mm/200GeV_200mm.root
+0/2
+1/2
+fitting histograms ... 
+****************************************
+         Invalid FitResult  (status = 4 )
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      17333.2
+NDf                       =         9658
+Edm                       =  0.000570759
+NCalls                    =         1354
+Constant                  =      464.529   +/-   53.9122     
+Mean                      =       136539   +/-   1216.63     
+Sigma                     =      39716.2   +/-   211.909      	 (limited)
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      82032.1
+NDf                       =         1188
+Edm                       =  4.66752e-07
+NCalls                    =          204
+Constant                  =      32.1221   +/-   5.92877     
+Mean                      =     -221.245   +/-   230.003     
+Sigma                     =      687.839   +/-   83.5393      	 (limited)
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      39088.5
+NDf                       =          793
+Edm                       =  3.82591e-07
+NCalls                    =          488
+Constant                  =      36.4657   +/-   4.35876     
+Mean                      =     -2793.97   +/-   354.48      
+Sigma                     =      3076.52   +/-   48.0468      	 (limited)
+Exit status: 0
+================================================================
+End of run is 2026年  8月 18日 火曜日 05:09:33 JST

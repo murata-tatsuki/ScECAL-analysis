@@ -1,0 +1,216 @@
+Layer  0 Chip  0 Ch  0: Fit Failed!
+Layer  0 Chip  0 Ch  4: Fit Failed!
+Layer  0 Chip  0 Ch  5: Fit Failed!
+Layer  0 Chip  0 Ch  9: Fit Failed!
+Layer  0 Chip  0 Ch 13: Fit Failed!
+Info in <ROOT::Math::ParameterSettings>: lower/upper bounds outside current parameter value. The value will be set to (low+up)/2 
+Layer  0 Chip  0 Ch 17: Fit Failed!
+Layer  0 Chip  0 Ch 23: Fit Failed!
+Layer  0 Chip  0 Ch 26: Fit Failed!
+Layer  0 Chip  0 Ch 28: Fit Failed!
+Layer  0 Chip  0 Ch 34: Fit Failed!
+Info in <TCanvas::Print>: png file ../result/threshold/figures/20GeV/gaus/chips/layer0chip0.png has been created
+Layer  0 Chip  1 Ch  1: Fit Failed!
+Layer  0 Chip  1 Ch  3: Fit Failed!
+Layer  0 Chip  1 Ch  5: Fit Failed!
+Layer  0 Chip  1 Ch 14: Fit Failed!
+Layer  0 Chip  1 Ch 24: Fit Failed!
+Layer  0 Chip  1 Ch 25: Fit Failed!
+Layer  0 Chip  1 Ch 28: Fit Failed!
+Layer  0 Chip  1 Ch 32: Fit Failed!
+Layer  0 Chip  1 Ch 33: Fit Failed!
+Layer  0 Chip  1 Ch 34: Fit Failed!
+Layer  0 Chip  1 Ch 35: Fit Failed!
+Info in <TCanvas::Print>: png file ../result/threshold/figures/20GeV/gaus/chips/layer0chip1.png has been created
+Layer  0 Chip  2 Ch  0: Fit Failed!
+Layer  0 Chip  2 Ch  1: Fit Failed!
+Layer  0 Chip  2 Ch  4: Fit Failed!
+Layer  0 Chip  2 Ch  6: Fit Failed!
+Layer  0 Chip  2 Ch 11: Fit Failed!
+Layer  0 Chip  2 Ch 14: Fit Failed!
+Info in <ROOT::Math::ParameterSettings>: lower/upper bounds outside current parameter value. The value will be set to (low+up)/2 
+Layer  0 Chip  2 Ch 16: Fit Failed!
+Layer  0 Chip  2 Ch 22: Fit Failed!
+Layer  0 Chip  2 Ch 33: Fit Failed!
+Layer  0 Chip  2 Ch 34: Fit Failed!
+Layer  0 Chip  2 Ch 35: Fit Failed!
+Info in <TCanvas::Print>: png file ../result/threshold/figures/20GeV/gaus/chips/layer0chip2.png has been created
+Layer  0 Chip  3 Ch  1: Fit Failed!
+Layer  0 Chip  3 Ch  2: Fit Failed!
+Layer  0 Chip  3 Ch  3: Fit Failed!
+Layer  0 Chip  3 Ch  5: Fit Failed!
+Layer  0 Chip  3 Ch  7: Fit Failed!
+Layer  0 Chip  3 Ch  9: Fit Failed!
+Layer  0 Chip  3 Ch 11: Fit Failed!
+Layer  0 Chip  3 Ch 13: Fit Failed!
+Layer  0 Chip  3 Ch 15: Fit Failed!
+Layer  0 Chip  3 Ch 17: Fit Failed!
+Layer  0 Chip  3 Ch 19: Fit Failed!
+Layer  0 Chip  3 Ch 21: Fit Failed!
+Layer  0 Chip  3 Ch 23: Fit Failed!
+Layer  0 Chip  3 Ch 25: Fit Failed!
+Layer  0 Chip  3 Ch 26: Fit Failed!
+Layer  0 Chip  3 Ch 27: Fit Failed!
+Layer  0 Chip  3 Ch 28: Fit Failed!
+Layer  0 Chip  3 Ch 29: Fit Failed!
+Layer  0 Chip  3 Ch 30: Fit Failed!
+Layer  0 Chip  3 Ch 31: Fit Failed!
+Layer  0 Chip  3 Ch 32: Fit Failed!
+Layer  0 Chip  3 Ch 33: Fit Failed!
+Layer  0 Chip  3 Ch 34: Fit Failed!
+Layer  0 Chip  3 Ch 35: Fit Failed!
+Info in <TCanvas::Print>: png file ../result/threshold/figures/20GeV/gaus/chips/layer0chip3.png has been created
+Layer  0 Chip  4 Ch  0: Fit Failed!
+Layer  0 Chip  4 Ch  1: Fit Failed!
+Layer  0 Chip  4 Ch  2: Fit Failed!
+Layer  0 Chip  4 Ch  3: Fit Failed!
+Layer  0 Chip  4 Ch  4: Fit Failed!
+Layer  0 Chip  4 Ch  5: Fit Failed!
+Layer  0 Chip  4 Ch  6: Fit Failed!
+Layer  0 Chip  4 Ch  7: Fit Failed!
+Layer  0 Chip  4 Ch  9: Fit Failed!
+Layer  0 Chip  4 Ch 10: Fit Failed!
+Layer  0 Chip  4 Ch 11: Fit Failed!
+Layer  0 Chip  4 Ch 13: Fit Failed!
+Layer  0 Chip  4 Ch 15: Fit Failed!
+Layer  0 Chip  4 Ch 17: Fit Failed!
+Layer  0 Chip  4 Ch 18: Fit Failed!
+Layer  0 Chip  4 Ch 19: Fit Failed!
+Layer  0 Chip  4 Ch 21: Fit Failed!
+Layer  0 Chip  4 Ch 22: Fit Failed!
+Layer  0 Chip  4 Ch 23: Fit Failed!
+Layer  0 Chip  4 Ch 24: Fit Failed!
+Layer  0 Chip  4 Ch 25: Fit Failed!
+Layer  0 Chip  4 Ch 26: Fit Failed!
+Layer  0 Chip  4 Ch 27: Fit Failed!
+Layer  0 Chip  4 Ch 28: Fit Failed!
+Layer  0 Chip  4 Ch 29: Fit Failed!
+Layer  0 Chip  4 Ch 30: Fit Failed!
+Layer  0 Chip  4 Ch 31: Fit Failed!
+Layer  0 Chip  4 Ch 32: Fit Failed!
+Layer  0 Chip  4 Ch 33: Fit Failed!
+Layer  0 Chip  4 Ch 34: Fit Failed!
+Layer  0 Chip  4 Ch 35: Fit Failed!
+Info in <TCanvas::Print>: png file ../result/threshold/figures/20GeV/gaus/chips/layer0chip4.png has been created
+Layer  0 Chip  5 Ch  0: Fit Failed!
+Layer  0 Chip  5 Ch  1: Fit Failed!
+Layer  0 Chip  5 Ch  3: Fit Failed!
+Layer  0 Chip  5 Ch  4: Fit Failed!
+Layer  0 Chip  5 Ch 14: Fit Failed!
+Layer  0 Chip  5 Ch 16: Fit Failed!
+Layer  0 Chip  5 Ch 18: Fit Failed!
+Layer  0 Chip  5 Ch 19: Fit Failed!
+Layer  0 Chip  5 Ch 20: Fit Failed!
+Layer  0 Chip  5 Ch 27: Fit Failed!
+Info in <ROOT::Math::ParameterSettings>: lower/upper bounds outside current parameter value. The value will be set to (low+up)/2 
+Layer  0 Chip  5 Ch 29: Fit Failed!
+Info in <TCanvas::Print>: png file ../result/threshold/figures/20GeV/gaus/chips/layer0chip5.png has been created
+Layer  1 Chip  0 Ch  0: Fit Failed!
+Layer  1 Chip  0 Ch  2: Fit Failed!
+Layer  1 Chip  0 Ch  4: Fit Failed!
+Layer  1 Chip  0 Ch  6: Fit Failed!
+Layer  1 Chip  0 Ch  7: Fit Failed!
+Layer  1 Chip  0 Ch  8: Fit Failed!
+Info in <ROOT::Math::ParameterSettings>: lower/upper bounds outside current parameter value. The value will be set to (low+up)/2 
+Layer  1 Chip  0 Ch 18: Fit Failed!
+Layer  1 Chip  0 Ch 22: Fit Failed!
+Layer  1 Chip  0 Ch 27: Fit Failed!
+Info in <TCanvas::Print>: png file ../result/threshold/figures/20GeV/gaus/chips/layer1chip0.png has been created
+Layer  1 Chip  1 Ch 20: Fit Failed!
+Layer  1 Chip  1 Ch 22: Fit Failed!
+Layer  1 Chip  1 Ch 24: Fit Failed!
+Layer  1 Chip  1 Ch 26: Fit Failed!
+Layer  1 Chip  1 Ch 28: Fit Failed!
+Layer  1 Chip  1 Ch 29: Fit Failed!
+Layer  1 Chip  1 Ch 30: Fit Failed!
+Layer  1 Chip  1 Ch 31: Fit Failed!
+Layer  1 Chip  1 Ch 32: Fit Failed!
+Layer  1 Chip  1 Ch 33: Fit Failed!
+Layer  1 Chip  1 Ch 34: Fit Failed!
+Layer  1 Chip  1 Ch 35: Fit Failed!
+Info in <TCanvas::Print>: png file ../result/threshold/figures/20GeV/gaus/chips/layer1chip1.png has been created
+Layer  1 Chip  2 Ch  8: Fit Failed!
+Layer  1 Chip  2 Ch  9: Fit Failed!
+Layer  1 Chip  2 Ch 13: Fit Failed!
+Layer  1 Chip  2 Ch 18: Fit Failed!
+Layer  1 Chip  2 Ch 20: Fit Failed!
+Layer  1 Chip  2 Ch 21: Fit Failed!
+Layer  1 Chip  2 Ch 23: Fit Failed!
+Layer  1 Chip  2 Ch 32: Fit Failed!
+Layer  1 Chip  2 Ch 33: Fit Failed!
+Layer  1 Chip  2 Ch 34: Fit Failed!
+Layer  1 Chip  2 Ch 35: Fit Failed!
+Info in <TCanvas::Print>: png file ../result/threshold/figures/20GeV/gaus/chips/layer1chip2.png has been created
+Info in <ROOT::Math::ParameterSettings>: lower/upper bounds outside current parameter value. The value will be set to (low+up)/2 
+Layer  1 Chip  3 Ch  4: Fit Failed!
+Layer  1 Chip  3 Ch 12: Fit Failed!
+Layer  1 Chip  3 Ch 13: Fit Failed!
+Info in <ROOT::Math::ParameterSettings>: lower/upper bounds outside current parameter value. The value will be set to (low+up)/2 
+Layer  1 Chip  3 Ch 14: Fit Failed!
+Layer  1 Chip  3 Ch 17: Fit Failed!
+Layer  1 Chip  3 Ch 19: Fit Failed!
+Layer  1 Chip  3 Ch 21: Fit Failed!
+Layer  1 Chip  3 Ch 23: Fit Failed!
+Layer  1 Chip  3 Ch 25: Fit Failed!
+Layer  1 Chip  3 Ch 27: Fit Failed!
+Layer  1 Chip  3 Ch 29: Fit Failed!
+Layer  1 Chip  3 Ch 30: Fit Failed!
+Layer  1 Chip  3 Ch 31: Fit Failed!
+Layer  1 Chip  3 Ch 32: Fit Failed!
+Layer  1 Chip  3 Ch 33: Fit Failed!
+Layer  1 Chip  3 Ch 34: Fit Failed!
+Layer  1 Chip  3 Ch 35: Fit Failed!
+Info in <TCanvas::Print>: png file ../result/threshold/figures/20GeV/gaus/chips/layer1chip3.png has been created
+Layer  1 Chip  4 Ch 15: Fit Failed!
+Layer  1 Chip  4 Ch 16: Fit Failed!
+Layer  1 Chip  4 Ch 19: Fit Failed!
+Layer  1 Chip  4 Ch 21: Fit Failed!
+Layer  1 Chip  4 Ch 23: Fit Failed!
+Layer  1 Chip  4 Ch 24: Fit Failed!
+Layer  1 Chip  4 Ch 25: Fit Failed!
+Layer  1 Chip  4 Ch 26: Fit Failed!
+Layer  1 Chip  4 Ch 27: Fit Failed!
+Layer  1 Chip  4 Ch 28: Fit Failed!
+Layer  1 Chip  4 Ch 29: Fit Failed!
+Layer  1 Chip  4 Ch 30: Fit Failed!
+Layer  1 Chip  4 Ch 32: Fit Failed!
+Layer  1 Chip  4 Ch 33: Fit Failed!
+Layer  1 Chip  4 Ch 34: Fit Failed!
+Layer  1 Chip  4 Ch 35: Fit Failed!
+Info in <TCanvas::Print>: png file ../result/threshold/figures/20GeV/gaus/chips/layer1chip4.png has been created
+Layer  1 Chip  5 Ch  4: Fit Failed!
+Layer  1 Chip  5 Ch 16: Fit Failed!
+Layer  1 Chip  5 Ch 25: Fit Failed!
+Info in <TCanvas::Print>: png file ../result/threshold/figures/20GeV/gaus/chips/layer1chip5.png has been created
+Layer  2 Chip  0 Ch  1: Fit Failed!
+Info in <ROOT::Math::ParameterSettings>: lower/upper bounds outside current parameter value. The value will be set to (low+up)/2 
+Layer  2 Chip  0 Ch  6: Fit Failed!
+Layer  2 Chip  0 Ch  7: Fit Failed!
+Info in <ROOT::Math::ParameterSettings>: lower/upper bounds outside current parameter value. The value will be set to (low+up)/2 
+Layer  2 Chip  0 Ch  9: Fit Failed!
+Info in <ROOT::Math::ParameterSettings>: lower/upper bounds outside current parameter value. The value will be set to (low+up)/2 
+Layer  2 Chip  0 Ch 23: Fit Failed!
+Layer  2 Chip  0 Ch 29: Fit Failed!
+Layer  2 Chip  0 Ch 30: Fit Failed!
+Info in <TCanvas::Print>: png file ../result/threshold/figures/20GeV/gaus/chips/layer2chip0.png has been created
+Layer  2 Chip  1 Ch  3: Fit Failed!
+Info in <ROOT::Math::ParameterSettings>: lower/upper bounds outside current parameter value. The value will be set to (low+up)/2 
+Layer  2 Chip  1 Ch 10: Fit Failed!
+Layer  2 Chip  1 Ch 13: Fit Failed!
+Layer  2 Chip  1 Ch 29: Fit Failed!
+Layer  2 Chip  1 Ch 30: Fit Failed!
+Layer  2 Chip  1 Ch 32: Fit Failed!
+Layer  2 Chip  1 Ch 33: Fit Failed!
+Layer  2 Chip  1 Ch 34: Fit Failed!
+Info in <TCanvas::Print>: png file ../result/threshold/figures/20GeV/gaus/chips/layer2chip1.png has been created
+Layer  2 Chip  2 Ch  1: Fit Failed!
+Layer  2 Chip  2 Ch  3: Fit Failed!
+Layer  2 Chip  2 Ch  9: Fit Failed!
+Layer  2 Chip  2 Ch 10: Fit Failed!
+Layer  2 Chip  2 Ch 12: Fit Failed!
+Layer  2 Chip  2 Ch 15: Fit Failed!
+Layer  2 Chip  2 Ch 17: Fit Failed!
+Layer  2 Chip  2 Ch 19: Fit Failed!
+Layer  2 Chip  2 Ch 20: Fit Failed!
+Layer  2 Chip  2 Ch 23: Fit Failed!slurmstepd: error: *** JOB 1275602 ON megofl04 CANCELLED AT 2026-07-31T16:42:23 ***
+
