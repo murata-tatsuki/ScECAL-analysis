@@ -198,9 +198,9 @@ int main(int argc, char* argv[])
   TH1D* h_slope_error[2];
   for(int i=0;i<2;i++){
     string xy = i==0 ? "x" : "y";
-    h_intercept[i] = new TH1D(Form("h_intercept_%s",xy.c_str()), Form(";%sz intercept [mm];Entries",xy.c_str()), 1200, -150, 150);
+    h_intercept[i] = new TH1D(Form("h_intercept_%s",xy.c_str()), Form(";%sz intercept [mm];Entries",xy.c_str()), 600, -150, 150);
     h_intercept_error[i] = new TH1D(Form("h_intercept_error_%s",xy.c_str()), Form(";%sz intercept error [mm];Entries",xy.c_str()), 200, 0, 2);
-    h_slope[i]     = new TH1D(Form("h_slope_%s",xy.c_str()),     Form(";%sz slope;Entries",xy.c_str()),     1000, -0.5, 0.5);
+    h_slope[i]     = new TH1D(Form("h_slope_%s",xy.c_str()),     Form(";%sz slope;Entries",xy.c_str()),     500, -0.5, 0.5);
     h_slope_error[i]     = new TH1D(Form("h_slope_error_%s",xy.c_str()),     Form(";%sz slope error;Entries",xy.c_str()),     1000, 0, 0.01);
   }
 
