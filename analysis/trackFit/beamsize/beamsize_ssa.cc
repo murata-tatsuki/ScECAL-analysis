@@ -29,10 +29,6 @@
 #include "EBUdecode.cxx"
 
 
-// track fitを用いて角channelのdetection efficitencyを求めるコード
-// fitのparameterの分布の表示も行っている
-
-
 double* EBUdecode_itr(int LayerIDs, int ChipIDs, int ChannelIDs){
   // static const int layerNu = 32;
   static const int chipNu = 6;
@@ -175,35 +171,6 @@ int main(int argc, char* argv[])
                 {21, 211.2},{22, 219.9},{23, 231.1},{24, 239.8},{25,   251},{26, 259.7},{27, 270.9},{28, 279.6},{29, 290.8} };
 
 
-  double SPSgain[layerNu][chipNu][channelNu];
-  double SPSgain_error[layerNu][chipNu][channelNu];
-  double MIP[layerNu][chipNu][channelNu];
-  double MIP_entry[layerNu][chipNu][channelNu];
-  double channel_thre[layerNu][chipNu][channelNu];
-  for(int i=0; i<layerNu;i++){
-    for(int j=0; j<chipNu;j++){
-      for(int k=0; k<channelNu;k++){
-        SPSgain[i][j][k] = 0;
-        SPSgain_error[i][j][k] = 0;
-        MIP[i][j][k] = 0;
-        MIP_entry[i][j][k] = 0;
-        channel_thre[i][j][k] = 0;
-      }
-    }
-  }
-
-  TH1D* h_intercept[2];
-  TH1D* h_intercept_error[2];
-  TH1D* h_slope[2];
-  TH1D* h_slope_error[2];
-  for(int i=0;i<2;i++){
-    string xy = i==0 ? "x" : "y";
-    h_intercept[i] = new TH1D(Form("h_intercept_%s",xy.c_str()), Form(";%sz intercept [mm];Entries",xy.c_str()), 1200, -150, 150);
-    h_intercept_error[i] = new TH1D(Form("h_intercept_error_%s",xy.c_str()), Form(";%sz intercept error [mm];Entries",xy.c_str()), 200, 0, 2);
-    h_slope[i]     = new TH1D(Form("h_slope_%s",xy.c_str()),     Form(";%sz slope;Entries",xy.c_str()),     1000, -0.5, 0.5);
-    h_slope_error[i]     = new TH1D(Form("h_slope_error_%s",xy.c_str()),     Form(";%sz slope error;Entries",xy.c_str()),     1000, 0, 0.01);
-  }
-
 
 
   int deadCells[65][3] = { {0, 1, 3}, {0, 1, 33}, {0, 1, 34}, {1, 27, 0}, {2, 1, 1}, {2, 1, 28}, {2, 1, 30}, {2, 4, 37}, {3, 36, 4}, {4, 4, 11}, {5, 29, 2}, {5, 0, 3}, {5, 26, 3}, {6, 0, 7}, {6, 0, 8}, 
@@ -274,12 +241,6 @@ int main(int argc, char* argv[])
       double slopeY = _trackFitPars->at(4);
       double interceptX = _trackFitPars->at(2);
       double interceptY = _trackFitPars->at(6);
-      for(int ixy=0;ixy<2;ixy++){
-        h_intercept[ixy]->Fill(_trackFitPars->at(ixy*4+2));
-        h_intercept_error[ixy]->Fill(_trackFitPars->at(ixy*4+2+1));
-        h_slope[ixy]->Fill(_trackFitPars->at(ixy*4));
-        h_slope_error[ixy]->Fill(_trackFitPars->at(ixy*4+1));
-      }
       for(int hit=0; hit!=(int)_newCell->size(); ++hit)
       {
         if(_newCell->at(hit)==-1) continue;
@@ -426,30 +387,6 @@ int main(int argc, char* argv[])
       gPad->SetGrid(0,0);
       eff_2d[i]->Draw("colz");
     }
-    TCanvas *fitParameterCanvas = new TCanvas(Form("fitParameterCanvas"),Form("fit parameters"), 2560, 1440);
-    fitParameterCanvas->Divide(4, 2);
-    fitParameterCanvas->cd();
-    for(int ixy=0;ixy<2;ixy++){
-      fitParameterCanvas->cd(ixy*4 + 1);
-      gPad->SetLogy(1);
-      gPad->SetGrid(0,0);
-      h_slope[ixy]->Draw();
-
-      fitParameterCanvas->cd(ixy*4 + 2);
-      gPad->SetLogy(1);
-      gPad->SetGrid(0,0);
-      h_slope_error[ixy]->Draw();
-
-      fitParameterCanvas->cd(ixy*4 + 3);
-      gPad->SetLogy(1);
-      gPad->SetGrid(0,0);
-      h_intercept[ixy]->Draw();
-
-      fitParameterCanvas->cd(ixy*4 + 4);
-      gPad->SetLogy(1);
-      gPad->SetGrid(0,0);
-      h_intercept_error[ixy]->Draw();
-    }
     if(writeCanvas){
       hitCanvas[0]->SaveAs(Form("%s/hitCanvas_even.png",argv[argc-1]));
       hitCanvas[1]->SaveAs(Form("%s/hitCanvas_odd.png",argv[argc-1]));
@@ -459,7 +396,6 @@ int main(int argc, char* argv[])
       fithitCanvas[1]->SaveAs(Form("%s/fithitCanvas_odd.png",argv[argc-1]));
       effCanvas[0]->SaveAs(Form("%s/effCanvas_even.png",argv[argc-1]));
       effCanvas[1]->SaveAs(Form("%s/effCanvas_odd.png",argv[argc-1]));
-      fitParameterCanvas->SaveAs(Form("%s/trackFit_parameters.png",argv[argc-1]));
     }
   }
 }

@@ -39,15 +39,8 @@ echo "================================================================"
 # Replace configuration file by yours
 #
 #./meganalyzer -i example/bartenderMode.xml -r 1 -b
-# ./mip_gain_all.sh
-# ./energy_resolution_data_all.sh 
-./energy_resolution_simulation.sh
-# ./energy_resolution_generation.sh
 
-# ./check_cog.sh 
-# ./check_cog_sim.sh 
-
-# ./energy_resolution_data_sps.sh 
+"$@"
 
 RET=$?
 echo "Exit status: $RET"

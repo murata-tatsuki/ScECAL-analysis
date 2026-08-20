@@ -1,2 +1,0 @@
-/megraid01/users/data_beamtest/ECAL_data/analysed/2023/sps/trackFit/mu-/100GeV/ECAL_Run40_20230426_201151.root
-/megraid01/users/data_beamtest/ECAL_data/analysed/2023/sps/trackFit/mu-/100GeV/ECAL_Run41_20230426_214312.root

@@ -1,6 +1,6 @@
-*.err
-*.out
-*.o
-*.png
+**/*.err
+**/*.out
+**/*.o
+**/*.png
 *.root
 tmp/*.txt
