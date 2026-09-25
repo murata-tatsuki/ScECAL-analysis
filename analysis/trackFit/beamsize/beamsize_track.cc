@@ -27,9 +27,9 @@
 #include "TCanvas.h"
 #include "EBUdecode.h"
 #include "EBUdecode.cxx"
-#include <set>
+#include <random>
 
-// SSAのdataを用いてbeamを解析するコード
+// trackfitのdataを用いてbeamを解析するコード
 // まずはbeam size
 
 
@@ -139,7 +139,6 @@ int main(int argc, char* argv[])
   }
   TH2F *eff_2d[30];     // channelごとのdetection efficiency
   TH2F *hit_2d[30];     // channelごとのhit数
-  TH2F *hit_2d_logz[30];     // channelごとのhit数
   TH2F *fit_2d[30];     // track fit のhit数 (trackが通過しているかどうか)
   TH2F *fit_hit_2d[30];   // trackが通過しているchannelに実際にhitがあった数
   for(int i=0;i<30;i++){
@@ -154,7 +153,6 @@ int main(int argc, char* argv[])
     double* accurateYBin = i%2==0 ? accurateBinX : accurateBinY;
     // eff_2d[i] = new TH2F(Form("eff_2d_%d",i),Form("efficiency at layer %d",i), xNu_,-xMax_,xMax_, yNu_,-yMax_,yMax_);
     hit_2d[i] = new TH2F(Form("hit_2d_%d",i),Form("hit map layer %d",i), 42,-113.3,113.3, 42,-113.3,113.3);
-    hit_2d_logz[i] = new TH2F(Form("hit_2d_logz_%d",i),Form("hit map layer %d",i), 42,-113.3,113.3, 42,-113.3,113.3);
     // fit_2d[i] = new TH2F(Form("fit_2d_%d",i),Form("position of fit at layer %d",i), xNu_,-xMax_,xMax_, yNu_,-yMax_,yMax_);
     // fit_hit_2d[i] = new TH2F(Form("fit_hit_2d_%d",i),Form("number of fit match hit at layer %d",i), xNu_,-xMax_,xMax_, yNu_,-yMax_,yMax_);
     // fit_2d[i] = new TH2F(Form("fit_2d_%d",i),Form("position of fit at layer %d",i), accuratexNu_,accurateXBin, accurateyNu_,accurateYBin);
@@ -164,12 +162,8 @@ int main(int argc, char* argv[])
                 {11, 111.7},{12, 120.4},{13, 131.6},{14, 140.3},{15, 151.5},{16, 160.2},{17, 171.4},{18, 180.1},{19, 191.3},{20,   200},
                 {21, 211.2},{22, 219.9},{23, 231.1},{24, 239.8},{25,   251},{26, 259.7},{27, 270.9},{28, 279.6},{29, 290.8} };
 
-
-
   TH2D *smeared_intecept = new TH2D(Form("h_hitmap_smooth"),Form("beam profile;x [mm];y [mm]"), 92,-115,115, 92,-115,115);
   const double pitch = 5.4;
-
-
 
   int deadCells[65][3] = { {0, 1, 3}, {0, 1, 33}, {0, 1, 34}, {1, 27, 0}, {2, 1, 1}, {2, 1, 28}, {2, 1, 30}, {2, 4, 37}, {3, 36, 4}, {4, 4, 11}, {5, 29, 2}, {5, 0, 3}, {5, 26, 3}, {6, 0, 7}, {6, 0, 8}, 
           {7, 4, 0}, {8, 2, 31}, {9, 29, 4}, {10, 1, 20}, {10, 2, 11}, {11, 3, 0}, {12, 1, 31}, {12, 1, 32}, {12, 2, 9}, {12, 2, 11}, {13, 8, 0}, {13, 9, 0}, {14, 0, 28}, {15, 25, 0}, 
@@ -181,66 +175,118 @@ int main(int argc, char* argv[])
   for(int irawfile=0; irawfile<rawfilenum; irawfile++){
     if(rawfilenum>1) cout << irawfile << "/" << rawfilenum << endl;
 
-    int _EventNum, _DetectorID;
-    std::vector<int>* _CellID = nullptr;
-    std::vector<double>* _Hit_Energy = nullptr;
-    std::vector<double>* _HG_Charge = nullptr;
-    std::vector<double>* _LG_Charge = nullptr;
-    std::vector<double>* _Hit_Time = nullptr;
-    std::vector<double>* _Hit_X = nullptr;
-    std::vector<double>* _Hit_Y = nullptr;
-    std::vector<double>* _Hit_Z = nullptr;
-    std::vector<double>* _NewTemperature = nullptr;
-    std::vector<int>* _ssaTag = nullptr;
+    std::vector<int>* _cell = nullptr;
+    std::vector<double>* _posX = nullptr;
+    std::vector<double>* _posY = nullptr;
+    std::vector<double>* _posZ = nullptr;
+    std::vector<int>* _newCell = nullptr;
+    std::vector<double>* _charge = nullptr;
+    std::vector<double>* _trackFitPars = nullptr;
+    std::vector<double>* _residualX = nullptr;
+    std::vector<double>* _residualY = nullptr;
+    std::vector<double>* _newPosX = nullptr;
+    std::vector<double>* _newPosY = nullptr;
+    std::vector<double>* _newPosZ = nullptr;
+    std::vector<double>* _temp = nullptr;  
     
     TFile *file = new TFile(argv[irawfile+2]);
-    TTree *fNtuple1 = (TTree*)file->Get("SSA_Hit");
+    TTree *fNtuple1 = (TTree*)file->Get("T_Event");
     int _totalEntries = fNtuple1->GetEntries();
     if(!fNtuple1) cout<<"open RawtoRoot file failed "<<endl;
-    fNtuple1 ->SetBranchAddress("Event_Num",&_EventNum);
-    fNtuple1 ->SetBranchAddress("DetectorID",&_DetectorID);
-    fNtuple1 ->SetBranchAddress("CellID",&_CellID);
-    fNtuple1 ->SetBranchAddress("Hit_Energy",&_Hit_Energy);
-    // fNtuple1 ->SetBranchAddress("Hit_Time",&_Hit_Time);
-    fNtuple1 ->SetBranchAddress("Hit_X",&_Hit_X);
-    fNtuple1 ->SetBranchAddress("Hit_Y",&_Hit_Y);
-    fNtuple1 ->SetBranchAddress("Hit_Z",&_Hit_Z);
-    fNtuple1 ->SetBranchAddress("NewTemperature",&_NewTemperature);
-    fNtuple1 ->SetBranchAddress("ssaTag",&_ssaTag);
+    fNtuple1 ->SetBranchAddress("CellID",&_cell);
+    fNtuple1 ->SetBranchAddress("Hit_X",&_posX);
+    fNtuple1 ->SetBranchAddress("Hit_Y",&_posY);
+    fNtuple1 ->SetBranchAddress("Hit_Z",&_posZ);
+    fNtuple1 ->SetBranchAddress("hitCellnew",&_newCell);
+    fNtuple1 ->SetBranchAddress("energyDep",&_charge);
+    fNtuple1 ->SetBranchAddress("trackFitPars",&_trackFitPars);
+    fNtuple1 ->SetBranchAddress("residualX",&_residualX);
+    fNtuple1 ->SetBranchAddress("residualY",&_residualY);
+    fNtuple1 ->SetBranchAddress("hitPosXnew",&_newPosX);
+    fNtuple1 ->SetBranchAddress("hitPosYnew",&_newPosY);
+    fNtuple1 ->SetBranchAddress("hitPosZnew",&_newPosZ);
+    fNtuple1 ->SetBranchAddress("Temperature",&_temp);
+    // fNtuple1 ->SetBranchAddress("TemperatureNew",&_temp);
 
-    for(int entry=0; entry!=_totalEntries; ++entry) {
-      if(entry%10000==0)  cout<<" Event : "<<entry<<endl;
+    for(int entry=0; entry!=_totalEntries; ++entry)
+    {
+      if(entry%10000==0) cout<<" Event : "<<entry<<endl;
       fNtuple1->GetEntry(entry);
 
-      // double slopeX = _trackFitPars->at(0);
-      // double slopeY = _trackFitPars->at(4);
-      // double interceptX = _trackFitPars->at(2);
-      // double interceptY = _trackFitPars->at(6);
-
-      std::set<std::tuple<int, double, double>> filled_points;
-
-      for(int hit=0; hit!=(int)_CellID->size(); ++hit) {
-        if(_CellID->at(hit)==-1) continue;
-        if(_ssaTag->at(hit)==0) continue;
-        int cellIDnow = _CellID->at(hit);
-        int _layerID = _CellID->at(hit)/1e5;
+      vector<tuple<int, double, double>> channelCoordinates(_cell->size());
+      for(int i=0;i<_cell->size();i++){
+        int _layer = _cell->at(i)/1e5;
+        channelCoordinates.at(i) = make_tuple(_cell->at(i), _posX->at(i), _posY->at(i));
+      }
+      double slopeX = _trackFitPars->at(0);
+      double slopeY = _trackFitPars->at(4);
+      double interceptX = _trackFitPars->at(2);
+      double interceptY = _trackFitPars->at(6);
+      for(int hit=0; hit!=(int)_newCell->size(); ++hit) {
+        if(_newCell->at(hit)==-1) continue;
+        int cellIDnow = _newCell->at(hit);
+        int _layerID = _newCell->at(hit)/1e5;
         if(_layerID>29) continue;
 
-        double x = _Hit_X->at(hit);
-        double y = _Hit_Y->at(hit);
-
-        auto point_key = std::make_tuple(_layerID, x, y);
-        if (filled_points.count(point_key) > 0) continue;
-        filled_points.insert(point_key);
-
-        hit_2d[_layerID]->Fill(x, y);
-        hit_2d_logz[_layerID]->Fill(x, y);
-
-        if(_layerID==0){
-          double x_smooth = _Hit_X->at(hit) + gRandom->Uniform(-pitch/2.0, pitch/2.0);
-          double y_smooth = _Hit_Y->at(hit) + gRandom->Uniform(-pitch/2.0, pitch/2.0);
-          smeared_intecept->Fill(x_smooth, y_smooth);
+        // double x_now = _newPosX->at(hit);
+        // double y_now = _newPosY->at(hit);
+        double x_now=-200, y_now=-200;
+        for(int ii=0;ii<_cell->size();ii++){
+          const int& cellIDcheck = get<0>(channelCoordinates.at(ii));
+          if(cellIDnow==cellIDcheck){
+            x_now = get<1>(channelCoordinates.at(ii));
+            y_now = get<2>(channelCoordinates.at(ii));
+            break;
+          }
         }
+        // hit_2d[_layerID]->Fill(x_now,y_now);
+      }
+      double x_smooth = interceptX + gRandom->Uniform(-pitch/2.0, pitch/2.0);
+      double y_smooth = interceptY + gRandom->Uniform(-pitch/2.0, pitch/2.0);
+      smeared_intecept->Fill(x_smooth, y_smooth);
+      for(int ilayer=0; ilayer<30; ++ilayer){
+        double z_now = layer_z[ilayer][1];
+        double x_fit = slopeX * z_now + interceptX;
+        double y_fit = slopeY * z_now + interceptY;
+        // fit_2d[ilayer]->Fill(x_fit,y_fit);
+        hit_2d[ilayer]->Fill(x_fit,y_fit); // hitの有無にかかわらず毎層Fill
+
+        /*
+        for(int hit=0; hit!=(int)_newCell->size(); ++hit){
+          if(_newCell->at(hit)==-1) continue;
+          int _layerID = _newCell->at(hit)/1e5;
+          int _chipID = _newCell->at(hit)%100000/1e4;
+          int _channelID = _newCell->at(hit)%100;
+          if(_layerID>29 || _layerID!=ilayer) continue;
+
+          // double x_now = _newPosX->at(hit);   // 今はpositionが修正されているから、元の座標を使うように変更   trackのsrcを変更する
+          // double y_now = _newPosY->at(hit);
+          double* position = EBUdecode_itr(_layerID,_chipID,_channelID);
+          double x_now = position[0];
+          double y_now = position[1];
+          
+          double x_int = ilayer%2==0 ? 45.0/2 : 5.0/2;
+          double y_int = ilayer%2==0 ? 5.0/2 : 45.0/2;
+          bool condition = (x_now-x_int<x_fit && x_now+x_int>x_fit) && (y_now-y_int<y_fit && y_now+y_int>y_fit);
+          if(condition){
+            hit_2d[ilayer]->Fill(x_fit,y_fit);
+            // if(true){
+            //   int nbinX = hit_2d[ilayer]->GetXaxis()->FindBin(x_fit);
+            //   int nbinY = hit_2d[ilayer]->GetYaxis()->FindBin(y_fit);
+            //   if(nbinX%2==0 && nbinY%2==0) cout << "   Event : " << entry << "  " <<  _layerID << ", " << x_fit << ", " << y_fit << ", " << nbinX << ", " << nbinY << endl;
+            // }
+
+            bool deadCondition = false;
+            for(int idead=0;idead<65;idead++){
+              if(deadCells[idead][0]!=_layerID) continue;
+              double x_dead = ilayer%2==0 ? (deadCells[idead][1]-2.0)*_yInterval : deadCells[idead][1]*_xInterval - 108.5;
+              double y_dead = ilayer%2==0 ? deadCells[idead][2]*_xInterval - 108.5 : (deadCells[idead][2]-2.0)*_yInterval;
+              deadCondition = deadCondition || (x_now-x_int<x_dead && x_now+x_int>x_dead) && (y_now-y_int<y_dead && y_now+y_int>y_dead);
+            }
+            if(deadCondition) cout << "   Event : " << entry << " has dead cell hit  " << _newCell->at(hit) << endl;
+          }
+        }
+        */
       }
     }
 
@@ -251,7 +297,6 @@ int main(int argc, char* argv[])
   bool writeCanvas = true;
   if(draw2dmap){
     TCanvas *hitCanvas[2];
-    TCanvas *hitlogCanvas[2];
     TCanvas *fitCanvas[2];
     TCanvas *fithitCanvas[2];
     TCanvas *effCanvas[2];
@@ -259,9 +304,6 @@ int main(int argc, char* argv[])
       string eo = i%2==0 ? "even" : "odd";
       hitCanvas[i] = new TCanvas(Form("hitCanvas_%s_%d",eo.c_str(),i),Form("hitCanvas_%s_%d",eo.c_str(),i), 2560, 1440);
       hitCanvas[i]->Divide(4, 4);
-
-      hitlogCanvas[i] = new TCanvas(Form("hitlogCanvas_%s_%d",eo.c_str(),i),Form("hitlogCanvas_%s_%d",eo.c_str(),i), 2560, 1440);
-      hitlogCanvas[i]->Divide(4, 4);
     }
     for(int i=0; i<LayerNo; i++){
       int even_odd = i%2;
@@ -272,21 +314,10 @@ int main(int argc, char* argv[])
       gStyle->SetOptStat(0);
       gPad->SetGrid(0,0);
       hit_2d[i]->Draw("colz");
-
-      hitlogCanvas[even_odd]->cd();
-      hitlogCanvas[even_odd]->cd(ilayer_eo+1);
-      gStyle->SetOptStat(0);
-      gPad->SetGrid(0,0);
-      hitlogCanvas[even_odd]->SetLogz(1);
-      hit_2d_logz[i]->Draw("colz");
-      gPad->SetLogz(1);
-      hitlogCanvas[even_odd]->Update();
     }
     if(writeCanvas){
       hitCanvas[0]->SaveAs(Form("%s/hitCanvas_even.png",argv[argc-1]));
       hitCanvas[1]->SaveAs(Form("%s/hitCanvas_odd.png",argv[argc-1]));
-      hitlogCanvas[0]->SaveAs(Form("%s/hitlogCanvas_even.png",argv[argc-1]));
-      hitlogCanvas[1]->SaveAs(Form("%s/hitlogCanvas_odd.png",argv[argc-1]));
     }
   }
 
@@ -294,8 +325,10 @@ int main(int argc, char* argv[])
   smeared_intecept->Write();
   TCanvas *C_int = new TCanvas(Form("C_int"),Form("C_int"), 2560, 1440);
   C_int->cd();
-  smeared_intecept->Draw("colz");
+  smeared_intecept->Draw();
   C_int->SaveAs(Form("%s/smeared_intecept.png",argv[argc-1]));
+
+
 
 
 }

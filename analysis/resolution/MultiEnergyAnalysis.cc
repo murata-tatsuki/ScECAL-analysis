@@ -198,6 +198,7 @@ TLegend* CreateNiceLegend(double x1, double y1, double x2, double y2, int nCols 
 };
 
 int CalculateRebinFactor(const TH1* h, double sigma) {
+  cout << sigma  << endl;
     // 安全対策：ヌルポインタや不適切な値の場合は 1 (Rebinなし) を返す
     if (!h || sigma <= 0.0) return 1;
 
@@ -408,12 +409,6 @@ int main(int argc, char* argv[])
 
 
 
-  
-
-
-  
-
-
 	// data をとってきてる
   for(int ienergy=0; ienergy<rawfilenum; ienergy++){
     if(filenames[0][ienergy].first != filenames[1][ienergy].first){
@@ -452,16 +447,31 @@ int main(int argc, char* argv[])
       C_e_summary->cd(1);
       gStyle->SetOptStat(0);
       gStyle->SetOptFit(0);
+      cout << 1 << endl;
       energy_deposition[ienergy][ds] = (TH1F*)filein[ds]->Get(Form("%s/edep_%dGeV",dirNames[0].c_str(),(int)_energy));
+      cout << 1 << endl;
       fit_gaus[ienergy][ds] = (TF1*)filein[ds]->Get(Form("%s/fit_gaus",dirNames[0].c_str()));
+      cout << 1 << endl;
+      cout << Form("%s/fit_gaus",dirNames[0].c_str()) << endl;
       ApplyConfigStyle(energy_deposition[ienergy][ds], drawSettings[ds].isData, drawSettings[ds].cutIdx, drawSettings[ds].calibIdx, 1);
+      cout << 1 << endl;
+      cout << fit_gaus[ienergy][ds]->GetParameter(0) << endl;
+      cout << fit_gaus[ienergy][ds]->GetParameter(1) << endl;
+      cout << fit_gaus[ienergy][ds]->GetParameter(2) << endl;
       int rebinFactor = CalculateRebinFactor(energy_deposition[ienergy][ds], fit_gaus[ienergy][ds]->GetParameter(2));
+      cout << rebinFactor << endl;
+      cout << 1 << endl;
       energy_deposition[ienergy][ds]->Rebin(rebinFactor);
+      cout << 1 << endl;
       fit_gaus[ienergy][ds]->SetParameter(0, fit_gaus[ienergy][ds]->GetParameter(0) * rebinFactor);
+      cout << 1 << endl;
       fit_gaus[ienergy][ds]->SetNpx(1000);
       // energy_deposition[ienergy][ds]->SetLineColor(histo_colors[ds]);
+      cout << 1 << endl;
       energy_deposition[ienergy][ds]->GetXaxis()->SetRangeUser(fit_gaus[ienergy][ds]->GetParameter(1)-10*fit_gaus[ienergy][ds]->GetParameter(2),fit_gaus[ienergy][ds]->GetParameter(1)+10*fit_gaus[ienergy][ds]->GetParameter(2));
+      cout << 1 << endl;
       energy_deposition[ienergy][ds]->Draw(histoDrawOptions[ds].c_str());
+      cout << 1 << endl;
       ApplyConfigStyle(fit_gaus[ienergy][ds], drawSettings[ds].isData, drawSettings[ds].cutIdx, drawSettings[ds].calibIdx, 1, true);
       // fit_gaus[ienergy][ds]->SetLineColor(fit_colors[ds]);
       // fit_gaus[ienergy][ds]->Draw("same");
@@ -474,7 +484,8 @@ int main(int argc, char* argv[])
       Eres[ds]->SetPoint(ienergy, _energy, sigma/mean);
       Eres[ds]->SetPointError(ienergy, 0, res_error);
 
-
+      cout << 1 << endl;
+      
       C_e_summary->cd(2);
       gStyle->SetOptStat(0);
       gStyle->SetOptFit(0);
@@ -541,7 +552,7 @@ int main(int argc, char* argv[])
       
       
 
-
+      cout << argv[filenames[ds][ienergy].second] << endl;
 
 
 
@@ -575,7 +586,7 @@ int main(int argc, char* argv[])
         gPad->SetLogy(1);
         hit_per_layer[ienergy][i_layer][ds]->Draw(histoDrawOptions[ds].c_str());
       }
-
+      cout << argv[filenames[ds][ienergy].second] << endl;
     }
 
     // --- 1. 左上：Data用の凡例 ---
@@ -638,11 +649,9 @@ int main(int argc, char* argv[])
         return 0.0; // 除外されるため戻り値は何でもよい
     }
     // それ以外の範囲の元の関数: sqrt(p[0]^2/x + p[1]^2)
+    // return sqrt((p[0]*p[0]) / x[0] + (p[1]*p[1]));
     return sqrt((p[0]*p[0]) / x[0] + (p[1]*p[1]));
   };
-
-
-
 
   TCanvas *resolution_plots = new TCanvas("resolution_plots", "resolution_plots", 2560,1440); 
   resolution_plots->Divide(2,2);
@@ -683,7 +692,6 @@ int main(int argc, char* argv[])
   gPad->Update();
   legend_resolution->Draw("same");
 
-
   resolution_plots->cd(3);
   gStyle->SetOptStat(0);
   gStyle->SetOptFit(0);
@@ -701,7 +709,6 @@ int main(int argc, char* argv[])
   gPad->Modified();
   gPad->Update();
   legResData->Draw("same");
-
 
   resolution_plots->cd(4);
   gStyle->SetOptStat(0);
@@ -724,13 +731,133 @@ int main(int argc, char* argv[])
   gPad->Update();
   legResSim->Draw("same");
 
-
-  
-
   resolution_plots->Write(Form("resolution"));
   resolution_plots->SaveAs(Form("%s/resolution.png",argv[argc-1]));
 
 
 
+
+
+
+  // =================================================================
+  // 【追加用】ノイズ項あり (a/sqrt(E) (+) b/E (+) c) のフィット＆描画処理
+  // =================================================================
+  
+  bool enable_reject_noise = true;
+  
+  // 3 パラメータ（統計項, ノイズ項, 定数項）フィット関数
+  auto FitFuncResolutionWithNoise = [&enable_reject_noise](double *x, double *p) {
+      if (enable_reject_noise && ( (x[0] > 25.0 && x[0] < 35.0) || (x[0] > 75.0 && x[0] < 85.0) )) {
+          TF1::RejectPoint();
+          return 0.0;
+      }
+      double E = x[0];
+      double term_stoch = (p[0] * p[0]) / E;         // (a / sqrt(E))^2
+      double term_noise = (p[1] * p[1]) / (E * E);   // (b / E)^2
+      double term_const = (p[2] * p[2]);             // c^2
+      return sqrt(term_stoch + term_noise + term_const);
+  };
+  
+  TCanvas *resolution_plots_noise = new TCanvas("resolution_plots_noise", "resolution_plots_noise", 2560, 1440); 
+  resolution_plots_noise->Divide(2, 2);
+  
+  TLegend *legend_resolution_noise = CreateNiceLegend(0.3, 0.4, 0.9, 0.85, 2);
+  TF1 *res_func_low_noise[Ndatasim];
+  
+  // --- 1. 全データ (Data + Sim) の描画 (cd(1)) ---
+  resolution_plots_noise->cd(1);
+  gStyle->SetOptStat(0);
+  gStyle->SetOptFit(0);
+  resolution_plots_noise->SetGrid();
+  
+  for (int ds = 0; ds < Ndatasim; ds++) {
+      res_func_low_noise[ds] = new TF1(Form("res_func_low_noise_%d", ds), FitFuncResolutionWithNoise, 0.1, 300, 3);
+      ApplyConfigStyle(res_func_low_noise[ds], drawSettings[ds].isData, drawSettings[ds].cutIdx, drawSettings[ds].calibIdx, 1, true);
+  
+      // 初期値設定
+      res_func_low_noise[ds]->SetParameter(0, 0.20); // 統計項 (a)
+      res_func_low_noise[ds]->SetParameter(1, 0.05); // ノイズ項 (b)
+      res_func_low_noise[ds]->SetParameter(2, 0.01); // 定数項 (c)
+      
+      // パラメータが負値に落ちるのを防ぐ制約
+      res_func_low_noise[ds]->SetParLimits(0, 0.0, 2.0);
+      res_func_low_noise[ds]->SetParLimits(1, 0.0, 5.0);
+      res_func_low_noise[ds]->SetParLimits(2, 0.0, 1.0);
+  
+      enable_reject_noise = true;
+      Eres[ds]->Fit(Form("res_func_low_noise_%d", ds), "", "", 0.1, 130);
+      res_func_low_noise[ds]->SetRange(0.1, 300.0);
+      enable_reject_noise = false;
+  
+      Eres[ds]->SetMinimum(0);
+      Eres[ds]->SetMaximum(0.3);
+      ApplyConfigStyle(Eres[ds], drawSettings[ds].isData, drawSettings[ds].cutIdx, drawSettings[ds].calibIdx, 1);
+      Eres[ds]->SetMarkerSize(1.7);
+      Eres[ds]->Draw(graphDrawOptions[ds].c_str());
+      Eres[ds]->GetXaxis()->SetRangeUser(0.0, 130);
+      res_func_low_noise[ds]->Draw("same");
+  
+      string cog_range = drawSettings[ds].cog_range == 200 ? "no cut" : Form("%dmm", drawSettings[ds].cog_range);
+      string sampleCaption = Form("%s %s", drawSettings[ds].dataType.c_str(), cog_range.c_str());
+  
+      legend_resolution_noise->AddEntry(Eres[ds], Form("%s #frac{%.3f}{#sqrt{E}} #oplus #frac{%.3f}{E} #oplus %.3f", sampleCaption.c_str(), std::abs(res_func_low_noise[ds]->GetParameter(0)), std::abs(res_func_low_noise[ds]->GetParameter(1)), std::abs(res_func_low_noise[ds]->GetParameter(2))), "lp");
+  }
+  gPad->Modified();
+  gPad->Update();
+  legend_resolution_noise->Draw("same");
+  
+  // --- 2. Data のみの描画 (cd(3)) ---
+  resolution_plots_noise->cd(3);
+  gStyle->SetOptStat(0);
+  gStyle->SetOptFit(0);
+  resolution_plots_noise->SetGrid();
+  TLegend *legResData_noise = CreateNiceLegend(0.3, 0.4, 0.9, 0.85, 1);
+  
+  for (int ds = 0; ds < Ndatasim; ds++) {
+      if (!drawSettings[ds].isData) continue;
+  
+      Eres[ds]->Draw(graphDrawOptions[ds].c_str());
+      Eres[ds]->GetXaxis()->SetRangeUser(0.0, 130);
+      res_func_low_noise[ds]->Draw("same");
+  
+      string cog_range = drawSettings[ds].cog_range == 200 ? "no cut" : Form("%dmm", drawSettings[ds].cog_range);
+      string sampleCaption = Form("%s %s", drawSettings[ds].dataType.c_str(), cog_range.c_str());
+  
+      legResData_noise->AddEntry(Eres[ds], Form("%s #frac{%.3f}{#sqrt{E}} #oplus #frac{%.3f}{E} #oplus %.3f", sampleCaption.c_str(), std::abs(res_func_low_noise[ds]->GetParameter(0)), std::abs(res_func_low_noise[ds]->GetParameter(1)), std::abs(res_func_low_noise[ds]->GetParameter(2))), "lp");
+  }
+  gPad->Modified();
+  gPad->Update();
+  legResData_noise->Draw("same");
+  
+  // --- 3. Sim のみの描画 (cd(4)) ---
+  resolution_plots_noise->cd(4);
+  gStyle->SetOptStat(0);
+  gStyle->SetOptFit(0);
+  resolution_plots_noise->SetGrid();
+  TLegend *legResSim_noise = CreateNiceLegend(0.3, 0.4, 0.9, 0.85, 1);
+  int firstDrawing_noise = 0;
+  
+  for (int ds = 0; ds < Ndatasim; ds++) {
+      if (drawSettings[ds].isData) continue;
+  
+      if (firstDrawing_noise == 0) Eres[ds]->Draw("AP");
+      else Eres[ds]->Draw(graphDrawOptions[ds].c_str());
+  
+      Eres[ds]->GetXaxis()->SetRangeUser(0.0, 130);
+      res_func_low_noise[ds]->Draw("same");
+  
+      string cog_range = drawSettings[ds].cog_range == 200 ? "no cut" : Form("%dmm", drawSettings[ds].cog_range);
+      string sampleCaption = Form("%s %s", drawSettings[ds].dataType.c_str(), cog_range.c_str());
+  
+      legResSim_noise->AddEntry(Eres[ds], Form("%s #frac{%.3f}{#sqrt{E}} #oplus #frac{%.3f}{E} #oplus %.3f", sampleCaption.c_str(), std::abs(res_func_low_noise[ds]->GetParameter(0)), std::abs(res_func_low_noise[ds]->GetParameter(1)), std::abs(res_func_low_noise[ds]->GetParameter(2))), "lp");
+      firstDrawing_noise++;
+  }
+  gPad->Modified();
+  gPad->Update();
+  legResSim_noise->Draw("same");
+  
+  // --- 4. 保存処理 ---
+  resolution_plots_noise->Write("resolution_with_noise");
+  resolution_plots_noise->SaveAs(Form("%s/resolution_with_noise.png", argv[argc - 1]));
 
 }

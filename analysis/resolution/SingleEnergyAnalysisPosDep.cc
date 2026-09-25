@@ -8,7 +8,6 @@
 #include "TH1S.h"
 #include "TH2D.h"
 #include "TH2S.h"
-#include "TStyle.h"
 #include "TGraph.h"
 #include "TGraphErrors.h"
 #include "TF1.h"
@@ -23,8 +22,9 @@
 #include <cmath>
 #include "TLegend.h"
 #include "TCanvas.h"
-#include "EBUdecode.h"
-#include "EBUdecode.cxx"
+#include "weightedSSA.cpp"
+#include "showerRaddius.cpp"
+#include "langaus.C"				// langaus(chargeH, &fitFunc, &peakP, &peakPError);
 // #include "../RawtoRoot/include/EBUdecode.h"
 // #include "/megraid01/users/murata_t/scecal/ScECAL_CR/analyseCode/RawtoRoot/include/EBUdecode.h"
 // #include "/megraid01/users/data_beamtest_SPS2022/analysis/ECAL_Analysis/include/EBUdecode.h"
@@ -39,6 +39,22 @@ using namespace std;
 // argvなどは複数エネルギーのものと同様になっていて、おそらく実際に複数エネルギーでも動くが、未検証
 
 const bool cog_cut = true;
+const bool check_reso_pos_dependency = true;      // pos_dep_mm角の位置で区切ってもろもろの解析をおこなうかどうか
+const double pos_dep_mm = 20;
+
+const int dep_pos_size = ceil( ( 113.3 - pos_dep_mm/2. ) / pos_dep_mm ) * 2 + 1;
+
+
+pair<int, int> GetBlockIndex(double _x, double _y){
+  const double min_val = -113.3;
+  auto get_rel_idx = [&](double val) {
+    return std::floor((val + pos_dep_mm / 2.0) / pos_dep_mm);
+  };
+  int offset = get_rel_idx(min_val);
+  return {get_rel_idx(_x) - offset, get_rel_idx(_y) - offset};
+}
+
+
 
 const unordered_set<int> bad_channels = {
   // bad channel の CellID をここに列挙
@@ -55,6 +71,10 @@ int sipmtypes(int layer){
     // layer 0~3, 28~31
   return ((layer < 4) || (layer >27)) ? 1 : 0;
 }
+
+#include <vector>
+#include <cmath>
+#include <iostream>
 
 /*
 double CalculateShowerRadiusRMS(const vector<double>& x, const vector<double>& y, const vector<double>& energy){
@@ -167,14 +187,12 @@ int main(int argc, char* argv[])
 
   double EnergyDep;
   vector<int> *cellID = nullptr;
-  vector<int> *_hitTag = nullptr;
   vector<double> *Hit_Energy = nullptr;
   vector<double> *Hit_X = nullptr;
 	vector<double> *Hit_Y = nullptr;
 	vector<double> *Hit_Z = nullptr;
   vector<double> *NewTemperature = nullptr;
-  vector<vector<double>> *_tempLayer = nullptr;
-  
+  vector<int> *ssaTag = nullptr;
 	
 
 
@@ -203,11 +221,13 @@ int main(int argc, char* argv[])
   double edep_mean=0, edep_sigma=0, nhit_mean=0, nhit_sigma=0;
 
 
-  // for (int eventCut = 0; eventCut < 2; ++eventCut) {
   for (int eventCut = 0; eventCut < 1; ++eventCut) {
     int irawfilenum = 3 + 2*Nenegry;
     // 0 : no cut,  1 : after cut
-
+  
+  for (int isize = 0; isize < dep_pos_size; ++isize) {
+    for (int jsize = 0; jsize < dep_pos_size; ++jsize) {
+      irawfilenum = 3 + 2*Nenegry;
 
 	// dataを入れるもの
   TH1F* energy_deposition[Nenegry];
@@ -269,16 +289,16 @@ int main(int argc, char* argv[])
       cog[i][ilayer] = new TH2F(Form("cog_%dGeV_layer_%d",i,ilayer),Form("center of gravity %g GeV layer %d",energy[i],ilayer),226,-113,113,226,-113,113);
     }
 
-    // shower_radiusRMS[i] = new TH1F(Form("shower_radiusRMS_%d",i),Form("%g GeV shower radius (RMS)",energy[i]),2000,0,200);
-    // shower_radiusRMS[i]->SetXTitle("radius [mm]");
-    // shower_radius90[i] = new TH1F(Form("shower_radius90_%d",i),Form("%g GeV shower radius R90",energy[i]),2000,0,200);
-    // shower_radius90[i]->SetXTitle("radius [mm]");
-    // layer_vs_r90[i] = new TH2F(Form("layer_vs_r90_%d",i),Form("%g GeV layer vs. r90",energy[i]), layerNu,0,layerNu, 2000,0,200);
-    // layer_vs_r90[i]->SetXTitle("layer");
-    // layer_vs_r90[i]->SetYTitle("radius [mm]");
-    // layer_vs_rRMS[i] = new TH2F(Form("layer_vs_rRMS_%d",i),Form("%g GeV layer vs. rRMS",energy[i]), layerNu,0,layerNu, 2000,0,200);
-    // layer_vs_rRMS[i]->SetXTitle("layer");
-    // layer_vs_rRMS[i]->SetYTitle("radius [mm]");
+    shower_radiusRMS[i] = new TH1F(Form("shower_radiusRMS_%d",i),Form("%g GeV shower radius (RMS)",energy[i]),2000,0,200);
+    shower_radiusRMS[i]->SetXTitle("radius [mm]");
+    shower_radius90[i] = new TH1F(Form("shower_radius90_%d",i),Form("%g GeV shower radius R90",energy[i]),2000,0,200);
+    shower_radius90[i]->SetXTitle("radius [mm]");
+    layer_vs_r90[i] = new TH2F(Form("layer_vs_r90_%d",i),Form("%g GeV layer vs. r90",energy[i]), layerNu,0,layerNu, 2000,0,200);
+    layer_vs_r90[i]->SetXTitle("layer");
+    layer_vs_r90[i]->SetYTitle("radius [mm]");
+    layer_vs_rRMS[i] = new TH2F(Form("layer_vs_rRMS_%d",i),Form("%g GeV layer vs. rRMS",energy[i]), layerNu,0,layerNu, 2000,0,200);
+    layer_vs_rRMS[i]->SetXTitle("layer");
+    layer_vs_rRMS[i]->SetYTitle("radius [mm]");
     // edep_vs_rRMS[i] = new TH2F(Form("edep_vs_rRMS_%d",i),Form("%g GeV edep vs. rRMS",energy[i]), nbin,0,max_range, 2000,0,200);
     // edep_vs_rRMS[i]->SetXTitle("layer");
     // edep_vs_rRMS[i]->SetYTitle("radius [mm]");
@@ -286,34 +306,18 @@ int main(int argc, char* argv[])
     // edep_vs_r90[i]->SetXTitle("layer");
     // edep_vs_r90[i]->SetYTitle("radius [mm]");
 
-    edep_1hit[i][1] = new TH1F(Form("edep_1hit_15um_%d",i),Form("%g GeV ADC of 1 channel (15 um)",energy[i]), 4096,0,4096);
+    edep_1hit[i][1] = new TH1F(Form("edep_1hit_15um_%d",i),Form("%g GeV Edep of 1 channel (15 um)",energy[i]), 12000,0,12);
     edep_1hit[i][1]->SetXTitle("[MeV]");
-    edep_1hit[i][0] = new TH1F(Form("edep_1hit_10um_%d",i),Form("%g GeV ADC of 1 channel (10 um)",energy[i]), 4096,0,4096);
+    edep_1hit[i][0] = new TH1F(Form("edep_1hit_10um_%d",i),Form("%g GeV Edep of 1 channel (10 um)",energy[i]), 12000,0,12);
     edep_1hit[i][0]->SetXTitle("[MeV]");
 
-    // firstLayerHit_vs_cog[i][0] = new TH2F(Form("firstLayerHit_vs_cog_%d_layer9",i),Form("%g GeV firstLayerHit vs cog 9",energy[i]), 2000,0,200, 2000,0,200);
-    // firstLayerHit_vs_cog[i][0]->SetXTitle("layer 0 cog from center [mm]");
-    // firstLayerHit_vs_cog[i][0]->SetYTitle("layer 9 cog from center [mm]");
-    // firstLayerHit_vs_cog[i][1] = new TH2F(Form("firstLayerHit_vs_cog_%d_layer10",i),Form("%g GeV firstLayerHit vs cog 10",energy[i]), 2000,0,200, 2000,0,200);
-    // firstLayerHit_vs_cog[i][1]->SetXTitle("layer 0 cog from center [mm]");
-    // firstLayerHit_vs_cog[i][1]->SetYTitle("layer 10 cog from center [mm]");
+    firstLayerHit_vs_cog[i][0] = new TH2F(Form("firstLayerHit_vs_cog_%d_layer9",i),Form("%g GeV firstLayerHit vs cog 9",energy[i]), 2000,0,200, 2000,0,200);
+    firstLayerHit_vs_cog[i][0]->SetXTitle("layer 0 cog from center [mm]");
+    firstLayerHit_vs_cog[i][0]->SetYTitle("layer 9 cog from center [mm]");
+    firstLayerHit_vs_cog[i][1] = new TH2F(Form("firstLayerHit_vs_cog_%d_layer10",i),Form("%g GeV firstLayerHit vs cog 10",energy[i]), 2000,0,200, 2000,0,200);
+    firstLayerHit_vs_cog[i][1]->SetXTitle("layer 0 cog from center [mm]");
+    firstLayerHit_vs_cog[i][1]->SetYTitle("layer 10 cog from center [mm]");
 	}
-  
-	
-
-	// runごとにつくるもの
-	
-
-
-  
-
-
-
-	// 保存形式
-  
-
-
-
 
 
 
@@ -324,21 +328,13 @@ int main(int argc, char* argv[])
 	for(int ienergy=0; ienergy<Nenegry; ienergy++){
 		if(Nenegry>1) cout << energy[ienergy] << " GeV" << endl;
 
-    TH1F* edep_channel[layerNu][chipNu][channelNu];
-    for (int i_layer = 0; i_layer < layerNu; ++i_layer) {
-      for (int i_chip = 0; i_chip < chipNu; ++i_chip) {
-        for (int i_channel = 0; i_channel < channelNu; ++i_channel) {
-          edep_channel[i_layer][i_chip][i_channel] = new TH1F(Form("edep_channel_%d_%d_%d",i_layer, i_chip, i_channel),Form("%g GeV layer%d chip%d channel%d",energy[ienergy], i_layer, i_chip, i_channel),4096,0,4096);
-        }
-      }
-    }
-
     TFile *filein[energy_files[ienergy]];
     TTree *tree[energy_files[ienergy]];
     int entry_max[energy_files[ienergy]];
     for(int i=0; i<energy_files[ienergy]; i++){
+      cout <<argv[irawfilenum+i] << endl;
 	  	filein[i] = new TFile(argv[irawfilenum+i]);
-	  	tree[i] = (TTree*) filein[i]->Get("Raw_Hit");
+	  	tree[i] = (TTree*) filein[i]->Get("SSA_Hit");
 	  	entry_max[i] = tree[i]->GetEntries();
     }
 
@@ -350,16 +346,13 @@ int main(int argc, char* argv[])
       // if (result != skipFiles.end()) continue;
       
 		  tree[irawfile]->SetBranchAddress("CellID", &cellID);
-      tree[irawfile]->SetBranchAddress("HitTag",&_hitTag);
-		  // tree[irawfile]->SetBranchAddress("HG_Charge", &Hit_Energy);
-		  tree[irawfile]->SetBranchAddress("LG_Charge", &Hit_Energy);
-		  // tree[irawfile]->SetBranchAddress("Hit_Energy", &Hit_Energy);
+		  tree[irawfile]->SetBranchAddress("Hit_Energy", &Hit_Energy);
 		  // tree[irawfile]->SetBranchAddress("TotalEnergyDep", &EnergyDep);
-		  // tree[irawfile]->SetBranchAddress("Hit_X", &Hit_X);
-		  // tree[irawfile]->SetBranchAddress("Hit_Y", &Hit_Y);
-		  // tree[irawfile]->SetBranchAddress("Hit_Z", &Hit_Z);
-		  // tree[irawfile]->SetBranchAddress("NewTemperature", &NewTemperature);
-		  tree[irawfile]->SetBranchAddress("Temperature", &_tempLayer);
+		  tree[irawfile]->SetBranchAddress("Hit_X", &Hit_X);
+		  tree[irawfile]->SetBranchAddress("Hit_Y", &Hit_Y);
+		  tree[irawfile]->SetBranchAddress("Hit_Z", &Hit_Z);
+		  tree[irawfile]->SetBranchAddress("NewTemperature", &NewTemperature);
+		  tree[irawfile]->SetBranchAddress("ssaTag", &ssaTag);
 
 	  	for(int ientry=0; ientry<entry_max[irawfile]; ientry++){
         // if(ientry%1000==0) cout << ientry << "/" << entry_max[irawfile] << endl;
@@ -376,44 +369,46 @@ int main(int argc, char* argv[])
         double average_temperature[32] = {0};
         int nhit_firstLayer = 0;
         // vector<double> layerSSA, xSSA, ySSA, eSSA;
-        double cut_nhit=0, cut_edep=EnergyDep;
-        for(int ihit=0;ihit<cellID->size();ihit++){
-          if(_hitTag->at(ihit)==0) continue;
+        double cut_nhit=0; //, cut_edep=EnergyDep;
+        for(int ihit=0;ihit<Hit_Energy->size();ihit++){
+          if(ssaTag->at(ihit)==0) continue;
           int _layerID = cellID->at(ihit)/1e5;
           int _chipID  = (cellID->at(ihit)%100000) /1e4;
           int _chanID  = cellID->at(ihit)%100;
           if(_layerID>=30) continue;
           if(_layerID==0) nhit_firstLayer++;
           if( (_chipID<0 || _chipID>5) || (_chanID<0 || _chanID>35) ) cout << "error in cellId " << cellID->at(ihit) << endl;
-          // if(Hit_Energy->at(ihit)<0) continue;
+          if(Hit_Energy->at(ihit)<0) continue;
           n_of_hits[0]++;
           const int currentCellId = cellID->at(ihit);
           if(bool_only_best) if(bad_channels.find(currentCellId) != bad_channels.end()) continue;
           n_of_hits[1]++;
-          // cog_x[_layerID] += Hit_X->at(ihit) * Hit_Energy->at(ihit);
-          // cog_y[_layerID] += Hit_Y->at(ihit) * Hit_Energy->at(ihit);
+          cog_x[_layerID] += Hit_X->at(ihit) * Hit_Energy->at(ihit);
+          cog_y[_layerID] += Hit_Y->at(ihit) * Hit_Energy->at(ihit);
           energies[_layerID] += Hit_Energy->at(ihit);
           sumEdep_all += Hit_Energy->at(ihit);
           cut_nhit++;
         }
-        // double distance_cog0 = sqrt(pow(cog_x[0]/energies[0],2)+pow(cog_y[0]/energies[0],2));
-        // double distance_cog9 = sqrt(pow(cog_x[9]/energies[9],2)+pow(cog_y[9]/energies[9],2));
-        // double distance_cog10 = sqrt(pow(cog_x[10]/energies[10],2)+pow(cog_y[10]/energies[10],2));
-        // firstLayerHit_vs_cog[ienergy][0]->Fill(distance_cog0, distance_cog9);
-        // firstLayerHit_vs_cog[ienergy][1]->Fill(distance_cog0, distance_cog10);
+        double distance_cog0 = sqrt(pow(cog_x[0]/energies[0],2)+pow(cog_y[0]/energies[0],2));
+        double distance_cog9 = sqrt(pow(cog_x[9]/energies[9],2)+pow(cog_y[9]/energies[9],2));
+        double distance_cog10 = sqrt(pow(cog_x[10]/energies[10],2)+pow(cog_y[10]/energies[10],2));
+        firstLayerHit_vs_cog[ienergy][0]->Fill(distance_cog0, distance_cog9);
+        firstLayerHit_vs_cog[ienergy][1]->Fill(distance_cog0, distance_cog10);
         // if(nhit_firstLayer>1) continue;
-        // if(!(cog_position_check(cog_x[9]/energies[9], cog_y[9]/energies[9], cog_range) && cog_position_check(cog_x[10]/energies[10], cog_y[10]/energies[10], cog_range))) continue;
-        // if(eventCut==1 && eventCutConditions(sumEdep_all, cut_nhit, edep_mean, edep_sigma, nhit_mean, nhit_sigma)) continue;
+        pair<int, int> group_id = GetBlockIndex(cog_x[0]/energies[0], cog_y[0]/energies[0]);
+        if(!(group_id.first==isize && group_id.second==jsize)) continue;
+        if(!(cog_position_check(cog_x[9]/energies[9], cog_y[9]/energies[9], cog_range) && cog_position_check(cog_x[10]/energies[10], cog_y[10]/energies[10], cog_range))) continue;
+        if(eventCut==1 && eventCutConditions(sumEdep_all, cut_nhit, edep_mean, edep_sigma, nhit_mean, nhit_sigma)) continue;
         // energy_deposition[ienergy]->Fill(sumEdep_all);
         for(int ihit=0;ihit<Hit_Energy->size();ihit++){
-          if(_hitTag->at(ihit)==0) continue;
+          if(ssaTag->at(ihit)==0) continue;
           int _layerID = cellID->at(ihit)/1e5;
           int _chipID  = (cellID->at(ihit)%100000) /1e4;
           int _chanID  = cellID->at(ihit)%100;
           if(_layerID>=30) continue;
           if( (_chipID<0 || _chipID>5) || (_chanID<0 || _chanID>35) ) cout << "error in cellId " << cellID->at(ihit) << endl;
-          // if(Hit_Energy->at(ihit)<0) continue;
-          edep_channel[_layerID][_chipID][_chanID]->Fill(Hit_Energy->at(ihit));
+          if(Hit_Energy->at(ihit)<0) continue;
+          // edep_channel[_layerID][_chipID][_chanID]->Fill(Hit_Energy->at(ihit));
           // layerSSA.push_back(_layerID);
           // xSSA.push_back(Hit_X->at(ihit));
           // ySSA.push_back(Hit_Y->at(ihit));
@@ -423,11 +418,7 @@ int main(int argc, char* argv[])
           sumEdep += Hit_Energy->at(ihit);
 
           nhits[_layerID]++;
-          double *_position = EBUdecode(_layerID,_chipID,_chanID);
-          double SiPMtemp;
-          if(_tempLayer->at(_layerID).size()!=0) SiPMtemp = tempReconstruction(_layerID, _position, _tempLayer->at(_layerID));
-          else SiPMtemp=20;
-          average_temperature[_layerID] += SiPMtemp;
+          average_temperature[_layerID] += NewTemperature->at(ihit);
 
           int SiPMType = sipmtypes(_layerID);
           edep_1hit[ienergy][SiPMType]->Fill(Hit_Energy->at(ihit));
@@ -467,9 +458,9 @@ int main(int argc, char* argv[])
           }
         // }
 
-        // for (int ilayer = 0; ilayer < layerNu; ++ilayer) {
-        //   cog[ienergy][ilayer]->Fill(cog_x[ilayer]/energies[ilayer], cog_y[ilayer]/energies[ilayer]);
-        // }
+        for (int ilayer = 0; ilayer < layerNu; ++ilayer) {
+          cog[ienergy][ilayer]->Fill(cog_x[ilayer]/energies[ilayer], cog_y[ilayer]/energies[ilayer]);
+        }
 	  	}
 
       EnergyDep = 0;
@@ -485,6 +476,7 @@ int main(int argc, char* argv[])
     // fileout.cd(Form("%s",dirName[eventCut].c_str()));
     if(eventCut==0) fileout.mkdir(Form("%dGeV", (int)energy[ienergy]));
     fileout.cd(Form("%dGeV", (int)energy[ienergy]));
+    /*
     for (int i_layer = 0; i_layer < 30; ++i_layer) {
       for (int i_chip = 0; i_chip < chipNu; ++i_chip) {
         TCanvas* c1 = new TCanvas(Form("edep_Layer%d_Chip%d", i_layer, i_chip), Form("Layer%d Chip%d", i_layer, i_chip), 2560, 1440);
@@ -495,14 +487,15 @@ int main(int argc, char* argv[])
           edep_channel[i_layer][i_chip][i_channel]->Draw();
         }
         c1->Update();
-        c1->Write(Form("%sedep_Layer%d_Chip%d", saveName[eventCut].c_str(),i_layer, i_chip));
-        c1->SaveAs(Form("%s/%gGeV/raw/%s%gGeV_layer%dchip%d.png",argv[argc-1],energy[ienergy],saveName[eventCut].c_str(),energy[ienergy],i_layer,i_chip));
+        // c1->Write(Form("%sedep_Layer%d_Chip%d", saveName[eventCut].c_str(),i_layer, i_chip));
+        // c1->SaveAs(Form("%s/%gGeV/raw/%s%gGeV_layer%dchip%d.png",argv[argc-1],energy[ienergy],saveName[eventCut].c_str(),energy[ienergy],i_layer,i_chip));
         delete c1;
         for (int i_channel = 0; i_channel < channelNu; ++i_channel) {
           delete edep_channel[i_layer][i_chip][i_channel];
         }
       }
     }
+    */
     fileout.cd();
     irawfilenum += energy_files[ienergy];
   }
@@ -557,9 +550,9 @@ int main(int argc, char* argv[])
 
     fileout.cd();
     fileout.cd(Form("%s",dirName[eventCut].c_str()));
-    C_res[ienergy]->Write();
-    energy_deposition[ienergy]->Write(Form("edep_%dGeV",(int)energy[ienergy]));
-    gaussian->Write("fit_gaus");
+    // C_res[ienergy]->Write();
+    // energy_deposition[ienergy]->Write(Form("edep_%dGeV",(int)energy[ienergy]));
+    // gaussian->Write("fit_gaus");
     
     fileout.cd();
     fileout.cd(Form("%s",dirName[eventCut].c_str()));
@@ -589,22 +582,22 @@ int main(int argc, char* argv[])
       C_cog->cd(ilayer+1);
       cog[ienergy][ilayer]->Draw("colz");
     }
-    C_cog->Write(Form("C_cog_%dGeV",(int)energy[ienergy]));
-    C_cog->SaveAs(Form("%s/%gGeV/%scog_%gGeV.png",argv[argc-1],energy[ienergy],saveName[eventCut].c_str(),energy[ienergy]));
+    // C_cog->Write(Form("C_cog_%dGeV",(int)energy[ienergy]));
+    C_cog->SaveAs(Form("%s/%gGeV/%scog_%gGeV_%d_%d.png",argv[argc-1],energy[ienergy],saveName[eventCut].c_str(),energy[ienergy],isize,jsize));
 
     delete C_cog;
   }
 
-  // for(int ienergy=0; ienergy<Nenegry; ienergy++){
-  //   TCanvas *C_cog_vs_first = new TCanvas(Form("C_cog_vs_first_%d",ienergy), Form("center of gravity %g GeV",energy[ienergy]), 2560,1440); 
-  //   C_cog_vs_first->Divide(2,1);
-  //   C_cog_vs_first->cd();
-  //   C_cog_vs_first->cd(1);
-  //   firstLayerHit_vs_cog[ienergy][0]->Draw("colz");
-  //   C_cog_vs_first->cd(2);
-  //   firstLayerHit_vs_cog[ienergy][1]->Draw("colz");
-  //   C_cog_vs_first->SaveAs(Form("%s/%gGeV/%sfirstLayerHit_vs_cog.png",argv[argc-1],energy[ienergy],saveName[eventCut].c_str()));
-  // }
+  for(int ienergy=0; ienergy<Nenegry; ienergy++){
+    TCanvas *C_cog_vs_first = new TCanvas(Form("C_cog_vs_first_%d",ienergy), Form("center of gravity %g GeV",energy[ienergy]), 2560,1440); 
+    C_cog_vs_first->Divide(2,1);
+    C_cog_vs_first->cd();
+    C_cog_vs_first->cd(1);
+    firstLayerHit_vs_cog[ienergy][0]->Draw("colz");
+    C_cog_vs_first->cd(2);
+    firstLayerHit_vs_cog[ienergy][1]->Draw("colz");
+    C_cog_vs_first->SaveAs(Form("%s/%gGeV/%sfirstLayerHit_vs_cog_%d_%d.png",argv[argc-1],energy[ienergy],saveName[eventCut].c_str(),isize,jsize));
+  }
 
   fileout.cd();
   fileout.cd(Form("%s",dirName[eventCut].c_str()));
@@ -615,10 +608,10 @@ int main(int argc, char* argv[])
     for (int ilayer = 0; ilayer < 30; ++ilayer) {
       C_hit_vs_e->cd(ilayer+1);
       hit_vs_e_per_layer[ienergy][ilayer]->Draw("colz");
-      hit_vs_e_per_layer[ienergy][ilayer]->Write(Form("hit_vs_e_%dGeV_layer%d",(int)energy[ienergy],ilayer));
+      // hit_vs_e_per_layer[ienergy][ilayer]->Write(Form("hit_vs_e_%dGeV_layer%d",(int)energy[ienergy],ilayer));
     }
-    C_hit_vs_e->Write(Form("hit_vs_e_per_layer_%dGeV",(int)energy[ienergy]));
-    C_hit_vs_e->SaveAs(Form("%s/%gGeV/%shit_vs_e_per_layer_%gGeV.png",argv[argc-1],energy[ienergy],saveName[eventCut].c_str(),energy[ienergy]));
+    // C_hit_vs_e->Write(Form("hit_vs_e_per_layer_%dGeV",(int)energy[ienergy]));
+    C_hit_vs_e->SaveAs(Form("%s/%gGeV/%shit_vs_e_per_layer_%gGeV_%d_%d.png",argv[argc-1],energy[ienergy],saveName[eventCut].c_str(),energy[ienergy],isize,jsize));
 
     delete C_hit_vs_e;
   }
@@ -629,10 +622,10 @@ int main(int argc, char* argv[])
     for (int ilayer = 0; ilayer < 30; ++ilayer) {
       C_edeps->cd(ilayer+1);
       edep_per_layer[ienergy][ilayer]->Draw();
-      edep_per_layer[ienergy][ilayer]->Write(Form("edep_%dGeV_layer%d",(int)energy[ienergy],ilayer));
+      // edep_per_layer[ienergy][ilayer]->Write(Form("edep_%dGeV_layer%d",(int)energy[ienergy],ilayer));
     }
-    C_edeps->Write(Form("edep_per_layer_%dGeV",(int)energy[ienergy]));
-    C_edeps->SaveAs(Form("%s/%gGeV/%sedep_per_layer_%gGeV.png",argv[argc-1],energy[ienergy],saveName[eventCut].c_str(),energy[ienergy]));
+    // C_edeps->Write(Form("edep_per_layer_%dGeV",(int)energy[ienergy]));
+    C_edeps->SaveAs(Form("%s/%gGeV/%sedep_per_layer_%gGeV_%d_%d.png",argv[argc-1],energy[ienergy],saveName[eventCut].c_str(),energy[ienergy],isize,jsize));
 
     delete C_edeps;
   }
@@ -643,10 +636,10 @@ int main(int argc, char* argv[])
     for (int ilayer = 0; ilayer < 30; ++ilayer) {
       C_nhits->cd(ilayer+1);
       hit_per_layer[ienergy][ilayer]->Draw();
-      hit_per_layer[ienergy][ilayer]->Write(Form("nhits_%dGeV_layer%d",(int)energy[ienergy],ilayer));
+      // hit_per_layer[ienergy][ilayer]->Write(Form("nhits_%dGeV_layer%d",(int)energy[ienergy],ilayer));
     }
-    C_nhits->Write(Form("nhits_per_layer_%dGeV",(int)energy[ienergy]));
-    C_nhits->SaveAs(Form("%s/%gGeV/%snhits_per_layer_%gGeV.png",argv[argc-1],energy[ienergy],saveName[eventCut].c_str(),energy[ienergy]));
+    // C_nhits->Write(Form("nhits_per_layer_%dGeV",(int)energy[ienergy]));
+    C_nhits->SaveAs(Form("%s/%gGeV/%snhits_per_layer_%gGeV_%d_%d.png",argv[argc-1],energy[ienergy],saveName[eventCut].c_str(),energy[ienergy],isize,jsize));
 
     delete C_nhits;
   }
@@ -664,7 +657,7 @@ int main(int argc, char* argv[])
 
     C_e_summary->cd(1);
     hit_vs_e[ienergy]->Draw("colz");
-    hit_vs_e[ienergy]->Write(Form("hit_vs_e_%dGeV",(int)energy[ienergy]));
+    // hit_vs_e[ienergy]->Write(Form("hit_vs_e_%dGeV",(int)energy[ienergy]));
     C_e_summary->cd(2);
     gStyle->SetOptFit(1111111);
     energy_deposition[ienergy]->Draw();
@@ -686,21 +679,21 @@ int main(int argc, char* argv[])
     number_of_hits[ienergy]->Write(Form("nhits_%dGeV", (int)energy[ienergy]));
     nhit_mean = gaussian_hit->GetParameter(1);
     nhit_sigma = gaussian_hit->GetParameter(2);
-    gaussian_hit->Write("fit_gaus_nhit");
+    // gaussian_hit->Write("fit_gaus_nhit");
 
     C_e_summary->cd(4);
     gPad->SetLogz(1);
     layer_vs_edep[ienergy]->Draw("colz");
-    layer_vs_edep[ienergy]->Write(Form("layer_vs_edep_%dGeV", (int)energy[ienergy]));
+    // layer_vs_edep[ienergy]->Write(Form("layer_vs_edep_%dGeV", (int)energy[ienergy]));
 
     C_e_summary->cd(5);
-    // edep_1hit[ienergy][0]->GetXaxis()->SetRangeUser(0,2);
+    edep_1hit[ienergy][0]->GetXaxis()->SetRangeUser(0,2);
     edep_1hit[ienergy][0]->Draw();
-    edep_1hit[ienergy][0]->Write(Form("edep_1hit_10um"));
+    // edep_1hit[ienergy][0]->Write(Form("edep_1hit_10um"));
     C_e_summary->cd(6);
-    // edep_1hit[ienergy][1]->GetXaxis()->SetRangeUser(0,2);
+    edep_1hit[ienergy][1]->GetXaxis()->SetRangeUser(0,2);
     edep_1hit[ienergy][1]->Draw();
-    edep_1hit[ienergy][1]->Write(Form("edep_1hit_15um"));
+    // edep_1hit[ienergy][1]->Write(Form("edep_1hit_15um"));
 
 
     // 1 hit (10 15 um)
@@ -710,16 +703,16 @@ int main(int argc, char* argv[])
     C_e_summary->cd(7);
     gPad->SetLogz(1);
     layer_vs_temp[ienergy]->Draw("colz");
-    layer_vs_temp[ienergy]->Write(Form("layer_vs_temp_%dGeV", (int)energy[ienergy]));
+    // layer_vs_temp[ienergy]->Write(Form("layer_vs_temp_%dGeV", (int)energy[ienergy]));
 
     C_e_summary->cd(8);
     gPad->SetLogz(1);
     layer_vs_nhits[ienergy]->Draw("colz");
-    layer_vs_nhits[ienergy]->Write(Form("layer_vs_nhits_%dGeV", (int)energy[ienergy]));
+    // layer_vs_nhits[ienergy]->Write(Form("layer_vs_nhits_%dGeV", (int)energy[ienergy]));
 
 
-    C_e_summary->Write();
-    C_e_summary->SaveAs(Form("%s/%ssummary_%gGeV.png",argv[argc-1],saveName[eventCut].c_str(),energy[ienergy]));
+    // C_e_summary->Write();
+    C_e_summary->SaveAs(Form("%s/%ssummary_%gGeV_%d_%d.png",argv[argc-1],saveName[eventCut].c_str(),energy[ienergy],isize,jsize));
 
 
     delete C_e_summary;
@@ -745,15 +738,17 @@ int main(int argc, char* argv[])
       delete cog[i][ilayer];
     }
 
-    // delete shower_radiusRMS[i];
-    // delete shower_radius90[i];
-    // delete layer_vs_r90[i];
-    // delete layer_vs_rRMS[i];
+    delete shower_radiusRMS[i];
+    delete shower_radius90[i];
+    delete layer_vs_r90[i];
+    delete layer_vs_rRMS[i];
 
     delete edep_1hit[i][0];
     delete edep_1hit[i][1];
 	}
 
+  }
+  }
   }
   
 }

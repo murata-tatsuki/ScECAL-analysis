@@ -39,8 +39,10 @@ echo "================================================================"
 #
 #./meganalyzer -i example/bartenderMode.xml -r 1 -b
 # ./mip_gain_all.sh
-./mip.sh
+# ./mip.sh
 # ./mip_comparison.sh
+
+"$@"
 
 RET=$?
 echo "Exit status: $RET"

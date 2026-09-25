@@ -1,4 +1,4 @@
-TARGET = MIP_calibration_data MIP_calibration_simulation
+TARGET = MIP_calibration_data MIP_calibration_simulation MIP_calibration
 CC = g++
 
 CFLAGS = -O2 -Wall -Wno-deprecated
@@ -20,6 +20,10 @@ MIP_calibration_data : MIP_calibration_data.o
 	$(CC) $(CFLAGS) $(LIBS) $(ROOTLIBS) $< -o $@
 
 MIP_calibration_simulation : MIP_calibration_simulation.o
+	@echo "Now generating target, wait a minutes..."
+	$(CC) $(CFLAGS) $(LIBS) $(ROOTLIBS) $< -o $@
+
+MIP_calibration : MIP_calibration.o
 	@echo "Now generating target, wait a minutes..."
 	$(CC) $(CFLAGS) $(LIBS) $(ROOTLIBS) $< -o $@
 

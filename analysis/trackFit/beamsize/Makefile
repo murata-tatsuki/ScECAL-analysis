@@ -1,4 +1,4 @@
-TARGET = between_files_energy_resolution_simulation between_files_energy_resolution between_files_cog between_files_energy_resolution_generation SingleEnergyAnalysis MultiEnergyAnalysis
+TARGET = beamsize_ssa beamsize_track
 CC = g++
 
 CFLAGS = -O2 -Wall -Wno-deprecated
@@ -15,27 +15,11 @@ ROOTLIBS := $(shell root-config --libs)
 
 all: $(TARGET)
 
-between_files_energy_resolution_simulation : between_files_energy_resolution_simulation.o
+beamsize_ssa : beamsize_ssa.o
 	@echo "Now generating target, wait a minutes..."
 	$(CC) $(CFLAGS) $(LIBS) $(ROOTLIBS) $< -o $@
 
-between_files_energy_resolution : between_files_energy_resolution.o
-	@echo "Now generating target, wait a minutes..."
-	$(CC) $(CFLAGS) $(LIBS) $(ROOTLIBS) $< -o $@
-
-between_files_cog : between_files_cog.o
-	@echo "Now generating target, wait a minutes..."
-	$(CC) $(CFLAGS) $(LIBS) $(ROOTLIBS) $< -o $@
-
-between_files_energy_resolution_generation : between_files_energy_resolution_generation.o
-	@echo "Now generating target, wait a minutes..."
-	$(CC) $(CFLAGS) $(LIBS) $(ROOTLIBS) $< -o $@
-
-SingleEnergyAnalysis : SingleEnergyAnalysis.o
-	@echo "Now generating target, wait a minutes..."
-	$(CC) $(CFLAGS) $(LIBS) $(ROOTLIBS) $< -o $@
-
-MultiEnergyAnalysis : MultiEnergyAnalysis.o
+beamsize_track : beamsize_track.o
 	@echo "Now generating target, wait a minutes..."
 	$(CC) $(CFLAGS) $(LIBS) $(ROOTLIBS) $< -o $@
 

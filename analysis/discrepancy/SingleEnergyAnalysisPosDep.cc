@@ -39,6 +39,9 @@ using namespace std;
 // argvなどは複数エネルギーのものと同様になっていて、おそらく実際に複数エネルギーでも動くが、未検証
 
 const bool cog_cut = true;
+const bool check_reso_pos_dependency = true;      // pos_dep_mm角の位置で区切ってもろもろの解析をおこなうかどうか
+const double pos_dep_mm = 10;
+
 
 const unordered_set<int> bad_channels = {
   // bad channel の CellID をここに列挙
@@ -202,6 +205,8 @@ int main(int argc, char* argv[])
 
   double edep_mean=0, edep_sigma=0, nhit_mean=0, nhit_sigma=0;
 
+  int dep_pos_size = ( ( 113.3 - pos_dep_mm/2. ) / pos_dep_mm + (( 113.3 - pos_dep_mm/2. ) % pos_dep_mm == 0 ? 0 : 1) ) * 2 + 1;
+
 
   // for (int eventCut = 0; eventCut < 2; ++eventCut) {
   for (int eventCut = 0; eventCut < 1; ++eventCut) {
@@ -229,6 +234,16 @@ int main(int argc, char* argv[])
   TH2F* firstLayerHit_vs_cog[Nenegry][2];
   // TH2F* edep_vs_rRMS[Nenegry];
   // TH2F* edep_vs_r90[Nenegry];
+  TH1F* posDep_energy_deposition[Nenegry][dep_pos_size][dep_pos_size];
+  TH2F* posDep_hitmap[Nenegry][layerNu][dep_pos_size][dep_pos_size];
+  TH1F* posDep_number_of_hits[Nenegry][dep_pos_size][dep_pos_size];
+  TH2F* posDep_hit_vs_e[Nenegry][dep_pos_size][dep_pos_size];
+  TH2F* posDep_hit_vs_e_per_layer[Nenegry][layerNu][dep_pos_size][dep_pos_size];
+  TH2F* posDep_layer_vs_edep[Nenegry][dep_pos_size][dep_pos_size];
+  TH2F* posDep_layer_vs_nhits[Nenegry][dep_pos_size][dep_pos_size];
+  TH1F* posDep_hit_per_layer[Nenegry][layerNu][dep_pos_size][dep_pos_size];
+  TH1F* posDep_edep_per_layer[Nenegry][layerNu][dep_pos_size][dep_pos_size];
+  TH1F* posDep_edep_1hit[Nenegry][2][dep_pos_size][dep_pos_size];
   for (int i = 0; i < Nenegry; ++i) {
     string histo_title = energy[i]<1 ? "0.5 GeV energy deposition" : Form("%g GeV energy deposition",energy[i]);
     int nbin = energy[i]>5 ? range_maximum : range_maximum_PS/binWidth_PS;
@@ -257,12 +272,12 @@ int main(int argc, char* argv[])
     layer_vs_temp[i]->SetYTitle("temperature [#circC]");
     
     for (int ilayer = 0; ilayer < layerNu; ++ilayer) {
-      hit_vs_e_per_layer[i][ilayer] = new TH2F(Form("hit_vs_e_per_layer_%d",ilayer),Form("%g GeV layer %d nhits vs. edep",energy[i], ilayer), edep_max,0,edep_max, 100,0,100);
+      hit_vs_e_per_layer[i][ilayer] = new TH2F(Form("hit_vs_e_per_layer_%d_%d",i,ilayer),Form("%g GeV layer %d nhits vs. edep",energy[i], ilayer), edep_max,0,edep_max, 100,0,100);
       hit_vs_e_per_layer[i][ilayer]->SetXTitle("Detected Energy [MeV]");
       hit_vs_e_per_layer[i][ilayer]->SetYTitle("number of hits");
-      edep_per_layer[i][ilayer] = new TH1F(Form("edep_per_layer_%d",ilayer),Form("%g GeV layer %d edep",energy[i],ilayer), edep_max,0,edep_max);
+      edep_per_layer[i][ilayer] = new TH1F(Form("edep_per_layer_%d_%d",i,ilayer),Form("%g GeV layer %d edep",energy[i],ilayer), edep_max,0,edep_max);
       edep_per_layer[i][ilayer]->SetXTitle("Detected Energy [MeV]");
-      hit_per_layer[i][ilayer] = new TH1F(Form("hit_per_layer_%d",ilayer),Form("%g GeV layer %d number of hits",energy[i],ilayer), 100,0,100);
+      hit_per_layer[i][ilayer] = new TH1F(Form("hit_per_layer_%d_%d",i,ilayer),Form("%g GeV layer %d number of hits",energy[i],ilayer), 100,0,100);
       hit_per_layer[i][ilayer]->SetXTitle("number of hits");
 
       hitmap[i][ilayer] = new TH2F(Form("hitmap_%dGeV_layer%d",i,ilayer),Form("hitmap %g GeV layer %d",energy[i],ilayer),226,-113,113,226,-113,113);
@@ -298,6 +313,51 @@ int main(int argc, char* argv[])
     // firstLayerHit_vs_cog[i][1]->SetXTitle("layer 0 cog from center [mm]");
     // firstLayerHit_vs_cog[i][1]->SetYTitle("layer 10 cog from center [mm]");
 	}
+  if(check_reso_pos_dependency) {
+    for (int isize = 0; isize < dep_pos_size; ++isize) {
+      for (int jsize = 0; jsize < dep_pos_size; ++jsize) {
+        for (int i = 0; i < Nenegry; ++i) {
+          string histo_title = energy[i]<1 ? "0.5 GeV energy deposition" : Form("%g GeV energy deposition",energy[i]);
+          int nbin = energy[i]>5 ? range_maximum : range_maximum_PS/binWidth_PS;
+          int max_range = energy[i]>5 ? range_maximum : range_maximum_PS;
+          posDep_energy_deposition[i][isize][jsize] = new TH1F(Form("posDep_energy_deposition_%d_%d_%d",i,isize,jsize),Form("%s",histo_title.c_str()),nbin,0,max_range);
+          posDep_energy_deposition[i][isize][jsize]->SetXTitle("Reconstructed Energy [MeV]");
+
+          posDep_number_of_hits[i][isize][jsize] = new TH1F(Form("posDep_number_of_hits_%d_%d_%d",i,isize,jsize),Form("%g GeV number of hits",energy[i]),3000,0,3000);
+          posDep_number_of_hits[i][isize][jsize]->SetXTitle("number of hits");
+
+          posDep_hit_vs_e[i][isize][jsize] = new TH2F(Form("posDep_hit_vs_e_%d_%d_%d",i,isize,jsize),Form("%g GeV nhits vs. edep",energy[i]), nbin,0,max_range, 3000,0,3000);
+          posDep_hit_vs_e[i][isize][jsize]->SetXTitle("Detected Energy [MeV]");
+          posDep_hit_vs_e[i][isize][jsize]->SetYTitle("number of hits");
+
+          double edep_max = energy[i]>5 ? 1000 : 100;
+          posDep_layer_vs_edep[i][isize][jsize] = new TH2F(Form("posDep_layer_vs_edep_%d_%d_%d",i,isize,jsize),Form("%g GeV layer vs. edep",energy[i]), layerNu,0,layerNu, edep_max,0,edep_max);
+          posDep_layer_vs_edep[i][isize][jsize]->SetXTitle("layer");
+          posDep_layer_vs_edep[i][isize][jsize]->SetYTitle("Detected Energy [MeV]");
+
+          posDep_layer_vs_nhits[i][isize][jsize] = new TH2F(Form("posDep_layer_vs_nhits_%d_%d_%d",i,isize,jsize),Form("%g GeV layer vs. number of hits",energy[i]), layerNu,0,layerNu, 100,0,100);
+          posDep_layer_vs_nhits[i][isize][jsize]->SetXTitle("layer");
+          posDep_layer_vs_nhits[i][isize][jsize]->SetYTitle("number of hits");
+
+          for (int ilayer = 0; ilayer < layerNu; ++ilayer) {
+            posDep_hit_vs_e_per_layer[i][ilayer][isize][jsize] = new TH2F(Form("posDep_hit_vs_e_per_layer_%d_%d_%d_%d",i,ilayer,isize,jsize),Form("%g GeV layer %d nhits vs. edep",energy[i], ilayer), edep_max,0,edep_max, 100,0,100);
+            posDep_hit_vs_e_per_layer[i][ilayer][isize][jsize]->SetXTitle("Detected Energy [MeV]");
+            posDep_hit_vs_e_per_layer[i][ilayer][isize][jsize]->SetYTitle("number of hits");
+            posDep_edep_per_layer[i][ilayer][isize][jsize] = new TH1F(Form("posDep_edep_per_layer_%d_%d_%d_%d",i,ilayer,isize,jsize),Form("%g GeV layer %d edep",energy[i],ilayer), edep_max,0,edep_max);
+            posDep_edep_per_layer[i][ilayer][isize][jsize]->SetXTitle("Detected Energy [MeV]");
+            posDep_hit_per_layer[i][ilayer][isize][jsize] = new TH1F(Form("posDep_hit_per_layer_%d_%d_%d_%d",i,ilayer,isize,jsize),Form("%g GeV layer %d number of hits",energy[i],ilayer), 100,0,100);
+            posDep_hit_per_layer[i][ilayer][isize][jsize]->SetXTitle("number of hits");
+          
+            posDep_hitmap[i][ilayer][isize][jsize] = new TH2F(Form("posDep_hitmap_%dGeV_layer%d_%d_%d",i,ilayer,isize,jsize),Form("hitmap %g GeV layer %d",energy[i],ilayer),226,-113,113,226,-113,113);
+          }
+          posDep_edep_1hit[i][1][isize][jsize] = new TH1F(Form("posDep_edep_1hit_15um_%d_%d_%d",i,isize,jsize),Form("%g GeV ADC of 1 channel (15 um)",energy[i]), 4096,0,4096);
+          posDep_edep_1hit[i][1][isize][jsize]->SetXTitle("[MeV]");
+          posDep_edep_1hit[i][0][isize][jsize] = new TH1F(Form("posDep_edep_1hit_10um_%d_%d_%d",i,isize,jsize),Form("%g GeV ADC of 1 channel (10 um)",energy[i]), 4096,0,4096);
+          posDep_edep_1hit[i][0][isize][jsize]->SetXTitle("[MeV]");
+  	    }
+      }
+    }
+  }
   
 	
 

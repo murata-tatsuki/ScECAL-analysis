@@ -1,4 +1,4 @@
-TARGET = between_files_energy_resolution_simulation between_files_energy_resolution between_files_cog between_files_energy_resolution_generation SingleEnergyAnalysis MultiEnergyAnalysis
+TARGET = between_files_energy_resolution_simulation between_files_energy_resolution between_files_cog between_files_energy_resolution_generation SingleEnergyAnalysis MultiEnergyAnalysis SingleEnergyAnalysisPosDep
 CC = g++
 
 CFLAGS = -O2 -Wall -Wno-deprecated
@@ -36,6 +36,10 @@ SingleEnergyAnalysis : SingleEnergyAnalysis.o
 	$(CC) $(CFLAGS) $(LIBS) $(ROOTLIBS) $< -o $@
 
 MultiEnergyAnalysis : MultiEnergyAnalysis.o
+	@echo "Now generating target, wait a minutes..."
+	$(CC) $(CFLAGS) $(LIBS) $(ROOTLIBS) $< -o $@
+
+SingleEnergyAnalysisPosDep : SingleEnergyAnalysisPosDep.o
 	@echo "Now generating target, wait a minutes..."
 	$(CC) $(CFLAGS) $(LIBS) $(ROOTLIBS) $< -o $@
 

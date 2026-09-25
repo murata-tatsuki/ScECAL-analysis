@@ -200,7 +200,7 @@ int main(int argc, char* argv[])
     string xy = i==0 ? "x" : "y";
     h_intercept[i] = new TH1D(Form("h_intercept_%s",xy.c_str()), Form(";%sz intercept [mm];Entries",xy.c_str()), 600, -150, 150);
     h_intercept_error[i] = new TH1D(Form("h_intercept_error_%s",xy.c_str()), Form(";%sz intercept error [mm];Entries",xy.c_str()), 200, 0, 2);
-    h_slope[i]     = new TH1D(Form("h_slope_%s",xy.c_str()),     Form(";%sz slope;Entries",xy.c_str()),     500, -0.5, 0.5);
+    h_slope[i]     = new TH1D(Form("h_slope_%s",xy.c_str()),     Form(";%sz slope;Entries",xy.c_str()),     1000, -0.5, 0.5);
     h_slope_error[i]     = new TH1D(Form("h_slope_error_%s",xy.c_str()),     Form(";%sz slope error;Entries",xy.c_str()),     1000, 0, 0.01);
   }
 
@@ -403,51 +403,52 @@ int main(int argc, char* argv[])
   
       hitCanvas[even_odd]->cd();
       hitCanvas[even_odd]->cd(ilayer_eo+1);
-      gStyle->SetOptStat(0);
+      hit_2d[i]->SetStats(kFALSE);
       gPad->SetGrid(0,0);
       hit_2d[i]->Draw("colz");
 
       fitCanvas[even_odd]->cd();
       fitCanvas[even_odd]->cd(ilayer_eo+1);
-      gStyle->SetOptStat(0);
+      fit_2d[i]->SetStats(kFALSE);
       gPad->SetGrid(0,0);
       fit_2d[i]->Draw("colz");
 
       fithitCanvas[even_odd]->cd();
       fithitCanvas[even_odd]->cd(ilayer_eo+1);
-      gStyle->SetOptStat(0);
+      fit_hit_2d[i]->SetStats(kFALSE);
       gPad->SetGrid(0,0);
       fit_hit_2d[i]->Draw("colz");
   
       effCanvas[even_odd]->cd();
       effCanvas[even_odd]->cd(ilayer_eo+1);
-      gStyle->SetOptStat(0);
+      eff_2d[i]->SetStats(kFALSE);
       eff_2d[i]->GetZaxis()->SetRangeUser(0, 1);
       gPad->SetGrid(0,0);
       eff_2d[i]->Draw("colz");
     }
     TCanvas *fitParameterCanvas = new TCanvas(Form("fitParameterCanvas"),Form("fit parameters"), 2560, 1440);
     fitParameterCanvas->Divide(4, 2);
+    gStyle->SetOptStat(1111);
     fitParameterCanvas->cd();
     for(int ixy=0;ixy<2;ixy++){
       fitParameterCanvas->cd(ixy*4 + 1);
       gPad->SetLogy(1);
-      gPad->SetGrid(0,0);
+      gPad->SetGrid(1,1);
       h_slope[ixy]->Draw();
 
       fitParameterCanvas->cd(ixy*4 + 2);
       gPad->SetLogy(1);
-      gPad->SetGrid(0,0);
+      gPad->SetGrid(1,1);
       h_slope_error[ixy]->Draw();
 
       fitParameterCanvas->cd(ixy*4 + 3);
       gPad->SetLogy(1);
-      gPad->SetGrid(0,0);
+      gPad->SetGrid(1,1);
       h_intercept[ixy]->Draw();
 
       fitParameterCanvas->cd(ixy*4 + 4);
       gPad->SetLogy(1);
-      gPad->SetGrid(0,0);
+      gPad->SetGrid(1,1);
       h_intercept_error[ixy]->Draw();
     }
     if(writeCanvas){
