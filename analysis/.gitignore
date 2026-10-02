@@ -4,3 +4,4 @@
 **/*.png
 *.root
 tmp/*.txt
+/log/
