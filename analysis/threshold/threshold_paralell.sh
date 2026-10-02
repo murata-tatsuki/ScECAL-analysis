@@ -1,4 +1,7 @@
 #! /bin/bash
+slurm_log_dir=$(realpath -m -- "$(dirname -- "${BASH_SOURCE[0]}")/../log/threshold")
+mkdir -p -- "$slurm_log_dir"
+
 source /megraid01/users/data_beamtest/analysis/ECAL_Analysis_LCIO/run/global_config
 
 paralell_jobs () {
@@ -32,7 +35,7 @@ paralell_jobs () {
 
     var=`cat ../tmp/threshold_${txt}.txt`
     # ./threshold_finding ../result/threshold/threshold_${txt}.root ${var} ${fig_path}
-    sbatch -o jobs/test-%A.out --error="jobs/test-%A.err" execute_paralell.sl ../result/threshold/threshold_${txt}.root ${var} ${fig_path}
+    sbatch -o "${slurm_log_dir}/test-%A.out" --error="${slurm_log_dir}/test-%A.err" execute_paralell.sl ../result/threshold/threshold_${txt}.root ${var} ${fig_path}
   done
 }
 

@@ -4,25 +4,37 @@
 
 ```text
 analysis/channel_response/
-  execute.sl              両解析共通のSlurm実行wrapper
+  execute.sl              各解析共通のSlurm実行wrapper
   root.mk                 共通のC++・ROOTビルド設定
   adc_energy/             HG–LG・ADC–energy比較のC++・shell
+  hl_intercept/           intercept修正前後の全channel比較・HG–LG再fit
   hg_lg_tail/             tailとevent内同時発生のC++・shell
-  job/
-    adc_energy/           応答比較のジョブログ・投入記録
-    hg_lg_tail/           tail解析のジョブログ・投入記録
+  calibration_residual/   run・温度別のHG/LG校正残差と切替点の診断
+  temperature_calibration/ PSのHG-only MIP温度補正・HG/LG接続・pedestal診断
+
+analysis/log/channel_response/
+  adc_energy/             応答比較のジョブログ・投入記録
+  hg_lg_tail/             tail解析のジョブログ・投入記録
+  calibration_residual/   校正残差解析のジョブログ・投入記録
+  mip_closure/            muon校正のジョブログ・投入記録
+  temperature_calibration/ 温度校正のジョブログ・入力manifest
 
 analysis/result/channel_response/
   adc_energy/             応答比較のROOT・PNG・入力設定
+  hl_intercept/           修正前後の入力ROOT・3sampleのfit ROOT・比較結果
   hg_lg_tail/             tail解析のROOT・PNG・集計表・入力設定
+  calibration_residual/   校正残差のROOT・PNG・統計表・定数監査
 ```
 
 - [adc_energyの説明・実行方法](adc_energy/README.md)
+- [hl_interceptの説明・実行方法](hl_intercept/README.md)
 - [hg_lg_tailの説明・実行方法](hg_lg_tail/README.md)
+- [calibration_residualの説明・実行方法](calibration_residual/README.md)
+- [temperature_calibrationの説明・実行方法](temperature_calibration/README.md)
 
 共通のSlurm実行wrapperは直下の`execute.sl`、C++・ROOTのビルド設定は`root.mk`にまとめています。各解析の`submit.sh`・`Makefile`がこれらを参照します。解析ごとのジョブ名・ログ保存先はそれぞれの`submit.sh`で設定します。
 
-`FastPng.hh`は`adc_energy/`だけで使用するため、その中に置いています。tailの校正係数読取は`analysis/impact_studies/StudyCommon.hh`を参照します。
+`adc_energy/FastPng.hh`は`adc_energy/`と`calibration_residual/`の高速PNG出力で共用しています。tailの校正係数読取は`analysis/impact_studies/StudyCommon.hh`を参照します。
 
 ## 実行例
 
@@ -42,7 +54,7 @@ bash submit.sh --energy 100
 
 ## 移動済みの既存出力
 
-従来`analysis/result/channel_response/`直下にあった応答比較の出力は、その下の`adc_energy/`に移動しました。従来のジョブログ・task manifest・投入記録も`job/adc_energy/`に移動しました。ファイル内容は変更していません。
+従来`analysis/result/channel_response/`直下にあった応答比較の出力は、その下の`adc_energy/`に移動しました。ジョブログ・task manifest・投入記録の現在の保存先は`analysis/log/channel_response/adc_energy/`です。ファイル内容は変更していません。
 
 過去のログ、設定記録、ROOT内の入力由来情報には、当時の実行パスがそのまま残っています。再実行には上記の現行コマンドを使ってください。
 

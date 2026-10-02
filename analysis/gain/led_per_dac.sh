@@ -1,4 +1,7 @@
 #! /bin/bash
+slurm_log_dir=$(realpath -m -- "$(dirname -- "${BASH_SOURCE[0]}")/../log/gain")
+mkdir -p -- "$slurm_log_dir"
+
 
 ## 一番いいfitを選び出すもの
 
@@ -7,9 +10,7 @@ dacList_=(2100 2150 2200 2250 2300 2350 2400 2450 2500)
 dacList_20230503_0835_Calib=(2100 2200 2300 2400 2500 2600 2700 2800 2900 3000 3100)
 # dacList=(2500)
 
-# rm -r jobs
-mkdir -p jobs
-
+mkdir -p "${slurm_log_dir}"
 beam=sps
 #beam=ps
 ledDir=LEDCali
@@ -45,7 +46,7 @@ for file in ${data_files[@]}; do
     var=`cat ../tmp/LED_allfilename.txt`
     # if [[ ${file} == *20230504* ]]
     # then
-      sbatch -o jobs/test-%A.out --error="jobs/test-%A.err" gpu.sl ./combine_files_LED ../result/gain/led/${file}/${file}_LED_${dac}.root ${outPitDir} ${var}
+      sbatch -o "${slurm_log_dir}/test-%A.out" --error="${slurm_log_dir}/test-%A.err" gpu.sl ./combine_files_LED ../result/gain/led/${file}/${file}_LED_${dac}.root ${outPitDir} ${var}
       # echo ./between_files_LED ../result/led/${file}_LED_${dac}.root ${outPitDir} ${var}
     # fi
 

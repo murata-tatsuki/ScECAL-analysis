@@ -6,7 +6,7 @@ submission_dir=$(pwd -P)
 ps_energies=0.5,1,2,3,4,5
 sps_energies=10,20,30,40,50,60,70,80,100,120,150,200,250
 energies_csv=$ps_energies,$sps_energies
-beam=auto partition=all log_dir=$HERE/../job/adc_energy
+beam=auto partition=all log_dir=$HERE/../../log/channel_response/adc_energy
 layers=0-29 channels=all plot_concurrency=32
 time_limit='' memory='' energy_option=''
 dry_run=0 no_plots=0 plots_only=0
@@ -25,7 +25,7 @@ Usage: bash submit.sh [submission options] [run.sh options]
   --partition NAME     Default: all
   --time LIMIT         Optional time limit for each task
   --mem SIZE           Optional memory per task
-  --log-dir PATH       Logs and submission/task records (default: $HERE/job)
+  --log-dir PATH       Logs and submission/task records (default: $HERE/../../log/channel_response/adc_energy)
   --dry-run            Validate inputs and print commands; create/submit nothing
 
 Other run.sh options, including --label, --channels, --layers, --max-events,

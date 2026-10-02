@@ -66,7 +66,7 @@ queueに相当するpartitionは`all`。`--partition`で変更できる。
 実行時間とメモリはclusterの設定を使い、必要に応じて`--time` / `--mem`を指定できる。
 `--label`、`--mc-tag`、`--no-plots`など、`run.sh`の解析オプションもそのまま渡せる。
 
-ログは集計が`analysis/channel_response/job/adc_energy/<energy>GeV-fill-<jobID>.out/.err`、
+ログは集計が`analysis/log/channel_response/adc_energy/<energy>GeV-fill-<jobID>.out/.err`、
 描画が`plot-<arrayJobID>_<taskID>.out/.err`。
 工程・energy・ジョブIDは`submissions_<日時>_<PID>.tsv`、
 配列taskIDとenergy/layerの対応は`plot_tasks_<日時>_<PID>.tsv`（0始まりの行番号）に記録する。

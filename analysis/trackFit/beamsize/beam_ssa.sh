@@ -1,4 +1,7 @@
 #! /bin/bash
+slurm_log_dir=$(realpath -m -- "$(dirname -- "${BASH_SOURCE[0]}")/../../log/trackFit/beamsize")
+mkdir -p -- "$slurm_log_dir"
+
 
 paralell_jobs () {
   track_path=$1
@@ -21,7 +24,7 @@ paralell_jobs () {
     echo -n ${dat_name} >> ../../tmp/beamsize_${beam}.txt
     echo -n " " >> ../../tmp/beamsize_${beam}.txt
   
-    sbatch -o ../jobs/beamsize/test-%A.out --error="../jobs/beamsize/test-%A.err" execute.sl ./beamsize_ssa ${outfile} ${dat_name} ${fig_path}
+    sbatch -o "${slurm_log_dir}/test-%A.out" --error="${slurm_log_dir}/test-%A.err" execute.sl ./beamsize_ssa ${outfile} ${dat_name} ${fig_path}
   done
 
   var=`cat ../../tmp/beamsize_${beam}.txt`
@@ -29,12 +32,11 @@ paralell_jobs () {
   outfile=${outPath}/${beam}/${particle}/${energy}.root
   fig_path=${outPath}/figures/${beam}/${particle}/${energy}
   mkdir -p ${fig_path}
-  # sbatch -o ../jobs/beamsize/test-%A.out --error="../jobs/beamsize/test-%A.err" execute.sl ./beamsize_ssa ${outfile} ${var} ${fig_path}
+  # sbatch -o "${slurm_log_dir}/test-%A.out" --error="${slurm_log_dir}/test-%A.err" execute.sl ./beamsize_ssa ${outfile} ${var} ${fig_path}
 }
 
 
-rm -rf ../jobs/beamsize
-mkdir -p ../jobs/beamsize
+mkdir -p "${slurm_log_dir}"
 
 
 outPath_=../../result/trackFit/beamsize_ssa

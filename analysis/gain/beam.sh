@@ -1,4 +1,7 @@
 #! /bin/bash
+slurm_log_dir=$(realpath -m -- "$(dirname -- "${BASH_SOURCE[0]}")/../log/gain")
+mkdir -p -- "$slurm_log_dir"
+
 
 ## 一番いいfitを選び出すもの
 
@@ -43,13 +46,11 @@ paralell_jobs () {
   mkdir -p ${outPitDir}/temp/histo
 
   var=`cat ../tmp/beam_allfilename.txt`
-  sbatch -o jobs/test-%A.out --error="jobs/test-%A.err" gpu.sl ./combine_files_beam ../result/gain/beam/${beam}_${particle}_all.root ${outPitDir} ${var}
+  sbatch -o "${slurm_log_dir}/test-%A.out" --error="${slurm_log_dir}/test-%A.err" gpu.sl ./combine_files_beam ../result/gain/beam/${beam}_${particle}_all.root ${outPitDir} ${var}
 }
 
 
-mkdir -p jobs
-
-
+mkdir -p "${slurm_log_dir}"
 paralell_jobs sps mu-
 paralell_jobs ps mu-
 # paralell_jobs sps e-

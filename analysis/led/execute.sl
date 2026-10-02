@@ -13,8 +13,8 @@
 #SBATCH --partition=all
 #SBATCH --ntasks=1       
 #SBATCH --job-name=analyzer   
-#SBATCH --output="output/analyzer%A.out"
-#SBATCH --error="ioutput/analyzer%A.err"
+#SBATCH --output=/home/murata_t/ScECAL_BeamTest/analysis/log/led/analyzer%A.out
+#SBATCH --error=/home/murata_t/ScECAL_BeamTest/analysis/log/led/analyzer%A.err
 
 MY_HOST=`hostname`
 MY_DATE=`date`

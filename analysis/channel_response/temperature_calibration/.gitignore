@@ -1,0 +1,4 @@
+CollectTemperature
+CollectTemperature.tmp
+__pycache__/
+.build.lock

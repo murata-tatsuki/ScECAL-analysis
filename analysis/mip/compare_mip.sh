@@ -1,4 +1,7 @@
 #! /bin/bash
+slurm_log_dir=$(realpath -m -- "$(dirname -- "${BASH_SOURCE[0]}")/../log/mip")
+mkdir -p -- "$slurm_log_dir"
+
 source /megraid01/users/data_beamtest/analysis/ECAL_Analysis_LCIO/run/global_config
 
 #Decode_path=${data_dir}/${year}/sps/simpleCalib/mu-/100GeV
@@ -25,4 +28,4 @@ var=`cat ../tmp/mip.txt`
 # ./MIP_calibration ../result/mip/mip.root ${var}
 
 
-sbatch -o test-%A.out --error="test-%A.err" execute.sl ./MIP_calibration ../result/mip/mip.root ${var}
+sbatch -o "${slurm_log_dir}/test-%A.out" --error="${slurm_log_dir}/test-%A.err" execute.sl ./MIP_calibration ../result/mip/mip.root ${var}

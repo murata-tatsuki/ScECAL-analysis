@@ -15,8 +15,8 @@
 #SBATCH --ntasks=1       
 #SBATCH --job-name=analyzer
 #SBATCH --array=0
-#SBATCH --output="analyzer-%A_%a.out"
-#SBATCH --error="analyzer-%A_%a.err"
+#SBATCH --output=/home/murata_t/ScECAL_BeamTest/analysis/log/gain/analyzer-%A_%a.out
+#SBATCH --error=/home/murata_t/ScECAL_BeamTest/analysis/log/gain/analyzer-%A_%a.err
 
 MY_HOST=`hostname`
 MY_DATE=`date`

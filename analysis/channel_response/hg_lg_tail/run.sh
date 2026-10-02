@@ -26,7 +26,7 @@ Usage: bash run.sh [options]
   --min-tail-channels N    Distinct low-tail channels for event flag (3)
   --selection MODE         all | cog20 | shower-cog20 (default)
   --reference-energy GEV   Shower reference; 0 uses sampled MC good-energy median
-  --scratch-root PATH      Local cache location, removed on exit (default: /tmp)
+  --scratch-root PATH      Temporary cache parent (default: this energy's result directory)
   --dry-run                Validate inputs and show configuration; no writes/submission
 
 All connected channels are inspected. A single common channel set and tail rule
@@ -39,9 +39,9 @@ declare -A opt=( [energy]=100 [beam]=auto [mc-tag]=threshold [label]=default
  [result-dir]="$HERE/../../result/channel_response/hg_lg_tail"
  [data-decode]='' [data-calib]='' [mc-decode]='' [mc-calib]=''
  [pedestal]="$params/pedestal2023_SPS.root" [hl]="$params/all_hl_electron2023_hlratio_v3.root" [mip]="$params/all_auto_muon_v4_trackfit.root"
- [bad-channel-source]="$HERE/../../comparison/SingleEnergyAnalysis.cc"
+ [bad-channel-source]="$HERE/../../cog_channel_scan/SingleEnergyAnalysis.cc"
  [max-events]=0 [max-files]=0 [events-per-file]=0 [hg-min]=800 [hg-max]=2200 [nsigma]=5 [min-hits]=100 [min-tail-channels]=3
- [selection]=shower-cog20 [reference-energy]=0 [scratch-root]=/tmp )
+ [selection]=shower-cog20 [reference-energy]=0 [scratch-root]='' )
 dry=0
 while (($#));do
  case $1 in -h|--help) usage;exit 0;; --dry-run) dry=1;shift;; --*) key=${1#--};[[ -v opt[$key] && $# -ge 2 ]]||fail "Unknown/missing option $1";opt[$key]=$2;shift 2;; *) fail "Unexpected argument $1";; esac
@@ -57,8 +57,8 @@ if [[ ${opt[beam]} == auto ]];then case ${opt[energy]} in 0.5|1|2|3|4|5) opt[bea
 [[ ${opt[beam]} == ps || ${opt[beam]} == sps ]]||fail 'Invalid beam'
 [[ -n ${opt[data-decode]} ]]||opt[data-decode]=$DATA/${opt[beam]}/decode/e-/${opt[energy]}GeV
 [[ -n ${opt[data-calib]} ]]||opt[data-calib]=$DATA/${opt[beam]}/calib/e-/${opt[energy]}GeV
-[[ -n ${opt[mc-decode]} ]]||opt[mc-decode]=$MC/Result_MC/decode/e-/sps/${opt[mc-tag]}/${opt[energy]}GeV
-[[ -n ${opt[mc-calib]} ]]||opt[mc-calib]=$MC/Result_MC/calib/e-/sps/${opt[mc-tag]}/${opt[energy]}GeV
+[[ -n ${opt[mc-decode]} ]]||opt[mc-decode]=$MC/Result_MC/decode/e-/e_ssa/${opt[mc-tag]}/${opt[energy]}GeV
+[[ -n ${opt[mc-calib]} ]]||opt[mc-calib]=$MC/Result_MC/calib/e-/e_ssa/${opt[mc-tag]}/${opt[energy]}GeV
 for k in pedestal hl mip bad-channel-source;do
  [[ $k != bad-channel-source || ${opt[$k]} != none ]]||continue
  [[ -f ${opt[$k]} ]]||fail "Missing $k: ${opt[$k]}";opt[$k]=$(realpath -e -- "${opt[$k]}")
@@ -75,15 +75,22 @@ for sample in data mc;do
  unset -n pairs
 done
 out=$(realpath -m -- "${opt[result-dir]}")/${opt[mc-tag]}/${opt[label]}/${opt[energy]}GeV
+[[ -n ${opt[scratch-root]} ]]||opt[scratch-root]=$out
+opt[scratch-root]=$(realpath -m -- "${opt[scratch-root]}")
 [[ ! -e $out/tail_study.root ]]||fail "Completed output exists; choose another --label: $out"
 printf 'Output: %s\nSelection: %s; all channels; max-events=%s; common min-hits=%s; low-tail z < -%s; event flag >=%s channels\n' "$out" "${opt[selection]}" "${opt[max-events]}" "${opt[min-hits]}" "${opt[nsigma]}" "${opt[min-tail-channels]}"
+printf 'Temporary cache parent: %s\n' "${opt[scratch-root]}"
 ((!dry))||exit 0
 ( flock 9; make -C "$HERE" all ) 9>"$HERE/.build.lock"
 mkdir -p -- "$out/inputs" "${opt[scratch-root]}"
 exec 8>"$out/.run.lock";flock -n 8||fail 'Another job is writing this output'
 [[ ! -e $out/tail_study.root ]]||fail 'Completed output appeared while waiting'
-scratch=$(mktemp -d "${opt[scratch-root]%/}/scecal_hg_lg_tail.XXXXXX")
+scratch=$(mktemp -d --suffix=.tmp "${opt[scratch-root]%/}/.hg_lg_tail.XXXXXX")
 trap 'rm -rf -- "$scratch"' EXIT
+trap 'exit 129' HUP
+trap 'exit 130' INT
+trap 'exit 143' TERM
+printf 'Temporary cache: %s/events.root\n' "$scratch"
 printf '%s\n' "${data_pairs[@]}" > "$out/inputs/data.tsv"
 printf '%s\n' "${mc_pairs[@]}" > "$out/inputs/mc.tsv"
 for k in "${!opt[@]}";do printf '%s=%s\n' "$k" "${opt[$k]}";done | sort > "$out/inputs/configuration.txt"

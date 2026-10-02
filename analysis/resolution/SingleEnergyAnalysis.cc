@@ -1,4 +1,5 @@
 #include <iostream>
+#include "HLTailSelection.hh"
 #include <fstream>
 #include "TROOT.h"
 #include "TFile.h"
@@ -117,12 +118,41 @@ bool eventCutConditions(double edep_event, double nhit_event, double edep_mean, 
   return (edep_square + nhit_square) > 1;
 }
 
-int main(int argc, char* argv[])
-{ 
-    if(argc < 3){                                                     //エラー処理
-        cout << "usage: ./between_files  output.root Nenegry E1...En E1Nfiles...EnNfiles input1.root input2.root  ...  cog_range b_only_best figure_path " << endl;
-        return 1;
+int main(int argc, char* argv[]) try
+{
+  if (argc < 3 || std::string(argv[1]) == "--help") {
+    cout << "Usage: SingleEnergyAnalysis output.root Nenergy E1...En E1Nfiles...EnNfiles input.root... cog_range only_best figure_path [--exclude-tail-events|--keep-tail-events] [--tail-results DIR]" << endl;
+    cout << "Default: exclude tail-rich events (>=3 distinct low-tail channels). DIR contains <energy>GeV/tail_study.root and inputs/." << endl;
+    return argc == 2 && std::string(argv[1]) == "--help" ? 0 : 1;
+  }
+  const int nEnergy = std::stoi(argv[2]);
+  hl_tail::require(nEnergy > 0 && 3LL + 2LL*nEnergy <= argc, "invalid energy count");
+  long long nFiles = 0;
+  for (int i = 0; i < nEnergy; ++i) {
+    const int count = std::stoi(argv[3+nEnergy+i]);
+    hl_tail::require(count > 0, "file count must be positive");
+    nFiles += count;
+  }
+  const long long positionalArgc = 6LL + 2LL*nEnergy + nFiles;
+  hl_tail::require(positionalArgc <= argc, "input file count does not match arguments");
+  bool excludeTailEvents = true;
+  bool tailModeSpecified = false;
+  std::filesystem::path tailResults = std::filesystem::canonical(argv[0]).parent_path() /
+      "../result/channel_response/hg_lg_tail/threshold/e_ssa";
+  for (int i = int(positionalArgc); i < argc; ++i) {
+    const std::string option = argv[i];
+    if (option == "--exclude-tail-events" || option == "--keep-tail-events") {
+      hl_tail::require(!tailModeSpecified, "specify one tail selection option");
+      excludeTailEvents = option == "--exclude-tail-events";
+      tailModeSpecified = true;
+    } else if (option == "--tail-results") {
+      hl_tail::require(i + 1 < argc, "--tail-results requires a directory");
+      tailResults = argv[++i];
+    } else {
+      throw std::runtime_error("Unknown option: " + option);
     }
+  }
+  argc = int(positionalArgc);
   gROOT->SetBatch(kTRUE);
 
     //cout << argv[1] << endl;
@@ -143,6 +173,34 @@ int main(int argc, char* argv[])
   int cog_range = atoi(argv[argc-3]);
   int bool_only_best = atoi(argv[argc-2]);
   string bestChannel = bool_only_best == 1 ? "_bestChannels" : "";
+
+
+  // Validate complete event coverage and identities before creating any output.
+  std::map<int, std::vector<unsigned char>> tailMasks;
+  std::string tailDefinition;
+  Long64_t tailChecked = 0, tailRejected = 0, eventsAfterCoG = 0;
+  std::set<std::string> uniqueInputs;
+  int inputArgument = 3 + 2*Nenegry;
+  for (int i = 0; i < Nenegry; ++i) {
+    std::unique_ptr<hl_tail::Selection> selection;
+    if (excludeTailEvents) {
+      selection = std::make_unique<hl_tail::Selection>(tailResults / Form("%gGeV", energy[i]));
+      tailDefinition = selection->definition();
+    }
+    for (int j = 0; j < energy_files[i]; ++j, ++inputArgument) {
+      const auto input = std::filesystem::canonical(argv[inputArgument]).string();
+      hl_tail::require(uniqueInputs.insert(input).second, "duplicate calibrated input " + input);
+      hl_tail::require(std::filesystem::weakly_canonical(argv[1]) != input, "output would overwrite input");
+      if (selection) {
+        auto mask = selection->mask(input);
+        tailChecked += mask.size();
+        tailRejected += std::count(mask.begin(), mask.end(), 1);
+        tailMasks.emplace(inputArgument, std::move(mask));
+      }
+    }
+  }
+  cout << "HL tail selection: " << (excludeTailEvents ? "exclude" : "keep")
+       << "; checked=" << tailChecked << "; rejected=" << tailRejected << endl;
 
 
 	// double cycleID, triggerID;
@@ -194,6 +252,9 @@ int main(int argc, char* argv[])
 
 
 	TFile fileout(argv[1],"RECREATE");
+  hl_tail::require(!fileout.IsZombie(), "cannot create output ROOT");
+  TParameter<int>("hl_tail_excluded", int(excludeTailEvents)).Write();
+  TNamed("hl_tail_status", "incomplete").Write();
   fileout.mkdir("beforeEventCut");
   fileout.mkdir("afterEventCut");
   fileout.cd();
@@ -336,11 +397,12 @@ int main(int argc, char* argv[])
 
     TFile *filein[energy_files[ienergy]];
     TTree *tree[energy_files[ienergy]];
-    int entry_max[energy_files[ienergy]];
+    Long64_t entry_max[energy_files[ienergy]];
     for(int i=0; i<energy_files[ienergy]; i++){
 	  	filein[i] = new TFile(argv[irawfilenum+i]);
 	  	tree[i] = (TTree*) filein[i]->Get("Calib_Hit");
-	  	entry_max[i] = tree[i]->GetEntries();
+      hl_tail::require(!filein[i]->IsZombie() && tree[i], "missing Calib_Hit input");
+      entry_max[i] = tree[i]->GetEntries();
     }
 
     for(int irawfile=0; irawfile<energy_files[ienergy]; irawfile++){
@@ -358,9 +420,10 @@ int main(int argc, char* argv[])
 		  tree[irawfile]->SetBranchAddress("Hit_Z", &Hit_Z);
 		  tree[irawfile]->SetBranchAddress("NewTemperature", &NewTemperature);
 
-	  	for(int ientry=0; ientry<entry_max[irawfile]; ientry++){
+      for(Long64_t ientry=0; ientry<entry_max[irawfile]; ientry++){
+        if (excludeTailEvents && tailMasks.at(irawfilenum+irawfile).at(ientry)) continue;
         // if(ientry%1000==0) cout << ientry << "/" << entry_max[irawfile] << endl;
-	  		tree[irawfile]->GetEntry(ientry);
+        hl_tail::require(tree[irawfile]->GetEntry(ientry) > 0, "cannot read calibrated hit event");
         
 
         double sumEdep = 0;
@@ -399,6 +462,7 @@ int main(int argc, char* argv[])
         firstLayerHit_vs_cog[ienergy][1]->Fill(distance_cog0, distance_cog10);
         // if(nhit_firstLayer>1) continue;
         if(!(cog_position_check(cog_x[9]/energies[9], cog_y[9]/energies[9], cog_range) && cog_position_check(cog_x[10]/energies[10], cog_y[10]/energies[10], cog_range))) continue;
+        if (eventCut == 0) ++eventsAfterCoG;
         if(eventCut==1 && eventCutConditions(sumEdep_all, cut_nhit, edep_mean, edep_sigma, nhit_mean, nhit_sigma)) continue;
         // energy_deposition[ienergy]->Fill(sumEdep_all);
         for(int ihit=0;ihit<Hit_Energy->size();ihit++){
@@ -472,6 +536,7 @@ int main(int argc, char* argv[])
       delete filein[irawfile];
 	  }
 
+    hl_tail::require(energy_deposition[ienergy]->GetEntries() > 0, "no events survive tail/CoG/event selection");
     fileout.cd();
     // fileout.cd(Form("%s",dirName[eventCut].c_str()));
     if(eventCut==0) fileout.mkdir(Form("%dGeV", (int)energy[ienergy]));
@@ -518,6 +583,11 @@ int main(int argc, char* argv[])
     double amp = energy_deposition[ienergy]->GetMaximum();
     double mean = energy_deposition[ienergy]->GetMean();
     double sigma = energy_deposition[ienergy]->GetStdDev();
+    // Seed the 200 GeV shower peak without the broad low-energy component (MeV).
+    if (energy[ienergy] == 200) {
+      mean = 8000;
+      sigma = 300;
+    }
     double fit_range_low = 15 > mean-3*sigma ? 15 : mean-3*sigma;
     // double mean = energy_deposition[ienergy]->GetMaximumBin();
     // if(energy[ienergy]<=5){
@@ -747,4 +817,16 @@ int main(int argc, char* argv[])
 
   }
   
+  fileout.cd();
+  TParameter<int>("hl_tail_excluded", int(excludeTailEvents)).Write();
+  TParameter<Long64_t>("hl_tail_checked_events", tailChecked).Write();
+  TParameter<Long64_t>("hl_tail_rejected_events", tailRejected).Write();
+  TParameter<Long64_t>("hl_tail_events_after_cog", eventsAfterCoG).Write();
+  TNamed("hl_tail_source", excludeTailEvents ? std::filesystem::canonical(tailResults).c_str() : "none").Write();
+  TNamed("hl_tail_definition", tailDefinition.c_str()).Write();
+  TNamed("hl_tail_status", "complete").Write();
+  return 0;
+} catch (const std::exception& error) {
+  std::cerr << error.what() << std::endl;
+  return 1;
 }

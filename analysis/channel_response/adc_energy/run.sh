@@ -108,8 +108,8 @@ for sample in data mc; do
             if [[ $sample == data ]]; then
                 opt[$key]=$DATA/${opt[beam]}/$stage/e-/${opt[energy]}GeV
             else
-                opt[$key]=$MC/Result_MC/$stage/e-/e_ssa_noHLintercept/${opt[mc-tag]}/${opt[energy]}GeV
-                # opt[$key]=$MC/Result_MC/$stage/e-/e_ssa/${opt[mc-tag]}/${opt[energy]}GeV
+                # opt[$key]=$MC/Result_MC/$stage/e-/e_ssa_noHLintercept/${opt[mc-tag]}/${opt[energy]}GeV
+                opt[$key]=$MC/Result_MC/$stage/e-/e_ssa/${opt[mc-tag]}/${opt[energy]}GeV
                 # opt[$key]=$MC/Result_MC/$stage/e-/sps/${opt[mc-tag]}/${opt[energy]}GeV
             fi
         fi

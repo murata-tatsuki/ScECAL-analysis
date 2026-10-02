@@ -1,4 +1,7 @@
 #! /bin/bash
+slurm_log_dir=$(realpath -m -- "$(dirname -- "${BASH_SOURCE[0]}")/../log/resolution")
+mkdir -p -- "$slurm_log_dir"
+
 source /megraid01/users/data_beamtest/analysis/ECAL_Analysis_LCIO/run/global_config
 
 paralell_jobs () {
@@ -31,12 +34,12 @@ paralell_jobs () {
 
     var=`cat ../tmp/analyze_${suffix}_${txt}.txt`
     # ./threshold_finding ../result/threshold/analyze_${txt}.root ${var} ${fig_path}
-    sbatch -o jobs/singleEnergy/test-%A.out --error="jobs/singleEnergy/test-%A.err" execute_paralell.sl ./SingleEnergyAnalysis ${root_path}/${txt}_${cog_rage}mm.root ${var} ${cog_rage} 1 ${fig_path}
+    sbatch -o "${slurm_log_dir}/singleEnergy/test-%A.out" --error="${slurm_log_dir}/singleEnergy/test-%A.err" execute_paralell.sl ./SingleEnergyAnalysis ${root_path}/${txt}_${cog_rage}mm.root ${var} ${cog_rage} 1 ${fig_path}
   done
 }
 
 
-mkdir -p jobs/singleEnergy
+mkdir -p "${slurm_log_dir}/singleEnergy"
 
 
 #Calib_path=${data_dir}/${data_year}/2023/sps/calib/e-_noIntercept

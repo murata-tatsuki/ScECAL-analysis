@@ -47,3 +47,5 @@ clean :
 	rm *.o 
 cleanall :
 	rm *~ $(OBJS) $(TARGET)
+
+SingleEnergyAnalysis.o MultiEnergyAnalysis.o: HLTailSelection.hh

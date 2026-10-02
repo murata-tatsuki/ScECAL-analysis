@@ -1,4 +1,5 @@
 #include <iostream>
+#include "HLTailSelection.hh"
 #include <fstream>
 #include "TROOT.h"
 #include "TFile.h"
@@ -22,8 +23,18 @@
 #include <set>
 #include <cmath>
 #include "TLegend.h"
+#include "TLegendEntry.h"
 #include "TCanvas.h"
+#include "TPad.h"
+#include "TKey.h"
+#include "TDirectory.h"
+#include "TSystem.h"
+#include <memory>
+#include <limits>
 #include "TColor.h"
+#include <regex>
+#include <functional>
+#include <limits>
 #include "TH1.h"
 #include <map>
 #include "weightedSSA.cpp"
@@ -108,6 +119,9 @@ struct nameStrings {
   bool isData       = true;
   int cutIdx        = 0;
   int calibIdx      = 0;
+  string label;
+  int sampleIndex   = -1; // Non-negative when labels are supplied by the caller.
+  int conditionIndex = -1; // Same condition across different CoG selections.
 };
 
 nameStrings find_name_of_file(string filePath){
@@ -117,7 +131,7 @@ nameStrings find_name_of_file(string filePath){
   if(filePath.find("simulation") != std::string::npos) result.dataType = "sim";
   else result.dataType = "data";
 
-  if(result.dataType == "simulation"){
+  if(result.dataType == "sim"){
     string path = filePath;
     path.erase(0,path.rfind("simulation")+11);
     path.erase(path.find_first_of("/"),path.length());
@@ -146,40 +160,255 @@ nameStrings find_name_of_file(string filePath){
 } 
 
 
-// ★ 16パターンのスタイルを自動セットアップする共通関数
+// Color and marker shape identify CoG; line/fill identify the compared condition.
+int CoGIndex(int cog){
+  switch(cog){ case 200: return 0; case 5: return 1; case 10: return 2; case 20: return 3; }
+  throw invalid_argument("Unsupported CoG selection: " + to_string(cog));
+}
+
+bool ReadCoG(const string& path, int& cog){
+  static const regex suffix("_([0-9]+)mm\\.root$");
+  smatch match;
+  if(!regex_search(path, match, suffix)) return false;
+  cog = stoi(match[1]);
+  CoGIndex(cog);
+  return true;
+}
+
+int CoGColor(int cutIdx){
+  const int colors[] = {kAzure+1, kRed+1, kGreen+2, kViolet+1};
+  return colors[std::max(0, std::min(cutIdx, 3))];
+}
+
 template <typename T>
-void ApplyConfigStyle(T* obj, bool isData, int cutIdx, int calibIdx = 0, int lineWidth = 2, bool isFit = false) {
-    if (!obj) return;
+void ApplyConditionStyle(T* obj, int cutIdx, int condition, int lineWidth, bool isFit){
+  if(!obj) return;
+  const int filled[] = {20, 21, 22, 33}, open[] = {24, 25, 26, 27};
+  const int lines[] = {kSolid, kDotted, kDashed, kDashDotted};
+  cutIdx = std::max(0, std::min(cutIdx, 3));
+  if(!isFit){
+    obj->SetMarkerStyle((condition == 0 ? filled : open)[cutIdx]);
+    obj->SetMarkerSize(1.2);
+    obj->SetMarkerColor(CoGColor(cutIdx));
+  }
+  obj->SetLineColor(CoGColor(cutIdx));
+  obj->SetLineStyle(lines[condition % 4]);
+  obj->SetLineWidth(lineWidth);
+}
 
-    // --- 1. Cut別定義 (0 ~ 3) ---
-    const int colors[4]      = {kAzure + 1, kRed + 1, kGreen + 2, kViolet + 1}; // 青, 赤, 緑, 紫
-    const int dataMarkers[4] = {20, 21, 22, 33}; // ●, ■, ▲, ◆ (塗りつぶし)
-    const int simMarkers[4]  = {24, 25, 26, 27}; // ○, □, △, ◇ (白抜き)
+template <typename T>
+void ApplyConfigStyle(T* obj, bool isData, int cutIdx, int calibIdx = 0, int lineWidth = 2, bool isFit = false){
+  ApplyConditionStyle(obj, cutIdx, isData ? 0 : 1 + std::max(0, std::min(calibIdx, 2)), lineWidth, isFit);
+}
 
-    // --- 2. Calibration別定義 (0 ~ 2) ---
-    // Dataは常に kSolid(1)、Simは Calibration ごとに線種を変更
-    const int simLineStyles[3] = {kDashed, kDotted, kDashDotted}; // 破線, 点線, 一点鎖線
+string SampleCaption(const nameStrings& settings){
+  if(settings.sampleIndex < 0)
+    return settings.dataType + " " + (settings.cog_range == 200 ? string("nocut") : string(Form("%dmm", settings.cog_range)));
+  string caption = settings.label;
+  caption = regex_replace(caption, regex("CoG[ ]*200[ ]*mm|200[ ]*mm|no cut"), "nocut");
+  if(settings.conditionIndex >= 0){
+    const string cut = settings.cog_range == 200 ? "nocut" : string(Form("%d mm", settings.cog_range));
+    const string compactCut = Form("%dmm", settings.cog_range);
+    if(caption.find(cut) == string::npos && caption.find(compactCut) == string::npos) caption += ", " + cut;
+  }
+  return caption;
+}
 
-    // インデックスの範囲ガード (0~3 / 0~2 に制限)
-    cutIdx   = std::max(0, std::min(cutIdx, 3));
-    calibIdx = std::max(0, std::min(calibIdx, 2));
+int SampleColor(int index){
+  const int palette[] = {kAzure+1, kOrange+7, kGreen+2, kMagenta+1,
+                         kRed+1, kCyan+2, kViolet+1, kGray+2};
+  return palette[index % 8];
+}
 
-    // パラメータ割り当て
-    int color       = colors[cutIdx];
-    // int color       = isData ? kBlack : colors[cutIdx];
-    int markerStyle = isData ? dataMarkers[cutIdx] : simMarkers[cutIdx];
-    int lineStyle   = isData ? kSolid : simLineStyles[calibIdx];
+template <typename T>
+void ApplySampleStyle(T* obj, const nameStrings& settings, int lineWidth = 2, bool isFit = false){
+  if(settings.conditionIndex >= 0){
+    ApplyConditionStyle(obj, settings.cutIdx, settings.conditionIndex, lineWidth, isFit);
+    return;
+  }
+  if(settings.sampleIndex < 0){
+    ApplyConfigStyle(obj, settings.isData, settings.cutIdx, settings.calibIdx, lineWidth, isFit);
+    return;
+  }
+  if(!obj) return;
+  const int index = settings.sampleIndex;
+  const int markers[] = {20, 21, 22, 23, 33, 34, 29, 24};
+  if(!isFit){
+    obj->SetMarkerStyle(markers[index % 8]);
+    obj->SetMarkerSize(1.2);
+    obj->SetMarkerColor(SampleColor(index));
+  }
+  obj->SetLineColor(SampleColor(index));
+  obj->SetLineStyle(1 + (index / 8) % 4);
+  obj->SetLineWidth(lineWidth);
+}
 
-    // オブジェクトへの適用
-    if(!isFit){
-      obj->SetMarkerStyle(markerStyle);
-      obj->SetMarkerSize(1.2);
-      obj->SetMarkerColor(color);
+// ROOT may cache callback fits while rejected points return zero. Store an
+// analytic display function with the fitted parameters so cloning/reopening a
+// canvas cannot introduce artificial dips at the excluded fit energies.
+void PrepareResolutionFunctions(TList* objects){
+  vector<TF1*> fits;
+  TIter next(objects);
+  while(auto* object=next()){
+    if(auto* pad=dynamic_cast<TVirtualPad*>(object)) PrepareResolutionFunctions(pad->GetListOfPrimitives());
+    else if(auto* graph=dynamic_cast<TGraph*>(object)) PrepareResolutionFunctions(graph->GetListOfFunctions());
+    else if(auto* fit=dynamic_cast<TF1*>(object)) fits.push_back(fit);
+  }
+  for(auto* fit : fits){
+      if(string(fit->GetName()).find("res_func_low_") != 0) continue;
+      const char* formula=fit->GetNpar()==3 ? "sqrt([0]*[0]/x+[1]*[1]/(x*x)+[2]*[2])" : "sqrt([0]*[0]/x+[1]*[1])";
+      auto* display=new TF1(fit->GetName(), formula, fit->GetXmin(), fit->GetXmax(), TF1::EAddToList::kNo);
+      for(int i=0; i<fit->GetNpar(); ++i){
+        display->SetParameter(i,fit->GetParameter(i));
+        display->SetParError(i,fit->GetParError(i));
+        display->SetParName(i,fit->GetParName(i));
+        double low, high; fit->GetParLimits(i,low,high); display->SetParLimits(i,low,high);
+      }
+      display->SetChisquare(fit->GetChisquare()); display->SetNDF(fit->GetNDF());
+      display->SetNumberFitPoints(fit->GetNumberFitPoints());
+      display->SetLineColor(fit->GetLineColor()); display->SetLineStyle(fit->GetLineStyle());
+      display->SetLineWidth(fit->GetLineWidth());
+      display->SetNpx(2000);
+      display->SetBit(TObject::kMustCleanup);
+      for(auto* link=objects->FirstLink(); link; link=link->Next()){
+        if(link->GetObject()==fit){ link->SetObject(display); break; }
+      }
+  }
+}
+
+// Copy each graph/curve independently; the legacy source may share objects
+// across pads, and subsequent noise fits reuse the original resolution graphs.
+void AddResolutionSummaryPanel(TCanvas* summary, TCanvas* source, int index, bool log){
+  // ROOT axis updates and PNG export depend on gPad. Restore the caller's pad.
+  TVirtualPad::TContext padContext;
+  TVirtualPad* sourcePad=source;
+  TIter pads(source->GetListOfPrimitives());
+  while(auto* object=pads()){
+    if(auto* pad=dynamic_cast<TVirtualPad*>(object)){ sourcePad=pad; break; }
+  }
+  auto* target=summary->cd(index);
+  target->SetLeftMargin(.12); target->SetRightMargin(.04);
+  target->SetTopMargin(.10); target->SetBottomMargin(.13);
+  target->SetLogx(log); target->SetLogy(log); target->SetGrid();
+  map<TObject*,TObject*> copies;
+  bool first=true;
+  TIter graphs(sourcePad->GetListOfPrimitives());
+  while(auto* object=graphs()){
+    auto* graph=dynamic_cast<TGraph*>(object);
+    if(!graph) continue;
+    auto* copy=dynamic_cast<TGraph*>(graph->Clone(Form("summary_graph_%d_%zu",index,copies.size())));
+    copy->GetListOfFunctions()->Delete(); // Explicit curves below use the same fitted parameters.
+    copy->SetBit(TObject::kCanDelete);
+    copy->SetMarkerSize(2.2);
+    copy->SetTitle(index%2 ? "without noise term" : "with noise term");
+    copy->Draw(first ? "AP" : "P same");
+    copies[graph]=copy;
+    first=false;
+  }
+  TIter curves(sourcePad->GetListOfPrimitives());
+  while(auto* object=curves()){
+    if(auto* fit=dynamic_cast<TF1*>(object)) fit->DrawCopy("same");
+  }
+  if(!log){
+    auto* legend=new TLegend(.30,.54,.95,.90);
+    legend->SetNColumns(copies.size()>4 ? 2 : 1);
+    legend->SetTextFont(42); legend->SetTextSize(0);
+    legend->SetBorderSize(0); legend->SetFillColorAlpha(kWhite,.8);
+    legend->SetMargin(.12); legend->SetEntrySeparation(.3);
+    legend->SetBit(TObject::kCanDelete);
+    TIter objects(sourcePad->GetListOfPrimitives());
+    while(auto* object=objects()){
+      auto* original=dynamic_cast<TLegend*>(object);
+      if(!original) continue;
+      TIter entries(original->GetListOfPrimitives());
+      while(auto* entryObject=entries()){
+        auto* entry=dynamic_cast<TLegendEntry*>(entryObject);
+        if(!entry) continue;
+        auto copy=copies.find(entry->GetObject());
+        legend->AddEntry(copy==copies.end() ? nullptr : copy->second,entry->GetLabel(),entry->GetOption());
+      }
     }
+    legend->Draw();
+  }
+  target->Modified(); target->Update();
+}
 
-    obj->SetLineColor(color);
-    obj->SetLineStyle(lineStyle);
-    obj->SetLineWidth(lineWidth);
+// Serialize linear and log views without recalculating points or fits.
+// Linear canvases retain their axes in the saved ROOT.
+void SaveResolutionViews(TCanvas* canvas, TFile& output, const string& figures, const string& name, TCanvas* summary){
+  TVirtualPad::TContext padContext;
+  canvas->cd();
+  PrepareResolutionFunctions(canvas->GetListOfPrimitives());
+  auto visit = [](TVirtualPad* root, const function<void(TVirtualPad*, TGraph*)>& action){
+    function<void(TVirtualPad*)> walk = [&](TVirtualPad* pad){
+      TVirtualPad::TContext graphContext;
+      pad->cd();
+      TIter next(pad->GetListOfPrimitives());
+      while(auto* object = next()){
+        if(auto* child = dynamic_cast<TVirtualPad*>(object)) walk(child);
+        else if(auto* graph = dynamic_cast<TGraph*>(object)) action(pad, graph);
+      }
+    };
+    walk(root);
+  };
+  double xmin = numeric_limits<double>::infinity(), xmax = 130;
+  double ymin = numeric_limits<double>::infinity(), ymax = .3;
+  visit(canvas, [&](TVirtualPad* pad, TGraph* graph){
+    for(int i=0; i<graph->GetN(); ++i){
+      const double x=graph->GetPointX(i), y=graph->GetPointY(i);
+      if(isfinite(x) && x>0){ xmin=std::min(xmin, .8*x); xmax=std::max(xmax, 1.1*x); }
+      if(isfinite(y) && y>0){
+        ymin=std::min(ymin, .5*y);
+        const auto* errors=dynamic_cast<TGraphErrors*>(graph);
+        const double error=errors ? errors->GetErrorY(i) : 0;
+        ymax=std::max(ymax, 1.15*(y+(isfinite(error) ? std::abs(error) : 0)));
+      }
+    }
+    pad->SetLogx(0); pad->SetLogy(0);
+    graph->SetMinimum(0); graph->SetMaximum(.3);
+    graph->GetXaxis()->SetRange(0,0); graph->GetXaxis()->SetLimits(0,130);
+    pad->Modified();
+  });
+  canvas->Modified(); canvas->Update();
+  bool divided=false;
+  TIter primitives(canvas->GetListOfPrimitives());
+  while(auto* object=primitives()) if(dynamic_cast<TVirtualPad*>(object)) divided=true;
+  // Legacy panels share graphs: serialize them before/after axis changes,
+  // then restore the original axes without cloning their shared ownership.
+  // Single-panel comparisons redraw a snapshot for the external legend.
+  unique_ptr<TCanvas> snapshot;
+  TCanvas* view=canvas;
+  if(!divided){
+    snapshot.reset(dynamic_cast<TCanvas*>(canvas->Clone((name+"_views").c_str())));
+    if(!snapshot) throw runtime_error("Cannot clone resolution canvas");
+    view=snapshot.get();
+    view->cd();
+    view->Modified(); view->Update();
+  }
+  output.cd(); view->Write(name.c_str());
+  view->SaveAs((figures+"/"+name+".png").c_str());
+  AddResolutionSummaryPanel(summary,view,name=="resolution" ? 1 : 2,false);
+  if(!isfinite(xmin)) xmin=.1;
+  if(!isfinite(ymin)) ymin=.001;
+  visit(view, [&](TVirtualPad* pad, TGraph* graph){
+    pad->SetLogx(1); pad->SetLogy(1);
+    graph->SetMinimum(ymin); graph->SetMaximum(ymax);
+    graph->GetXaxis()->SetRange(0,0); graph->GetXaxis()->SetLimits(xmin,xmax);
+    pad->Modified();
+  });
+  view->cd();
+  view->Modified(); view->Update();
+  output.cd(); view->Write((name+"_loglog").c_str());
+  view->SaveAs((figures+"/"+name+"_loglog.png").c_str());
+  AddResolutionSummaryPanel(summary,view,name=="resolution" ? 3 : 4,true);
+  if(divided){
+    visit(view, [](TVirtualPad* pad, TGraph* graph){
+      pad->SetLogx(0); pad->SetLogy(0);
+      graph->SetMinimum(0); graph->SetMaximum(.3);
+      graph->GetXaxis()->SetRange(0,0); graph->GetXaxis()->SetLimits(0,130);
+      pad->Modified();
+    });
+  }
 }
 
 TLegend* CreateNiceLegend(double x1, double y1, double x2, double y2, int nCols = 2) {
@@ -197,8 +426,265 @@ TLegend* CreateNiceLegend(double x1, double y1, double x2, double y2, int nCols 
   return leg;
 };
 
+TLegend* CreateSampleLegend(int samples){
+  TLegend* legend = CreateNiceLegend(0.32, std::max(0.2, 0.88-0.07*samples), 0.92, 0.88, 1);
+  legend->SetMargin(0.12);
+  legend->SetEntrySeparation(0.5);
+  legend->SetTextSize(0); // ROOT fits arbitrary caller-supplied labels into this box.
+  return legend;
+}
+
+// Use a common bin width for every sample of a channel. The IQR-based width is
+// robust to the long edep tail; cap the display at 40-200 bins over the full range.
+int ChannelEnergyRebinFactor(const vector<TH1*>& histograms){
+  const TH1* reference = histograms.front();
+  const int bins = reference->GetNbinsX();
+  const double low = reference->GetXaxis()->GetXmin();
+  const double high = reference->GetXaxis()->GetXmax();
+  const double span = high-low;
+  double width = span/200.;
+  bool populated = false;
+  for(TH1* hist : histograms){
+    if(hist->GetNbinsX() != bins || hist->GetXaxis()->GetXmin() != low ||
+       hist->GetXaxis()->GetXmax() != high || hist->GetXaxis()->GetXbins()->GetSize() != 0){
+      cerr << "Incompatible channel histogram binning: " << hist->GetName() << endl;
+      return 0;
+    }
+    const double entries = hist->Integral(1, bins);
+    if(entries <= 0) continue;
+    populated = true;
+    double candidate = span/40.;
+    if(entries >= 20){
+      double quantiles[2], probabilities[2] = {0.25, 0.75};
+      hist->GetQuantiles(2, quantiles, probabilities);
+      candidate = 2.*(quantiles[1]-quantiles[0])/std::cbrt(entries);
+      if(!(candidate > 0)) candidate = 3.5*hist->GetStdDev()/std::cbrt(entries);
+    }
+    if(std::isfinite(candidate)) width = std::max(width, candidate);
+  }
+  if(!populated) width = span/100.;
+  width = std::max(span/200., std::min(span/40., width));
+  int bestFactor = 1;
+  double bestDistance = std::numeric_limits<double>::infinity();
+  for(int factor=1; factor<=bins; ++factor){
+    if(bins%factor != 0) continue; // Never move leftover bins into overflow.
+    const int displayedBins = bins/factor;
+    if(displayedBins < 40 || displayedBins > 200) continue;
+    const double distance = std::abs(std::log((span/displayedBins)/width));
+    if(distance < bestDistance){
+      bestDistance = distance;
+      bestFactor = factor;
+    }
+  }
+  return bestFactor;
+}
+
+// SingleEnergy stores per-channel histograms inside its 6x6 raw canvases.
+// Read one layer/chip at a time so memory does not grow with the number of canvases.
+bool SaveChannelEnergyPair(TFile* const* inputs, int samples, const nameStrings* settings,
+                           double energy, TDirectory& output, const char* figurePath){
+  TDirectory::TContext restoreDirectory;
+  const bool normalize = true;
+  const int layers = 30, chips = 6, channels = 36;
+  const string energyName = Form("%gGeV", energy);
+  const string rawPath = string(figurePath) + "/" + energyName + "/raw";
+  if(gSystem->mkdir(rawPath.c_str(), true) != 0 && gSystem->AccessPathName(rawPath.c_str())){
+    cerr << "Cannot create channel comparison directory: " << rawPath << endl;
+    return false;
+  }
+  vector<TDirectory*> inputDirectories(samples);
+  vector<int> colors(samples);
+  for(int ds=0; ds<samples; ++ds){
+    inputDirectories[ds] = inputs[ds]->GetDirectory(energyName.c_str());
+    // Older SingleEnergy files truncate the directory name for fractional beam energies.
+    if(!inputDirectories[ds]) inputDirectories[ds] = inputs[ds]->GetDirectory(Form("%dGeV", int(energy)));
+    if(!inputDirectories[ds]){
+      cerr << "Missing channel energy directory for " << energyName << " in " << inputs[ds]->GetName() << endl;
+      return false;
+    }
+    colors[ds] = settings[ds].conditionIndex >= 0 || settings[ds].sampleIndex < 0
+                   ? CoGColor(settings[ds].cutIdx) : SampleColor(settings[ds].sampleIndex);
+    // Check all raw canvases before starting to render this energy.
+    for(const char* prefix : {"", "cut_"}){
+      for(int layer=0; layer<layers; ++layer){
+        for(int chip=0; chip<chips; ++chip){
+          const string key = Form("%sedep_Layer%d_Chip%d", prefix, layer, chip);
+          if(!inputDirectories[ds]->GetKey(key.c_str())){
+            cerr << "Missing raw canvas " << key << " in " << inputs[ds]->GetName() << endl;
+            return false;
+          }
+        }
+      }
+    }
+  }
+  TDirectory* energyDirectory = output.GetDirectory(energyName.c_str());
+  if(!energyDirectory) energyDirectory = output.mkdir(energyName.c_str());
+  TDirectory* rawDirectory = energyDirectory->GetDirectory("raw");
+  if(!rawDirectory) rawDirectory = energyDirectory->mkdir("raw");
+  for(int eventCut=0; eventCut<2; ++eventCut){
+    const char* prefix = eventCut ? "cut_" : "";
+    for(int layer=0; layer<layers; ++layer){
+      cout << "Channel edep: " << energyName << ", " << (eventCut ? "after" : "before")
+           << " event cut, layer " << layer << "/" << layers-1 << endl;
+      for(int chip=0; chip<chips; ++chip){
+        const string key = Form("%sedep_Layer%d_Chip%d", prefix, layer, chip);
+        vector<vector<unique_ptr<TH1>>> histograms(samples);
+        for(int ds=0; ds<samples; ++ds){
+          TDirectory::TContext inputContext(inputDirectories[ds]);
+          unique_ptr<TObject> stored(inputDirectories[ds]->GetKey(key.c_str())->ReadObj());
+          TCanvas* source = dynamic_cast<TCanvas*>(stored.get());
+          if(!source){
+            cerr << "Raw object is not a canvas: " << key << " in " << inputs[ds]->GetName() << endl;
+            return false;
+          }
+          for(int channel=0; channel<channels; ++channel){
+            const string histName = Form("edep_channel_%d_%d_%d", layer, chip, channel);
+            TVirtualPad* pad = source->GetPad(channel+1);
+            TH1* original = pad ? dynamic_cast<TH1*>(pad->GetListOfPrimitives()->FindObject(histName.c_str())) : nullptr;
+            if(!original){
+              cerr << "Missing histogram " << histName << " in " << inputs[ds]->GetName() << ":" << key << endl;
+              return false;
+            }
+            unique_ptr<TH1> hist(static_cast<TH1*>(original->Clone(Form("%s_ds%d", histName.c_str(), ds))));
+            hist->SetDirectory(nullptr);
+            hist->ResetBit(TObject::kCanDelete);
+            hist->GetXaxis()->SetRange(0, 0);
+            hist->SetStats(false);
+            hist->SetTitle(Form("channel %d", channel));
+            hist->GetXaxis()->SetTitle("Hit energy [MeV]");
+            hist->GetYaxis()->SetTitle(normalize ? "Normalized entries" : "Entries");
+            ApplySampleStyle(hist.get(), settings[ds], 2);
+            hist->SetLineColor(colors[ds]);
+            hist->SetMarkerColor(colors[ds]);
+            histograms[ds].push_back(std::move(hist));
+          }
+        }
+        const string canvasName = Form("channel_comparison_%s_%s", energyName.c_str(), key.c_str());
+        unique_ptr<TCanvas> canvas(new TCanvas(canvasName.c_str(), canvasName.c_str(), 2560, 1440));
+        canvas->SetCanvasSize(2560, 1440); // Fix drawable/PNG size independently of window borders.
+        canvas->Divide(6, 6);
+        const int columns = std::min(samples, 4);
+        const int rows = (samples+columns-1)/columns;
+        const double legendBottom = 0.952 - 0.032*rows;
+        const double plotTop = legendBottom-0.012;
+        for(int channel=0; channel<channels; ++channel){
+          TPad* pad = static_cast<TPad*>(canvas->cd(channel+1));
+          pad->SetPad(pad->GetXlowNDC(), plotTop*pad->GetYlowNDC(),
+                      pad->GetXlowNDC()+pad->GetWNDC(), plotTop*(pad->GetYlowNDC()+pad->GetHNDC()));
+          vector<TH1*> channelHistograms;
+          for(int ds=0; ds<samples; ++ds) channelHistograms.push_back(histograms[ds][channel].get());
+          const int factor = ChannelEnergyRebinFactor(channelHistograms);
+          if(factor == 0) return false;
+          double maximum = 0;
+          for(TH1* hist : channelHistograms){
+            if(factor > 1) hist->Rebin(factor);
+            const double integral = hist->Integral(1, hist->GetNbinsX());
+            if(normalize && integral > 0) hist->Scale(1./integral);
+            hist->SetTitle(Form("channel %d (rebin %d)", channel, factor));
+            maximum = std::max(maximum, hist->GetMaximum());
+          }
+          histograms[0][channel]->SetMinimum(0);
+          histograms[0][channel]->SetMaximum(maximum > 0 ? 1.15*maximum : 1.);
+          for(int ds=0; ds<samples; ++ds) histograms[ds][channel]->Draw(ds == 0 ? "HIST" : "HIST SAME");
+          if(maximum == 0){
+            TLatex empty;
+            empty.SetNDC();
+            empty.SetTextSize(0.07);
+            empty.DrawLatex(0.4, 0.5, "no entries");
+          }
+        }
+        canvas->cd();
+        TLatex title;
+        title.SetNDC();
+        title.SetTextFont(42);
+        title.SetTextSize(0.025);
+        title.DrawLatex(0.02, 0.972, Form("%g GeV, layer %d, chip %d; %s event cut; %s",
+          energy, layer, chip, eventCut ? "after" : "before", normalize ? "unit area (0-2 MeV)" : "raw entries"));
+        unique_ptr<TLegend> legend(CreateNiceLegend(0.02, legendBottom, 0.98, 0.952, columns));
+        legend->SetFillStyle(0);
+        legend->SetTextSize(0.021);
+        legend->SetMargin(0.12);
+        for(int ds=0; ds<samples; ++ds){
+          const string cut = settings[ds].cog_range == 200 ? "nocut" : Form("%d mm", settings[ds].cog_range);
+          const string sample = settings[ds].isData ? "data" : "sim " + settings[ds].threshold;
+          const string caption = settings[ds].sampleIndex >= 0 ? SampleCaption(settings[ds]) : sample + ", CoG " + cut;
+          legend->AddEntry(histograms[ds][0].get(), caption.c_str(), "l");
+        }
+        legend->Draw();
+        canvas->Modified();
+        canvas->Update();
+        rawDirectory->cd();
+        canvas->Write(key.c_str());
+        canvas->SaveAs(Form("%s/%s%gGeV_layer%dchip%d.png", rawPath.c_str(), prefix, energy, layer, chip));
+        canvas.reset();
+      }
+    }
+  }
+  return true;
+}
+
+// Match by CoG selection, not by input order. Each threshold is compared separately.
+// Keep the SingleEnergy PNG names and put the condition in directories instead.
+bool SaveChannelEnergyComparisons(TFile* const* inputs, int samples, const nameStrings* settings,
+                                 double energy, TFile& output, const char* figurePath){
+  TDirectory::TContext restoreDirectory;
+  if(settings[0].sampleIndex >= 0){
+    TDirectory* directory = output.GetDirectory("samples");
+    if(!directory) directory = output.mkdir("samples");
+    const string path = string(figurePath) + "/samples";
+    return SaveChannelEnergyPair(inputs, samples, settings, energy, *directory, path.c_str());
+  }
+  vector<pair<int, int>> pairs;
+  vector<bool> matched(samples, false);
+  set<pair<int, string>> conditions;
+  for(int sim=0; sim<samples; ++sim){
+    if(settings[sim].isData) continue;
+    int data = -1;
+    for(int candidate=0; candidate<samples; ++candidate){
+      if(!settings[candidate].isData || settings[candidate].cog_range != settings[sim].cog_range) continue;
+      if(data != -1){
+        cerr << "Multiple data samples for CoG " << settings[sim].cog_range << " mm; cannot select a unique pair" << endl;
+        return false;
+      }
+      data = candidate;
+    }
+    if(data == -1){
+      cerr << "No matching data for " << inputs[sim]->GetName() << " (CoG " << settings[sim].cog_range << " mm)" << endl;
+      return false;
+    }
+    if(!conditions.emplace(settings[sim].cog_range, settings[sim].threshold).second){
+      cerr << "Duplicate simulation condition: CoG " << settings[sim].cog_range
+           << " mm, " << settings[sim].threshold << endl;
+      return false;
+    }
+    pairs.emplace_back(data, sim);
+    matched[data] = matched[sim] = true;
+  }
+  for(int ds=0; ds<samples; ++ds){
+    if(!matched[ds]){
+      cerr << "No matching simulation for " << inputs[ds]->GetName()
+           << " (CoG " << settings[ds].cog_range << " mm)" << endl;
+      return false;
+    }
+  }
+  for(const auto& pair : pairs){
+    TFile* pairInputs[2] = {inputs[pair.first], inputs[pair.second]};
+    const nameStrings pairSettings[2] = {settings[pair.first], settings[pair.second]};
+    const string cogName = Form("cog%dmm", pairSettings[0].cog_range);
+    const string thresholdName = pairSettings[1].threshold.empty() ? "simulation" : pairSettings[1].threshold;
+    const string pairPath = string(figurePath) + "/" + cogName + "/" + thresholdName;
+    TDirectory* cogDirectory = output.GetDirectory(cogName.c_str());
+    if(!cogDirectory) cogDirectory = output.mkdir(cogName.c_str());
+    TDirectory* pairDirectory = cogDirectory->GetDirectory(thresholdName.c_str());
+    if(!pairDirectory) pairDirectory = cogDirectory->mkdir(thresholdName.c_str());
+    cout << "Channel comparison pair: " << cogName << "/" << thresholdName << endl;
+    if(!SaveChannelEnergyPair(pairInputs, 2, pairSettings, energy, *pairDirectory, pairPath.c_str())) return false;
+  }
+  return true;
+}
+
 int CalculateRebinFactor(const TH1* h, double sigma) {
-  cout << sigma  << endl;
+  // cout << sigma  << endl;
     // 安全対策：ヌルポインタや不適切な値の場合は 1 (Rebinなし) を返す
     if (!h || sigma <= 0.0) return 1;
 
@@ -242,10 +728,10 @@ int CalculateLandauRebinFactor(const TH1* h, int targetBinsOnRise = 10) {
     return std::max(1, rebinFactor);
 }
 
-int main(int argc, char* argv[])
+int main(int argc, char* argv[]) try
 { 
-    if(argc < 3){                                                     //エラー処理
-        cout << "usage: ./between_files  output.root N_datasim N_files input_1.root ... input_Ndata.root input_1.root ... input_Nsim.root ...  figure_path " << endl;
+    if(argc < 6){
+        cout << "usage: MultiEnergyAnalysis output.root N_samples N_files files... figure_path [--labels label1 ... labelN] [--skip-channel-plots] [--exclude-tail-events|--keep-tail-events|--compare-tail-selections]" << endl;
         return 1;
     }
   gROOT->SetBatch(kTRUE);
@@ -253,12 +739,61 @@ int main(int argc, char* argv[])
     //cout << argv[1] << endl;
 	cout << "=====>  " << argv[1] << endl;
   
-  int rawfilenum = atoi(argv[3]);
-  int Ndatasim = atoi(argv[2]);
-  if( ( Ndatasim * rawfilenum + 5 != argc ) ){
-    cout << "number of files are NOT right !!" << endl;
+  int rawfilenum = 0, Ndatasim = 0;
+  try {
+    size_t countEnd, samplesEnd;
+    rawfilenum = stoi(argv[3], &countEnd);
+    Ndatasim = stoi(argv[2], &samplesEnd);
+    if(countEnd != string(argv[3]).size() || samplesEnd != string(argv[2]).size() ||
+       rawfilenum <= 0 || Ndatasim < 2) throw invalid_argument("counts");
+  } catch(const exception&){
+    cerr << "Require at least two samples and a positive file count per sample" << endl;
     return 1;
   }
+  const long long positionalArgc = 5LL + 1LL * Ndatasim * rawfilenum;
+  if(positionalArgc > argc){
+    cerr << "Number of files does not match N_samples * N_files" << endl;
+    return 1;
+  }
+  vector<string> labels;
+  bool skipChannelPlots = false;
+  bool excludeTailEvents = true, tailModeSpecified = false, compareTailSelections = false;
+  for(int argument = int(positionalArgc); argument < argc;){
+    const string option = argv[argument++];
+    if(option == "--labels" && labels.empty()){
+      if(argc - argument < Ndatasim){
+        cerr << "--labels requires one label per sample" << endl;
+        return 1;
+      }
+      for(int ds=0; ds<Ndatasim; ++ds){
+        const string label = argv[argument++];
+        if(label.empty() || label.compare(0, 2, "--") == 0){
+          cerr << "Labels must be non-empty and must not start with --" << endl;
+          return 1;
+        }
+        labels.push_back(label);
+      }
+    } else if(option == "--exclude-tail-events" || option == "--keep-tail-events"){
+      hl_tail::require(!tailModeSpecified, "specify one tail selection option");
+      tailModeSpecified = true;
+      excludeTailEvents = option == "--exclude-tail-events";
+    } else if(option == "--compare-tail-selections"){
+      hl_tail::require(!compareTailSelections, "repeated --compare-tail-selections");
+      compareTailSelections = true;
+    } else if(option == "--skip-channel-plots"){
+      skipChannelPlots = true;
+    } else {
+      cerr << "Unknown or repeated option: " << option << endl;
+      return 1;
+    }
+  }
+  hl_tail::require(!(compareTailSelections && tailModeSpecified),
+                   "--compare-tail-selections cannot be combined with an exclude/keep option");
+  hl_tail::require(!compareTailSelections || !labels.empty(),
+                   "--compare-tail-selections requires explicit --labels for each series");
+  const bool customLabels = !labels.empty();
+  // Keep the original positional interface and figure-path references below.
+  argc = int(positionalArgc);
 
   vector<pair<double,int>> filenames[Ndatasim];
   for(int ii=0; ii<Ndatasim; ii++){
@@ -267,11 +802,59 @@ int main(int argc, char* argv[])
       string txtname(argv[index]);
       txtname.erase(0,txtname.find_last_of("/")+1);
       // txtname.erase(txtname.find_last_of("_"),txtname.end()-1);
-      filenames[ii].push_back({stod(txtname), index});
+      try {
+        const double energy = stod(txtname);
+        if(!isfinite(energy) || energy <= 0) throw invalid_argument("energy");
+        filenames[ii].push_back({energy, index});
+      } catch(const exception&){
+        cerr << "Input filename must start with a positive beam energy: " << argv[index] << endl;
+        return 1;
+      }
       // cout << argv[index] << ",  " << stod(txtname) << endl;
     }
   }
   for(int ii=0; ii<Ndatasim; ii++) sort(filenames[ii].begin(),filenames[ii].end());
+  for(int ds=0; ds<Ndatasim; ++ds){
+    for(int i=0; i<rawfilenum; ++i){
+      if(i > 0 && filenames[ds][i-1].first == filenames[ds][i].first){
+        cerr << "Duplicate beam energy in sample " << ds+1 << ": " << filenames[ds][i].first << endl;
+        return 1;
+      }
+      if(filenames[ds][i].first != filenames[0][i].first){
+        cerr << "Beam energies do not match for sample " << ds+1 << endl;
+        return 1;
+      }
+    }
+  }
+  for(int argument=4; argument<argc-1; ++argument){
+    if(string(argv[argument]) == argv[1]){
+      cerr << "Output must not overwrite an input file" << endl;
+      return 1;
+    }
+  }
+  // Mixed comparisons are explicit; each series must still have one selection at all energies.
+  vector<int> sampleTailSelection(Ndatasim, -1);
+  for (int ds = 0; ds < Ndatasim; ++ds) {
+    for (const auto& item : filenames[ds]) {
+      const int argument = item.second;
+      hl_tail::require(std::filesystem::weakly_canonical(argv[1]) != std::filesystem::weakly_canonical(argv[argument]),
+                       "output would overwrite input");
+      auto input = hl_tail::open(argv[argument]);
+      int selection = int(excludeTailEvents);
+      if (compareTailSelections) {
+        selection = hl_tail::object<TParameter<int>>(*input, "hl_tail_excluded")->GetVal();
+        hl_tail::require(selection == 0 || selection == 1, "expected SingleEnergy selection flag 0 or 1");
+      }
+      hl_tail::checkAnalysis(*input, selection == 1);
+      hl_tail::require(sampleTailSelection[ds] == -1 || sampleTailSelection[ds] == selection,
+                       "tail selection changes across energies in sample " + std::to_string(ds+1));
+      sampleTailSelection[ds] = selection;
+    }
+  }
+  if(gSystem->mkdir(argv[argc-1], true) != 0 && gSystem->AccessPathName(argv[argc-1])){
+    cerr << "Cannot create figure directory: " << argv[argc-1] << endl;
+    return 1;
+  }
   
 
 	// int rawfilenum = argc - 2 - 2*rawfilenum - 3;
@@ -325,6 +908,11 @@ int main(int argc, char* argv[])
 
 
 	TFile fileout(argv[1],"RECREATE");
+  if(fileout.IsZombie()) return 1;
+  // -1 marks a comparison which can contain both selections, never a SingleEnergy input.
+  TParameter<int>("hl_tail_excluded", compareTailSelections ? -1 : int(excludeTailEvents)).Write();
+  for (int ds = 0; ds < Ndatasim; ++ds)
+    TParameter<int>(Form("hl_tail_excluded_sample_%d", ds), sampleTailSelection[ds]).Write();
   fileout.mkdir("simulation");
   fileout.mkdir("data");
 	// gain_histo->Write();
@@ -402,8 +990,37 @@ int main(int argc, char* argv[])
 
 
   nameStrings drawSettings[Ndatasim];
+  map<string,int> conditionIndices;
   for(int ds=0;ds<Ndatasim;ds++){      // cout << filenames[ds][ienergy].second << endl;
-    drawSettings[ds] = find_name_of_file(argv[filenames[ds][0].second]);
+    if(customLabels){
+      drawSettings[ds].label = labels[ds];
+      drawSettings[ds].sampleIndex = ds;
+      const string firstPath = argv[filenames[ds][0].second];
+      int cog;
+      if(ReadCoG(firstPath, cog)){
+        for(const auto& input : filenames[ds]){
+          int otherCoG;
+          if(!ReadCoG(argv[input.second], otherCoG) || otherCoG != cog)
+            throw invalid_argument("CoG selection changes across energies in sample " + to_string(ds+1));
+        }
+        drawSettings[ds].cog_range = cog;
+        drawSettings[ds].cutIdx = CoGIndex(cog);
+        auto conditionPath = std::filesystem::path(firstPath).parent_path();
+        if(conditionPath.filename() == to_string(cog)+"mm") conditionPath = conditionPath.parent_path();
+        // Use the configured path, not its symlink target: separate conditions
+        // may legitimately refer to identical input files in a closure test.
+        const string condition = conditionPath.lexically_normal().string();
+        auto group = conditionIndices.emplace(condition, int(conditionIndices.size()));
+        drawSettings[ds].conditionIndex = group.first->second;
+      }
+    } else {
+      try {
+        drawSettings[ds] = find_name_of_file(argv[filenames[ds][0].second]);
+      } catch(const exception& error){
+        cerr << "Cannot infer legacy sample settings: " << error.what() << "; use --labels for arbitrary samples" << endl;
+        return 1;
+      }
+    }
   }
 
 
@@ -424,20 +1041,48 @@ int main(int argc, char* argv[])
 
     TFile *filein[Ndatasim];
     TCanvas* C_e_summary = new TCanvas(Form("Edep_%gGeV_summary",_energy), Form("%g GeV",_energy), 2560,1440); 
+    C_e_summary->SetCanvasSize(2560, 1440); // Fix drawable/PNG size independently of window borders.
     C_e_summary->cd();
     C_e_summary->Divide(4,2);
     TCanvas* C_edeps = new TCanvas(Form("edeps_%gGeV",_energy), Form("%g GeV",_energy), 2560,1440); 
+    C_edeps->SetCanvasSize(2560, 1440); // Fix drawable/PNG size independently of window borders.
     C_edeps->cd();
     C_edeps->Divide(6,5);
     TCanvas* C_nhits = new TCanvas(Form("nhits_%gGeV",_energy), Form("%g GeV",_energy), 2560,1440); 
+    C_nhits->SetCanvasSize(2560, 1440); // Fix drawable/PNG size independently of window borders.
     C_nhits->cd();
     C_nhits->Divide(6,5);
 
     // data (0) or simulation (1)
     for(int ds=0;ds<Ndatasim;ds++){
-      // cout << filenames[ds][ienergy].second << endl;
-      cout << argv[filenames[ds][ienergy].second] << endl;
       filein[ds] = new TFile(argv[filenames[ds][ienergy].second]);
+      if(filein[ds]->IsZombie()){
+        cerr << "Cannot read " << filein[ds]->GetName() << endl;
+        return 1;
+      }
+      vector<string> histogramNames = {Form("edep_%dGeV", int(_energy)),
+                                      Form("nhits_%dGeV", int(_energy)),
+                                      "edep_1hit_10um", "edep_1hit_15um"};
+      for(int layer=0; layer<30; ++layer){
+        histogramNames.push_back(Form("edep_%dGeV_layer%d", int(_energy), layer));
+        histogramNames.push_back(Form("nhits_%dGeV_layer%d", int(_energy), layer));
+      }
+      for(const string& name : histogramNames){
+        const string key = dirNames[0] + "/" + name;
+        if(!dynamic_cast<TH1F*>(filein[ds]->Get(key.c_str()))){
+          cerr << "Missing TH1F " << key << " in " << filein[ds]->GetName() << endl;
+          return 1;
+        }
+      }
+      for(const char* name : {"fit_gaus", "fit_gaus_nhit"}){
+        const string key = dirNames[0] + "/" + name;
+        TF1* fit = dynamic_cast<TF1*>(filein[ds]->Get(key.c_str()));
+        if(!fit || fit->GetNpar() < 3 || !isfinite(fit->GetParameter(1)) ||
+           fit->GetParameter(1) <= 0 || !isfinite(fit->GetParameter(2)) || fit->GetParameter(2) <= 0){
+          cerr << "Missing or invalid fit " << key << " in " << filein[ds]->GetName() << endl;
+          return 1;
+        }
+      }
       filein[ds]->cd();
 
       // cout << Form("%s/edep_%dGeV",dirNames[0].c_str(),(int)_energy) << endl;
@@ -447,32 +1092,17 @@ int main(int argc, char* argv[])
       C_e_summary->cd(1);
       gStyle->SetOptStat(0);
       gStyle->SetOptFit(0);
-      cout << 1 << endl;
       energy_deposition[ienergy][ds] = (TH1F*)filein[ds]->Get(Form("%s/edep_%dGeV",dirNames[0].c_str(),(int)_energy));
-      cout << 1 << endl;
       fit_gaus[ienergy][ds] = (TF1*)filein[ds]->Get(Form("%s/fit_gaus",dirNames[0].c_str()));
-      cout << 1 << endl;
-      cout << Form("%s/fit_gaus",dirNames[0].c_str()) << endl;
-      ApplyConfigStyle(energy_deposition[ienergy][ds], drawSettings[ds].isData, drawSettings[ds].cutIdx, drawSettings[ds].calibIdx, 1);
-      cout << 1 << endl;
-      cout << fit_gaus[ienergy][ds]->GetParameter(0) << endl;
-      cout << fit_gaus[ienergy][ds]->GetParameter(1) << endl;
-      cout << fit_gaus[ienergy][ds]->GetParameter(2) << endl;
+      ApplySampleStyle(energy_deposition[ienergy][ds], drawSettings[ds], 2);
       int rebinFactor = CalculateRebinFactor(energy_deposition[ienergy][ds], fit_gaus[ienergy][ds]->GetParameter(2));
-      cout << rebinFactor << endl;
-      cout << 1 << endl;
       energy_deposition[ienergy][ds]->Rebin(rebinFactor);
-      cout << 1 << endl;
       fit_gaus[ienergy][ds]->SetParameter(0, fit_gaus[ienergy][ds]->GetParameter(0) * rebinFactor);
-      cout << 1 << endl;
       fit_gaus[ienergy][ds]->SetNpx(1000);
       // energy_deposition[ienergy][ds]->SetLineColor(histo_colors[ds]);
-      cout << 1 << endl;
       energy_deposition[ienergy][ds]->GetXaxis()->SetRangeUser(fit_gaus[ienergy][ds]->GetParameter(1)-10*fit_gaus[ienergy][ds]->GetParameter(2),fit_gaus[ienergy][ds]->GetParameter(1)+10*fit_gaus[ienergy][ds]->GetParameter(2));
-      cout << 1 << endl;
       energy_deposition[ienergy][ds]->Draw(histoDrawOptions[ds].c_str());
-      cout << 1 << endl;
-      ApplyConfigStyle(fit_gaus[ienergy][ds], drawSettings[ds].isData, drawSettings[ds].cutIdx, drawSettings[ds].calibIdx, 1, true);
+      ApplySampleStyle(fit_gaus[ienergy][ds], drawSettings[ds], 1, true);
       // fit_gaus[ienergy][ds]->SetLineColor(fit_colors[ds]);
       // fit_gaus[ienergy][ds]->Draw("same");
 
@@ -483,14 +1113,12 @@ int main(int argc, char* argv[])
       double res_error = sqrt( pow(sigma_error/mean,2) + pow(sigma*mean_error/mean/mean,2));
       Eres[ds]->SetPoint(ienergy, _energy, sigma/mean);
       Eres[ds]->SetPointError(ienergy, 0, res_error);
-
-      cout << 1 << endl;
       
       C_e_summary->cd(2);
       gStyle->SetOptStat(0);
       gStyle->SetOptFit(0);
       number_of_hits[ienergy][ds] = (TH1F*)filein[ds]->Get(Form("%s/nhits_%dGeV",dirNames[0].c_str(),(int)_energy));
-      ApplyConfigStyle(number_of_hits[ienergy][ds], drawSettings[ds].isData, drawSettings[ds].cutIdx, drawSettings[ds].calibIdx, 1);
+      ApplySampleStyle(number_of_hits[ienergy][ds], drawSettings[ds], 2);
       // number_of_hits[ienergy][ds]->SetLineColor(histo_colors[ds]);
       fit_gaus_nhit[ienergy][ds] = (TF1*)filein[ds]->Get(Form("%s/fit_gaus_nhit",dirNames[0].c_str()));
       // fitFunc = number_of_hits[ienergy][ds]->GetFunction("gaussian");
@@ -507,7 +1135,7 @@ int main(int argc, char* argv[])
       C_e_summary->cd(3);
       edep_1hit[ienergy][0][ds] = (TH1F*)filein[ds]->Get(Form("%s/edep_1hit_10um",dirNames[0].c_str()));
       edep_1hit[ienergy][0][ds]->Rebin(rebinFactor_1hit);
-      ApplyConfigStyle(edep_1hit[ienergy][0][ds], drawSettings[ds].isData, drawSettings[ds].cutIdx, drawSettings[ds].calibIdx, 1);
+      ApplySampleStyle(edep_1hit[ienergy][0][ds], drawSettings[ds], 1);
       // edep_1hit[ienergy][0][ds]->SetLineColor(histo_colors[ds]);
       edep_1hit[ienergy][0][ds]->GetXaxis()->SetRangeUser(0,2);
       edep_1hit[ienergy][0][ds]->GetYaxis()->SetTitle("[a.u.]");
@@ -516,7 +1144,7 @@ int main(int argc, char* argv[])
       C_e_summary->cd(4);
       edep_1hit[ienergy][1][ds] = (TH1F*)filein[ds]->Get(Form("%s/edep_1hit_15um",dirNames[0].c_str()));
       edep_1hit[ienergy][1][ds]->Rebin(rebinFactor_1hit);
-      ApplyConfigStyle(edep_1hit[ienergy][1][ds], drawSettings[ds].isData, drawSettings[ds].cutIdx, drawSettings[ds].calibIdx, 1);
+      ApplySampleStyle(edep_1hit[ienergy][1][ds], drawSettings[ds], 1);
       // edep_1hit[ienergy][1][ds]->SetLineColor(histo_colors[ds]);
       edep_1hit[ienergy][1][ds]->GetXaxis()->SetRangeUser(0,2);
       edep_1hit[ienergy][1][ds]->GetYaxis()->SetTitle("[a.u.]");
@@ -527,7 +1155,7 @@ int main(int argc, char* argv[])
       edep_1hit_allRagne[ienergy][0][ds] = (TH1F*)filein[ds]->Get(Form("%s/edep_1hit_10um",dirNames[0].c_str()));
       edep_1hit_allRagne[ienergy][0][ds]->SetTitle(Form("%g GeV Edep of 1 channel all range (10 um)",_energy));
       edep_1hit_allRagne[ienergy][0][ds]->Rebin(rebinFactor_1hit);
-      ApplyConfigStyle(edep_1hit_allRagne[ienergy][0][ds], drawSettings[ds].isData, drawSettings[ds].cutIdx, drawSettings[ds].calibIdx, 1);
+      ApplySampleStyle(edep_1hit_allRagne[ienergy][0][ds], drawSettings[ds], 1);
       // edep_1hit_allRagne[ienergy][0][ds]->SetLineColor(histo_colors[ds]);
       edep_1hit_allRagne[ienergy][0][ds]->GetXaxis()->SetRangeUser(0,12);
       edep_1hit_allRagne[ienergy][0][ds]->GetYaxis()->SetTitle("[a.u.]");
@@ -537,7 +1165,7 @@ int main(int argc, char* argv[])
       edep_1hit_allRagne[ienergy][1][ds] = (TH1F*)filein[ds]->Get(Form("%s/edep_1hit_15um",dirNames[0].c_str()));
       edep_1hit_allRagne[ienergy][1][ds]->SetTitle(Form("%g GeV Edep of 1 channel all range (15 um)",_energy));
       edep_1hit_allRagne[ienergy][1][ds]->Rebin(rebinFactor_1hit);
-      ApplyConfigStyle(edep_1hit_allRagne[ienergy][1][ds], drawSettings[ds].isData, drawSettings[ds].cutIdx, drawSettings[ds].calibIdx, 1);
+      ApplySampleStyle(edep_1hit_allRagne[ienergy][1][ds], drawSettings[ds], 1);
       // edep_1hit_allRagne[ienergy][1][ds]->SetLineColor(histo_colors[ds]);
       edep_1hit_allRagne[ienergy][1][ds]->GetXaxis()->SetRangeUser(0,12);
       edep_1hit_allRagne[ienergy][1][ds]->GetYaxis()->SetTitle("[a.u.]");
@@ -552,11 +1180,6 @@ int main(int argc, char* argv[])
       
       
 
-      cout << argv[filenames[ds][ienergy].second] << endl;
-
-
-
-
 
 
       // edep per layer
@@ -566,7 +1189,7 @@ int main(int argc, char* argv[])
         C_edeps->cd(i_layer+1);
         edep_per_layer[ienergy][i_layer][ds] = (TH1F*)filein[ds]->Get(Form("%s/edep_%dGeV_layer%d",dirNames[0].c_str(),(int)_energy,i_layer));
         edep_per_layer[ienergy][i_layer][ds]->Rebin(rebinFactor_1hit);
-        ApplyConfigStyle(edep_per_layer[ienergy][i_layer][ds], drawSettings[ds].isData, drawSettings[ds].cutIdx, drawSettings[ds].calibIdx, 1);
+        ApplySampleStyle(edep_per_layer[ienergy][i_layer][ds], drawSettings[ds], 1);
         // edep_per_layer[ienergy][i_layer][ds]->SetLineColor(histo_colors[ds]);
         edep_per_layer[ienergy][i_layer][ds]->GetYaxis()->SetTitle("[a.u.]");
         edep_per_layer[ienergy][i_layer][ds]->Scale(1./edep_per_layer[ienergy][i_layer][ds]->Integral());
@@ -579,22 +1202,29 @@ int main(int argc, char* argv[])
         if(i_layer>=30) continue;
         C_nhits->cd(i_layer+1);
         hit_per_layer[ienergy][i_layer][ds] = (TH1F*)filein[ds]->Get(Form("%s/nhits_%dGeV_layer%d",dirNames[0].c_str(),(int)_energy,i_layer));
-        ApplyConfigStyle(hit_per_layer[ienergy][i_layer][ds], drawSettings[ds].isData, drawSettings[ds].cutIdx, drawSettings[ds].calibIdx, 1);
+        ApplySampleStyle(hit_per_layer[ienergy][i_layer][ds], drawSettings[ds], 1);
         // hit_per_layer[ienergy][i_layer][ds]->SetLineColor(histo_colors[ds]);
         hit_per_layer[ienergy][i_layer][ds]->GetYaxis()->SetTitle("[a.u.]");
         hit_per_layer[ienergy][i_layer][ds]->Scale(1./hit_per_layer[ienergy][i_layer][ds]->Integral());
         gPad->SetLogy(1);
         hit_per_layer[ienergy][i_layer][ds]->Draw(histoDrawOptions[ds].c_str());
       }
-      cout << argv[filenames[ds][ienergy].second] << endl;
     }
 
-    // --- 1. 左上：Data用の凡例 ---
-    TLegend *legHisto = CreateNiceLegend(0.65, 0.5, 0.9, 0.9, 1); // 2列
+    // Overlay legends at the right of the full-width distribution panels.
+    auto distributionLegend = [](){
+      auto* legend=CreateNiceLegend(.62,.40,.89,.89,1);
+      legend->SetMargin(.30); legend->SetTextSize(0);
+      legend->SetEntrySeparation(.2);
+      return legend;
+    };
+    TLegend *legHisto = distributionLegend();
+    TLegend *legHits = distributionLegend();
     double max_height_edep=0, max_height_nhit=0;
     for(int ds=0;ds<Ndatasim;ds++){
-      string cog_range = drawSettings[ds].cog_range == 200 ? "no cut" : Form("%dmm", drawSettings[ds].cog_range);
-      legHisto->AddEntry(energy_deposition[ienergy][ds], Form("%s %s", drawSettings[ds].dataType.c_str(), cog_range.c_str()), "l");
+
+      legHisto->AddEntry(energy_deposition[ienergy][ds], SampleCaption(drawSettings[ds]).c_str(), "l");
+      legHits->AddEntry(number_of_hits[ienergy][ds], SampleCaption(drawSettings[ds]).c_str(), "l");
       if(max_height_edep < energy_deposition[ienergy][ds]->GetMaximum()) max_height_edep = energy_deposition[ienergy][ds]->GetMaximum();
       if(max_height_nhit < number_of_hits[ienergy][ds]->GetMaximum()) max_height_nhit = number_of_hits[ienergy][ds]->GetMaximum();
     }
@@ -609,7 +1239,7 @@ int main(int argc, char* argv[])
     gPad->Update();
     C_e_summary->cd(2);
     number_of_hits[ienergy][0]->SetMaximum(max_height_nhit * 1.15);
-    legHisto->Draw("same");
+    legHits->Draw("same");
     gPad->Modified();
     gPad->Update();
     C_e_summary->Write();
@@ -621,6 +1251,8 @@ int main(int argc, char* argv[])
     C_nhits->Write();
     C_nhits->SaveAs(Form("%s/%gGeV_nhits.png",argv[argc-1],_energy));
 
+
+    if(!skipChannelPlots && !SaveChannelEnergyComparisons(filein, Ndatasim, drawSettings, _energy, fileout, argv[argc-1])) return 1;
 
     for(int ds=0;ds<Ndatasim;ds++){
       delete filein[ds];
@@ -641,6 +1273,8 @@ int main(int argc, char* argv[])
 
 
   bool enable_reject = true;
+  const double resolutionMaximum = 0.3;
+  const double energyMaximum = 130.;
 
   auto FitFuncResolution = [&enable_reject](double *x, double *p) {
     // 25〜35 または 75〜85 の範囲に入った場合はフィット点から除外
@@ -653,19 +1287,30 @@ int main(int argc, char* argv[])
     return sqrt((p[0]*p[0]) / x[0] + (p[1]*p[1]));
   };
 
+  TCanvas *resolution_summary = new TCanvas("summary_resolution", "Resolution summary", 2560,1440);
+  resolution_summary->SetCanvasSize(2560, 1440); // Fix drawable/PNG size independently of window borders.
+  resolution_summary->Divide(2,2);
+
   TCanvas *resolution_plots = new TCanvas("resolution_plots", "resolution_plots", 2560,1440); 
-  resolution_plots->Divide(2,2);
+  resolution_plots->SetCanvasSize(2560, 1440); // Fix drawable/PNG size independently of window borders.
+  if(!customLabels) resolution_plots->Divide(2,2);
   
-  TLegend *legend_resolution = CreateNiceLegend(0.3, 0.4, 0.9, 0.85, 2);
+  TLegend *legend_resolution = customLabels ? CreateSampleLegend(Ndatasim) : CreateNiceLegend(0.3, 0.4, 0.9, 0.85, 2);
+  if(customLabels && Ndatasim >= 6){
+    // Keep eight fit captions outside the data area, including in log views.
+    resolution_plots->SetRightMargin(.46);
+    legend_resolution->SetX1(.56); legend_resolution->SetX2(.99);
+    legend_resolution->SetY1(.20); legend_resolution->SetY2(.90);
+  }
   TF1 *res_func_low[Ndatasim];
   resolution_plots->cd();
-  resolution_plots->cd(1);
+  resolution_plots->cd(customLabels ? 0 : 1);
   gStyle->SetOptStat(0);
   gStyle->SetOptFit(0);
   resolution_plots->SetGrid();
   for(int ds=0;ds<Ndatasim;ds++){
     res_func_low[ds] = new TF1(Form("res_func_low_%d",ds),FitFuncResolution,1,300, 2);
-    ApplyConfigStyle(res_func_low[ds], drawSettings[ds].isData, drawSettings[ds].cutIdx, drawSettings[ds].calibIdx, 1, true);
+    ApplySampleStyle(res_func_low[ds], drawSettings[ds], 1, true);
     // res_func_low[ds]->SetLineColor(fit_colors[ds]);
     res_func_low[ds]->SetParameter(0,0.2);
     res_func_low[ds]->SetParameter(1,0);
@@ -674,24 +1319,24 @@ int main(int argc, char* argv[])
     res_func_low[ds]->SetRange(0.1, 300.0);
     enable_reject = false;
     Eres[ds]->SetMinimum(0);
-    Eres[ds]->SetMaximum(0.3);
+    Eres[ds]->SetMaximum(resolutionMaximum);
     // Eres[ds]->SetMarkerStyle(4);
     // Eres[ds]->SetMarkerColor(histo_colors[ds]);
     // Eres[ds]->SetLineColor(histo_colors[ds]);
-    ApplyConfigStyle(Eres[ds], drawSettings[ds].isData, drawSettings[ds].cutIdx, drawSettings[ds].calibIdx, 1);
-    Eres[ds]->SetMarkerSize(1.7);
+    ApplySampleStyle(Eres[ds], drawSettings[ds], 1);
+    Eres[ds]->SetMarkerSize(3.0);
     Eres[ds]->Draw(graphDrawOptions[ds].c_str());
-    Eres[ds]->GetXaxis()->SetRangeUser(0.0, 130);
+    Eres[ds]->GetXaxis()->SetRangeUser(0.0, energyMaximum);
     res_func_low[ds]->Draw("same");
-    
-    string cog_range = drawSettings[ds].cog_range == 200 ? "no cut" : Form("%dmm", drawSettings[ds].cog_range);
-    string sampleCaption = Form("%s %s", drawSettings[ds].dataType.c_str(), cog_range.c_str());
+
+    string sampleCaption = SampleCaption(drawSettings[ds]);
     legend_resolution->AddEntry(Eres[ds], Form("%s #frac{%.3f}{#sqrt{E}} #oplus %.3f", sampleCaption.c_str(), abs(res_func_low[ds]->GetParameter(0)), abs(res_func_low[ds]->GetParameter(1))) , "lp");
   }
   gPad->Modified();
   gPad->Update();
   legend_resolution->Draw("same");
 
+  if(!customLabels){
   resolution_plots->cd(3);
   gStyle->SetOptStat(0);
   gStyle->SetOptFit(0);
@@ -702,8 +1347,8 @@ int main(int argc, char* argv[])
     Eres[ds]->Draw(graphDrawOptions[ds].c_str());
     Eres[ds]->GetXaxis()->SetRangeUser(0.0, 130);
     res_func_low[ds]->Draw("same");
-    string cog_range = drawSettings[ds].cog_range == 200 ? "no cut" : Form("%dmm", drawSettings[ds].cog_range);
-    string sampleCaption = Form("%s %s", drawSettings[ds].dataType.c_str(), cog_range.c_str());
+
+    string sampleCaption = SampleCaption(drawSettings[ds]);
     legResData->AddEntry(Eres[ds], Form("%s #frac{%.3f}{#sqrt{E}} #oplus %.3f", sampleCaption.c_str(), abs(res_func_low[ds]->GetParameter(0)), abs(res_func_low[ds]->GetParameter(1))) , "lp");
   }
   gPad->Modified();
@@ -722,8 +1367,8 @@ int main(int argc, char* argv[])
     else Eres[ds]->Draw(graphDrawOptions[ds].c_str());
     Eres[ds]->GetXaxis()->SetRangeUser(0.0, 130);
     res_func_low[ds]->Draw("same");
-    string cog_range = drawSettings[ds].cog_range == 200 ? "no cut" : Form("%dmm", drawSettings[ds].cog_range);
-    string sampleCaption = Form("%s %s", drawSettings[ds].dataType.c_str(), cog_range.c_str());
+
+    string sampleCaption = SampleCaption(drawSettings[ds]);
     legResSim->AddEntry(Eres[ds], Form("%s #frac{%.3f}{#sqrt{E}} #oplus %.3f", sampleCaption.c_str(), abs(res_func_low[ds]->GetParameter(0)), abs(res_func_low[ds]->GetParameter(1))) , "lp");
     firstDrawing++;
   }
@@ -731,8 +1376,8 @@ int main(int argc, char* argv[])
   gPad->Update();
   legResSim->Draw("same");
 
-  resolution_plots->Write(Form("resolution"));
-  resolution_plots->SaveAs(Form("%s/resolution.png",argv[argc-1]));
+  }
+  SaveResolutionViews(resolution_plots, fileout, argv[argc-1], "resolution", resolution_summary);
 
 
 
@@ -759,20 +1404,27 @@ int main(int argc, char* argv[])
   };
   
   TCanvas *resolution_plots_noise = new TCanvas("resolution_plots_noise", "resolution_plots_noise", 2560, 1440); 
-  resolution_plots_noise->Divide(2, 2);
+  resolution_plots_noise->SetCanvasSize(2560, 1440); // Fix drawable/PNG size independently of window borders.
+  if(!customLabels) resolution_plots_noise->Divide(2, 2);
   
-  TLegend *legend_resolution_noise = CreateNiceLegend(0.3, 0.4, 0.9, 0.85, 2);
+  TLegend *legend_resolution_noise = customLabels ? CreateSampleLegend(Ndatasim) : CreateNiceLegend(0.3, 0.4, 0.9, 0.85, 2);
+  if(customLabels && Ndatasim >= 6){
+    // Keep eight fit captions outside the data area, including in log views.
+    resolution_plots_noise->SetRightMargin(.46);
+    legend_resolution_noise->SetX1(.56); legend_resolution_noise->SetX2(.99);
+    legend_resolution_noise->SetY1(.20); legend_resolution_noise->SetY2(.90);
+  }
   TF1 *res_func_low_noise[Ndatasim];
   
   // --- 1. 全データ (Data + Sim) の描画 (cd(1)) ---
-  resolution_plots_noise->cd(1);
+  resolution_plots_noise->cd(customLabels ? 0 : 1);
   gStyle->SetOptStat(0);
   gStyle->SetOptFit(0);
   resolution_plots_noise->SetGrid();
   
   for (int ds = 0; ds < Ndatasim; ds++) {
       res_func_low_noise[ds] = new TF1(Form("res_func_low_noise_%d", ds), FitFuncResolutionWithNoise, 0.1, 300, 3);
-      ApplyConfigStyle(res_func_low_noise[ds], drawSettings[ds].isData, drawSettings[ds].cutIdx, drawSettings[ds].calibIdx, 1, true);
+      ApplySampleStyle(res_func_low_noise[ds], drawSettings[ds], 1, true);
   
       // 初期値設定
       res_func_low_noise[ds]->SetParameter(0, 0.20); // 統計項 (a)
@@ -790,15 +1442,14 @@ int main(int argc, char* argv[])
       enable_reject_noise = false;
   
       Eres[ds]->SetMinimum(0);
-      Eres[ds]->SetMaximum(0.3);
-      ApplyConfigStyle(Eres[ds], drawSettings[ds].isData, drawSettings[ds].cutIdx, drawSettings[ds].calibIdx, 1);
-      Eres[ds]->SetMarkerSize(1.7);
+      Eres[ds]->SetMaximum(resolutionMaximum);
+      ApplySampleStyle(Eres[ds], drawSettings[ds], 1);
+      Eres[ds]->SetMarkerSize(3.0);
       Eres[ds]->Draw(graphDrawOptions[ds].c_str());
-      Eres[ds]->GetXaxis()->SetRangeUser(0.0, 130);
+      Eres[ds]->GetXaxis()->SetRangeUser(0.0, energyMaximum);
       res_func_low_noise[ds]->Draw("same");
-  
-      string cog_range = drawSettings[ds].cog_range == 200 ? "no cut" : Form("%dmm", drawSettings[ds].cog_range);
-      string sampleCaption = Form("%s %s", drawSettings[ds].dataType.c_str(), cog_range.c_str());
+
+      string sampleCaption = SampleCaption(drawSettings[ds]);
   
       legend_resolution_noise->AddEntry(Eres[ds], Form("%s #frac{%.3f}{#sqrt{E}} #oplus #frac{%.3f}{E} #oplus %.3f", sampleCaption.c_str(), std::abs(res_func_low_noise[ds]->GetParameter(0)), std::abs(res_func_low_noise[ds]->GetParameter(1)), std::abs(res_func_low_noise[ds]->GetParameter(2))), "lp");
   }
@@ -807,6 +1458,7 @@ int main(int argc, char* argv[])
   legend_resolution_noise->Draw("same");
   
   // --- 2. Data のみの描画 (cd(3)) ---
+  if(!customLabels){
   resolution_plots_noise->cd(3);
   gStyle->SetOptStat(0);
   gStyle->SetOptFit(0);
@@ -819,9 +1471,8 @@ int main(int argc, char* argv[])
       Eres[ds]->Draw(graphDrawOptions[ds].c_str());
       Eres[ds]->GetXaxis()->SetRangeUser(0.0, 130);
       res_func_low_noise[ds]->Draw("same");
-  
-      string cog_range = drawSettings[ds].cog_range == 200 ? "no cut" : Form("%dmm", drawSettings[ds].cog_range);
-      string sampleCaption = Form("%s %s", drawSettings[ds].dataType.c_str(), cog_range.c_str());
+
+      string sampleCaption = SampleCaption(drawSettings[ds]);
   
       legResData_noise->AddEntry(Eres[ds], Form("%s #frac{%.3f}{#sqrt{E}} #oplus #frac{%.3f}{E} #oplus %.3f", sampleCaption.c_str(), std::abs(res_func_low_noise[ds]->GetParameter(0)), std::abs(res_func_low_noise[ds]->GetParameter(1)), std::abs(res_func_low_noise[ds]->GetParameter(2))), "lp");
   }
@@ -845,9 +1496,8 @@ int main(int argc, char* argv[])
   
       Eres[ds]->GetXaxis()->SetRangeUser(0.0, 130);
       res_func_low_noise[ds]->Draw("same");
-  
-      string cog_range = drawSettings[ds].cog_range == 200 ? "no cut" : Form("%dmm", drawSettings[ds].cog_range);
-      string sampleCaption = Form("%s %s", drawSettings[ds].dataType.c_str(), cog_range.c_str());
+
+      string sampleCaption = SampleCaption(drawSettings[ds]);
   
       legResSim_noise->AddEntry(Eres[ds], Form("%s #frac{%.3f}{#sqrt{E}} #oplus #frac{%.3f}{E} #oplus %.3f", sampleCaption.c_str(), std::abs(res_func_low_noise[ds]->GetParameter(0)), std::abs(res_func_low_noise[ds]->GetParameter(1)), std::abs(res_func_low_noise[ds]->GetParameter(2))), "lp");
       firstDrawing_noise++;
@@ -856,8 +1506,18 @@ int main(int argc, char* argv[])
   gPad->Update();
   legResSim_noise->Draw("same");
   
+  }
   // --- 4. 保存処理 ---
-  resolution_plots_noise->Write("resolution_with_noise");
-  resolution_plots_noise->SaveAs(Form("%s/resolution_with_noise.png", argv[argc - 1]));
+  SaveResolutionViews(resolution_plots_noise, fileout, argv[argc-1], "resolution_with_noise", resolution_summary);
+  resolution_summary->cd();
+  resolution_summary->Modified(); resolution_summary->Update();
+  fileout.cd(); resolution_summary->Write("summary_resolution");
+  resolution_summary->SaveAs(Form("%s/summary_resolution.png",argv[argc-1]));
 
+  fileout.cd();
+  TNamed("hl_tail_status", "complete").Write();
+  return 0;
+} catch (const std::exception& error) {
+  std::cerr << error.what() << std::endl;
+  return 1;
 }

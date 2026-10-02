@@ -2,7 +2,7 @@
 set -euo pipefail
 HERE=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)
 submission_dir=$(pwd -P)
-energies=100 partition=all logs=$HERE/../job/hg_lg_tail dry=0 time_limit='' memory=''
+energies=100 partition=all logs=$HERE/../../log/channel_response/hg_lg_tail dry=0 time_limit='' memory=''
 args=()
 while (($#));do
  case $1 in
@@ -10,7 +10,7 @@ while (($#));do
 Usage: bash submit.sh [--energy VALUE|all] [--energies CSV] [run.sh options]
 Default: 100 GeV only. One Slurm job per energy, all channels/events by default.
 --energy all includes PS 0.5,1,2,3,4,5 and SPS 10,20,30,40,50,60,70,80,100,120,150,200,250.
---partition NAME (all), --log-dir PATH (default: $HERE/../job/hg_lg_tail),
+--partition NAME (all), --log-dir PATH (default: $HERE/../../log/channel_response/hg_lg_tail),
 --mem SIZE, --time LIMIT, --dry-run.
 --dry-run validates inputs and prints sbatch commands; it creates/submits nothing.
 Status: bjobs or squeue -u \$USER

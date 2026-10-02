@@ -7,15 +7,15 @@
 #        (1) Submit the job.
 #            % cd $MEG2SYS/analyzer
 #            % sbatch example/analyzer.sl
-#            % sbatch -o test-%A_%a.out --error="test-%A_%a.err" execute.sl
+#            % sbatch -o /home/murata_t/ScECAL_BeamTest/analysis/log/discrepancy.bak/slurm-%j.out --error=/home/murata_t/ScECAL_BeamTest/analysis/log/discrepancy.bak/slurm-%j.err execute.sl
 #
 ###############################################################################
 
 #SBATCH --partition=all
 #SBATCH --ntasks=1       
 #SBATCH --job-name=analyzer   
-#SBATCH --output="output/analyzer%A.out"
-#SBATCH --error="ioutput/analyzer%A.err"
+#SBATCH --output=/home/murata_t/ScECAL_BeamTest/analysis/log/discrepancy.bak/analyzer%A.out
+#SBATCH --error=/home/murata_t/ScECAL_BeamTest/analysis/log/discrepancy.bak/analyzer%A.err
 
 MY_HOST=`hostname`
 MY_DATE=`date`

@@ -25,7 +25,7 @@ bash submit.sh --energy all
 bash submit.sh --energies 5,100 --label comparison_v1
 ```
 
-Slurmの`sbatch`を使用します。`bjobs`または`squeue -u "$USER"`で確認できます。1 energyにつき1ジョブ・1 CPUです。各ジョブが集計とPNG保存まで実行するので、異なるenergyはスケジューラが許す範囲で並列に処理されます。同じenergy内は順次処理します。ログは`analysis/channel_response/job/hg_lg_tail/`、投入したjob IDはその中の`submissions_*.tsv`に保存します。`--partition`、`--mem`、`--time`、`--log-dir`も指定できます。指定しないメモリ・時間制限はクラスタの既定値です。
+Slurmの`sbatch`を使用します。`bjobs`または`squeue -u "$USER"`で確認できます。1 energyにつき1ジョブ・1 CPUです。各ジョブが集計とPNG保存まで実行するので、異なるenergyはスケジューラが許す範囲で並列に処理されます。同じenergy内は順次処理します。ログは`analysis/log/channel_response/hg_lg_tail/`、投入したjob IDはその中の`submissions_*.tsv`に保存します。`--partition`、`--mem`、`--time`、`--log-dir`も指定できます。指定しないメモリ・時間制限はクラスタの既定値です。
 
 全energyはPSの0.5, 1, 2, 3, 4, 5 GeVと、SPSの10, 20, 30, 40, 50, 60, 70, 80, 100, 120, 150, 200, 250 GeVです。dataのPS/SPSをenergyから自動選択します。MCは既存の配置どおり、PS相当energyも`Result_MC/{decode,calib}/e-/sps/<mc-tag>/`から読みます。
 
@@ -114,7 +114,11 @@ ROOTの`events`は全読み込みeventを保存し、`selected`と`tail_rich`、
 
 元のROOTは必要branchだけを各sampleにつき1回読みます。中央値の確定後にhitとeventを同じ定義で分類するため、比較範囲内のhitを一時ROOTに保存し、そこを再読込します。中央値は近似せず、残差をsampleごとにメモリに保持して算出します。比較範囲内のhitがN個なら残差の数値だけで約8N byte、加えてvectorの余剰容量等が必要です。全event実行ではI/O・メモリ・一時領域が増えます。重いchannelごとのPNG一括描画は行いません。
 
-一時ROOTは既定で`/tmp/scecal_hg_lg_tail.XXXXXX/`に置き、shell終了時に削除します。`--scratch-root PATH`で変更できます。通常終了・エラー終了時はcleanupされますが、SIGKILLやノード停止の場合は削除できません。
+一時ROOTは各energyの結果ディレクトリ内の`.hg_lg_tail.XXXXXX.tmp/events.root`に保存します。
+既定の保存先は`analysis/result/channel_response/hg_lg_tail/<mc-tag>/<label>/<energy>GeV/`です。
+正常終了・エラー終了・HUP/INT/TERMによる終了時に、この一時ディレクトリごと削除します。
+完成したROOT・PNG・集計表は結果ディレクトリに残します。`--scratch-root PATH`で一時ディレクトリの親を変更できます。
+SIGKILLやノード停止の場合は終了処理が動かないため、一時ファイルが残ることがあります。
 
 ## 実装時の検証
 

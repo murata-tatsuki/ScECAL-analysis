@@ -1,4 +1,7 @@
 #! /bin/bash
+slurm_log_dir=$(realpath -m -- "$(dirname -- "${BASH_SOURCE[0]}")/../../log/trackFit/efficiency")
+mkdir -p -- "$slurm_log_dir"
+
 
 paralell_jobs () {
   track_path=$1
@@ -20,19 +23,18 @@ paralell_jobs () {
     echo -n ${dat_name} >> ../../tmp/efficiency_${beam}.txt
     echo -n " " >> ../../tmp/efficiency_${beam}.txt
   
-    sbatch -o ../jobs/efficiency/test-%A.out --error="../jobs/efficiency/test-%A.err" execute.sl ./channel_efficiecy ${outfile} ${dat_name} ${fig_path}
+    sbatch -o "${slurm_log_dir}/test-%A.out" --error="${slurm_log_dir}/test-%A.err" execute.sl ./channel_efficiecy ${outfile} ${dat_name} ${fig_path}
   done
 
   var=`cat ../../tmp/efficiency_${beam}.txt`
   outfile=${outPath}/${beam}/all.root
   fig_path=${outPath}/figures/${beam}/all
   mkdir -p ${fig_path}
-  sbatch -o ../jobs/efficiency/test-%A.out --error="../jobs/efficiency/test-%A.err" execute.sl ./channel_efficiecy ${outfile} ${var} ${fig_path}
+  sbatch -o "${slurm_log_dir}/test-%A.out" --error="${slurm_log_dir}/test-%A.err" execute.sl ./channel_efficiecy ${outfile} ${var} ${fig_path}
 }
 
 
-rm -rf ../jobs/efficiency
-mkdir -p ../jobs/efficiency
+mkdir -p "${slurm_log_dir}"
 
 
 # outPath=../../result/trackFit/efficiency
