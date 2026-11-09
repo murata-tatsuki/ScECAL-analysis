@@ -1,0 +1,3 @@
+sample	sampled_table_rows	tail_flagged_rows	cog20_events	window_events	checked_calib_hits	max_HG_closure_MeV	max_LG_closure_MeV	max_selected_closure_MeV	max_event_energy_closure_GeV
+data	6000	122	5048	4999	3119088	3.5527136788005009e-15	2.8421709430404007e-14	0	4.9995563244920049e-12
+mc	6000	0	4541	4541	3204672	3.5527136788005009e-15	2.8421709430404007e-14	0	4.9995563244920049e-12

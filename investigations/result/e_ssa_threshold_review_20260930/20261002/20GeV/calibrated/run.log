@@ -1,0 +1,12 @@
+20 GeV data: 4000 sampled, cog shower=1803
+20 GeV MC: 6000 sampled, cog shower=2719
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261002/20GeV/calibrated/good_energy/figures/event_energy.png has been created
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261002/20GeV/calibrated/good_energy/figures/event_energy_change.png has been created
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261002/20GeV/calibrated/good_energy/figures/event_energy_full_range.png has been created
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261002/20GeV/calibrated/good_energy/figures/event_energy_change_full_range.png has been created
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261002/20GeV/calibrated/central_energy/figures/event_energy.png has been created
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261002/20GeV/calibrated/central_energy/figures/event_energy_change.png has been created
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261002/20GeV/calibrated/central_energy/figures/event_energy_full_range.png has been created
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261002/20GeV/calibrated/central_energy/figures/event_energy_change_full_range.png has been created
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261002/20GeV/calibrated/figures/energy_at_fixed_nhit.png has been created
+Validated signed and zero-intercept totals; max error=0, 4.44089e-16

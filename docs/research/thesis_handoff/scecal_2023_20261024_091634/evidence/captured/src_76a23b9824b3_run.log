@@ -1,0 +1,566 @@
+2026-10-12T07:58:57+09:00
+Usable inputs: data 28, MC 28; recovered=0
+file 0 sample=0 run=29 sampled=21833 crossings=452402 response=330651 truth_hits=0
+file 1 sample=1 run=29 sampled=100000 crossings=2428008 response=2121526 truth_hits=3650861
+file 2 sample=0 run=30 sampled=12082 crossings=234996 response=171978 truth_hits=0
+file 3 sample=1 run=30 sampled=100000 crossings=2431523 response=2124218 truth_hits=3673353
+file 4 sample=0 run=31 sampled=12429 crossings=240769 response=175091 truth_hits=0
+file 5 sample=1 run=31 sampled=100000 crossings=2459152 response=2152034 truth_hits=3654412
+file 6 sample=0 run=33 sampled=21871 crossings=285273 response=188588 truth_hits=0
+file 7 sample=1 run=33 sampled=100000 crossings=2461679 response=2119385 truth_hits=3658076
+file 8 sample=0 run=34 sampled=974 crossings=11875 response=7895 truth_hits=0
+file 9 sample=1 run=34 sampled=100000 crossings=2443130 response=2109021 truth_hits=3640464
+file 10 sample=0 run=35 sampled=14955 crossings=189268 response=124927 truth_hits=0
+file 11 sample=1 run=35 sampled=100000 crossings=2509105 response=2154894 truth_hits=3632295
+file 12 sample=0 run=36 sampled=34136 crossings=429705 response=281906 truth_hits=0
+file 13 sample=1 run=36 sampled=100000 crossings=2516901 response=2149395 truth_hits=3616820
+file 14 sample=0 run=37 sampled=39372 crossings=752240 response=524731 truth_hits=0
+file 15 sample=1 run=37 sampled=100000 crossings=2490276 response=2156405 truth_hits=3626684
+file 16 sample=0 run=38 sampled=36372 crossings=720090 response=501734 truth_hits=0
+file 17 sample=1 run=38 sampled=100000 crossings=2521096 response=2174017 truth_hits=3594028
+file 18 sample=0 run=39 sampled=29713 crossings=586560 response=418828 truth_hits=0
+file 19 sample=1 run=39 sampled=100000 crossings=2462814 response=2145077 truth_hits=3636496
+file 20 sample=0 run=40 sampled=42671 crossings=815829 response=580438 truth_hits=0
+file 21 sample=1 run=40 sampled=100000 crossings=2507464 response=2179825 truth_hits=3632585
+file 22 sample=0 run=41 sampled=18313 crossings=158163 response=108336 truth_hits=0
+file 23 sample=1 run=41 sampled=100000 crossings=2564257 response=2220049 truth_hits=3486648
+file 24 sample=0 run=42 sampled=6239 crossings=122824 response=86165 truth_hits=0
+file 25 sample=1 run=42 sampled=100000 crossings=2524477 response=2176911 truth_hits=3612157
+file 26 sample=0 run=43 sampled=23625 crossings=475454 response=333068 truth_hits=0
+file 27 sample=1 run=43 sampled=100000 crossings=2532946 response=2184563 truth_hits=3605836
+file 28 sample=0 run=44 sampled=25691 crossings=29483 response=18834 truth_hits=0
+file 29 sample=1 run=44 sampled=100000 crossings=2597661 response=2186014 truth_hits=3352208
+file 30 sample=0 run=45 sampled=15529 crossings=34141 response=23168 truth_hits=0
+file 31 sample=1 run=45 sampled=100000 crossings=2541135 response=2179424 truth_hits=3490941
+file 32 sample=0 run=46 sampled=28740 crossings=63184 response=41379 truth_hits=0
+file 33 sample=1 run=46 sampled=100000 crossings=2557456 response=2137217 truth_hits=3472529
+file 34 sample=0 run=47 sampled=44278 crossings=30869 response=18754 truth_hits=0
+file 35 sample=1 run=47 sampled=100000 crossings=2616458 response=2168722 truth_hits=3353945
+file 36 sample=0 run=48 sampled=26808 crossings=191158 response=126492 truth_hits=0
+file 37 sample=1 run=48 sampled=100000 crossings=2617935 response=2213507 truth_hits=3487604
+file 38 sample=0 run=49 sampled=24955 crossings=205192 response=149011 truth_hits=0
+file 39 sample=1 run=49 sampled=100000 crossings=2529827 response=2213680 truth_hits=3531490
+file 40 sample=0 run=50 sampled=26411 crossings=85953 response=56734 truth_hits=0
+file 41 sample=1 run=50 sampled=100000 crossings=2632444 response=2227591 truth_hits=3510103
+file 42 sample=0 run=51 sampled=33418 crossings=2694 response=1526 truth_hits=0
+file 43 sample=1 run=51 sampled=100000 crossings=2470820 response=2036667 truth_hits=3487017
+file 44 sample=0 run=52 sampled=34465 crossings=6054 response=3284 truth_hits=0
+file 45 sample=1 run=52 sampled=100000 crossings=2574056 response=2099944 truth_hits=3475101
+file 46 sample=0 run=53 sampled=33736 crossings=4364 response=2220 truth_hits=0
+file 47 sample=1 run=53 sampled=100000 crossings=2489595 response=2035806 truth_hits=3472060
+file 48 sample=0 run=54 sampled=198167 crossings=16520 response=8900 truth_hits=0
+file 49 sample=1 run=54 sampled=100000 crossings=2523666 response=1864658 truth_hits=3428878
+file 50 sample=0 run=55 sampled=27519 crossings=109970 response=61861 truth_hits=0
+file 51 sample=1 run=55 sampled=100000 crossings=2584897 response=2118842 truth_hits=3506955
+file 52 sample=0 run=56 sampled=17000 crossings=201600 response=139030 truth_hits=0
+file 53 sample=1 run=56 sampled=100000 crossings=2519920 response=2181277 truth_hits=3532475
+file 54 sample=0 run=57 sampled=4420 crossings=86204 response=61670 truth_hits=0
+file 55 sample=1 run=57 sampled=100000 crossings=2407589 response=2098754 truth_hits=3663341
+Warning in <Fit>: Fit data is empty 
+Warning in <Fit>: Fit data is empty 
+Warning in <Fit>: Fit data is empty 
+Warning in <Fit>: Fit data is empty 
+Warning in <Fit>: Fit data is empty 
+Warning in <Fit>: Fit data is empty 
+Fitted through CellID 0
+Fitted through CellID 10000
+Fitted through CellID 20000
+Fitted through CellID 30000
+Fitted through CellID 40000
+Fitted through CellID 50000
+Fitted through CellID 100000
+Fitted through CellID 110000
+Fitted through CellID 120000
+Fitted through CellID 130000
+Fitted through CellID 140000
+Fitted through CellID 150000
+Fitted through CellID 200000
+Fitted through CellID 210000
+Fitted through CellID 220000
+Fitted through CellID 230000
+Fitted through CellID 240000
+Fitted through CellID 250000
+Fitted through CellID 300000
+Fitted through CellID 310000
+Fitted through CellID 320000
+Fitted through CellID 330000
+Fitted through CellID 340000
+Fitted through CellID 350000
+Fitted through CellID 400000
+Fitted through CellID 410000
+Fitted through CellID 420000
+Fitted through CellID 430000
+Fitted through CellID 440000
+Fitted through CellID 450000
+Fitted through CellID 500000
+Fitted through CellID 510000
+Fitted through CellID 520000
+Fitted through CellID 530000
+Fitted through CellID 540000
+Fitted through CellID 550000
+Fitted through CellID 600000
+Fitted through CellID 610000
+Fitted through CellID 620000
+Fitted through CellID 630000
+Fitted through CellID 640000
+Fitted through CellID 650000
+Fitted through CellID 700000
+Fitted through CellID 710000
+Fitted through CellID 720000
+Fitted through CellID 730000
+Fitted through CellID 740000
+Fitted through CellID 750000
+Fitted through CellID 800000
+Fitted through CellID 810000
+Fitted through CellID 820000
+Fitted through CellID 830000
+Fitted through CellID 840000
+Fitted through CellID 850000
+Fitted through CellID 900000
+Fitted through CellID 910000
+Fitted through CellID 920000
+Fitted through CellID 930000
+Fitted through CellID 940000
+Fitted through CellID 950000
+Fitted through CellID 1000000
+Fitted through CellID 1010000
+Fitted through CellID 1020000
+Fitted through CellID 1030000
+Fitted through CellID 1040000
+Fitted through CellID 1050000
+Fitted through CellID 1100000
+Fitted through CellID 1110000
+Fitted through CellID 1120000
+Fitted through CellID 1130000
+Fitted through CellID 1140000
+Fitted through CellID 1150000
+Fitted through CellID 1200000
+Fitted through CellID 1210000
+Fitted through CellID 1220000
+Fitted through CellID 1230000
+Fitted through CellID 1240000
+Fitted through CellID 1250000
+Fitted through CellID 1300000
+Fitted through CellID 1310000
+Fitted through CellID 1320000
+Fitted through CellID 1330000
+Fitted through CellID 1340000
+Fitted through CellID 1350000
+Fitted through CellID 1400000
+Fitted through CellID 1410000
+Fitted through CellID 1420000
+Fitted through CellID 1430000
+Fitted through CellID 1440000
+Fitted through CellID 1450000
+Fitted through CellID 1500000
+Fitted through CellID 1510000
+Fitted through CellID 1520000
+Fitted through CellID 1530000
+Fitted through CellID 1540000
+Fitted through CellID 1550000
+Fitted through CellID 1600000
+Fitted through CellID 1610000
+Fitted through CellID 1620000
+Fitted through CellID 1630000
+Fitted through CellID 1640000
+Fitted through CellID 1650000
+Fitted through CellID 1700000
+Fitted through CellID 1710000
+Fitted through CellID 1720000
+Fitted through CellID 1730000
+Fitted through CellID 1740000
+Fitted through CellID 1750000
+Fitted through CellID 1800000
+Fitted through CellID 1810000
+Fitted through CellID 1820000
+Fitted through CellID 1830000
+Fitted through CellID 1840000
+Fitted through CellID 1850000
+Fitted through CellID 1900000
+Fitted through CellID 1910000
+Fitted through CellID 1920000
+Fitted through CellID 1930000
+Fitted through CellID 1940000
+Fitted through CellID 1950000
+Fitted through CellID 2000000
+Fitted through CellID 2010000
+Fitted through CellID 2020000
+Fitted through CellID 2030000
+Fitted through CellID 2040000
+Fitted through CellID 2050000
+Fitted through CellID 2100000
+Fitted through CellID 2110000
+Fitted through CellID 2120000
+Fitted through CellID 2130000
+Fitted through CellID 2140000
+Fitted through CellID 2150000
+Fitted through CellID 2200000
+Fitted through CellID 2210000
+Fitted through CellID 2220000
+Fitted through CellID 2230000
+Fitted through CellID 2240000
+Fitted through CellID 2250000
+Fitted through CellID 2300000
+Fitted through CellID 2310000
+Fitted through CellID 2320000
+Fitted through CellID 2330000
+Fitted through CellID 2340000
+Fitted through CellID 2350000
+Fitted through CellID 2400000
+Fitted through CellID 2410000
+Fitted through CellID 2420000
+Fitted through CellID 2430000
+Fitted through CellID 2440000
+Fitted through CellID 2450000
+Fitted through CellID 2500000
+Fitted through CellID 2510000
+Fitted through CellID 2520000
+Fitted through CellID 2530000
+Fitted through CellID 2540000
+Fitted through CellID 2550000
+Fitted through CellID 2600000
+Fitted through CellID 2610000
+Fitted through CellID 2620000
+Fitted through CellID 2630000
+Fitted through CellID 2640000
+Fitted through CellID 2650000
+Fitted through CellID 2700000
+Fitted through CellID 2710000
+Fitted through CellID 2720000
+Fitted through CellID 2730000
+Fitted through CellID 2740000
+Fitted through CellID 2750000
+Fitted through CellID 2800000
+Fitted through CellID 2810000
+Fitted through CellID 2820000
+Fitted through CellID 2830000
+Fitted through CellID 2840000
+Fitted through CellID 2850000
+Fitted through CellID 2900000
+Fitted through CellID 2910000
+Fitted through CellID 2920000
+Fitted through CellID 2930000
+Fitted through CellID 2940000
+Fitted through CellID 2950000
+Muon response complete: "/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/default", matched fit channels data/MC 918/1981
+2026-10-12T11:08:51+09:00
+
+2026-10-12T13:58:37+09:00 Figure layout updated: comparison/{matched,unmatched}/100GeV/channels/cell<CellID>_*.png -> comparison/{matched,unmatched}/100GeV/layer<layer>/chip<chip>/cell<CellID>_*.png; moved 16698 PNG with inode, size, and modification time unchanged. ROOT, TSV, and global map unchanged.
+2026-10-12T14:43:53+09:00
+Repainting 12 existing PNGs for 3 channels with 3 workers; scratch="/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/.scratch/muon_mip_response_redraw/redraw_513970_bVbI36"
+Redraw worker 0 complete: 4 PNGs
+Redraw worker 2 complete: 4 PNGs
+Redraw worker 1 complete: 4 PNGs
+PNG redraw complete; saved ROOT and fit tables were read-only
+2026-10-12T14:43:59+09:00
+Plots updated from saved histograms and fits; input checksums unchanged.
+2026-10-12T14:49:31+09:00
+Repainting 12 existing PNGs for 3 channels with 3 workers; scratch="/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/.scratch/muon_mip_response_redraw/redraw_515054_qm9kiI"
+Redraw worker 2 complete: 4 PNGs
+Redraw worker 0 complete: 4 PNGs
+Redraw worker 1 complete: 4 PNGs
+PNG redraw complete; saved ROOT and fit tables were read-only
+2026-10-12T14:50:07+09:00
+Plots updated from saved histograms and fits; input checksums unchanged.
+2026-10-12T14:52:59+09:00
+Repainting 11132 existing PNGs for 2898 channels with 4 workers; scratch="/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/.scratch/muon_mip_response_redraw/redraw_611447_hQrjWa"
+Redraw worker 3: 100 PNGs
+Redraw worker 2: 100 PNGs
+Redraw worker 1: 100 PNGs
+Redraw worker 0: 100 PNGs
+Redraw worker 3: 200 PNGs
+Redraw worker 2: 200 PNGs
+Redraw worker 0: 200 PNGs
+Redraw worker 1: 200 PNGs
+Redraw worker 3: 300 PNGs
+Redraw worker 0: 300 PNGs
+Redraw worker 1: 300 PNGs
+Redraw worker 2: 300 PNGs
+Redraw worker 3: 400 PNGs
+Redraw worker 0: 400 PNGs
+Redraw worker 2: 400 PNGs
+Redraw worker 1: 400 PNGs
+Redraw worker 3: 500 PNGs
+Redraw worker 0: 500 PNGs
+Redraw worker 1: 500 PNGs
+Redraw worker 2: 500 PNGs
+Redraw worker 2: 600 PNGs
+Redraw worker 1: 600 PNGs
+Redraw worker 0: 600 PNGs
+Redraw worker 2: 700 PNGs
+Redraw worker 1: 700 PNGs
+Redraw worker 0: 700 PNGs
+Redraw worker 2: 800 PNGs
+Redraw worker 0: 800 PNGs
+Redraw worker 1: 800 PNGs
+Redraw worker 2: 900 PNGs
+Redraw worker 0: 900 PNGs
+Redraw worker 1: 900 PNGs
+Redraw worker 3: 600 PNGs
+Redraw worker 2: 1000 PNGs
+Redraw worker 0: 1000 PNGs
+Redraw worker 1: 1000 PNGs
+Redraw worker 3: 700 PNGs
+Redraw worker 2: 1100 PNGs
+Redraw worker 0: 1100 PNGs
+Redraw worker 1: 1100 PNGs
+Redraw worker 3: 800 PNGs
+Redraw worker 2: 1200 PNGs
+Redraw worker 0: 1200 PNGs
+Redraw worker 1: 1200 PNGs
+Redraw worker 3: 900 PNGs
+Redraw worker 2: 1300 PNGs
+Redraw worker 0: 1300 PNGs
+Redraw worker 1: 1300 PNGs
+Redraw worker 3: 1000 PNGs
+Redraw worker 2: 1400 PNGs
+Redraw worker 0: 1400 PNGs
+Redraw worker 1: 1400 PNGs
+Redraw worker 0: 1500 PNGs
+Redraw worker 2: 1500 PNGs
+Redraw worker 1: 1500 PNGs
+Redraw worker 1: 1600 PNGs
+Redraw worker 0: 1600 PNGs
+Redraw worker 2: 1600 PNGs
+Redraw worker 0: 1700 PNGs
+Redraw worker 1: 1700 PNGs
+Redraw worker 2: 1700 PNGs
+Redraw worker 1: 1800 PNGs
+Redraw worker 0: 1800 PNGs
+Redraw worker 3: 1100 PNGs
+Redraw worker 2: 1800 PNGs
+Redraw worker 1: 1900 PNGs
+Redraw worker 0: 1900 PNGs
+Redraw worker 3: 1200 PNGs
+Redraw worker 2: 1900 PNGs
+Redraw worker 1: 2000 PNGs
+Redraw worker 0: 2000 PNGs
+Redraw worker 3: 1300 PNGs
+Redraw worker 2: 2000 PNGs
+Redraw worker 1: 2100 PNGs
+Redraw worker 0: 2100 PNGs
+Redraw worker 3: 1400 PNGs
+Redraw worker 2: 2100 PNGs
+Redraw worker 1: 2200 PNGs
+Redraw worker 0: 2200 PNGs
+Redraw worker 3: 1500 PNGs
+Redraw worker 2: 2200 PNGs
+Redraw worker 1: 2300 PNGs
+Redraw worker 0: 2300 PNGs
+Redraw worker 3: 1600 PNGs
+Redraw worker 2: 2300 PNGs
+Redraw worker 1: 2400 PNGs
+Redraw worker 0: 2400 PNGs
+Redraw worker 3: 1700 PNGs
+Redraw worker 2: 2400 PNGs
+Redraw worker 1: 2500 PNGs
+Redraw worker 0: 2500 PNGs
+Redraw worker 3: 1800 PNGs
+Redraw worker 2: 2500 PNGs
+Redraw worker 1: 2600 PNGs
+Redraw worker 0: 2600 PNGs
+Redraw worker 3: 1900 PNGs
+Redraw worker 2: 2600 PNGs
+Redraw worker 0: 2700 PNGs
+Redraw worker 3: 2000 PNGs
+Redraw worker 2: 2700 PNGs
+Redraw worker 0: 2800 PNGs
+Redraw worker 0 complete: 2804 PNGs
+Redraw worker 3: 2100 PNGs
+Redraw worker 2 complete: 2790 PNGs
+Redraw worker 3: 2200 PNGs
+Redraw worker 3: 2300 PNGs
+Redraw worker 3: 2400 PNGs
+Redraw worker 1: 2700 PNGs
+Redraw worker 1 complete: 2776 PNGs
+Redraw worker 3: 2500 PNGs
+Redraw worker 3: 2600 PNGs
+Redraw worker 3: 2700 PNGs
+Redraw worker 3 complete: 2762 PNGs
+PNG redraw complete; saved ROOT and fit tables were read-only
+2026-10-12T15:03:12+09:00
+Plots updated from saved histograms and fits; input checksums unchanged.
+2026-10-12T15:43:23+09:00
+Repainting 12 existing PNGs for 2 channels with 2 workers; scratch="/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/.scratch/muon_mip_response_redraw/redraw_524381_pmlvL0"
+Redraw worker 0 complete: 6 PNGs
+Redraw worker 1 complete: 6 PNGs
+PNG redraw complete; saved ROOT and fit tables were read-only
+2026-10-12T15:43:30+09:00
+Plots updated from saved histograms and fits; input checksums unchanged.
+2026-10-12T15:45:25+09:00
+Repainting 16699 existing PNGs for 2898 channels with 8 workers; scratch="/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/.scratch/muon_mip_response_redraw/redraw_611774_8OHKMh"
+Redraw worker 2: 100 PNGs
+Redraw worker 3: 100 PNGs
+Redraw worker 1: 100 PNGs
+Redraw worker 4: 100 PNGs
+Redraw worker 6: 100 PNGs
+Redraw worker 0: 100 PNGs
+Redraw worker 5: 100 PNGs
+Redraw worker 7: 100 PNGs
+Redraw worker 4: 200 PNGs
+Redraw worker 1: 200 PNGs
+Redraw worker 3: 200 PNGs
+Redraw worker 2: 200 PNGs
+Redraw worker 0: 200 PNGs
+Redraw worker 6: 200 PNGs
+Redraw worker 5: 200 PNGs
+Redraw worker 7: 200 PNGs
+Redraw worker 0: 300 PNGs
+Redraw worker 1: 300 PNGs
+Redraw worker 4: 300 PNGs
+Redraw worker 3: 300 PNGs
+Redraw worker 2: 300 PNGs
+Redraw worker 5: 300 PNGs
+Redraw worker 7: 300 PNGs
+Redraw worker 0: 400 PNGs
+Redraw worker 7: 400 PNGs
+Redraw worker 2: 400 PNGs
+Redraw worker 1: 400 PNGs
+Redraw worker 4: 400 PNGs
+Redraw worker 3: 400 PNGs
+Redraw worker 5: 400 PNGs
+Redraw worker 7: 500 PNGs
+Redraw worker 6: 300 PNGs
+Redraw worker 0: 500 PNGs
+Redraw worker 2: 500 PNGs
+Redraw worker 1: 500 PNGs
+Redraw worker 4: 500 PNGs
+Redraw worker 3: 500 PNGs
+Redraw worker 5: 500 PNGs
+Redraw worker 7: 600 PNGs
+Redraw worker 6: 400 PNGs
+Redraw worker 0: 600 PNGs
+Redraw worker 2: 600 PNGs
+Redraw worker 1: 600 PNGs
+Redraw worker 4: 600 PNGs
+Redraw worker 3: 600 PNGs
+Redraw worker 5: 600 PNGs
+Redraw worker 6: 500 PNGs
+Redraw worker 0: 700 PNGs
+Redraw worker 1: 700 PNGs
+Redraw worker 5: 700 PNGs
+Redraw worker 2: 700 PNGs
+Redraw worker 4: 700 PNGs
+Redraw worker 3: 700 PNGs
+Redraw worker 5: 800 PNGs
+Redraw worker 6: 600 PNGs
+Redraw worker 0: 800 PNGs
+Redraw worker 1: 800 PNGs
+Redraw worker 7: 700 PNGs
+Redraw worker 4: 800 PNGs
+Redraw worker 3: 800 PNGs
+Redraw worker 5: 900 PNGs
+Redraw worker 6: 700 PNGs
+Redraw worker 1: 900 PNGs
+Redraw worker 0: 900 PNGs
+Redraw worker 4: 900 PNGs
+Redraw worker 7: 800 PNGs
+Redraw worker 5: 1000 PNGs
+Redraw worker 3: 900 PNGs
+Redraw worker 6: 800 PNGs
+Redraw worker 2: 800 PNGs
+Redraw worker 1: 1000 PNGs
+Redraw worker 0: 1000 PNGs
+Redraw worker 4: 1000 PNGs
+Redraw worker 7: 900 PNGs
+Redraw worker 5: 1100 PNGs
+Redraw worker 3: 1000 PNGs
+Redraw worker 6: 900 PNGs
+Redraw worker 2: 900 PNGs
+Redraw worker 1: 1100 PNGs
+Redraw worker 4: 1100 PNGs
+Redraw worker 6: 1000 PNGs
+Redraw worker 7: 1000 PNGs
+Redraw worker 5: 1200 PNGs
+Redraw worker 3: 1100 PNGs
+Redraw worker 1: 1200 PNGs
+Redraw worker 2: 1000 PNGs
+Redraw worker 6: 1100 PNGs
+Redraw worker 4: 1200 PNGs
+Redraw worker 7: 1100 PNGs
+Redraw worker 5: 1300 PNGs
+Redraw worker 3: 1200 PNGs
+Redraw worker 0: 1100 PNGs
+Redraw worker 1: 1300 PNGs
+Redraw worker 2: 1100 PNGs
+Redraw worker 6: 1200 PNGs
+Redraw worker 4: 1300 PNGs
+Redraw worker 7: 1200 PNGs
+Redraw worker 5: 1400 PNGs
+Redraw worker 3: 1300 PNGs
+Redraw worker 0: 1200 PNGs
+Redraw worker 1: 1400 PNGs
+Redraw worker 2: 1200 PNGs
+Redraw worker 6: 1300 PNGs
+Redraw worker 4: 1400 PNGs
+Redraw worker 7: 1300 PNGs
+Redraw worker 0: 1300 PNGs
+Redraw worker 5: 1500 PNGs
+Redraw worker 3: 1400 PNGs
+Redraw worker 6: 1400 PNGs
+Redraw worker 2: 1300 PNGs
+Redraw worker 0: 1400 PNGs
+Redraw worker 7: 1400 PNGs
+Redraw worker 4: 1500 PNGs
+Redraw worker 3: 1500 PNGs
+Redraw worker 5: 1600 PNGs
+Redraw worker 6: 1500 PNGs
+Redraw worker 2: 1400 PNGs
+Redraw worker 1: 1500 PNGs
+Redraw worker 0: 1500 PNGs
+Redraw worker 7: 1500 PNGs
+Redraw worker 4: 1600 PNGs
+Redraw worker 3: 1600 PNGs
+Redraw worker 5: 1700 PNGs
+Redraw worker 6: 1600 PNGs
+Redraw worker 2: 1500 PNGs
+Redraw worker 1: 1600 PNGs
+Redraw worker 0: 1600 PNGs
+Redraw worker 7: 1600 PNGs
+Redraw worker 4: 1700 PNGs
+Redraw worker 3: 1700 PNGs
+Redraw worker 5: 1800 PNGs
+Redraw worker 2: 1600 PNGs
+Redraw worker 0: 1700 PNGs
+Redraw worker 1: 1700 PNGs
+Redraw worker 7: 1700 PNGs
+Redraw worker 4: 1800 PNGs
+Redraw worker 3: 1800 PNGs
+Redraw worker 5: 1900 PNGs
+Redraw worker 0: 1800 PNGs
+Redraw worker 2: 1700 PNGs
+Redraw worker 1: 1800 PNGs
+Redraw worker 7: 1800 PNGs
+Redraw worker 3: 1900 PNGs
+Redraw worker 6: 1700 PNGs
+Redraw worker 4: 1900 PNGs
+Redraw worker 5: 2000 PNGs
+Redraw worker 7: 1900 PNGs
+Redraw worker 2: 1800 PNGs
+Redraw worker 1: 1900 PNGs
+Redraw worker 3: 2000 PNGs
+Redraw worker 3 complete: 2043 PNGs
+Redraw worker 6: 1800 PNGs
+Redraw worker 4: 2000 PNGs
+Redraw worker 5 complete: 2082 PNGs
+Redraw worker 7: 2000 PNGs
+Redraw worker 0: 1900 PNGs
+Redraw worker 2: 1900 PNGs
+Redraw worker 1: 2000 PNGs
+Redraw worker 6: 1900 PNGs
+Redraw worker 4: 2100 PNGs
+Redraw worker 4 complete: 2103 PNGs
+Redraw worker 0: 2000 PNGs
+Redraw worker 1 complete: 2082 PNGs
+Redraw worker 7: 2100 PNGs
+Redraw worker 7 complete: 2100 PNGs
+Redraw worker 2: 2000 PNGs
+Redraw worker 6: 2000 PNGs
+Redraw worker 0: 2100 PNGs
+Redraw worker 0 complete: 2104 PNGs
+Redraw worker 2 complete: 2091 PNGs
+Redraw worker 6 complete: 2094 PNGs
+PNG redraw complete; saved ROOT and fit tables were read-only
+2026-10-12T15:56:52+09:00
+Plots updated from saved histograms and fits; input checksums unchanged.
+Verified all 16699 PNGs at 2250x1500 pixels: channel_map=1, mean_profiles=5566, profiles=5566, response=5566

@@ -1,0 +1,9 @@
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/joint_response/digitization/5GeV/joint_response.png has been created
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/joint_response/digitization/20GeV/joint_response.png has been created
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/joint_response/digitization/100GeV/joint_response.png has been created
+5 GeV joint summary: 937 fixed original selected slots
+20 GeV joint summary: 910 fixed original selected slots
+100 GeV joint summary: 1516 fixed original selected slots
+5 GeV common-hit ADC controls complete
+20 GeV common-hit ADC controls complete
+100 GeV common-hit ADC controls complete

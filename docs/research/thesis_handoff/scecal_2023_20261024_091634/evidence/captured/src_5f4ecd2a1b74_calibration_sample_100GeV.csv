@@ -1,0 +1,5 @@
+sample,path,entries_sampled,cog5_pass,temp_median,central_E_median_cog5,central_N_median_cog5,central_HGLG_delta_median
+data,/megraid01/users/data_beamtest/ECAL_data/analysed/2023/sps/calib/e-/100GeV/ECAL_Run105_20230430_081224.root,2000,174,22.863035201437274,4140.87512442546,200.0,0.04239616563779558
+data,/megraid01/users/data_beamtest/ECAL_data/analysed/2023/sps/calib/e-/100GeV/ECAL_Run106_20230430_093819.root,2000,162,22.921131458601938,4117.66192371254,201.0,-0.010084964035795618
+data,/megraid01/users/data_beamtest/ECAL_data/analysed/2023/sps/calib/e-/100GeV/ECAL_Run107_20230430_111425.root,2000,164,23.08765553885368,4092.2264045123643,200.0,-0.005651232359138225
+mc,/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/sps/threshold/100GeV/e-_100GeV_0.root,1000,110,20.0,3583.89364740826,200.0,0.8449638553482246

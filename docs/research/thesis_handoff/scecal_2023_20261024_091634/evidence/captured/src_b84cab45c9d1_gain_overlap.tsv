@@ -1,0 +1,4 @@
+energy_GeV	common_channels	data_EL_minus_EH_MeV	mc_EL_minus_EH_MeV	data_HG4000_hits	mc_HG4000_hits	data_LG3000_hits	mc_LG3000_hits
+5	164	0.353981	-0.000797832	0	15654	0	0
+20	338	0.252486	-0.000495661	0	67548	0	0
+100	1213	-0.00374517	8.61564e-05	0	406948	0	0

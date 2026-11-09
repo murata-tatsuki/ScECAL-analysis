@@ -1,0 +1,4 @@
+energy_GeV	selection	paired_slots	old_selected	new_selected	both_selected	old_only_selected	new_only_selected
+100	all_paired_sampled_events	2000	2000	2000	2000	0	0
+100	frozen_old_cog20	2000	1516	1523	1510	6	13
+100	frozen_old_cog20_energy_window	2000	1516	1523	1510	6	13

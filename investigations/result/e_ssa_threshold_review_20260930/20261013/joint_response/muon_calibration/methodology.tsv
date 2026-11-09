@@ -1,0 +1,8 @@
+quantity	definition
+muon	COMPLETE default/threshold_MPVwoCT;data temperature_adc unmatched3sigma;old/new DATA fittedMPV/statusequal;checkedchannels=6300. Existing fit bounds shared with MC;future data-onlyfit may shift some MPVs.
+selection	DATA-only accepted channel:statusok,2/3/4sigma allvalidandstable<3%,MPVrelativeerror<=5%,fit-effectivehits>=100;maskedexcluded;NO MC-fit requirement. 100GeV is moduleconfiguration, muon/cosmic data not electronMIP.
+recalibration	MIPnew=MIPold*dataMuonMPV_over_MIP;Enew=Eold/dataMuonMPV_over_MIP on accepted channels;othersunchanged;HGandLGsame scaling. NO MC lightyield/digitizationupdate;bothsameADCdiagnostic NOTselfconsistentproduction.
+cohort	OriginalelectronCoG20/windowanddataLGtailveto;CTMC2files,originalthresholdselectionfrozen;exactpositivegoodhitlistunchanged. ADCandhitcount unchanged byconstruction.
+uncertainty	400paired100entryblockresampleswithinfixedfiles;MC2filesonly;q16/q84omit muonfit/coefficientuncertaintyandfile-levelsystematics.
+position	OriginalshowerCoG9x/10y;5blockfoldheldoutquadratic regression andprofiles:association only, not independentincidentposition/leakage.
+muon_width	Three-sample qualifiedstablechannels only. Gaussian convolutionwidthNOTelectronicsnoise. Squaredrelativewidthratio isphoto-statnuisance benchmarkNOTmeasuredgain/CT.

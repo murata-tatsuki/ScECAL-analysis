@@ -1,0 +1,12 @@
+5 GeV data: 8000 sampled, cog shower=2796
+5 GeV MC: 6000 sampled, cog shower=2870
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/e_ssa_threshold_review_20260930/result/5GeV/calibrated/good_energy/figures/event_energy.png has been created
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/e_ssa_threshold_review_20260930/result/5GeV/calibrated/good_energy/figures/event_energy_change.png has been created
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/e_ssa_threshold_review_20260930/result/5GeV/calibrated/good_energy/figures/event_energy_full_range.png has been created
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/e_ssa_threshold_review_20260930/result/5GeV/calibrated/good_energy/figures/event_energy_change_full_range.png has been created
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/e_ssa_threshold_review_20260930/result/5GeV/calibrated/central_energy/figures/event_energy.png has been created
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/e_ssa_threshold_review_20260930/result/5GeV/calibrated/central_energy/figures/event_energy_change.png has been created
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/e_ssa_threshold_review_20260930/result/5GeV/calibrated/central_energy/figures/event_energy_full_range.png has been created
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/e_ssa_threshold_review_20260930/result/5GeV/calibrated/central_energy/figures/event_energy_change_full_range.png has been created
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/e_ssa_threshold_review_20260930/result/5GeV/calibrated/figures/energy_at_fixed_nhit.png has been created
+Validated signed and zero-intercept totals; max error=0, 1.11022e-16

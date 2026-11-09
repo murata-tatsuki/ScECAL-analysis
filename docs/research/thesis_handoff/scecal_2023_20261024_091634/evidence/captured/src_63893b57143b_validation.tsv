@@ -1,0 +1,4 @@
+sample	crossings	eligible_HG	calibration_max_error_MeV	data_duplicate_collection_equal
+data	22666	14480	1.77635683940025e-15	1
+mc_old_threshold	519460	436922	8.881784197001252e-16	1
+mc_new_threshold_MPVwoCT	517925	415440	8.881784197001252e-16	1

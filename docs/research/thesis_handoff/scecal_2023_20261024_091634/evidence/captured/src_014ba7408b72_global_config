@@ -1,0 +1,118 @@
+#! /bin/bash
+work_dir='/megraid01/users/data_beamtest/analysis/backup/ECAL_Analysis_simulation'
+data_dir='/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC'
+
+work_dir='/megraid01/users/data_beamtest/analysis/ECAL_Analysis_LCIO'
+
+# dat_dir='/megraid01/users/data_beamtest/ECAL_data/data'
+# dat_dir='/home/murata_t/data_beamtest/simulation/CEPCScECAL_SML_Portable_update/Result_MC/decode'
+
+bin_dir="${work_dir}/bin"
+# raw_dir="${dat_dir}"
+factor_dir="/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Analysis/share"
+
+#date_tag=pi+   ######<<< CHANGE HERE into today's date ######
+#date_tag=mu+   ######<<< CHANGE HERE into today's date ######
+#date_tag=e+    ######<<< CHANGE HERE into today's date ######
+#date_tag=LEDCalib/20221031_2214_Calib
+
+#date_tag=pi-   ######<<< CHANGE HERE into today's date ######
+#date_tag=mu-   ######<<< CHANGE HERE into today's date ######
+# date_tag=e-    ######<<< CHANGE HERE into today's date ######
+# date_tag=e-_new
+# date_tag=mu-_new_edit
+#date_tag=LEDCali    ######<<< CHANGE HERE into today's date ######
+#date_tag=pedestal
+date_tag="e-/threScan"
+date_tag="e-/sps"
+# date_tag="e-/sps_beam"
+
+date_tag="mu-/mu_track/threshold"
+# date_tag="mu-/mu_track/threshold_MPVwoCT"
+# date_tag="mu-/mu_track_slope_2_14/threshold"
+# date_tag="mu-/mu_track_slope_2_14/threshold_MPVwoCT"
+date_tag="mu-/mu_track_slope_4s6_14/threshold_MPVwoCT"
+
+# date_tag="e-/e_ssa/threshold"
+
+# date_tag="e-/beam_scan/point"
+# date_tag="e-/beam_scan/point_noTriggerSci"
+
+energy=100GeV
+# energy=all
+
+#year=2022
+# year=2023
+
+#beam=sps
+# beam=ps
+
+# angle=angle0
+
+#----- Do not change -----
+# raw_path=${raw_dir}/${year}/${beam}/${date_tag}/${energy}
+decode_path=${data_dir}/decode/${date_tag}/${energy}
+# decode_path=${data_dir}/decode/${date_tag}/${energy}/${angle}
+
+##############for LED data
+#LEDData=20230524_1118_Calib
+#raw_path='/megraid01/users/data_beamtest/ECAL_data/data/2023/sps/LEDCali/'${LEDData}
+#raw_path='/megraid01/users/data_beamtest/ECAL_data/data/2023/ps/lightCalibData/'${LEDData}
+#decode_path=${data_dir}/${year}/${beam}/decode/LEDCali/${LEDData}
+##############
+
+# ped_fit=${data_dir}/${year}/${beam}/ped/fit/${date_tag}/${energy}
+# ped_hist=${data_dir}/${year}/${beam}/ped/hist/${date_tag}/${energy}
+
+# simpleCalib_path=${data_dir}/${year}/${beam}/simpleCalib/${date_tag}/${energy}
+
+# mip_fit=${data_dir}/${year}/${beam}/mip/fit/${date_tag}/${energy}
+# mip_hist=${data_dir}/${year}/${beam}/mip/hist/${date_tag}/${energy}
+
+# temperature_ped_fit=${data_dir}/${year}/${beam}/temperature/ped/fit/${date_tag}/${energy}
+# temperature_ped_hist=${data_dir}/${year}/${beam}/temperature/ped/hist/${date_tag}/${energy}
+
+############## calibration factors measured at simulation
+pede_factor="${factor_dir}/pedestal2023_SPS.root"
+inter_factor="${factor_dir}/all_hl_electron2023_hlratio_v3.root"
+mip_factor="${factor_dir}/all_auto_muon_v4_trackfit.root"
+##############
+
+calib_path="${data_dir}/calib/${date_tag}/${energy}"
+# calib_path="${data_dir}/calib/${date_tag}/${energy}/${angle}"
+# calib_path="${data_dir}/${year}/${beam}/calib/${date_tag}/${energy}"
+# calib_path="${data_dir}/${year}/${beam}/calib_original/${date_tag}/${energy}"
+# temp_subped_path="${data_dir}/${year}/${beam}/temp_subped/${date_tag}/${energy}"
+#add temperature and subtracted pedestal
+
+simpleCalib_path=${data_dir}/simpleCalib/${date_tag}/${energy}
+
+# stripSprit_path="${data_dir}/ssa/${date_tag}/${energy}"
+stripSprit_path="${data_dir}/ssaCalib/${date_tag}/${energy}"
+calibStripSprit_path="${data_dir}/ssaCalib/${date_tag}/${energy}"
+
+trackFit_path=${data_dir}/trackFit/${date_tag}/${energy}
+trackFit_path3D=${data_dir}/trackFit3D/${date_tag}/${energy}
+
+# trackFit_path=${data_dir}/${year}/${beam}/trackFit/${date_tag}/${energy}
+# trackFit_path3D=${data_dir}/${year}/${beam}/trackFit3D/${date_tag}/${energy}
+
+log_dir="${data_dir}/log/${date_tag}/${energy}"
+
+
+############ for edited calibration (must change src/calibration)
+#pede_factor="/megraid01/users/data_beamtest/ECAL_data/analysed/2023/ps/ped/fit/pedestal/ECAL_Run23_20230518_153022.root"
+# pede_factor="${factor_dir}/pedestal2023_SPS.root"
+# #inter_factor="${factor_dir}/hlratio_merge7files.root"
+# inter_factor="${factor_dir}/all_hl_electron2023_hlratio_v3.root"
+# mip_factor="${factor_dir}/compare_MIP.root"
+#calib_path="/megraid01/users/murata_t/scecal/ScECAL_BeamTest/results/${year}/${beam}/calib/${date_tag}/${energy}"
+# calib_path="${data_dir}/${year}/${beam}/calib1/${date_tag}/${energy}"
+# calib_path="${data_dir}/${year}/${beam}/calib2/${date_tag}/${energy}"
+# calib_path="${data_dir}/${year}/${beam}/calib3/${date_tag}/${energy}"
+
+
+factor_dir="/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Analysis_edit/share"
+pede_factor="${factor_dir}/pedestal2023_SPS.root"
+inter_factor="${factor_dir}/all_hl_electron2023_hlratio_v3.root"
+mip_factor="${factor_dir}/all_auto_muon_v4_trackfit.root"

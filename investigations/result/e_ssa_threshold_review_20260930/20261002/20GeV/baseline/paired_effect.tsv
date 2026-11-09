@@ -1,0 +1,2 @@
+events	mean_delta_GeV	sem_delta_GeV	rms_delta_GeV	mean_event_relative_delta	mean_relative_events	lg_hits	validated_mc_hits	max_baseline_error_MeV
+6000	-0.0217907937564	0.000129174425652	0.010004974134	-0.0260979946721	6000	200889	2009291	5.68434188608e-14

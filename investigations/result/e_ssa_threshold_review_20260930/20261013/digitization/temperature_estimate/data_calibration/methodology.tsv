@@ -1,0 +1,6 @@
+quantity	definition
+selection	Original good nonnegative calibrated hit set and original CoG20/energy-window/data-tail-veto event set frozen;gainselectionrawHG2600 heldfixed;inversecorrectionsapplytoHG-equivalentsignalincludingLGoffset, while currentbaselinekeepsexistingplacement;newnegativevaluesremain in same-hit sum andcounted.
+models	Gainratio1-alphaDeltaT,alpha10=1.6/135,alpha15=3.5/230;Uratio1-.06DeltaT/U20,U20=4.5/4V;CTp=p0Uratio^2,p0=.1/.15;PDEconstantorlinearUratio sensitivities,NOTmeasuredparameterfit.
+correction	CurrentC=1-alphaDeltaT;gaininverseC=1/(1-alphaDeltaT);fullresponseinverseC=1/[gainratio*(1-p0)/(1-p(T))*PDEratio]. Lowoccupancymeanmodel;notvalidsaturationcorrectionforallhits.
+uncertainty	400paired100-entry-blockdrawsstratifiedwithinexistingdatafiles;40Gaussianfitdraws;16-84percentileintervals,notmodelsystematics.
+MC	Thisstagechangesdataonly;comparewithpairedpilotMCthermal study separately. No originaldata/MC ROOTs overwritten.

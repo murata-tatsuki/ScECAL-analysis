@@ -1,0 +1,1 @@
+../../docs/research/hg-lg-tail.md

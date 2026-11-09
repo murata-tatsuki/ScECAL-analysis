@@ -1,0 +1,16 @@
+metric	data	mc	definition
+common_channels	1278	1278	positive MIP, common good mask, raw HG 800-2200, at least 100 hits/sample/channel
+overlap_hits	1002694	1277475	common channel set
+tail5sigma_hits	6666	1	common channel set
+positive_tail_hits	43	1	common channel set
+negative_tail_hits	6623	0	common channel set
+matched_weight_tail_fraction	0.00656299788026	1.1432268951e-06	channel weight=min(data hits,MC hits); tail relative to channel/sample median
+central68_sigma_LG_ADC	2.72900625087	2.53243160597	median across same channels, ADC
+RMS_LG_ADC	3.50431826278	2.55641814018	median across same channels, ADC
+core3sigma_RMS	2.6748847211	2.51357260415	median across same channels, ADC
+core_ped_HG_mean	1.78684302853	nan	data HitTag=0 with both ADC within 5 pedestal sigma; median over 4157 channels, not an unbiased pedestal refit
+core_ped_LG_mean	4.48583075341	nan	data HitTag=0 with both ADC within 5 pedestal sigma; median over 4157 channels, not an unbiased pedestal refit
+core_ped_HG_sigma	4.63365973755	nan	data HitTag=0 with both ADC within 5 pedestal sigma; median over 4157 channels, not an unbiased pedestal refit
+core_ped_LG_sigma	2.50152370415	nan	data HitTag=0 with both ADC within 5 pedestal sigma; median over 4157 channels, not an unbiased pedestal refit
+calib_digi_HL_slope_mismatch_channels	nan	73	all connected channels
+configured_HG_switch_below2600_channels	nan	2531	all connected channels; configuration alone does not prove a populated effect

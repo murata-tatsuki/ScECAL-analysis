@@ -1,0 +1,6 @@
+sample	file_index	entries_total	entries_sampled	path
+data	0	3192	3192	/net/megsrv01/export/megraid01/users/data_beamtest/ECAL_data/analysed/2023/ps/calib/e-/5GeV/ECAL_Run63_20230522_162547.root
+data	1	5519	5519	/net/megsrv01/export/megraid01/users/data_beamtest/ECAL_data/analysed/2023/ps/calib/e-/5GeV/ECAL_Run64_20230522_175643.root
+data	2	8218	8218	/net/megsrv01/export/megraid01/users/data_beamtest/ECAL_data/analysed/2023/ps/calib/e-/5GeV/ECAL_Run75_20230523_191602.root
+data	3	9016	9016	/net/megsrv01/export/megraid01/users/data_beamtest/ECAL_data/analysed/2023/ps/calib/e-/5GeV/ECAL_Run76_20230523_213529.root
+mc	0	100000	20000	/net/megsrv01/export/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/sps/threshold/5GeV/e-_5GeV_0.root

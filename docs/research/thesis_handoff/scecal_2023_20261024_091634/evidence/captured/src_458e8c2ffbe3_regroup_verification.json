@@ -1,0 +1,13 @@
+{
+  "raw_inputs": 1884,
+  "analysis_units": 220,
+  "completed_by_kind": {
+    "led": 128,
+    "electron": 43,
+    "muon": 49
+  },
+  "collection_checksums_verified": true,
+  "non_led_root_bytes_identical": true,
+  "fit_tasks_with_4_methods_4_parts": 3520,
+  "fit_jobs_submitted": false
+}

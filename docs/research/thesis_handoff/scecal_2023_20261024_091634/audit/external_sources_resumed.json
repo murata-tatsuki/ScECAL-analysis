@@ -1,0 +1,66 @@
+[
+  {
+    "url": "https://arxiv.org/pdf/2002.01809v2",
+    "retrieved_at": "2026-10-24T09:16:15.734868+00:00",
+    "http_status": 200,
+    "content_type": "application/pdf",
+    "archive_path": "assets/literature/design_2020.pdf",
+    "availability": "copied",
+    "size": 7476255,
+    "sha256": "c33731306a096f8b6f3c19d2e958f797b8ddc752547082c8c4fca1ff5ca9cc84"
+  },
+  {
+    "url": "https://indico.tlabs.ac.za/event/112/contributions/2961/attachments/1161/1577/2023_0906_CERN_Beamtests_CALICE_ScCalo_Prototypes.pdf",
+    "retrieved_at": "2026-10-24T09:31:09.967331+00:00",
+    "availability": "unavailable",
+    "error": "('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))"
+  },
+  {
+    "url": "https://indico.cern.ch/event/1531732/contributions/6448349/attachments/3042846/5375711/DRD_ScWECAL20250401WO.pdf",
+    "retrieved_at": "2026-10-24T09:31:32.885272+00:00",
+    "http_status": 200,
+    "content_type": "application/pdf; charset=utf-8",
+    "archive_path": "assets/literature/ootani_2025.pdf",
+    "availability": "copied",
+    "size": 4366991,
+    "sha256": "def9e023bd3d5ebb975b91929b9fe8bf86afbb38030793675d782010b4d70b4d"
+  },
+  {
+    "url": "https://indico.cern.ch/event/1339557/contributions/5898550/attachments/2859747/5003008/calor2024TatsukiMurata.pdf",
+    "retrieved_at": "2026-10-24T09:40:37.132958+00:00",
+    "retrieval_note": "existing prior copy retained",
+    "archive_path": "assets/literature/murata_calor2024.pdf",
+    "availability": "copied",
+    "size": 5906241,
+    "sha256": "6f19b3685f3c97488a215de747df281f027136b6f8749543fd8b8b71beba2a6a"
+  },
+  {
+    "url": "https://agenda.linearcollider.org/event/10229/contributions/53761/attachments/39257/61905/ILC-Japan_murata.pdf",
+    "retrieved_at": "2026-10-24T09:41:10.049284+00:00",
+    "http_status": 200,
+    "content_type": "application/pdf; charset=utf-8",
+    "archive_path": "assets/literature/murata_ilcjapan.pdf",
+    "availability": "copied",
+    "size": 5589845,
+    "sha256": "9c88a3d53ff79e69b3cdbb9467c0f499f932f9e0ec1365144d240d7004fdf9a8"
+  },
+  {
+    "url": "https://agenda.linearcollider.org/event/10098/contributions/53294/attachments/39113/61631/BeamTest-20230928.pdf",
+    "retrieved_at": "2026-10-24T09:59:06.562020+00:00",
+    "http_status": 200,
+    "content_type": "application/pdf; charset=utf-8",
+    "archive_path": "assets/literature/calice_beamtest2023.pdf",
+    "availability": "copied",
+    "size": 3568480,
+    "sha256": "4771efe9aa16c757ebe711ecb7d53520a957155cb8d32a44f2acf878f3697004"
+  },
+  {
+    "url": "https://indico.ihep.ac.cn/event/22295/contributions/155135/attachments/77354/95987/2024_0416_CEPC_Calorimeters_Overview.pdf",
+    "retrieved_at": "2026-10-24T10:07:19.777033+00:00",
+    "retrieval_note": "existing prior copy retained",
+    "archive_path": "assets/literature/liu_2024_overview.pdf",
+    "availability": "copied",
+    "size": 19630412,
+    "sha256": "de14ae2ee0483d5fe6997e5e0908d73f7c01c940dda3b3c24da0af0e5a1be26a"
+  }
+]

@@ -1,0 +1,15 @@
+RawADCReview investigations/result/e_ssa_threshold_review_20260930/20261013 investigations/result/e_ssa_threshold_review_20260930/20261013/raw_adc all
+MC: e_ssa/threshold; data: production low-LG tail exclusion from fresh selected table
+CoG: both x,y of layers9,10 within20mm; fixed selected identities; energy_window uses all connected nonnegative energy and parent MC reference
+Channel distributions: cog20_energy_window, unmasked connected raw HitTag1; HG20C rawHG<2600; LG20C all raw HitTag1; saved energy and adopted ADC nonnegative only
+Temperature factor C=1-(T-20)*(1.6/135 inner10um,3.5/230 outer15um); adopted ADC=C*(HG-pedHG) or C*ratio*(LG-pedLG)+HGintercept
+Common channels require >=100 eligible hits in both samples, each weighted to min(data hits,MC hits); shower ADC mode is descriptive, not a MIP fit
+Occupancy/missing is conditional on the selected triggered event cohort, not unconditional detection efficiency
+Group mean MIP diagnostic uses the same recorded hits, multiplying saved energy by MIPchannel/groupMeanMIP. This removes response calibration weights and is not a production calibration fix
+Bootstrap:300 resamples of whole file x 10 acquisition blocks; correlated within events, run differences retained; large-gap changes can reflect changed channel mix
+Threshold/cap-hit deletion diagnostics retain original event selection and do not rerun reconstruction; cap deletion removes legitimate signal and is a bound, not a correction
+5GeV: data events cog20=3073, window=2733; MC cog20=2825, window=2825; all closure checks passed
+20GeV: data events cog20=1784, window=1756; MC cog20=2740, window=2740; all closure checks passed
+100GeV: data events cog20=5048, window=4999; MC cog20=4541, window=4541; all closure checks passed
+Input before/after fingerprints stable. No ROOT recovery, raw/calib/event identity or calibration closure failures. Complete.
+ADC vector clarification: calibration-retained HitTag1 hits; rawTag1 occupancy counters additionally include the tiny C*(HG-pedHG)<10 ADC SP2E-guard subset. PNG labels repainted from saved ROOT only; all scientific ROOT/TSV SHA-256 hashes verified unchanged (inputs/repaint_validation.log).

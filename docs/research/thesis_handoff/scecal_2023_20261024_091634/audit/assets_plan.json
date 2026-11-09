@@ -1,0 +1,231 @@
+[
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/resolution/figures/comparsion/dataThre/resolution.png",
+    "copy_to": "assets/results/resolution.png",
+    "max_size": 15000000
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/resolution/figures/comparsion/dataThre/resolution_with_noise.png",
+    "copy_to": "assets/results/resolution_with_noise.png",
+    "max_size": 15000000
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/resolution/figures/comparsion/dataThre/summary_100GeV.png",
+    "copy_to": "assets/results/energy100_summary.png",
+    "max_size": 15000000
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/resolution/figures/comparsion/dataThre/summary_5GeV.png",
+    "copy_to": "assets/results/energy5_summary.png",
+    "max_size": 15000000
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/figures/channel_maps.png",
+    "copy_to": "assets/results/all_muons_refit_channel_maps.png",
+    "max_size": 15000000
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/figures/MPV_distributions.png",
+    "copy_to": "assets/results/all_muons_refit_MPV_distributions.png",
+    "max_size": 15000000
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/sipm_gain/full_grouped/comparison/plots/layer_00/channel_0_page1.png",
+    "copy_to": "assets/results/plots_channel_0_page1.png",
+    "max_size": 15000000
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/sipm_gain/full_grouped/comparison/plots/layer_00/channel_0_page2.png",
+    "copy_to": "assets/results/plots_channel_0_page2.png",
+    "max_size": 15000000
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/sipm_gain/full_grouped/comparison/plots/layer_00/channel_0_page3.png",
+    "copy_to": "assets/results/plots_channel_0_page3.png",
+    "max_size": 15000000
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/sipm_gain/full_grouped/comparison/plots/layer_00/channel_0_page4.png",
+    "copy_to": "assets/results/plots_channel_0_page4.png",
+    "max_size": 15000000
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/muon_ct/unmatched_adc.png",
+    "copy_to": "assets/results/20261013_unmatched_adc.png",
+    "max_size": 15000000
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/muon_ct/matched_three_samples_adc.png",
+    "copy_to": "assets/results/20261013_matched_three_samples_adc.png",
+    "max_size": 15000000
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/muon_ct/event_hits_energy.png",
+    "copy_to": "assets/results/20261013_event_hits_energy.png",
+    "max_size": 15000000
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/model_scan/model_scan.png",
+    "copy_to": "assets/results/digitization_model_scan.png",
+    "max_size": 15000000
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/comparison_build.log"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/comparison_run.log"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/summary.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/impact.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/comparison_validation.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/truth_hit_acceptance.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/selection_changes.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/per_file_impact.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/comparison_methodology.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/inputs/ct_digitization_study.sh"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/inputs/source_checksums.txt"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/inputs/manifest.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/inputs/input_stats_before.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/inputs/generation_conditions.txt"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/inputs/jobs.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/inputs/comparison_input_stats_before.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/inputs/comparison_input_sha256_before.txt"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/inputs/reviewer_source_parameter_checksums.txt"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/inputs/comparison_command.sh"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/inputs/comparison_input_stats_after.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/inputs/comparison_input_sha256_after.txt"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/inputs/frozen_production_source_verification.log"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/model_scan/model_summary.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/model_scan/model_impact.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/model_scan/truth_reference.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/model_scan/model_methodology.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/model_scan/adc_controls.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/model_scan/adc_control_coverage.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/model_scan/adc_control_methodology.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/model_scan/inputs/frozen_base_verification.log"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/model_scan/inputs/digitization_model_scan.sh"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/model_scan/inputs/cases.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/model_scan/inputs/manifest.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/model_scan/inputs/source_parameter_checksums.txt"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/model_scan/inputs/model_definitions.txt"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/model_scan/inputs/command.sh"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/model_scan/inputs/jobs.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/model_scan/inputs/source_verification.log"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/model_scan/inputs/comparison_stats_before.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/model_scan/inputs/comparison_sha256_before.txt"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/model_scan/inputs/reviewer_code_checksums.txt"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/model_scan/inputs/review_command.sh"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/model_scan/inputs/comparison_stats_after.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/model_scan/inputs/comparison_sha256_after.txt"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/model_scan/inputs/adc_code_checksums.txt"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/model_scan/inputs/adc_command.sh"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/model_scan/inputs/adc_inputs_before_sha256.txt"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/model_scan/inputs/adc_inputs_after_sha256.txt"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/integrated/inputs/production_resolution_stats.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/integrated/inputs/truth_files.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/integrated/inputs/checksums.txt"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/integrated/inputs/producer_checksums.txt"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/integrated/inputs/analysis_source_checksums.txt"
+  }
+]

@@ -1,0 +1,9 @@
+make: Entering directory '/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/e_ssa_threshold_review_20260930'
+make: 'TruthResponse' is up to date.
+make: 'Sensitivity' is up to date.
+make: Leaving directory '/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/e_ssa_threshold_review_20260930'
+channels=6300 negative_calibration=565 different_digi_vs_calib=2422 calib_fallback=1857 digi_mean_outer=406.656 digi_mean_inner=97.3403
+Truth/decode matched 6000 events
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261002/sensitivity/comparison/20mm/20GeV/figures/event_energy.png has been created
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261002/sensitivity/comparison/20mm/20GeV/figures/layer_response.png has been created
+Sensitivity complete: tail-excluded data=1755 MC=2719

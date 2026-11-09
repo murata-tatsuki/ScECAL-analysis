@@ -1,0 +1,7 @@
+/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/e_ssa_threshold_review_20260930/MuonsCTReview.cc: In function ‘int main(int, char**)’:
+/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/e_ssa_threshold_review_20260930/MuonsCTReview.cc:74:2: warning: this ‘for’ clause does not guard... [-Wmisleading-indentation]
+   74 |  for(auto*f:{&summary,&hits,&fits,&groups,&validation,&events,&truthTable,&methodology})require(bool(*f),"Output write failed");std::cout<<"rows="<<rows[0].size()<<","<<rows[1].size()<<","<<rows[2].size()<<" commonSignalBins="<<signalTarget.size()<<" commonDenominatorBins="<<denTarget.size()<<'\n';return 0;
+      |  ^~~
+/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/e_ssa_threshold_review_20260930/MuonsCTReview.cc:74:129: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘for’
+   74 |  for(auto*f:{&summary,&hits,&fits,&groups,&validation,&events,&truthTable,&methodology})require(bool(*f),"Output write failed");std::cout<<"rows="<<rows[0].size()<<","<<rows[1].size()<<","<<rows[2].size()<<" commonSignalBins="<<signalTarget.size()<<" commonDenominatorBins="<<denTarget.size()<<'\n';return 0;
+      |                                                                                                                                 ^~~

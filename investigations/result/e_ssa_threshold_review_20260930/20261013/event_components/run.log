@@ -1,0 +1,43 @@
+Started: 2026-10-13T03:57:37+09:00
+Command: bash /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/e_ssa_threshold_review_20260930/event_distribution_review.sh 20261013 /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/integrated
+Input: /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/integrated
+Output: /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/event_components
+5 GeV cog20 events 3073/2825, resolution 0.319707/0.0762338
+5 GeV cog20_energy_window events 2733/2825, resolution 0.124471/0.0762338
+20 GeV cog20 events 1784/2740, resolution 0.126359/0.0430572
+20 GeV cog20_energy_window events 1756/2740, resolution 0.0839483/0.0430572
+100 GeV cog20 events 5048/4541, resolution 0.102118/0.0263391
+100 GeV cog20_energy_window events 4999/4541, resolution 0.05019/0.0263391
+Finished: 2026-10-13T03:58:53+09:00
+Refresh started: 2026-10-13T04:02:23+09:00
+Final rendering margins and directed MC-to-data weights; fixed input cohort; same output directory.
+Command: investigations/e_ssa_threshold_review_20260930/EventDistributionReview investigations/result/e_ssa_threshold_review_20260930/20261013/integrated investigations/result/e_ssa_threshold_review_20260930/20261013/event_components
+5 GeV cog20 events 3073/2825, resolution 0.319707/0.0762338
+5 GeV cog20_energy_window events 2733/2825, resolution 0.124471/0.0762338
+20 GeV cog20 events 1784/2740, resolution 0.126359/0.0430572
+20 GeV cog20_energy_window events 1756/2740, resolution 0.0839483/0.0430572
+100 GeV cog20 events 5048/4541, resolution 0.102118/0.0263391
+100 GeV cog20_energy_window events 4999/4541, resolution 0.05019/0.0263391
+Refresh finished: 2026-10-13T04:02:29+09:00
+Final refresh started: 2026-10-13T04:06:38+09:00
+Working directory: /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest
+Integer Nhit bins; weight support/core widths; weighted diagnostic PNGs; fixed source cohort.
+Command: investigations/e_ssa_threshold_review_20260930/EventDistributionReview investigations/result/e_ssa_threshold_review_20260930/20261013/integrated investigations/result/e_ssa_threshold_review_20260930/20261013/event_components
+5 GeV cog20 events 3073/2825, resolution 0.319707/0.0762338
+5 GeV cog20_energy_window events 2733/2825, resolution 0.124471/0.0762338
+20 GeV cog20 events 1784/2740, resolution 0.126359/0.0430572
+20 GeV cog20_energy_window events 1756/2740, resolution 0.0839483/0.0430572
+100 GeV cog20 events 5048/4541, resolution 0.102118/0.0263391
+100 GeV cog20_energy_window events 4999/4541, resolution 0.05019/0.0263391
+Final refresh finished: 2026-10-13T04:07:42+09:00
+Verified refresh started: 2026-10-13T04:08:48+09:00
+Previous auxiliary refresh used the existing binary after a compile error; outputs below are regenerated with the corrected freshly compiled source.
+Working directory: /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest
+Command: investigations/e_ssa_threshold_review_20260930/EventDistributionReview investigations/result/e_ssa_threshold_review_20260930/20261013/integrated investigations/result/e_ssa_threshold_review_20260930/20261013/event_components
+5 GeV cog20 events 3073/2825, resolution 0.319707/0.0762338
+5 GeV cog20_energy_window events 2733/2825, resolution 0.124471/0.0762338
+20 GeV cog20 events 1784/2740, resolution 0.126359/0.0430572
+20 GeV cog20_energy_window events 1756/2740, resolution 0.0839483/0.0430572
+100 GeV cog20 events 5048/4541, resolution 0.102118/0.0263391
+100 GeV cog20_energy_window events 4999/4541, resolution 0.05019/0.0263391
+Verified refresh finished: 2026-10-13T04:09:25+09:00

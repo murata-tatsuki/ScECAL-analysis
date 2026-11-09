@@ -1,0 +1,9 @@
+energy_GeV	sample	file	events	path	identity_equal
+5	CT_input	0	474	/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/mc/ct_input/5GeV/calib/5GeV_0.root	1
+5	CT_input	5	463	/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/mc/ct_input/5GeV/calib/5GeV_99.root	1
+20	CT_input	0	460	/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/mc/ct_input/20GeV/calib/20GeV_0.root	1
+20	CT_input	5	450	/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/mc/ct_input/20GeV/calib/20GeV_99.root	1
+100	CT_input	0	758	/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/mc/ct_input/100GeV/calib/100GeV_0.root	1
+100	CT_input	5	758	/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/mc/ct_input/100GeV/calib/100GeV_99.root	1
+100	norm_pixels19600_threshold10	0	758	/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/joint_response/digitization/mc/norm_pixels19600_threshold10/100GeV/calib/100GeV_0.root	1
+100	norm_pixels19600_threshold10	5	758	/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/joint_response/digitization/mc/norm_pixels19600_threshold10/100GeV/calib/100GeV_99.root	1

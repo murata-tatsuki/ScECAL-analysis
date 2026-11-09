@@ -1,0 +1,16 @@
+2026-10-26T06:36:58.239675+00:00 START build_bundle.py
+output complete manifest.yaml
+output complete results.csv
+output complete runs.csv
+output complete figures.csv
+output complete SOURCES.md
+output complete audit/assembly_counts.json
+assembled 639 sources 4034 results 3400 runs 31 figures
+DONE build_bundle.py
+2026-10-26T07:02:21.534615+00:00 START finish_indices.py
+extended 5871 saved metrics 3400 run usages 31 figures
+DONE finish_indices.py
+2026-10-26T07:27:51.569639+00:00 START polish_bundle.py
+{"results": 5871, "runs": 3400, "figures": 31, "sources": 678, "conditions": 551, "excluded_legacy_metric_rows": 0, "completed_at": "2026-10-26T16:28:36.289830+09:00"}
+DONE polish_bundle.py
+Preparation complete; log closed before checksumming and archiving.

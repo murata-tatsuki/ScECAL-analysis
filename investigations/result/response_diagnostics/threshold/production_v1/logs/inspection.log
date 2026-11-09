@@ -1,0 +1,85 @@
+0.5 GeV data: 4000 sampled, cog shower=69
+0.5 GeV MC: 200 sampled, cog shower=40
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/0.5GeV/good_energy/figures/event_energy.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/0.5GeV/good_energy/figures/event_energy_change.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/0.5GeV/good_energy/figures/event_energy_full_range.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/0.5GeV/good_energy/figures/event_energy_change_full_range.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/0.5GeV/central_energy/figures/event_energy.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/0.5GeV/central_energy/figures/event_energy_change.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/0.5GeV/central_energy/figures/event_energy_full_range.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/0.5GeV/central_energy/figures/event_energy_change_full_range.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/0.5GeV/figures/energy_at_fixed_nhit.png has been created
+Validated signed and zero-intercept totals; max error=0, 3.46945e-18
+1 GeV data: 4000 sampled, cog shower=117
+1 GeV MC: 200 sampled, cog shower=99
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/1GeV/good_energy/figures/event_energy.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/1GeV/good_energy/figures/event_energy_change.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/1GeV/good_energy/figures/event_energy_full_range.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/1GeV/good_energy/figures/event_energy_change_full_range.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/1GeV/central_energy/figures/event_energy.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/1GeV/central_energy/figures/event_energy_change.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/1GeV/central_energy/figures/event_energy_full_range.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/1GeV/central_energy/figures/event_energy_change_full_range.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/1GeV/figures/energy_at_fixed_nhit.png has been created
+Validated signed and zero-intercept totals; max error=0, 6.93889e-18
+5 GeV data: 8000 sampled, cog shower=2793
+5 GeV MC: 200 sampled, cog shower=153
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/5GeV/good_energy/figures/event_energy.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/5GeV/good_energy/figures/event_energy_change.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/5GeV/good_energy/figures/event_energy_full_range.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/5GeV/good_energy/figures/event_energy_change_full_range.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/5GeV/central_energy/figures/event_energy.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/5GeV/central_energy/figures/event_energy_change.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/5GeV/central_energy/figures/event_energy_full_range.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/5GeV/central_energy/figures/event_energy_change_full_range.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/5GeV/figures/energy_at_fixed_nhit.png has been created
+Validated signed and zero-intercept totals; max error=0, 5.55112e-17
+30 GeV data: 4000 sampled, cog shower=2724
+30 GeV MC: 20000 sampled, cog shower=16760
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/30GeV/good_energy/figures/event_energy.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/30GeV/good_energy/figures/event_energy_change.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/30GeV/good_energy/figures/event_energy_full_range.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/30GeV/good_energy/figures/event_energy_change_full_range.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/30GeV/central_energy/figures/event_energy.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/30GeV/central_energy/figures/event_energy_change.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/30GeV/central_energy/figures/event_energy_full_range.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/30GeV/central_energy/figures/event_energy_change_full_range.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/30GeV/figures/energy_at_fixed_nhit.png has been created
+Validated signed and zero-intercept totals; max error=0, 6.66134e-16
+100 GeV data: 6000 sampled, cog shower=5118
+100 GeV MC: 20000 sampled, cog shower=16844
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/100GeV/good_energy/figures/event_energy.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/100GeV/good_energy/figures/event_energy_change.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/100GeV/good_energy/figures/event_energy_full_range.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/100GeV/good_energy/figures/event_energy_change_full_range.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/100GeV/central_energy/figures/event_energy.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/100GeV/central_energy/figures/event_energy_change.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/100GeV/central_energy/figures/event_energy_full_range.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/100GeV/central_energy/figures/event_energy_change_full_range.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/100GeV/figures/energy_at_fixed_nhit.png has been created
+Validated signed and zero-intercept totals; max error=0, 1.77636e-15
+200 GeV data: 4000 sampled, cog shower=1426
+200 GeV MC: 20000 sampled, cog shower=16741
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/200GeV/good_energy/figures/event_energy.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/200GeV/good_energy/figures/event_energy_change.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/200GeV/good_energy/figures/event_energy_full_range.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/200GeV/good_energy/figures/event_energy_change_full_range.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/200GeV/central_energy/figures/event_energy.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/200GeV/central_energy/figures/event_energy_change.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/200GeV/central_energy/figures/event_energy_full_range.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/200GeV/central_energy/figures/event_energy_change_full_range.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/200GeV/figures/energy_at_fixed_nhit.png has been created
+Validated signed and zero-intercept totals; max error=0, 3.55271e-15
+250 GeV data: 4000 sampled, cog shower=3394
+250 GeV MC: 20000 sampled, cog shower=16837
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/250GeV/good_energy/figures/event_energy.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/250GeV/good_energy/figures/event_energy_change.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/250GeV/good_energy/figures/event_energy_full_range.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/250GeV/good_energy/figures/event_energy_change_full_range.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/250GeV/central_energy/figures/event_energy.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/250GeV/central_energy/figures/event_energy_change.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/250GeV/central_energy/figures/event_energy_full_range.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/250GeV/central_energy/figures/event_energy_change_full_range.png has been created
+Info in <TCanvas::Print>: png file /home/murata_t/impact_response_investigation_work/result/250GeV/figures/energy_at_fixed_nhit.png has been created
+Validated signed and zero-intercept totals; max error=0, 3.55271e-15
+inspect.sh: line 13: unexpected EOF while looking for matching `"'

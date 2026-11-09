@@ -1,0 +1,752 @@
+[
+  {
+    "path": "/home/murata_t/scecal_reassessment_20260929/read_saved_results.py"
+  },
+  {
+    "path": "/home/murata_t/scecal_reassessment_20260929/saved_fit_values.csv"
+  },
+  {
+    "path": "/home/murata_t/scecal_reassessment_20260929/saved_layer_means_100GeV.csv"
+  },
+  {
+    "path": "/home/murata_t/scecal_reassessment_20260929/probe_calibration.py"
+  },
+  {
+    "path": "/home/murata_t/scecal_reassessment_20260929/HGLG_overlap_ECAL_Run105_20230430_081224.csv"
+  },
+  {
+    "path": "/home/murata_t/scecal_reassessment_20260929/HGLG_overlap_ECAL_Run106_20230430_093819.csv"
+  },
+  {
+    "path": "/home/murata_t/scecal_reassessment_20260929/HGLG_overlap_ECAL_Run107_20230430_111425.csv"
+  },
+  {
+    "path": "/home/murata_t/scecal_reassessment_20260929/HGLG_overlap_e-_100GeV_0.csv"
+  },
+  {
+    "path": "/home/murata_t/scecal_reassessment_20260929/calibration_sample_100GeV.csv"
+  },
+  {
+    "path": "/home/murata_t/scecal_reassessment_20260929/mc_truth_calibration_closure_sample.csv"
+  },
+  {
+    "path": "/home/murata_t/scecal_reassessment_20260929/conditional_energy_100GeV.csv"
+  },
+  {
+    "path": "/home/murata_t/scecal_reassessment_20260929/plot_summary.py"
+  },
+  {
+    "path": "/home/murata_t/scecal_reassessment_20260929/audit_mip_constants.py"
+  },
+  {
+    "path": "/home/murata_t/scecal_reassessment_20260929/mip_parameter_audit.csv"
+  },
+  {
+    "path": "/home/murata_t/scecal_reassessment_20260929/mip_inferred_from_saved_mc.csv"
+  },
+  {
+    "path": "/home/murata_t/scecal_reassessment_20260929/mip_audit_summary.json"
+  },
+  {
+    "path": "/home/murata_t/scecal_reassessment_20260929/reassessment_ja.md"
+  },
+  {
+    "path": "/home/murata_t/scecal_reassessment_20260929/reassessment_summary.png"
+  },
+  {
+    "path": "/home/murata_t/scecal_reassessment_20260929/reassessment_summary.pdf"
+  },
+  {
+    "path": "/home/murata_t/thesis/digitization_flow.pdf"
+  },
+  {
+    "path": "/home/murata_t/thesis/digitization_flow.svg"
+  },
+  {
+    "path": "/home/murata_t/thesis/digitization_flow.pptx"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/run.log"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/dependencies.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/event_audit.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/COLLECTED"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/fits.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/fit_variants.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/schema.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/channels.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/summary.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/reader_status.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/COMPLETE"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/inputs/command.sh"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/inputs/manifest.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/inputs/parameter_sources.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/inputs/configuration.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/inputs/analysis_sources.tar.gz"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/inputs/checksums.sha256"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/inputs/root_version.txt"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/inputs/refit_input.sha256"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/inputs/result_checksums.sha256"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/inputs/current_reader_sources/Calibration.cxx"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/inputs/current_reader_sources/EBUdecode.cxx"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/inputs/current_reader_sources/Extract.cxx"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/inputs/current_reader_sources/MCDigi.cxx"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/inputs/collection_origin/command.sh"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/inputs/collection_origin/manifest.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/inputs/collection_origin/parameter_sources.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/inputs/collection_origin/configuration.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/inputs/collection_origin/analysis_sources.tar.gz"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/inputs/collection_origin/checksums.sha256"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/inputs/collection_origin/root_version.txt"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/inputs/collection_origin/input_stats_before.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/inputs/collection_origin/input_stats_after.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/inputs/collection_origin/result_checksums.sha256"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/inputs/collection_origin/plot_checksums_before.txt"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/inputs/collection_origin/plot_sources.tar.gz"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/inputs/collection_origin/plot_code_checksums.sha256"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/inputs/collection_origin/plot_commands.sh"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/inputs/collection_origin/plot_checksums_after.txt"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/default/run.log"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/default/validation.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/default/geometry_bins.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/default/geometry_coverage.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/default/efficiency.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/default/calibration_closure.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/default/fits.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/default/plateau_stability.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/default/comparison.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/default/common_group_summary.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/default/fit_status_counts.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/default/group_summary.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/default/dependency_fits.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/default/event_summary.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/default/analysis_status.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/default/COMPLETE"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/default/inputs/requested.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/default/inputs/configuration.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/default/inputs/code_checksums.txt"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/default/inputs/parameter_checksums.txt"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/default/inputs/current_source_checksums.txt"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/default/inputs/current_MCDigi.cxx"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/default/inputs/current_Extract.cxx"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/default/inputs/current_Calibration.cxx"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/default/inputs/current_MIPFit.cxx"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/default/inputs/command.sh"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/default/inputs/file_metadata.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/default/inputs/manifest.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/default/inputs/input_stats_before.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/default/inputs/input_stats_after.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/default/inputs/calibration_parameters.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/default/inputs/plot_input_checksums_before.txt"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/default/inputs/plot_code_checksums.txt"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/default/inputs/plot_command.sh"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/default/inputs/plot_input_checksums_after.txt"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/threshold_MPVwoCT/run.log"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/threshold_MPVwoCT/validation.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/threshold_MPVwoCT/geometry_bins.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/threshold_MPVwoCT/geometry_coverage.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/threshold_MPVwoCT/event_summary.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/threshold_MPVwoCT/fits.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/threshold_MPVwoCT/comparison.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/threshold_MPVwoCT/efficiency.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/threshold_MPVwoCT/calibration_closure.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/threshold_MPVwoCT/plateau_stability.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/threshold_MPVwoCT/dependency_fits.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/threshold_MPVwoCT/performance.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/threshold_MPVwoCT/group_summary.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/threshold_MPVwoCT/common_group_summary.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/threshold_MPVwoCT/fit_status_counts.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/threshold_MPVwoCT/analysis_status.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/threshold_MPVwoCT/COMPLETE"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/threshold_MPVwoCT/inputs/requested.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/threshold_MPVwoCT/inputs/configuration.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/threshold_MPVwoCT/inputs/code_checksums.txt"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/threshold_MPVwoCT/inputs/parameter_checksums.txt"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/threshold_MPVwoCT/inputs/current_source_checksums.txt"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/threshold_MPVwoCT/inputs/current_MCDigi.cxx"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/threshold_MPVwoCT/inputs/current_Extract.cxx"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/threshold_MPVwoCT/inputs/current_Calibration.cxx"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/threshold_MPVwoCT/inputs/current_MIPFit.cxx"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/threshold_MPVwoCT/inputs/command.sh"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/threshold_MPVwoCT/inputs/file_metadata.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/threshold_MPVwoCT/inputs/manifest.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/threshold_MPVwoCT/inputs/input_stats_before.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/threshold_MPVwoCT/inputs/input_stats_after.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/threshold_MPVwoCT/inputs/calibration_parameters.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/raw_calibration/100GeV/run.log"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/raw_calibration/100GeV/runs.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/raw_calibration/100GeV/channels.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/raw_calibration/100GeV/validation.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/raw_calibration/100GeV/event_summary.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/raw_calibration/100GeV/tails.log"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/raw_calibration/100GeV/tail_examples.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/raw_calibration/100GeV/robust_residuals.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/raw_calibration/100GeV/residuals_by_run.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/raw_calibration/100GeV/tail_event_effect.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/raw_calibration/100GeV/tail_counts.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/raw_calibration/100GeV/lg_dropout_examples.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/raw_calibration/100GeV/lg_dropout_counts.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/raw_calibration/100GeV/event_readout.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/raw_calibration/100GeV/comparison_summary.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/raw_calibration/100GeV/early_switch_channels.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/raw_calibration/100GeV/event_readout_summary.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/raw_calibration/100GeV/investigation.md"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/raw_calibration/100GeV/inputs/checksums.txt"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/raw_calibration/100GeV/inputs/sampled_files.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/raw_calibration/100GeV/inputs/Calibration_current.cxx"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/raw_calibration/100GeV/inputs/HLGainDecode_current.cxx"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/raw_calibration/100GeV/inputs/MCDigi_current.cxx"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/raw_calibration/100GeV/inputs/Extract_current.cxx"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/raw_calibration/100GeV/inputs/comparison_source.cc"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/raw_calibration/100GeV/inputs/final_code_checksums.txt"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/raw_calibration/100GeV/inputs/provenance.txt"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/muon_ct/build.log"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/muon_ct/reviewer_code_checksums.txt"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/muon_ct/command.sh"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/muon_ct/review.log"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/muon_ct/validation.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/muon_ct/adc_distribution.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/muon_ct/hit_efficiency.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/muon_ct/channel_fits.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/muon_ct/common_channel_summary.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/muon_ct/event_summary.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/muon_ct/generated_truth.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/muon_ct/methodology.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/muon_ct/paired_truth_detection.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/integrated/run.log"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/integrated/summary.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/integrated/impact.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/integrated/validation.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/integrated/gain_channels.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/integrated/models.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/integrated/covariance.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/integrated/production_resolution.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/integrated/hit_cuts.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/integrated/truth_scale.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/integrated/response_comparison.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/integrated/gain_overlap.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/integrated/leak_proxy_rates.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/investigations/result/hg_lg_tail_review_20260930/completed_summary.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/sipm_gain/full_grouped/inputs/regroup.log"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/sipm_gain/full_grouped/inputs/analysis_units.json"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/sipm_gain/full_grouped/inputs/manifest.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/sipm_gain/full_grouped/inputs/source_manifest.json"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/sipm_gain/full_grouped/inputs/regroup_source.json"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/sipm_gain/full_grouped/inputs/regroup_verification.json"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/sipm_gain/full_grouped/inputs/fit_prepare.log"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/sipm_gain/full_grouped/inputs/analysis_plan.json"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/sipm_gain/full_grouped/comparison/inputs/configuration.json"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/sipm_gain_selection/full_grouped_relaxed_2dac/conditions.tsv"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/sipm_gain_selection/full_grouped_relaxed_2dac/summary.json"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/sipm_gain_selection/full_grouped_relaxed_2dac/inputs/configuration.json"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/sipm_gain/full_grouped/comparison/summary.json"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/sipm_gain/full_grouped/comparison/NUMERIC_COMPLETE"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/sipm_gain/full_grouped/comparison/PREPARE_COMPLETE"
+  },
+  {
+    "path": "/home/murata_t/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Analysis_edit/share/all_auto_muon_v4_trackfit.root"
+  },
+  {
+    "path": "/home/murata_t/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Analysis_edit/share/all_hl_electron2023_hlratio_v3.root"
+  },
+  {
+    "path": "/home/murata_t/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Analysis_edit/share/pedestal2023_SPS.root"
+  },
+  {
+    "path": "/home/murata_t/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Analysis_edit/share/20230504_1425_Calib_LED_all.root"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/sipm_gain_selection/Common.hh"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/sipm_gain_selection/Selection.hh"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/sipm_gain_selection/Select.cc"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/sipm_gain_selection/Merge.cc"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/sipm_gain_selection/Plots.cc"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/sipm_gain_selection/README.md"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/sipm_gain_selection/Temperature.cc"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/sipm_gain_pool/Pool.cc"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/sipm_gain_pool/stage_job.sh"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/sipm_gain_pool/submit_stage.sh"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/sipm_gain_pool/README.md"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/channel_response/muon_mip_response/MuonMIPCommon.hh"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/channel_response/muon_mip_response/InspectMuonInputs.cc"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/channel_response/muon_mip_response/README.md"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/channel_response/muon_mip_response/AnalyzeMuonMIP.cc"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/channel_response/muon_mip_response/MuonMIPPlotStyle.hh"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/channel_response/muon_mip_response/RedrawMuonMIP.cc"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/channel_response/muon_mip_response/CollectMuonMIP.cc"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/channel_response/muon_mip_response/ExactFitCache.hh"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/channel_response/muon_mip_response/submit.sh"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/channel_response/muon_mip_response/CurrentCalibration.hh"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/channel_response/muon_mip_response/run.sh"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/channel_response/muon_mip_response/MergeMuonShards.cc"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/channel_response/muon_mip_response/TrackGeometry.hh"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/threshold/threshold_allGeVs.sh"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/threshold/threshold_paralell.sh"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/threshold/EBUdecode.cxx"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/threshold/threshold_finding_.cc"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/threshold/threshold_finding.cc"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/gain/EBUdecode.cxx"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/gain/combine_files_LED.cc"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/gain/led_per_dac.sh"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/gain/led_per_day.sh"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/gain/combine_files_beam.cc"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/gain/beam.sh"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/led/EBUdecode.cxx"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/led/LED_combine.sh"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/led/between_files_LED.cc"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/led/between_files_LED_scan.cc"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/led/between_files_gain.cc"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/led/execute_files_LED.sh"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/led/gain_combine.sh"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/led/led_scan.sh"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/led/scanning.cc"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/led/scanning.sh"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/mip.root"
+  },
+  {
+    "path": "/home/murata_t/ScECAL_BeamTest/analysis/result/threshold/threshold.root"
+  },
+  {
+    "path": "/home/murata_t/data_beamtest/ECAL_data/analysed/2023/sps/summary.txt"
+  },
+  {
+    "path": "/meg/home/meg/pro/cern/setenv.sh"
+  }
+]

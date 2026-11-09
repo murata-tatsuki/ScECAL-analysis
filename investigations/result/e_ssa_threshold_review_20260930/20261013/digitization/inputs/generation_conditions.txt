@@ -1,0 +1,1 @@
+ROOT digitizer calls SetSeed(0); generation is stochastic. Frozen binaries/sources and generated ROOTs are retained for exact analysis reproduction. Calibration MIP is unchanged. Two existing truth files (indices 0 and 5) per energy; 5/20/100 GeV only.

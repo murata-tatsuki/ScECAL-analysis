@@ -1,0 +1,3 @@
+sample	eligible_HG_hits	matched_hits	matched_hit_fraction	matched_sum_weights	common_bins	common_target	generated_truth_valid	generated_truth_invalid_primary_chord
+data	4547199	1130003	0.24850528864	1102711	181233	1102711	0	0
+mc	56938031	22173963	0.389440284649	1102711.00001	181233	1102711	68195200	31290162

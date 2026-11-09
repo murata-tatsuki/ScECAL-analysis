@@ -1,0 +1,6 @@
+Collecting pypdf==6.1.3
+  Downloading pypdf-6.1.3-py3-none-any.whl (323 kB)
+Collecting typing_extensions>=4.0
+  Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+Installing collected packages: typing-extensions, pypdf
+Successfully installed pypdf-6.1.3 typing-extensions-4.16.0

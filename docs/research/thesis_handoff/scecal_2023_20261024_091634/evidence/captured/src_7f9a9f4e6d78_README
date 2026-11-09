@@ -1,0 +1,16 @@
+
+
+analyseCode is copied from /megraid01/users/tsuji/scecal/ScECAL_CR/lightCalib
+
+this is for LED data decoding
+
+
+
+
+
+
+
+track 3D はSSAした後のものを使用して3次元的にtrackfitを行っている
+
+
+SSAのコードが多分古くて同じ位置に複数5mm角のhhitが存在する可能性がある

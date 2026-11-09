@@ -1,0 +1,24 @@
+{
+  "10": {
+    "accepted": 3381,
+    "nonpositive": 490,
+    "fallback_mean": 81.57685311249782,
+    "positive_only_mean": 97.09835364003983
+  },
+  "15": {
+    "accepted": 1062,
+    "nonpositive": 75,
+    "fallback_mean": 397.91676647866325,
+    "positive_only_mean": 428.9134812566772
+  },
+  "central_10um_observed": {
+    "n": 185,
+    "rejected_by_quality": 160
+  },
+  "raw_calib_probe": {
+    "events": 50,
+    "hits": 2096,
+    "median_raw_over_linear": 1.1050566983549444,
+    "median_file_mip_over_effective": 1.2020971524227075
+  }
+}

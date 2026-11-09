@@ -1,0 +1,57 @@
+****************************
+** directory desctription **
+****************************
+
+
+decode
+  raw data in root format
+  no calibratoin applied
+
+ped
+  pedestal analysis data
+  pedestal are calclated from decode data
+
+simpleCalib
+  decode root file + strip coordinate
+
+calib
+  calibrated data
+  calibration parameters are latest
+
+calib1
+  calibrated data
+  sps pedestal data		pedestal2023_SPS.root
+  sps intercalibration data	all_hl_electron2023_hlratio_v3.root
+  sps mip calibration (tatsuki)	compare_MIP.root
+
+calib2
+  calibrated data
+  sps pedestal data             pedestal2023_SPS.root
+  sps intercalibration data     all_hl_electron2023_hlratio_v3.root
+  sps mip calibration (jiaxuan) compare_MIP.root
+
+calib2
+  calibrated data
+  sps pedestal data             pedestal2023_SPS.root
+  sps intercalibration data     all_hl_electron2023_hlratio_v3.root
+  sps mip calibration (tatsuki) compare_MIP.root (MIP>50)
+
+calib_simulation
+  calibrated data (simulation calibration parameters)
+  pede_factor="${factor_dir}/2020ped.root"
+  inter_factor="${factor_dir}/20201216_20210308_InterCalib.root"
+  mip_factor="${factor_dir}/20201216_20210308.root"
+
+calib_original
+  calibrated data
+  calibration parameters : cosmic ray test result
+
+trackFit関連
+  /megraid01/users/murata_t/scecal/ScECAL_BeamTest/ECALにコードが有る
+  
+  trackFitwoSSAevenodd
+    /megraid01/users/murata_t/scecal/ScECAL_BeamTest/ECAL/TrackFit
+
+
+
+

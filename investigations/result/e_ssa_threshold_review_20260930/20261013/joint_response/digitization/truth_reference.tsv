@@ -1,0 +1,4 @@
+energy_GeV	reference	events	mean_GeV	RMS_over_mean	sigma68_over_median
+5	good_channel_linear_Geant4_edep_no_threshold	937	0.16541650602093	0.074269038304516	0.074488765830228
+20	good_channel_linear_Geant4_edep_no_threshold	910	0.66050085135714	0.041207259490725	0.04164400056252
+100	good_channel_linear_Geant4_edep_no_threshold	1516	3.2763463350315	0.028571074761343	0.026602844843166

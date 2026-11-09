@@ -1,0 +1,3 @@
+sample	common_channels	overlap_hits	low_tail_hits	high_tail_hits	matched_weight_low_fraction	matched_weight_high_fraction
+data	310	129732	504	4	0.00387711645167	3.01714497111e-05
+mc	310	151446	0	0	0	0

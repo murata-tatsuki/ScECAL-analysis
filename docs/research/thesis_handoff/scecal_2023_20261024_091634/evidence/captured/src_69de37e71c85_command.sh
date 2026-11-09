@@ -1,0 +1,1 @@
+/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/analysis/mip_calibration/run.sh --label all_muons_refit --refit-from analysis/result/mip_calibration/all_muons --max-relative-error 0.10 --fit-min-adc 40 

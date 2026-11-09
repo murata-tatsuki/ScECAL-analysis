@@ -1,0 +1,1 @@
+bash /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/e_ssa_threshold_review_20260930/run_muons_ct_review.sh /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/muon_ct

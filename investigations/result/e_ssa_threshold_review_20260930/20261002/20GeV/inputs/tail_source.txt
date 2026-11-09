@@ -1,0 +1,1 @@
+/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/analysis/result/channel_response/hg_lg_tail/threshold/e_ssa/20GeV

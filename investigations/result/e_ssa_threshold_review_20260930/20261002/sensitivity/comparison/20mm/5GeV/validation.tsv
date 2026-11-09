@@ -1,0 +1,3 @@
+sample	sampled	selected_keep	selected_exclude	tail_rejected	checked_hits	max_HG_error_MeV	max_LG_error_MeV
+data	8000	2796	2753	43	623861	1.42108547152e-14	2.84217094304e-14
+mc	6000	2870	2870	0	789337	1.42108547152e-14	5.68434188608e-14

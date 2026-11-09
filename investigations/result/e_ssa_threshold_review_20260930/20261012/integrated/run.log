@@ -1,0 +1,19 @@
+Started: 2026-10-12T05:42:42+09:00
+Command: bash /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/e_ssa_threshold_review_20260930/integrated_review.sh 20261012
+make: Entering directory '/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/e_ssa_threshold_review_20260930'
+make: 'PrepareReference' is up to date.
+g++ -O2 -Wall -Wextra -std=c++17 -I../../analysis/impact_studies -pthread -std=c++20 -m64 -I/meg/home/meg/cern/root-v6.36.08_gcc1421_python312_release/include IntegratedReview.cc -L/meg/home/meg/cern/root-v6.36.08_gcc1421_python312_release/lib -lCore -lImt -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lROOTVecOps -lTree -lTreePlayer -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lROOTNTuple -lMultiProc -lROOTDataFrame -lROOTNTupleUtil -Wl,-rpath,/meg/home/meg/cern/root-v6.36.08_gcc1421_python312_release/lib -pthread -lm -ldl -rdynamic -o IntegratedReview
+make: Leaving directory '/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/e_ssa_threshold_review_20260930'
+5GeV reference ready; 100 MC files available
+20GeV reference ready; 100 MC files available
+100GeV reference ready; 100 MC files available
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261012/integrated/comparison/20mm/5GeV/resolution_position_impact.png has been created
+5GeV fresh review complete
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261012/integrated/comparison/20mm/20GeV/resolution_position_impact.png has been created
+20GeV fresh review complete
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261012/integrated/comparison/20mm/100GeV/resolution_position_impact.png has been created
+100GeV fresh review complete
+Finished: 2026-10-12T05:51:57+09:00
+Post-run label clarification: summary auxiliary columns explicitly baseline; outer_fine_strip cut named by its geometry; models sample_selection separates cog20 and cog20_energy_window. No numerical values changed. Final source recompiled.
+Additional current truth audit: IntegratedReview --truth-only integrated (same output directory), one file *_0.root per energy, all 1000 events/file, existing saved truth and decode only.
+Derived response_comparison, gain_overlap, leak_proxy_rates TSV: executed the final three awk commands in integrated_review.sh on saved summary/gain tables.

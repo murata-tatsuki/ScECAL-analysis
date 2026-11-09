@@ -1,0 +1,10 @@
+data file 0 tail diagnosis complete
+data file 1 tail diagnosis complete
+data file 2 tail diagnosis complete
+mc file 0 tail diagnosis complete
+mc file 1 tail diagnosis complete
+mc file 2 tail diagnosis complete
+mc file 3 tail diagnosis complete
+mc file 4 tail diagnosis complete
+mc file 5 tail diagnosis complete
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/result/raw_calibration_investigation/100GeV/figures/hg_lg_residual_tails.png has been created

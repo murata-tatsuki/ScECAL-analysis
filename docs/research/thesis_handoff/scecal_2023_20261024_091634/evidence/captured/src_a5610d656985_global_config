@@ -1,0 +1,102 @@
+#! /bin/bash
+work_dir='/megraid01/users/data_beamtest/analysis/ECAL_Analysis_LCIO'
+data_dir='/megraid01/users/data_beamtest/ECAL_data/analysed'
+
+dat_dir='/megraid01/users/data_beamtest/ECAL_data/data'
+
+bin_dir="${work_dir}/bin"
+raw_dir="${dat_dir}"
+factor_dir="${work_dir}/share"
+
+#date_tag=pi+   ######<<< CHANGE HERE into today's date ######
+#date_tag=mu+   ######<<< CHANGE HERE into today's date ######
+#date_tag=e+    ######<<< CHANGE HERE into today's date ######
+#date_tag=LEDCalib/20221031_2214_Calib
+
+#date_tag=pi-   ######<<< CHANGE HERE into today's date ######
+# date_tag=mu-   ######<<< CHANGE HERE into today's date ######
+date_tag=e-    ######<<< CHANGE HERE into today's date ######
+# date_tag=LEDCali    ######<<< CHANGE HERE into today's date ######
+# date_tag=lightCalibData    ######<<< CHANGE HERE into today's date ######
+#date_tag=pedestal
+
+# energy=100GeV
+energy=all
+
+#year=2022
+year=2023
+
+beam=sps
+# beam=ps
+
+# year=2025
+# beam=kek
+# date_tag=Pedestal
+# date_tag=mipScan
+# date_tag=shower
+# energy=layer_except_10_11_12_13_16_17_18_19_20_21_26_27
+# energy=all
+
+#----- Do not change -----
+raw_path=${raw_dir}/${year}/${beam}/${date_tag}/${energy}
+decode_path=${data_dir}/${year}/${beam}/decode/${date_tag}/${energy}
+# decode_path=${data_dir}/${year}/${beam}/decode/shower/${energy}
+
+##############for LED data
+#LEDData=20230524_1118_Calib
+#raw_path='/megraid01/users/data_beamtest/ECAL_data/data/2023/sps/LEDCali/'${LEDData}
+#raw_path='/megraid01/users/data_beamtest/ECAL_data/data/2023/ps/lightCalibData/'${LEDData}
+#decode_path=${data_dir}/${year}/${beam}/decode/LEDCali/${LEDData}
+##############
+
+ped_fit=${data_dir}/${year}/${beam}/ped/fit/${date_tag}/${energy}
+ped_hist=${data_dir}/${year}/${beam}/ped/hist/${date_tag}/${energy}
+
+simpleCalib_path=${data_dir}/${year}/${beam}/simpleCalib/${date_tag}/${energy}
+
+mip_fit=${data_dir}/${year}/${beam}/mip/fit/${date_tag}/${energy}
+mip_hist=${data_dir}/${year}/${beam}/mip/hist/${date_tag}/${energy}
+
+temperature_ped_fit=${data_dir}/${year}/${beam}/temperature/ped/fit/${date_tag}/${energy}
+temperature_ped_hist=${data_dir}/${year}/${beam}/temperature/ped/hist/${date_tag}/${energy}
+
+############## calibration factors measured at cosmic ray test
+# pede_factor="${factor_dir}/2020ped.root"
+# inter_factor="${factor_dir}/20201216_20210308_InterCalib.root"
+# mip_factor="${factor_dir}/20201216_20210308.root"
+##############
+
+calib_path="${data_dir}/${year}/${beam}/calib/${date_tag}/${energy}"
+# calib_path="${data_dir}/${year}/${beam}/calib_original/${date_tag}/${energy}"
+temp_subped_path="${data_dir}/${year}/${beam}/temp_subped/${date_tag}/${energy}"
+#add temperature and subtracted pedestal
+
+stripSprit_path="${data_dir}/${year}/${beam}/ssa/${date_tag}/${energy}"
+calibStripSprit_path="${data_dir}/${year}/${beam}/ssaCalib/${date_tag}/${energy}"
+
+trackFit_path=${data_dir}/${year}/${beam}/trackFit/${date_tag}/${energy}
+trackFit_path3D=${data_dir}/${year}/${beam}/trackFit3D/${date_tag}/${energy}
+
+log_dir="${data_dir}/${year}/${beam}/log/${date_tag}/${energy}"
+
+
+############ for edited calibration (must change src/calibration)
+#pede_factor="/megraid01/users/data_beamtest/ECAL_data/analysed/2023/ps/ped/fit/pedestal/ECAL_Run23_20230518_153022.root"
+# pede_factor="${factor_dir}/pedestal2023_SPS.root"
+# inter_factor="${factor_dir}/hlratio_merge7files.root"
+# inter_factor="${factor_dir}/all_hl_electron2023_hlratio_v3.root"
+# mip_factor="${factor_dir}/compare_MIP.root"
+#calib_path="/megraid01/users/murata_t/scecal/ScECAL_BeamTest/results/${year}/${beam}/calib/${date_tag}/${energy}"
+# calib_path="${data_dir}/${year}/${beam}/calib1/${date_tag}/${energy}"
+# calib_path="${data_dir}/${year}/${beam}/calib2/${date_tag}/${energy}"
+# calib_path="${data_dir}/${year}/${beam}/calib3/${date_tag}/${energy}"
+
+
+
+############### for simulation calibration parameters
+factor_dir="/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Analysis_edit/share"
+pede_factor="${factor_dir}/pedestal2023_SPS.root"
+inter_factor="${factor_dir}/all_hl_electron2023_hlratio_v3.root"
+mip_factor="${factor_dir}/all_auto_muon_v4_trackfit.root"
+
+# calib_path="${data_dir}/${year}/${beam}/calib_simulation/${date_tag}/${energy}"

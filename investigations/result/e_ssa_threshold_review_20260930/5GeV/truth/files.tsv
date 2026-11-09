@@ -1,0 +1,7 @@
+decode	truth	events
+/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/5GeV/5GeV_0.root	/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/generate/e-/e_ssa/5GeV/5GeV_0.root	1000
+/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/5GeV/5GeV_26.root	/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/generate/e-/e_ssa/5GeV/5GeV_26.root	1000
+/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/5GeV/5GeV_44.root	/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/generate/e-/e_ssa/5GeV/5GeV_44.root	1000
+/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/5GeV/5GeV_62.root	/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/generate/e-/e_ssa/5GeV/5GeV_62.root	1000
+/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/5GeV/5GeV_80.root	/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/generate/e-/e_ssa/5GeV/5GeV_80.root	1000
+/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/5GeV/5GeV_99.root	/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/generate/e-/e_ssa/5GeV/5GeV_99.root	1000

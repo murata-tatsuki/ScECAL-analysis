@@ -1,0 +1,5 @@
+case	effective_pixels_10um	threshold_shift_HG_ADC
+pixels14400	14400	0
+pixels19600	19600	0
+threshold_plus5	10000	5
+threshold_plus10	10000	10

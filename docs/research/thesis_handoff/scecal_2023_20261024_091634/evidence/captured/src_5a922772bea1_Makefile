@@ -1,0 +1,65 @@
+TARGET = between_files_MIP_newConvoluted combine_all_data combine_all_data_edit MIP_calibration_simulation MIP_comparison MIP_comparison_fitting selection selection_1hit selection_trackFit selection_trackFit_ comparison_mip_kek
+CC = g++
+
+CFLAGS = -O2 -Wall -Wno-deprecated
+FLAG := -I.
+LIBS :=
+ROOTFLAG := $(shell root-config --cflags)
+ROOTLIBS := $(shell root-config --libs)
+
+.SUFFIXES: .cc .o
+
+.cc.o :
+	@echo "Now generating object files, wait a minutes..."
+	$(CC) $(CFLAGS) $(FLAG) $(ROOTFLAG) -c $<
+
+all: $(TARGET)
+
+between_files_MIP_newConvoluted : between_files_MIP_newConvoluted.o
+	@echo "Now generating target, wait a minutes..."
+	$(CC) $(CFLAGS) $(LIBS) $(ROOTLIBS) $< -o $@
+
+combine_all_data : combine_all_data.o
+	@echo "Now generating target, wait a minutes..."
+	$(CC) $(CFLAGS) $(LIBS) $(ROOTLIBS) $< -o $@
+
+combine_all_data_edit : combine_all_data_edit.o
+	@echo "Now generating target, wait a minutes..."
+	$(CC) $(CFLAGS) $(LIBS) $(ROOTLIBS) $< -o $@
+
+MIP_calibration_simulation : MIP_calibration_simulation.o
+	@echo "Now generating target, wait a minutes..."
+	$(CC) $(CFLAGS) $(LIBS) $(ROOTLIBS) $< -o $@
+
+MIP_comparison : MIP_comparison.o
+	@echo "Now generating target, wait a minutes..."
+	$(CC) $(CFLAGS) $(LIBS) $(ROOTLIBS) $< -o $@
+
+MIP_comparison_fitting : MIP_comparison_fitting.o
+	@echo "Now generating target, wait a minutes..."
+	$(CC) $(CFLAGS) $(LIBS) $(ROOTLIBS) $< -o $@
+
+selection : selection.o
+	@echo "Now generating target, wait a minutes..."
+	$(CC) $(CFLAGS) $(LIBS) $(ROOTLIBS) $< -o $@
+
+selection_1hit : selection_1hit.o
+	@echo "Now generating target, wait a minutes..."
+	$(CC) $(CFLAGS) $(LIBS) $(ROOTLIBS) $< -o $@
+
+selection_trackFit : selection_trackFit.o
+	@echo "Now generating target, wait a minutes..."
+	$(CC) $(CFLAGS) $(LIBS) $(ROOTLIBS) $< -o $@
+
+selection_trackFit_ : selection_trackFit_.o
+	@echo "Now generating target, wait a minutes..."
+	$(CC) $(CFLAGS) $(LIBS) $(ROOTLIBS) $< -o $@
+
+comparison_mip_kek : comparison_mip_kek.o
+	@echo "Now generating target, wait a minutes..."
+	$(CC) $(CFLAGS) $(LIBS) $(ROOTLIBS) $< -o $@
+
+clean :
+	rm *.o 
+cleanall :
+	rm *~ $(OBJS) $(TARGET)

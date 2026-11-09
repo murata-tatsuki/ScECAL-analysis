@@ -1,0 +1,218 @@
+[
+  {
+    "directory": "/home/murata_t/data_beamtest/ECAL_data/data/2023/ps",
+    "entries": [
+      "e-",
+      "lightCalibData",
+      "mu-",
+      "pedestal",
+      "pi-"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/data_beamtest/ECAL_data/data/2023/sps",
+    "entries": [
+      "LEDCali",
+      "e-",
+      "mu-",
+      "p+",
+      "pedestal",
+      "pi-",
+      "selectThrScanData"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/data_beamtest/ECAL_data/analysed/2023/ps",
+    "entries": [
+      "decode",
+      "ped",
+      "log",
+      "calib_original",
+      "calib1",
+      "calib2",
+      "calib3",
+      "calib_simulation",
+      "calib",
+      "simpleCalib",
+      "trackFit",
+      "trackFit3D",
+      "ssa.bak",
+      "ssaCalib.bak",
+      "ssaCalib"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/data_beamtest/ECAL_data/analysed/2023/sps",
+    "entries": [
+      "decode",
+      "ped",
+      "log",
+      "calib_original",
+      "calib1",
+      "calib2",
+      "calib3",
+      "summary.txt",
+      "calib_simulation",
+      "calib",
+      "simpleCalib",
+      "trackFit",
+      "trackFit3D",
+      "ssa.bak",
+      "ssaCalib.bak",
+      "ssaCalib"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/ScECAL_BeamTest/analysis/result/resolution/comparsion",
+    "entries": [
+      "comparison_5mm.root"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/ScECAL_BeamTest/analysis/result/resolution/data",
+    "entries": [
+      "200mm",
+      "20mm",
+      "10mm",
+      "5mm"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/ScECAL_BeamTest/analysis/result/resolution/simulation",
+    "entries": [
+      "threshold"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response",
+    "entries": [
+      "default",
+      "threshold_MPVwoCT"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit",
+    "entries": [
+      "inputs",
+      ".run.lock",
+      "run.log",
+      "histograms.root",
+      "dependencies.tsv",
+      "event_audit.tsv",
+      "COLLECTED",
+      "fits.root",
+      "fits.tsv",
+      "fit_variants.tsv",
+      "mip.root",
+      "schema.tsv",
+      "channels.tsv",
+      "summary.tsv",
+      "reader_status.tsv",
+      "figures",
+      "COMPLETE"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/ScECAL_BeamTest/analysis/result/sipm_gain/full_grouped",
+    "entries": [
+      "inputs",
+      "data",
+      "comparison"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/ScECAL_BeamTest/analysis/mip_calibration",
+    "entries": [
+      "Common.hh",
+      "Collect.cc",
+      "FitModel.hh",
+      "Fit.cc",
+      "Export.cc",
+      "Draw.cc",
+      "Makefile",
+      "Export",
+      "Fit",
+      "Draw",
+      "run.sh",
+      "submit.sh",
+      ".gitignore",
+      "Collect",
+      "README.md",
+      ".build.lock",
+      "Diagnose.cc",
+      "Diagnose",
+      "diagnose.sh"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Analysis_edit/share",
+    "entries": [
+      "20230504_1425_Calib_LED_all.root",
+      "all_auto_muon_v4_trackfit_range0.7.root",
+      "all_auto_muon_v4_trackfit.root",
+      "all_hl_electron2023_hlratio_v3.root",
+      "pedestal2023_SPS.root",
+      "threshold_rev.root",
+      "cosmic_parameters"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/CEPCScECAL/src",
+    "entries": [
+      "PrimaryGeneratorAction.cc",
+      "RunAction.cc",
+      "HistoManager.cc",
+      "TrackingMessenger.cc",
+      "EventAction.cc",
+      "DetectorConstruction.cc",
+      "PrimaryGeneratorMessenger.cc",
+      "SteppingAction.cc",
+      "TrackingAction.cc",
+      "Run.cc",
+      "SteppingVerbose.cc",
+      "PhysicsList.cc"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/ScECAL_BeamTest/investigations/result/raw_calibration/100GeV",
+    "entries": [
+      "inputs",
+      "run.log",
+      "figures",
+      "runs.tsv",
+      "channels.tsv",
+      "validation.tsv",
+      "event_summary.tsv",
+      "raw_calibration.root",
+      "tails.log",
+      "tail_examples.tsv",
+      "robust_residuals.tsv",
+      "residuals_by_run.tsv",
+      "tail_event_effect.tsv",
+      "tail_counts.tsv",
+      "lg_dropout_examples.tsv",
+      "lg_dropout_counts.tsv",
+      "event_readout.tsv",
+      "residual_tails.root",
+      "comparison_summary.tsv",
+      "early_switch_channels.tsv",
+      "comparison_summary.root",
+      "event_readout_summary.tsv",
+      "investigation.md"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930",
+    "entries": [
+      "100GeV",
+      "5GeV",
+      "gain_summary.tsv",
+      "mip_audit.tsv",
+      "region_summary.tsv",
+      "20261002",
+      "resolution_impact",
+      "20261012",
+      "20261013"
+    ]
+  }
+]

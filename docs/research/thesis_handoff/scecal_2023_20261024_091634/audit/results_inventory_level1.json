@@ -1,0 +1,124 @@
+[
+  {
+    "directory": "/home/murata_t/data_beamtest/ECAL_data/data/2023",
+    "entries": [
+      "sps",
+      "ps"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/data_beamtest/ECAL_data/analysed/2023",
+    "entries": [
+      "sps",
+      "ps"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/data_beamtest/disk-BeamTestData1",
+    "entries": [
+      "Analyzed",
+      "analysis",
+      "backup",
+      "data",
+      "scripts",
+      "timepix3"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/ScECAL_BeamTest/analysis/result/resolution",
+    "entries": [
+      "data",
+      "figures",
+      "simulation",
+      "comparsion"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response",
+    "entries": [
+      "hg_lg_tail",
+      "muon_mip_response",
+      "time_stability",
+      "detection_efficiency",
+      "strip_position_response"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration",
+    "entries": [
+      "validation_collect",
+      "validation_data",
+      "validation",
+      "validation_no_temperature",
+      "all_muons",
+      "fit_diagnosis",
+      "fit_diagnosis_stable_integral",
+      "fit_method_validation",
+      "all_muons_refit"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/ScECAL_BeamTest/analysis/result/sipm_gain",
+    "entries": [
+      "pilot",
+      "full",
+      "pilot_cpp",
+      "full_retry",
+      "split_validation",
+      "full_split",
+      "grouping_validation",
+      "full_grouped",
+      "comparison_fixture",
+      "temperature_pool_validation"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/ScECAL_BeamTest/simulation",
+    "entries": [
+      "cern-testbeam-simulation-for-scecal-and-ahcal-main",
+      "CEPCScECAL_SML",
+      "CEPCScECAL_SML_original",
+      "cern-testbeam-simulation-for-scecal-and-ahcal-main2"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/ScECAL_BeamTest/ECAL/pic",
+    "entries": [
+      "layer0.pdf",
+      "layer29.pdf",
+      "layer1.pdf",
+      "layer2.pdf",
+      "layer3.pdf",
+      "layer4.pdf",
+      "c16x.pdf",
+      "c16y.pdf",
+      "c32x.pdf",
+      "c32y.pdf"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC",
+    "entries": [
+      "generate",
+      "truth",
+      "decode",
+      "calib",
+      "ssaCalib",
+      "simpleCalib",
+      "trackFit",
+      "trackFit3D",
+      "ssa.bak",
+      "ssa"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/ScECAL_BeamTest/investigations/result",
+    "entries": [
+      "e_ssa_threshold_review_20260930",
+      "raw_calibration",
+      "response_diagnostics",
+      "channel_response_review_20260930",
+      "hg_lg_tail_review_20260930"
+    ]
+  }
+]

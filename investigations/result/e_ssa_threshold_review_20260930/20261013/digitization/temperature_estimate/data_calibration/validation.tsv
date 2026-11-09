@@ -1,0 +1,4 @@
+energy_GeV	selected_events	checked_hits	max_HG_LG_saved_closure_MeV	max_event_cache_error_GeV	original_hit_selection_frozen
+5	2733	324584	3.5527136788005e-15	4.9998893913994e-13	1
+20	1756	511718	1.4210854715202e-14	4.7881698606034e-12	1
+100	4999	3620220	2.8421709430404e-14	4.9991122352822e-12	1

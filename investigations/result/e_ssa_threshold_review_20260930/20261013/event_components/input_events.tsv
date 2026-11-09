@@ -1,0 +1,4 @@
+path	bytes	filesystem_mtime_ticks	data_rows	mc_rows
+/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/integrated/comparison/20mm/5GeV/events.tsv	7613064	-4645832919263759076	8000	6000
+/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/integrated/comparison/20mm/20GeV/events.tsv	6334755	-4645832893770758204	4000	6000
+/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/integrated/comparison/20mm/100GeV/events.tsv	7377765	-4645832838112756299	6000	6000

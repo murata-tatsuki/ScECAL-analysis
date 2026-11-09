@@ -1,0 +1,251 @@
+2026-10-13T03:41:16+09:00
+Usable inputs: data 28, MC 28; recovered=0
+file 0 sample=0 run=29 sampled=21833 crossings=452402 response=330651 truth_hits=0
+file 1 sample=1 run=29 sampled=100000 crossings=2422456 response=2025085 truth_hits=3650861
+file 2 sample=0 run=30 sampled=12082 crossings=234996 response=171978 truth_hits=0
+file 3 sample=1 run=30 sampled=100000 crossings=2425381 response=2027189 truth_hits=3673353
+file 4 sample=0 run=31 sampled=12429 crossings=240769 response=175091 truth_hits=0
+file 5 sample=1 run=31 sampled=100000 crossings=2452495 response=2052287 truth_hits=3654412
+file 6 sample=0 run=33 sampled=21871 crossings=285273 response=188588 truth_hits=0
+file 7 sample=1 run=33 sampled=100000 crossings=2453133 response=2010810 truth_hits=3658076
+file 8 sample=0 run=34 sampled=974 crossings=11875 response=7895 truth_hits=0
+file 9 sample=1 run=34 sampled=100000 crossings=2434764 response=2003216 truth_hits=3640464
+file 10 sample=0 run=35 sampled=14955 crossings=189268 response=124927 truth_hits=0
+file 11 sample=1 run=35 sampled=100000 crossings=2501427 response=2045561 truth_hits=3632295
+file 12 sample=0 run=36 sampled=34136 crossings=429705 response=281906 truth_hits=0
+file 13 sample=1 run=36 sampled=100000 crossings=2507754 response=2035675 truth_hits=3616820
+file 14 sample=0 run=37 sampled=39372 crossings=752240 response=524731 truth_hits=0
+file 15 sample=1 run=37 sampled=100000 crossings=2483292 response=2051904 truth_hits=3626684
+file 16 sample=0 run=38 sampled=36372 crossings=720090 response=501734 truth_hits=0
+file 17 sample=1 run=38 sampled=100000 crossings=2512040 response=2066707 truth_hits=3594028
+file 18 sample=0 run=39 sampled=29713 crossings=586560 response=418828 truth_hits=0
+file 19 sample=1 run=39 sampled=100000 crossings=2456189 response=2045958 truth_hits=3636496
+file 20 sample=0 run=40 sampled=42671 crossings=815829 response=580438 truth_hits=0
+file 21 sample=1 run=40 sampled=100000 crossings=2498991 response=2078975 truth_hits=3632585
+file 22 sample=0 run=41 sampled=18313 crossings=158163 response=108336 truth_hits=0
+file 23 sample=1 run=41 sampled=100000 crossings=2554243 response=2117610 truth_hits=3486648
+file 24 sample=0 run=42 sampled=6239 crossings=122824 response=86165 truth_hits=0
+file 25 sample=1 run=42 sampled=100000 crossings=2517088 response=2071803 truth_hits=3612157
+file 26 sample=0 run=43 sampled=23625 crossings=475454 response=333068 truth_hits=0
+file 27 sample=1 run=43 sampled=100000 crossings=2525063 response=2077865 truth_hits=3605836
+file 28 sample=0 run=44 sampled=25691 crossings=29483 response=18834 truth_hits=0
+file 29 sample=1 run=44 sampled=100000 crossings=2587169 response=2076455 truth_hits=3352208
+file 30 sample=0 run=45 sampled=15529 crossings=34141 response=23168 truth_hits=0
+file 31 sample=1 run=45 sampled=100000 crossings=2532413 response=2064103 truth_hits=3490941
+file 32 sample=0 run=46 sampled=28740 crossings=63184 response=41379 truth_hits=0
+file 33 sample=1 run=46 sampled=100000 crossings=2548889 response=2028133 truth_hits=3472529
+file 34 sample=0 run=47 sampled=44278 crossings=30869 response=18754 truth_hits=0
+file 35 sample=1 run=47 sampled=100000 crossings=2607724 response=2064485 truth_hits=3353945
+file 36 sample=0 run=48 sampled=26808 crossings=191158 response=126492 truth_hits=0
+file 37 sample=1 run=48 sampled=100000 crossings=2609375 response=2102911 truth_hits=3487604
+file 38 sample=0 run=49 sampled=24955 crossings=205192 response=149011 truth_hits=0
+file 39 sample=1 run=49 sampled=100000 crossings=2523235 response=2110800 truth_hits=3531490
+file 40 sample=0 run=50 sampled=26411 crossings=85953 response=56734 truth_hits=0
+file 41 sample=1 run=50 sampled=100000 crossings=2619699 response=2105729 truth_hits=3510103
+file 42 sample=0 run=51 sampled=33418 crossings=2694 response=1526 truth_hits=0
+file 43 sample=1 run=51 sampled=100000 crossings=2460352 response=1928877 truth_hits=3487017
+file 44 sample=0 run=52 sampled=34465 crossings=6054 response=3284 truth_hits=0
+file 45 sample=1 run=52 sampled=100000 crossings=2560709 response=1974349 truth_hits=3475101
+file 46 sample=0 run=53 sampled=33736 crossings=4364 response=2220 truth_hits=0
+file 47 sample=1 run=53 sampled=100000 crossings=2476385 response=1913074 truth_hits=3472060
+file 48 sample=0 run=54 sampled=198167 crossings=16520 response=8900 truth_hits=0
+file 49 sample=1 run=54 sampled=100000 crossings=2515645 response=1771372 truth_hits=3428878
+file 50 sample=0 run=55 sampled=27519 crossings=109970 response=61861 truth_hits=0
+file 51 sample=1 run=55 sampled=100000 crossings=2573962 response=2003610 truth_hits=3506955
+file 52 sample=0 run=56 sampled=17000 crossings=201600 response=139030 truth_hits=0
+file 53 sample=1 run=56 sampled=100000 crossings=2512515 response=2082096 truth_hits=3532475
+file 54 sample=0 run=57 sampled=4420 crossings=86204 response=61670 truth_hits=0
+file 55 sample=1 run=57 sampled=100000 crossings=2402664 response=2001392 truth_hits=3663341
+Prepared 6300 channels and 291550 dependency bins; peak preparation RSS=4533120 KiB; starting 4 isolated fit workers
+Fit worker temporary outputs: "/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/.scratch/muon_mip_response_runs/fit_workers_617113_FInLwg"
+Warning in <Fit>: Fit data is empty 
+Warning in <Fit>: Fit data is empty 
+Warning in <Fit>: Fit data is empty 
+Warning in <Fit>: Fit data is empty 
+Fitted through CellID 100000
+Fitted through CellID 110000
+Fitted through CellID 120000
+Fitted through CellID 130000
+Fitted through CellID 140000
+Fitted through CellID 150000
+Fitted through CellID 300000
+Fitted through CellID 310000
+Fitted through CellID 320000
+Fitted through CellID 330000
+Fitted through CellID 340000
+Fitted through CellID 350000
+Fitted through CellID 500000
+Fitted through CellID 510000
+Fitted through CellID 520000
+Fitted through CellID 530000
+Fitted through CellID 540000
+Fitted through CellID 550000
+Fitted through CellID 700000
+Fitted through CellID 710000
+Fitted through CellID 720000
+Fitted through CellID 730000
+Fitted through CellID 740000
+Fitted through CellID 750000
+Fitted through CellID 900000
+Fitted through CellID 910000
+Fitted through CellID 920000
+Fitted through CellID 930000
+Fitted through CellID 940000
+Fitted through CellID 950000
+Fitted through CellID 1100000
+Fitted through CellID 1110000
+Fitted through CellID 1120000
+Fitted through CellID 1130000
+Fitted through CellID 1140000
+Fitted through CellID 1150000
+Fitted through CellID 1300000
+Fitted through CellID 1310000
+Fitted through CellID 1320000
+Fitted through CellID 1330000
+Fitted through CellID 1340000
+Fitted through CellID 1350000
+Fitted through CellID 1500000
+Fitted through CellID 1510000
+Fitted through CellID 1520000
+Fitted through CellID 1530000
+Fitted through CellID 1540000
+Fitted through CellID 1550000
+Fitted through CellID 1700000
+Fitted through CellID 1710000
+Fitted through CellID 1720000
+Fitted through CellID 1730000
+Fitted through CellID 1740000
+Fitted through CellID 1750000
+Fitted through CellID 1900000
+Fitted through CellID 1910000
+Fitted through CellID 1920000
+Fitted through CellID 1930000
+Fitted through CellID 1940000
+Fitted through CellID 1950000
+Fitted through CellID 2100000
+Fitted through CellID 2110000
+Fitted through CellID 2120000
+Fitted through CellID 2130000
+Fitted through CellID 2140000
+Fitted through CellID 2150000
+Fitted through CellID 2300000
+Fitted through CellID 2310000
+Fitted through CellID 2320000
+Fitted through CellID 2330000
+Fitted through CellID 2340000
+Fitted through CellID 2350000
+Fitted through CellID 2500000
+Fitted through CellID 2510000
+Fitted through CellID 2520000
+Fitted through CellID 2530000
+Fitted through CellID 2540000
+Fitted through CellID 2550000
+Fitted through CellID 2700000
+Fitted through CellID 2710000
+Fitted through CellID 2720000
+Fitted through CellID 2730000
+Fitted through CellID 2740000
+Fitted through CellID 2750000
+Fitted through CellID 2900000
+Fitted through CellID 2910000
+Fitted through CellID 2920000
+Fitted through CellID 2930000
+Fitted through CellID 2940000
+Fitted through CellID 2950000
+Fitted through CellID 0
+Fitted through CellID 10000
+Fitted through CellID 20000
+Fitted through CellID 30000
+Fitted through CellID 40000
+Fitted through CellID 50000
+Fitted through CellID 200000
+Fitted through CellID 210000
+Fitted through CellID 220000
+Fitted through CellID 230000
+Fitted through CellID 240000
+Fitted through CellID 250000
+Fitted through CellID 400000
+Fitted through CellID 410000
+Fitted through CellID 420000
+Fitted through CellID 430000
+Fitted through CellID 440000
+Fitted through CellID 450000
+Fitted through CellID 600000
+Fitted through CellID 610000
+Fitted through CellID 620000
+Fitted through CellID 630000
+Fitted through CellID 640000
+Fitted through CellID 650000
+Fitted through CellID 800000
+Fitted through CellID 810000
+Fitted through CellID 820000
+Fitted through CellID 830000
+Fitted through CellID 840000
+Fitted through CellID 850000
+Fitted through CellID 1000000
+Fitted through CellID 1010000
+Fitted through CellID 1020000
+Fitted through CellID 1030000
+Fitted through CellID 1040000
+Fitted through CellID 1050000
+Fitted through CellID 1200000
+Fitted through CellID 1210000
+Fitted through CellID 1220000
+Fitted through CellID 1230000
+Fitted through CellID 1240000
+Fitted through CellID 1250000
+Fitted through CellID 1400000
+Fitted through CellID 1410000
+Fitted through CellID 1420000
+Fitted through CellID 1430000
+Fitted through CellID 1440000
+Fitted through CellID 1450000
+Fitted through CellID 1600000
+Fitted through CellID 1610000
+Fitted through CellID 1620000
+Fitted through CellID 1630000
+Fitted through CellID 1640000
+Fitted through CellID 1650000
+Fitted through CellID 1800000
+Fitted through CellID 1810000
+Fitted through CellID 1820000
+Fitted through CellID 1830000
+Fitted through CellID 1840000
+Fitted through CellID 1850000
+Fitted through CellID 2000000
+Fitted through CellID 2010000
+Fitted through CellID 2020000
+Fitted through CellID 2030000
+Fitted through CellID 2040000
+Fitted through CellID 2050000
+Fitted through CellID 2200000
+Fitted through CellID 2210000
+Fitted through CellID 2220000
+Fitted through CellID 2230000
+Fitted through CellID 2240000
+Fitted through CellID 2250000
+Fitted through CellID 2400000
+Fitted through CellID 2410000
+Fitted through CellID 2420000
+Fitted through CellID 2430000
+Fitted through CellID 2440000
+Fitted through CellID 2450000
+Fitted through CellID 2600000
+Fitted through CellID 2610000
+Fitted through CellID 2620000
+Fitted through CellID 2630000
+Fitted through CellID 2640000
+Fitted through CellID 2650000
+Fitted through CellID 2800000
+Fitted through CellID 2810000
+Fitted through CellID 2820000
+Fitted through CellID 2830000
+Fitted through CellID 2840000
+Fitted through CellID 2850000
+Muon response fit worker 3 complete: "/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/.scratch/muon_mip_response_runs/fit_workers_617113_FInLwg/worker_3", matched fit channels data/MC 212/315
+Muon response fit worker 1 complete: "/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/.scratch/muon_mip_response_runs/fit_workers_617113_FInLwg/worker_1", matched fit channels data/MC 211/335
+Muon response fit worker 2 complete: "/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/.scratch/muon_mip_response_runs/fit_workers_617113_FInLwg/worker_2", matched fit channels data/MC 227/407
+Muon response fit worker 0 complete: "/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/.scratch/muon_mip_response_runs/fit_workers_617113_FInLwg/worker_0", matched fit channels data/MC 275/397
+Merged 4 channel workers into "/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/threshold_MPVwoCT"
+Muon response complete: "/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/threshold_MPVwoCT", isolated workers=4
+2026-10-13T05:31:46+09:00

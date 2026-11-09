@@ -1,0 +1,7 @@
+view	sample	bins	min_GeV	max_GeV	underflow	overflow
+main	0	218	2.46633	4.99693	3	2
+main	1	218	2.46633	4.99693	0	0
+main	2	218	2.46633	4.99693	3	2
+full	0	400	1.91649	5.23486	0	0
+full	1	400	1.91649	5.23486	0	0
+full	2	400	1.91649	5.23486	0	0

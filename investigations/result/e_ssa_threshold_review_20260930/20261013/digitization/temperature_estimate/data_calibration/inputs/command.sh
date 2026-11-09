@@ -1,0 +1,1 @@
+bash /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/e_ssa_threshold_review_20260930/data_temperature_impact.sh 20261013

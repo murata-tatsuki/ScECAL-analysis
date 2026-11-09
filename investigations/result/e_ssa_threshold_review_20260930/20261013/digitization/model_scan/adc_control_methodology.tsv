@@ -1,0 +1,6 @@
+quantity	definition
+cohort	100GeV2truthfilesx1000events;1516originalcog20+energywindowevents;requireSAMEphysicalhitpresentwithpositivecalenergyinALL6cases(original,CTbase,2pixels,2thresholds). Sameboth/all-survivor sampleforallreportedconditions.
+HG	Truthhit0.6..1.2and1.2..3MeV;all6useHG(rawHG<2600). Excludes earlygain-switch channels here.
+LG	Truthhit30..100and>=100MeV;all6useLG(rawHG>=2600);all6rawLG<3000toclipoutLGADCceiling. HG4000sentinelsaregainflags,notevidenceofphysicalsaturation.
+ADC	HG-equivalentselectedADC=HitEnergy*adoptedcalibrationMIP/.305;reference=truth_edep/.305*MIP;MC20C;calibrationMIPsharedunchanged. NormalizedratioquantifiesMCresponse,becauseDataGeant4truthunavailableNOTameasureddataSiPMsaturationratio.
+statistics	q16/q84areHITDISTRIBUTIONquantiles,NOTconfidenceintervals. Model/CTpairedperhitratioshaveindependentADCnoise;selectionconditional;countsandcontributingeventsshown;small15umlargeLGsamplescannotgeneralize.

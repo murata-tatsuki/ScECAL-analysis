@@ -1,0 +1,4 @@
+energy_GeV	data_events	mc_events	data_back5_gt5percent_fraction	mc_back5_gt5percent_fraction
+5	3073	2825	0.0966482	0.0141593
+20	1784	2740	0.0257848	0.0324818
+100	5048	4541	0.0923138	0.199075

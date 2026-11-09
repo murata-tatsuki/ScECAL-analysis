@@ -1,0 +1,11 @@
+{
+  "id": "simulation",
+  "path": "/home/murata_t/data_beamtest/simulation",
+  "resolved_path": "/net/megsrv01/export/megraid01/users/data_beamtest/simulation",
+  "commit": "66a6526e9db5ede8c90101772084fdf9cb63a7df\n",
+  "commit_error": "",
+  "branch": "main\n",
+  "branch_error": "",
+  "status_error": "Command '['git', '-C', '/home/murata_t/data_beamtest/simulation', 'status', '--porcelain=v1', '--untracked-files=no']' timed out after 180 seconds",
+  "tracked_error": "Command '['git', '-C', '/home/murata_t/data_beamtest/simulation', 'ls-files']' timed out after 180 seconds"
+}

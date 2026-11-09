@@ -1,0 +1,12 @@
+data file 0 sampled 2000 max calibration errors 1.42109e-14,2.84217e-14
+data file 1 sampled 2000 max calibration errors 1.42109e-14,1.42109e-14
+data file 2 sampled 2000 max calibration errors 3.55271e-15,3.55271e-15
+data file 3 sampled 2000 max calibration errors 7.10543e-15,7.10543e-15
+mc file 0 sampled 1000 max calibration errors 1.42109e-14,2.84217e-14
+mc file 1 sampled 1000 max calibration errors 1.42109e-14,1.42109e-14
+mc file 2 sampled 1000 max calibration errors 1.42109e-14,2.84217e-14
+mc file 3 sampled 1000 max calibration errors 1.42109e-14,5.68434e-14
+mc file 4 sampled 1000 max calibration errors 1.42109e-14,1.42109e-14
+mc file 5 sampled 1000 max calibration errors 1.42109e-14,5.68434e-14
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/e_ssa_threshold_review_20260930/result/5GeV/raw/figures/raw_adc_and_lg_energy.png has been created
+Finished: "/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/e_ssa_threshold_review_20260930/result/5GeV/raw"

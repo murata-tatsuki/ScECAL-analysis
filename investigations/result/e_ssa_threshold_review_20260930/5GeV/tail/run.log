@@ -1,0 +1,20 @@
+data files=1 processed events=2000
+data files=2 processed events=4000
+data files=3 processed events=6000
+data files=4 processed events=8000
+mc files=1 processed events=1000
+mc files=2 processed events=2000
+mc files=3 processed events=3000
+mc files=4 processed events=4000
+mc files=5 processed events=5000
+mc files=6 processed events=6000
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/e_ssa_threshold_review_20260930/result/5GeV/tail/figures/hg_lg_tail_overview.png has been created
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/e_ssa_threshold_review_20260930/result/5GeV/tail/figures/hg_lg_tail_channel_map.png has been created
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/e_ssa_threshold_review_20260930/result/5GeV/tail/figures/hg_lg_tail_layer_map_data_layers00_15.tmp.786625.png has been created
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/e_ssa_threshold_review_20260930/result/5GeV/tail/figures/hg_lg_tail_layer_map_data_layers16_29.tmp.786625.png has been created
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/e_ssa_threshold_review_20260930/result/5GeV/tail/figures/hg_lg_tail_layer_map_mc_layers00_15.tmp.786625.png has been created
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/e_ssa_threshold_review_20260930/result/5GeV/tail/figures/hg_lg_tail_layer_map_mc_layers16_29.tmp.786625.png has been created
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/e_ssa_threshold_review_20260930/result/5GeV/tail/figures/event_energy.png has been created
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/e_ssa_threshold_review_20260930/result/5GeV/tail/figures/event_energy_full_range.png has been created
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/e_ssa_threshold_review_20260930/result/5GeV/tail/figures/event_tail_correlations.png has been created
+Finished "/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/e_ssa_threshold_review_20260930/result/5GeV/tail"; common channels=310; hit/event counts agree

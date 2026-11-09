@@ -1,0 +1,46 @@
+Verification date: 2026-10-04 JST
+Command: bash /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/e_ssa_threshold_review_20260930/resolution_impact.sh
+Requested MC: /home/murata_t/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold
+Resolved MC: /net/megsrv01/export/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold
+/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Analysis_edit/src/MCDigi.cxx: OK
+/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Analysis_edit/src/Extract.cxx: OK
+/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Analysis_edit/share/all_hl_electron2023_hlratio_v3.root: OK
+/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Analysis_edit/share/all_auto_muon_v4_trackfit.root: OK
+/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Analysis_edit/share/pedestal2023_SPS.root: OK
+/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/analysis/result/channel_response/hg_lg_tail/threshold/e_ssa/5GeV/tail_study.root: OK
+/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/analysis/result/channel_response/hg_lg_tail/threshold/e_ssa/5GeV/inputs/data.tsv: OK
+/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/analysis/result/channel_response/hg_lg_tail/threshold/e_ssa/5GeV/inputs/mc.tsv: OK
+5 GeV: source metadata, parameters, and tail flags verified
+/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Analysis_edit/src/MCDigi.cxx: OK
+/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Analysis_edit/src/Extract.cxx: OK
+/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Analysis_edit/share/all_hl_electron2023_hlratio_v3.root: OK
+/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Analysis_edit/share/all_auto_muon_v4_trackfit.root: OK
+/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Analysis_edit/share/pedestal2023_SPS.root: OK
+/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/analysis/result/channel_response/hg_lg_tail/threshold/e_ssa/20GeV/tail_study.root: OK
+/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/analysis/result/channel_response/hg_lg_tail/threshold/e_ssa/20GeV/inputs/data.tsv: OK
+/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/analysis/result/channel_response/hg_lg_tail/threshold/e_ssa/20GeV/inputs/mc.tsv: OK
+20 GeV: source metadata, parameters, and tail flags verified
+/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Analysis_edit/src/MCDigi.cxx: OK
+/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Analysis_edit/src/Extract.cxx: OK
+/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Analysis_edit/share/all_hl_electron2023_hlratio_v3.root: OK
+/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Analysis_edit/share/all_auto_muon_v4_trackfit.root: OK
+/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Analysis_edit/share/pedestal2023_SPS.root: OK
+/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/analysis/result/channel_response/hg_lg_tail/threshold/e_ssa/100GeV/tail_study.root: OK
+/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/analysis/result/channel_response/hg_lg_tail/threshold/e_ssa/100GeV/inputs/data.tsv: OK
+/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/analysis/result/channel_response/hg_lg_tail/threshold/e_ssa/100GeV/inputs/mc.tsv: OK
+100 GeV: source metadata, parameters, and tail flags verified
+make: Entering directory '/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/e_ssa_threshold_review_20260930'
+g++ -O2 -Wall -Wextra -std=c++17 -I../../analysis/impact_studies -pthread -std=c++20 -m64 -I/meg/home/meg/cern/root-v6.36.08_gcc1421_python312_release/include ResolutionImpact.cc -L/meg/home/meg/cern/root-v6.36.08_gcc1421_python312_release/lib -lCore -lImt -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lROOTVecOps -lTree -lTreePlayer -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lROOTNTuple -lMultiProc -lROOTDataFrame -lROOTNTupleUtil -Wl,-rpath,/meg/home/meg/cern/root-v6.36.08_gcc1421_python312_release/lib -pthread -lm -ldl -rdynamic -o ResolutionImpact
+make: Leaving directory '/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/e_ssa_threshold_review_20260930'
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/resolution_impact/comparison/20mm/5GeV/figures/resolution_position_impact.png has been created
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/resolution_impact/comparison/20mm/5GeV/figures/energy_position_profile.png has been created
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/resolution_impact/comparison/20mm/20GeV/figures/resolution_position_impact.png has been created
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/resolution_impact/comparison/20mm/20GeV/figures/energy_position_profile.png has been created
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/resolution_impact/comparison/20mm/100GeV/figures/resolution_position_impact.png has been created
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/resolution_impact/comparison/20mm/100GeV/figures/energy_position_profile.png has been created
+5 GeV complete
+20 GeV complete
+100 GeV complete
+
+Additional command: ResolutionImpact INPUT_BASE OUTPUT_BASE --fit-scan
+72 Gaussian fits: status 0; source files unchanged after analysis; baseline moments independently reproduced.

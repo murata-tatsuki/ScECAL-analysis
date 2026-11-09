@@ -1,0 +1,1 @@
+investigations/e_ssa_threshold_review_20260930/run.sh: line 32: 1666057 Killed                  "$PROJECT/analysis/impact_studies/HLInterceptStudy" --data-manifest "$out/baseline/inputs/data.tsv" --mc-manifest "$out/baseline/inputs/mc.tsv" "${args[@]}" --energy "$energy" --max-events 6000 --plots 0 --out "$out/baseline" > "$out/baseline/run.log" 2>&1

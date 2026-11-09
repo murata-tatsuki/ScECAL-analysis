@@ -1,0 +1,11 @@
+branch	type
+CellID	Int_t
+LandauMPV	Double_t
+LandauWidth	Double_t
+GauSigma	Double_t
+ChiSquare	Double_t
+NDF	Int_t
+chnEntries	Int_t
+LandauMPV_error	Double_t
+LandauWidth_error	Double_t
+GauSigma_error	Double_t

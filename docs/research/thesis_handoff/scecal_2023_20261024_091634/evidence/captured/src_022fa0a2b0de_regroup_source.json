@@ -1,0 +1,25 @@
+{
+  "from_label": "full_split",
+  "source_code_manifest": {
+    "analysis/channel_response/temperature_calibration/TemperatureGeometry.hh": "39ad9c352361e74ee7a8f5b959afbcd908382eaafff7cd4ad6ac53eb2bb01900",
+    "analysis/sipm_gain/Makefile": "2efed198240e60abf7b5a926f4bc96be49cb97ef2af34e82cd759b13f3d9331f",
+    "analysis/sipm_gain/autocorrelation/Fit.cc": "e4579760a6604c763f94533751da5e355bc6780933c43cefcbddfb3410f89b0f",
+    "analysis/sipm_gain/collect/Collect.cc": "90a4178b177cc11ba282990764b3d09f43a618ceb8b87ac8bb6c7715fac85643",
+    "analysis/sipm_gain/common/CombFit.cc": "520af6564ca373ae6fd1aacdd6d817804e59e5c50629128c33a962c128db344f",
+    "analysis/sipm_gain/common/GainIO.hh": "6cdd6bf61fde8946d7157dc07744ea0a9e03ec26af77476f328513c5c860e46a",
+    "analysis/sipm_gain/common/GainMethods.cc": "81b4d0a58dd8cced967fd3be3e6fe778720f6c54d963b3ad59487157c0880a9a",
+    "analysis/sipm_gain/common/GainMethods.hh": "ee53a14b77acff455cda9592865a6f19c6609560a2bb5805bfbbe96711cedc56",
+    "analysis/sipm_gain/common/Numerics.cc": "ce883c1c79560a873747d1363dd9174290f0e51bd8e11113764528093e1e2625",
+    "analysis/sipm_gain/common/Numerics.hh": "f4d9cf8ed5ed7f16c6f10677cea8c1704f1440a57eec5dbc878c1d11a51afbd3",
+    "analysis/sipm_gain/common/Pipeline.hh": "1a51a1b5e9645620cb3c1711b589903d0af1726a2dbacd0642ebee8a32ba1dad",
+    "analysis/sipm_gain/compare/Compare.cc": "f68eaabb8b9ecff1256a28fab749357b6dcff95d0ece2fa301aa13ecf5d4f3a0",
+    "analysis/sipm_gain/envelope_comb/Fit.cc": "b94b8ef4fcab76b7c3d1b7e318c529ccae559fddcbfa3d268fc87882c1c2b100",
+    "analysis/sipm_gain/fft/Fit.cc": "cc7b183f4c2e40ce30611c1eee2f37919509ed85c720a6fa1a53bbf1d1393ec0",
+    "analysis/sipm_gain/multi_gaussian/Fit.cc": "761853fae89048208143cf6ede122e945382dd4ce4dae5ebda9d804da3e7f435",
+    "analysis/sipm_gain/run.sh": "92f72328d5c66e6282ffdb241affc6bf13bed9202f7aa2ae0a768eb9e9bb11ef",
+    "analysis/sipm_gain/slurm_array.sh": "c02e23e21af5a48899ed4c3488494db502168cf35b346e17248927ba55868b68",
+    "analysis/sipm_gain/workflow/Analyze.cc": "300386a3c0624212792e9cbf75e035799a9ae749e080ed6448acc4d4b1800f89",
+    "analysis/sipm_gain/workflow/Submit.cc": "052221ad78de9ddf0099f68596fe11e50695151f0e2ea4382047821a19e3a5ae"
+  },
+  "source_manifest_sha256": "bd8da7f8b522923069451482c7c9d8d0248949e96f2dad094a91a21905b41755"
+}

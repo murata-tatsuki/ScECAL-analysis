@@ -1,0 +1,4 @@
+pedestal	/home/murata_t/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Analysis_edit/share/pedestal2023_SPS.root
+current-mip	/home/murata_t/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Analysis_edit/share/all_auto_muon_v4_trackfit.root
+hl	/home/murata_t/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Analysis_edit/share/all_hl_electron2023_hlratio_v3.root
+threshold	/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/analysis/result/threshold/threshold.root

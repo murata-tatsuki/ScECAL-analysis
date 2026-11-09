@@ -1,0 +1,456 @@
+[
+  {
+    "directory": "/home/murata_t/scecal_reassessment_20260929",
+    "entries": [
+      "read_saved_results.py",
+      "saved_fit_values.csv",
+      "saved_layer_means_100GeV.csv",
+      "probe_calibration.py",
+      "HGLG_overlap_ECAL_Run105_20230430_081224.csv",
+      "HGLG_overlap_ECAL_Run106_20230430_093819.csv",
+      "HGLG_overlap_ECAL_Run107_20230430_111425.csv",
+      "HGLG_overlap_e-_100GeV_0.csv",
+      "calibration_sample_100GeV.csv",
+      "mc_truth_calibration_closure_sample.csv",
+      "conditional_energy_100GeV.csv",
+      "plot_summary.py",
+      "reassessment_summary.png",
+      "reassessment_summary.pdf",
+      "audit_mip_constants.py",
+      "mip_parameter_audit.csv",
+      "mip_inferred_from_saved_mc.csv",
+      "mip_audit_summary.json",
+      "reassessment_ja.md"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit",
+    "entries": [
+      "inputs",
+      ".run.lock",
+      "run.log",
+      "histograms.root",
+      "dependencies.tsv",
+      "event_audit.tsv",
+      "COLLECTED",
+      "fits.root",
+      "fits.tsv",
+      "fit_variants.tsv",
+      "mip.root",
+      "schema.tsv",
+      "channels.tsv",
+      "summary.tsv",
+      "reader_status.tsv",
+      "figures",
+      "COMPLETE"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/inputs",
+    "entries": [
+      "parameters",
+      "bin",
+      "command.sh",
+      "manifest.tsv",
+      "parameter_sources.tsv",
+      "configuration.tsv",
+      "analysis_sources.tar.gz",
+      "current_reader_sources",
+      "checksums.sha256",
+      "root_version.txt",
+      "collection_origin",
+      "refit_input.sha256",
+      "result_checksums.sha256"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/inputs/current_reader_sources",
+    "entries": [
+      "Calibration.cxx",
+      "EBUdecode.cxx",
+      "Calibration.h",
+      "EBUdecode.h",
+      "global_config",
+      "Extract.cxx",
+      "Extract.h",
+      "MCDigi.cxx"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons_refit/inputs/collection_origin",
+    "entries": [
+      "parameters",
+      "bin",
+      "command.sh",
+      "manifest.tsv",
+      "parameter_sources.tsv",
+      "configuration.tsv",
+      "analysis_sources.tar.gz",
+      "current_reader_sources",
+      "checksums.sha256",
+      "root_version.txt",
+      "input_stats_before.tsv",
+      "input_stats_after.tsv",
+      "result_checksums.sha256",
+      "plot_checksums_before.txt",
+      "plot_sources.tar.gz",
+      "plot_code_checksums.sha256",
+      "plot_commands.sh",
+      "plot_checksums_after.txt"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/default",
+    "entries": [
+      "inputs",
+      ".run.lock",
+      "run.log",
+      "validation.tsv",
+      "flat.root",
+      "geometry_bins.tsv",
+      "geometry_coverage.tsv",
+      "efficiency.tsv",
+      "calibration_closure.tsv",
+      "fits.tsv",
+      "plateau_stability.tsv",
+      "spectra.root",
+      "comparison.tsv",
+      "common_group_summary.tsv",
+      "fit_status_counts.tsv",
+      "group_summary.tsv",
+      "dependency_fits.tsv",
+      "event_summary.tsv",
+      "comparison",
+      "analysis_status.tsv",
+      "COMPLETE"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/default/inputs",
+    "entries": [
+      "requested.tsv",
+      "configuration.tsv",
+      "code_checksums.txt",
+      "parameter_checksums.txt",
+      "current_source_checksums.txt",
+      "current_MCDigi.cxx",
+      "current_Extract.cxx",
+      "current_Calibration.cxx",
+      "current_MIPFit.cxx",
+      "command.sh",
+      "file_metadata.tsv",
+      "manifest.tsv",
+      "input_stats_before.tsv",
+      "input_stats_after.tsv",
+      "calibration_parameters.tsv",
+      "analysis_source",
+      "plot_input_checksums_before.txt",
+      "plot_code_checksums.txt",
+      "plot_command.sh",
+      "plot_input_checksums_after.txt"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/threshold_MPVwoCT",
+    "entries": [
+      "inputs",
+      ".run.lock",
+      "run.log",
+      "validation.tsv",
+      "flat.root",
+      "geometry_bins.tsv",
+      "geometry_coverage.tsv",
+      "event_summary.tsv",
+      "fits.tsv",
+      "comparison.tsv",
+      "efficiency.tsv",
+      "calibration_closure.tsv",
+      "plateau_stability.tsv",
+      "dependency_fits.tsv",
+      "performance.tsv",
+      "group_summary.tsv",
+      "common_group_summary.tsv",
+      "fit_status_counts.tsv",
+      "spectra.root",
+      "analysis_status.tsv",
+      "comparison",
+      "COMPLETE"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/ScECAL_BeamTest/analysis/result/channel_response/muon_mip_response/threshold_MPVwoCT/inputs",
+    "entries": [
+      "requested.tsv",
+      "configuration.tsv",
+      "code_checksums.txt",
+      "parameter_checksums.txt",
+      "current_source_checksums.txt",
+      "current_MCDigi.cxx",
+      "current_Extract.cxx",
+      "current_Calibration.cxx",
+      "current_MIPFit.cxx",
+      "command.sh",
+      "file_metadata.tsv",
+      "manifest.tsv",
+      "input_stats_before.tsv",
+      "input_stats_after.tsv",
+      "calibration_parameters.tsv"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/ScECAL_BeamTest/investigations/result/raw_calibration/100GeV",
+    "entries": [
+      "inputs",
+      "run.log",
+      "figures",
+      "runs.tsv",
+      "channels.tsv",
+      "validation.tsv",
+      "event_summary.tsv",
+      "raw_calibration.root",
+      "tails.log",
+      "tail_examples.tsv",
+      "robust_residuals.tsv",
+      "residuals_by_run.tsv",
+      "tail_event_effect.tsv",
+      "tail_counts.tsv",
+      "lg_dropout_examples.tsv",
+      "lg_dropout_counts.tsv",
+      "event_readout.tsv",
+      "residual_tails.root",
+      "comparison_summary.tsv",
+      "early_switch_channels.tsv",
+      "comparison_summary.root",
+      "event_readout_summary.tsv",
+      "investigation.md"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/ScECAL_BeamTest/investigations/result/raw_calibration/100GeV/inputs",
+    "entries": [
+      "checksums.txt",
+      "sampled_files.tsv",
+      "Calibration_current.cxx",
+      "HLGainDecode_current.cxx",
+      "MCDigi_current.cxx",
+      "Extract_current.cxx",
+      "comparison_source.cc",
+      "final_code_checksums.txt",
+      "provenance.txt"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/muon_ct",
+    "entries": [
+      "old_threshold",
+      "new_threshold_MPVwoCT",
+      "build.log",
+      "reviewer_code_checksums.txt",
+      "command.sh",
+      "review.log",
+      "validation.tsv",
+      "adc_distribution.tsv",
+      "hit_efficiency.tsv",
+      "channel_fits.tsv",
+      "common_channel_summary.tsv",
+      "unmatched_adc.png",
+      "matched_three_samples_adc.png",
+      "event_summary.tsv",
+      "event_hits_energy.png",
+      "generated_truth.tsv",
+      "methodology.tsv",
+      "paired_truth_detection.tsv"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/integrated",
+    "entries": [
+      "inputs",
+      "slurm-1326636.out",
+      "slurm-1326636.err",
+      "run.log",
+      "summary.tsv",
+      "impact.tsv",
+      "validation.tsv",
+      "gain_channels.tsv",
+      "models.tsv",
+      "covariance.tsv",
+      "production_resolution.tsv",
+      "hit_cuts.tsv",
+      "comparison",
+      "truth_scale.tsv",
+      "response_comparison.tsv",
+      "gain_overlap.tsv",
+      "leak_proxy_rates.tsv"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/ScECAL_BeamTest/investigations/result/hg_lg_tail_review_20260930",
+    "entries": [
+      "completed_summary.tsv"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/ScECAL_BeamTest/analysis/result/sipm_gain/full_grouped/inputs",
+    "entries": [
+      "regroup.log",
+      ".lock",
+      "analysis_units.json",
+      "manifest.tsv",
+      "source",
+      "source_manifest.json",
+      "regroup_source.json",
+      "regroup_verification.json",
+      "fit_prepare.log",
+      ".plan.lock",
+      "analysis_plan.json"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/ScECAL_BeamTest/analysis/result/sipm_gain/full_grouped/comparison/inputs",
+    "entries": [
+      "source",
+      "configuration.json"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/ScECAL_BeamTest/analysis/result/sipm_gain_selection/full_grouped_relaxed_2dac",
+    "entries": [
+      ".lock",
+      "inputs",
+      ".configuration.lock",
+      "layers",
+      "selection.root",
+      "data",
+      "conditions.tsv",
+      "summary.json",
+      "MERGE_COMPLETE",
+      "plots"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/ScECAL_BeamTest/analysis/result/sipm_gain_selection/full_grouped_relaxed_2dac/inputs",
+    "entries": [
+      "source",
+      "configuration.json"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/ScECAL_BeamTest/analysis/sipm_gain_selection",
+    "entries": [
+      "Common.hh",
+      "Selection.hh",
+      "Select.cc",
+      "Merge.cc",
+      "Makefile",
+      "Plots.cc",
+      "Select.o",
+      "README.md",
+      "Merge.o",
+      "Plots.o",
+      "Select",
+      "Temperature.cc",
+      "Temperature.o"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/ScECAL_BeamTest/analysis/sipm_gain_pool",
+    "entries": [
+      "Pool.cc",
+      "Makefile",
+      "Pool",
+      "stage_job.sh",
+      "submit_stage.sh",
+      "README.md"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/ScECAL_BeamTest/analysis/channel_response/muon_mip_response",
+    "entries": [
+      "MuonMIPCommon.hh",
+      "InspectMuonInputs.cc",
+      "Makefile",
+      "README.md",
+      "AnalyzeMuonMIP.cc",
+      "RedrawMuonMIP",
+      "MuonMIPPlotStyle.hh",
+      "RedrawMuonMIP.cc",
+      "CollectMuonMIP.cc",
+      ".build.lock",
+      "InspectMuonInputs",
+      "CollectMuonMIP",
+      "AnalyzeMuonMIP",
+      "ExactFitCache.hh",
+      "MergeMuonShards",
+      "submit.sh",
+      "CurrentCalibration.hh",
+      "run.sh",
+      "MergeMuonShards.cc",
+      "TrackGeometry.hh"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/ScECAL_BeamTest/analysis/threshold",
+    "entries": [
+      "Makefile",
+      "langaus.C",
+      "execute.sl",
+      "threshold_allGeVs.sh",
+      "threshold_paralell.sh",
+      "execute_paralell.sl",
+      "EBUdecode.cxx",
+      "EBUdecode.h",
+      "threshold_finding_.cc",
+      "threshold_finding.cc",
+      "threshold_finding.o",
+      "threshold_finding",
+      "txt"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/ScECAL_BeamTest/analysis/gain",
+    "entries": [
+      "EBUdecode.h",
+      "EBUdecode.cxx",
+      "Makefile",
+      "langaus.C",
+      "gpu.sl",
+      "combine_files_LED.cc",
+      "led_per_dac.sh",
+      "led_per_day.sh",
+      "combine_files_beam.cc",
+      "beam.sh",
+      "combine_files_LED.o",
+      "combine_files_LED",
+      "combine_files_beam.o",
+      "combine_files_beam"
+    ]
+  },
+  {
+    "directory": "/home/murata_t/ScECAL_BeamTest/analysis/led",
+    "entries": [
+      "EBUdecode.cxx",
+      "EBUdecode.h",
+      "LED_combine.sh",
+      "Makefile",
+      "SPSgain.root",
+      "between_files_LED.cc",
+      "between_files_LED_scan.cc",
+      "between_files_gain.cc",
+      "compare_mip_histo.cpp",
+      "execute.sl",
+      "execute_files_LED.sh",
+      "file_list",
+      "gain_combine.sh",
+      "gpu.sl",
+      "gpu_.sl",
+      "langaus.C",
+      "led_scan.sh",
+      "mip_compare.root",
+      "scanning",
+      "scanning.cc",
+      "scanning.o",
+      "scanning.sh"
+    ]
+  }
+]

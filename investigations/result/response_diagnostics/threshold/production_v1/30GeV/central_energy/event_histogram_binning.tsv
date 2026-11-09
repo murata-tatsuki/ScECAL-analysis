@@ -1,0 +1,11 @@
+histogram	bins	xmin	xmax	bin_width	entries	underflow	overflow
+data_event_energy	155	-0.06	1.49	0.01	2724	0	1
+mc_nominal_event_energy	155	-0.06	1.49	0.01	16760	0	0
+mc_intercept_zero_event_energy	155	-0.06	1.49	0.01	16760	0	0
+data_event_energy_full_range	328	-0.065	1.575	0.005	2724	0	0
+mc_nominal_event_energy_full_range	328	-0.065	1.575	0.005	16760	0	0
+mc_intercept_zero_event_energy_full_range	328	-0.065	1.575	0.005	16760	0	0
+mc_event_energy_change	108	-0.052	0.002	0.0005	16760	2	0
+mc_event_relative_change	100	-0.048	0.002	0.0005	16760	5	0
+mc_event_energy_change_full_range	284	-0.0546	0.0022	0.0002	16760	0	0
+mc_event_relative_change_full_range	293	-0.0564	0.0022	0.0002	16760	0	0

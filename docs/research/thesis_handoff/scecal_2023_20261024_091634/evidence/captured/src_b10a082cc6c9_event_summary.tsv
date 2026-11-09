@@ -1,0 +1,3 @@
+sample	collected_events	calib_paired_finite_events	unavailable_event_energy	mean_saved_energy_MeV	mean_positive_saved_energy_MeV	mean_saved_hit_count
+data	855722	855722	0	6.4117509819	6.41175154507	12.554483816
+mc	2800000	2800000	0	19.4572374028	19.4666299851	30.2895310714

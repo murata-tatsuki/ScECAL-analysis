@@ -1,0 +1,14 @@
+Command: bash /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/e_ssa_threshold_review_20260930/temperature_resolution_estimate.sh 20261013
+Input: /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013
+Output: /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/temperature_estimate
+5 GeV: T mean=28.9756 RMS=0.0987647 C; CT RMS=7.81428%, data=12.4471%
+20 GeV: T mean=23.5115 RMS=0.319777 C; CT RMS=4.21065%, data=8.39483%
+100 GeV: T mean=22.9924 RMS=0.104138 C; CT RMS=2.63952%, data=5.019%
+Completed: 2026-10-13T09:09:23+09:00
+Command: bash /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/e_ssa_threshold_review_20260930/temperature_resolution_estimate.sh 20261013 --recompute
+Input: /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013
+Output: /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/temperature_estimate
+5 GeV: T mean=28.9756 RMS=0.0987647 C; CT RMS=7.81428%, data=12.4471%
+20 GeV: T mean=23.5115 RMS=0.319777 C; CT RMS=4.21065%, data=8.39483%
+100 GeV: T mean=22.9924 RMS=0.104138 C; CT RMS=2.63952%, data=5.019%
+Completed: 2026-10-13T09:11:22+09:00

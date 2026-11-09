@@ -1,0 +1,3 @@
+reference	events	mean_GeV	RMS_over_mean	sigma68_over_median
+all_good_channel_Geant4_edep_linear_unsaturated	1516	3.2763463350315	0.028571074761343	0.026602844843166
+subtotal_only_deposits_le1p2MeV	1516	0.25447670855589	0.06100651234111	0.060538918401687

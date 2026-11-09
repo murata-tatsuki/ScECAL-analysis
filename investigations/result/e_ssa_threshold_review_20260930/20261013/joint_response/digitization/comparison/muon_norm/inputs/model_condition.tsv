@@ -1,0 +1,2 @@
+case	yield_scale_10um	yield_scale_15um	effective_pixels_10um	threshold_shift_HG_ADC	beam_energies_GeV
+muon_norm	1.10	1.05	10000	0	5,20,100

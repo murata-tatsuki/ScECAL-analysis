@@ -1,0 +1,8 @@
+quantity	definition
+primary_yield	10um multiplier1.10,15um1.05 applied to primary photons only;CT(1-p) base retained,gain/CT/noise/calibrationMIP unchanged;20C fixed. Informed by measured muon MPV deficits,not exact validated MPV closure.
+cohort	Two existing electron truthfiles0and99 first1000eventseach at5/20/100GeV;fixed original20mmCoG and energywindow,tail-veto data. Normonly5/20/100,extra threshold+10/effectivepixels19600 and combined100GeVonly.
+truth	Good-channel sum ALL truthedep,withoutADCthreshold/saturation;active scintillator signal,not beamenergy or leakageoutsideactivevolume.
+ADC	Same positive physical hits present in all cases;HG truth0.6..1.2/1.2..3MeV and HGselected in all;LG truth30..100/>=100MeV LGselected and rawLG<3000 in all. HG-equivalentselectedADC=calEnergy*MIP/.305. Quantiles describe hitdistributions,NOTconfidenceintervals. Different electron signal mixture cannot be treated as muon MPV closure.
+uncertainty	400paired100-entry-block draws,stratified within2fixedfiles;independentdata blockresampling withinfixedfiles;60pairedGaussian bootstrapdraws;intervalsq16/q84. No file-levelsystematiccoverage.
+variance_gap	(newPilotCVsquared-referencePilotCVsquared)/(fullDataCVsquared-referencePilotCVsquared),positive narrows gap when data wider. Referencesoriginal,CTbase,andnorm. Not finalMCproductionresolution.
+conditions	Effectivepixelcount proxy for nonlinearity/recovery,not physicalpixelcountrecommendation;threshold shiftsdiagnostic,not fitted acquisitionefficiency. ROOTSetSeed(0) independentdraws;retainedROOTspermit exact analysis reproduction.

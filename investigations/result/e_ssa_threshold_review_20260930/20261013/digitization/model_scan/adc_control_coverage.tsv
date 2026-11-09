@@ -1,0 +1,5 @@
+signal_range	frozen_old_selected_events	truth_good_channel_hits_in_range	common_all6_cases_gain_stable_uncapped_hits
+HG_edep0p6to1p2MeV	1516	255544	249657
+HG_edep1p2to3MeV	1516	221360	209582
+LG_edep30to100MeV	1516	31429	31429
+LG_edepGE100MeV	1516	6379	6379

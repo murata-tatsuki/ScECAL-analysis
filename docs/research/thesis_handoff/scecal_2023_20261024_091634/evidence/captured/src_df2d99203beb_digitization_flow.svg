@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+<defs><marker id="arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#8195AB"/></marker></defs>
+<rect x="0" y="0" width="1600" height="900" rx="0" fill="#F4F7FB"/>
+<rect x="0" y="0" width="1600" height="187" rx="0" fill="#152C46"/>
+<text x="60" y="46.15" font-family="DejaVu Sans" font-size="17" font-weight="bold" fill="#AFC7E3">ScECAL  /  DETECTOR RESPONSE MODEL</text>
+<text x="60" y="112.75" font-family="DejaVu Sans" font-size="45" font-weight="bold" fill="#FFFFFF">From energy deposits to digitized ADC</text>
+<text x="60" y="154.85" font-family="DejaVu Sans" font-size="23" font-weight="normal" fill="#CBDAEB">A stochastic response model applied to each truth channel hit</text>
+<text x="60" y="221.25" font-family="DejaVu Sans" font-size="15" font-weight="bold" fill="#60758A">TRUTH ENERGY</text>
+<text x="1260" y="221.25" font-family="DejaVu Sans" font-size="15" font-weight="bold" fill="#60758A">DIGITIZED READOUT</text>
+<rect x="60" y="245" width="280" height="366" rx="14" fill="#FFFFFF" stroke="#DCE5EE" stroke-width="1"/>
+<rect x="60" y="245" width="280" height="7" rx="0" fill="#2862C9"/>
+<text x="80" y="285.1" font-family="DejaVu Sans" font-size="18" font-weight="bold" fill="#2862C9">01</text>
+<text x="80" y="326.85" font-family="DejaVu Sans" font-size="23" font-weight="bold" fill="#152C46">Energy deposit</text>
+<path d="M343,421 h10" stroke="#8195AB" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="360" y="245" width="280" height="366" rx="14" fill="#FFFFFF" stroke="#DCE5EE" stroke-width="1"/>
+<rect x="360" y="245" width="280" height="7" rx="0" fill="#008C95"/>
+<text x="380" y="285.1" font-family="DejaVu Sans" font-size="18" font-weight="bold" fill="#008C95">02</text>
+<text x="380" y="326.85" font-family="DejaVu Sans" font-size="23" font-weight="bold" fill="#152C46">Photon statistics</text>
+<path d="M643,421 h10" stroke="#8195AB" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="660" y="245" width="280" height="366" rx="14" fill="#FFFFFF" stroke="#DCE5EE" stroke-width="1"/>
+<rect x="660" y="245" width="280" height="7" rx="0" fill="#7552BB"/>
+<text x="680" y="285.1" font-family="DejaVu Sans" font-size="18" font-weight="bold" fill="#7552BB">03</text>
+<text x="680" y="326.85" font-family="DejaVu Sans" font-size="23" font-weight="bold" fill="#152C46">SiPM response</text>
+<path d="M943,421 h10" stroke="#8195AB" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="960" y="245" width="280" height="366" rx="14" fill="#FFFFFF" stroke="#DCE5EE" stroke-width="1"/>
+<rect x="960" y="245" width="280" height="7" rx="0" fill="#BA7619"/>
+<text x="980" y="285.1" font-family="DejaVu Sans" font-size="18" font-weight="bold" fill="#BA7619">04</text>
+<text x="980" y="326.85" font-family="DejaVu Sans" font-size="23" font-weight="bold" fill="#152C46">Electronics</text>
+<path d="M1243,421 h10" stroke="#8195AB" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="1260" y="245" width="280" height="366" rx="14" fill="#FFFFFF" stroke="#DCE5EE" stroke-width="1"/>
+<rect x="1260" y="245" width="280" height="7" rx="0" fill="#258264"/>
+<text x="1280" y="285.1" font-family="DejaVu Sans" font-size="18" font-weight="bold" fill="#258264">05</text>
+<text x="1280" y="326.85" font-family="DejaVu Sans" font-size="23" font-weight="bold" fill="#152C46">Hit acceptance</text>
+<text x="80" y="390.45" font-family="DejaVu Sans" font-size="31" font-weight="bold" fill="#2862C9">Edep [MeV]</text>
+<text x="80" y="436.0" font-family="DejaVu Sans" font-size="20" font-weight="bold" fill="#233B52">nMIP = Edep / 0.305</text>
+<text x="80" y="497.1" font-family="DejaVu Sans" font-size="18" font-weight="normal" fill="#60758A">Reference MIP energy</text>
+<text x="80" y="529.9" font-family="DejaVu Sans" font-size="22" font-weight="bold" fill="#233B52">0.305 MeV</text>
+<rect x="80" y="554" width="240" height="37" rx="9" fill="#2862C9"/>
+<text x="93" y="576.15" font-family="DejaVu Sans" font-size="17" font-weight="bold" fill="#FFFFFF">MIP-equivalent input</text>
+<text x="380" y="385.75" font-family="DejaVu Sans" font-size="25" font-weight="bold" fill="#008C95">Y = M / G</text>
+<text x="380" y="426.95" font-family="DejaVu Sans" font-size="21" font-weight="bold" fill="#233B52">μγ = nMIP · Y / PDE</text>
+<text x="380" y="483.95" font-family="DejaVu Sans" font-size="21" font-weight="normal" fill="#233B52">Poisson sampling</text>
+<text x="380" y="518.0" font-family="DejaVu Sans" font-size="20" font-weight="normal" fill="#60758A">Uniform variation</text>
+<text x="380" y="547.05" font-family="DejaVu Sans" font-size="19" font-weight="normal" fill="#60758A">±4.2% in photon count</text>
+<text x="680" y="382.95" font-family="DejaVu Sans" font-size="21" font-weight="bold" fill="#233B52">PDE → detection</text>
+<text x="680" y="428.05" font-family="DejaVu Sans" font-size="19" font-weight="normal" fill="#233B52">Finite pixel occupancy</text>
+<text x="680" y="458.0" font-family="DejaVu Sans" font-size="20" font-weight="bold" fill="#7552BB">→ saturation</text>
+<text x="680" y="503.95" font-family="DejaVu Sans" font-size="21" font-weight="bold" fill="#233B52">Crosstalk</text>
+<text x="680" y="532.05" font-family="DejaVu Sans" font-size="19" font-weight="normal" fill="#60758A">→ extra avalanches</text>
+<rect x="680" y="554" width="240" height="37" rx="9" fill="#7552BB"/>
+<text x="693" y="576.15" font-family="DejaVu Sans" font-size="17" font-weight="bold" fill="#FFFFFF">Nf = fired pixel count</text>
+<text x="980" y="386.65" font-family="DejaVu Sans" font-size="27" font-weight="bold" fill="#BA7619">A ≈ G × Nf</text>
+<text x="980" y="417.1" font-family="DejaVu Sans" font-size="18" font-weight="normal" fill="#60758A">Signal spread: σ = 3√Nf</text>
+<rect x="974" y="440" width="252" height="78" rx="8" fill="#FCF6EB"/>
+<text x="983" y="468.1" font-family="DejaVu Sans" font-size="18" font-weight="bold" fill="#233B52">HG: A + PH + noise</text>
+<text x="983" y="499.15" font-family="DejaVu Sans" font-size="17" font-weight="bold" fill="#233B52">LG: A/R + I + PL + noise</text>
+<text x="980" y="564.1" font-family="DejaVu Sans" font-size="18" font-weight="normal" fill="#60758A">Round to integer ADC</text>
+<text x="980" y="591.1" font-family="DejaVu Sans" font-size="18" font-weight="normal" fill="#60758A">Apply readout limits</text>
+<text x="1280" y="380.05" font-family="DejaVu Sans" font-size="19" font-weight="bold" fill="#233B52">Fluctuating threshold</text>
+<text x="1280" y="417.0" font-family="DejaVu Sans" font-size="20" font-weight="bold" fill="#258264">T ~ N(PH + θ, σθ²)</text>
+<text x="1280" y="466.05" font-family="DejaVu Sans" font-size="19" font-weight="normal" fill="#60758A">Keep hit if</text>
+<text x="1280" y="498.05" font-family="DejaVu Sans" font-size="19" font-weight="bold" fill="#233B52">HG ≥ T  and  HG ≥ PH</text>
+<rect x="1280" y="554" width="240" height="37" rx="9" fill="#258264"/>
+<text x="1293" y="576.15" font-family="DejaVu Sans" font-size="17" font-weight="bold" fill="#FFFFFF">SAVE BOTH: HG + LG</text>
+<rect x="60" y="647" width="688" height="164" rx="12" fill="#E6EDF8"/>
+<text x="82" y="682.2" font-family="DejaVu Sans" font-size="16" font-weight="bold" fill="#2862C9">CHANNEL-DEPENDENT CONSTANTS</text>
+<text x="82" y="722.05" font-family="DejaVu Sans" font-size="19" font-weight="normal" fill="#233B52">M: MIP response  ·  G: SiPM gain  ·  R: HG/LG ratio</text>
+<text x="82" y="755.05" font-family="DejaVu Sans" font-size="19" font-weight="normal" fill="#233B52">I: LG intercept  ·  PH, PL: pedestal means</text>
+<text x="82" y="787.1" font-family="DejaVu Sans" font-size="18" font-weight="normal" fill="#60758A">Plus pedestal widths, ADC limit and threshold parameters</text>
+<rect x="770" y="647" width="770" height="164" rx="12" fill="#FFFFFF" stroke="#DCE5EE" stroke-width="1"/>
+<text x="792" y="682.2" font-family="DejaVu Sans" font-size="16" font-weight="bold" fill="#7552BB">SiPM SETTINGS</text>
+<text x="792" y="720.1" font-family="DejaVu Sans" font-size="18" font-weight="bold" fill="#60758A">Pixel pitch</text>
+<text x="981" y="720.1" font-family="DejaVu Sans" font-size="18" font-weight="bold" fill="#60758A">PDE</text>
+<text x="1135" y="720.1" font-family="DejaVu Sans" font-size="18" font-weight="bold" fill="#60758A">Pixels</text>
+<text x="1323" y="720.1" font-family="DejaVu Sans" font-size="18" font-weight="bold" fill="#60758A">Crosstalk</text>
+<text x="792" y="757.05" font-family="DejaVu Sans" font-size="19" font-weight="normal" fill="#233B52">10 μm</text>
+<text x="981" y="757.05" font-family="DejaVu Sans" font-size="19" font-weight="normal" fill="#233B52">0.10</text>
+<text x="1135" y="757.05" font-family="DejaVu Sans" font-size="19" font-weight="normal" fill="#233B52">10,000</text>
+<text x="1323" y="757.05" font-family="DejaVu Sans" font-size="19" font-weight="normal" fill="#233B52">0.10</text>
+<text x="792" y="793.05" font-family="DejaVu Sans" font-size="19" font-weight="normal" fill="#233B52">15 μm</text>
+<text x="981" y="793.05" font-family="DejaVu Sans" font-size="19" font-weight="normal" fill="#233B52">0.25</text>
+<text x="1135" y="793.05" font-family="DejaVu Sans" font-size="19" font-weight="normal" fill="#233B52">4,489</text>
+<text x="1323" y="793.05" font-family="DejaVu Sans" font-size="19" font-weight="normal" fill="#233B52">0.15</text>
+<text x="60" y="856.0" font-family="DejaVu Sans" font-size="20" font-weight="bold" fill="#152C46">Output: pedestal-inclusive HG/LG ADC values; hit selection uses HG only.</text>
+<text x="60" y="883.35" font-family="DejaVu Sans" font-size="13" font-weight="normal" fill="#60758A">Implementation: Analysis_edit/src/MCDigi.cxx  ·  Gaussian notation N(mean, variance)  ·  A includes a shared signal fluctuation.</text>
+</svg>

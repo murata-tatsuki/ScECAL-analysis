@@ -1,0 +1,12 @@
+"1GeV" topology data sampled 4000
+"1GeV" topology mc sampled 20000
+Info in <TCanvas::Print>: png file result/1GeV/figures/shower_position.png has been created
+"5GeV" topology data sampled 8000
+"5GeV" topology mc sampled 20000
+Info in <TCanvas::Print>: png file result/5GeV/figures/shower_position.png has been created
+"100GeV" topology data sampled 6000
+"100GeV" topology mc sampled 20000
+Info in <TCanvas::Print>: png file result/100GeV/figures/shower_position.png has been created
+"200GeV" topology data sampled 4000
+"200GeV" topology mc sampled 20000
+Info in <TCanvas::Print>: png file result/200GeV/figures/shower_position.png has been created

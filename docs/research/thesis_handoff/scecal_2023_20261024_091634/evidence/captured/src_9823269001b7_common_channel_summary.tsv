@@ -1,0 +1,9 @@
+condition	group	common_valid_channels	stable_2_3_4sigma_channels	median_data_over_old_MPV	median_data_over_new_MPV	median_new_over_old_MPV	median_new_over_old_MPV_stable	stable_ratio_channel_bootstrap_CI_low	stable_ratio_channel_bootstrap_CI_high	median_data_Gaussian_over_MPV	median_old_Gaussian_over_MPV	median_new_Gaussian_over_MPV
+unmatched	10um_individual	0	0	nan	nan	nan	nan	nan	nan	nan	nan	nan
+unmatched	10um_fallback	0	0	nan	nan	nan	nan	nan	nan	nan	nan	nan
+unmatched	15um_individual	3	3	0.8795116016198	1.0625223772522	0.8485188875812	0.8485188875812	0.82775819168563	0.84868182391355	0.047211501636989	0.19823163982306	0.22248473036639
+unmatched	15um_fallback	1	1	0.80523761149509	0.96749308031317	0.83229288961368	0.83229288961368	nan	nan	0.18861055865837	0.25347604336554	0.28110194169187
+matched_three_samples	10um_individual	0	0	nan	nan	nan	nan	nan	nan	nan	nan	nan
+matched_three_samples	10um_fallback	0	0	nan	nan	nan	nan	nan	nan	nan	nan	nan
+matched_three_samples	15um_individual	0	0	nan	nan	nan	nan	nan	nan	nan	nan	nan
+matched_three_samples	15um_fallback	0	0	nan	nan	nan	nan	nan	nan	nan	nan	nan

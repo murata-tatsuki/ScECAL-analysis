@@ -1,0 +1,2 @@
+sample	selection	events	sum_weight	effective_events	mean_GeV	RMS_over_mean	central_GeV	hits	central_hits	temperature20_GeV	digiMip_GeV	nonfallback_GeV	cleanMip_GeV	temperature20_RMS_over_mean	digiMip_RMS_over_mean	cleanMip_RMS_over_mean	LG_GeV	energy_weighted_temperature	negative_all_connected_GeV	SEM_GeV
+data	keep	2796	2796	2796	0.164521540485	0.123339756277	0.134081019125	109.860157368	66.828683834	0.184076215865	0.137260324815	0.0250171472191	0.142244340454	0.122816671645	0.120126475982	0.121040308123	0.0406664983837	28.9771535454	-0.00134147989948	0.000383757847688

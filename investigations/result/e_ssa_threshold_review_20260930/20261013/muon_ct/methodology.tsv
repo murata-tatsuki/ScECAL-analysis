@@ -1,0 +1,8 @@
+quantity	definition
+geometry	Production CollectMuonMIP leave-one-layer-out tracking;7layers/projection;0.05rad;RMS3mm;full45x5x2mmchord;20000evenlysampledentries/file;Run44
+ADC	(rawHG-pedHG)*2/path_mm*C(T)/original_calibration_MIP;C(T)=1-(T-20)*alpha;HG<2600
+matching	Three-sample common bins(run,channel,longitudinal5mm,transverse1.5mm,sx0.01,sy0.01);>=3entries/sample;target=min(counts);weights=target/count. ADC matching uses eligible HG hits; efficiency matching separately uses ALL predicted crossings. Temperature is corrected, not matched.
+efficiency	Conditional on tracks in other layers and fiducial chord;not unconditional hardware efficiency. Hit detection includes ambiguous hits;HG_response needs unambiguous calibrated HG below2600.
+uncertainty	Means and efficiency SE use event-cluster sandwich estimate;MPV errors from ROOT fit;ratio median CI resamples channels descriptively(1000draws),not independent experimental repetitions. Quantile errors not estimated.
+fit	Same Landau-Gaussian convolution and quality policy as module;200bins0..8MIP;common three-sample bounds;100effectivehits;fitChi2/NDF<=3;3sigma default plus2/4sigma;stable requiresallvalidandMPVchange<3percent. Fits onnormalizedADC, not ADCinrawunits.
+limitations	Run44representative sample only;dataandMCindependent events. Pooled channel quantiles include response nonuniformity. All event sums are unselected and can include backgrounds/tails, not calorimetric electron resolution.

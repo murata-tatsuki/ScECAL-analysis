@@ -1,0 +1,46 @@
+{
+  "agreement_fraction": 0.05,
+  "beam_temperature_tolerance_C": 0.5,
+  "bootstrap": 0,
+  "calibration_schema": {
+    "NDF": "Double_t",
+    "cellIDs": "Int_t",
+    "chiSquare": "Double_t",
+    "gain": "Double_t",
+    "gainError": "Double_t",
+    "temp": "Double_t",
+    "tempError": "Double_t"
+  },
+  "comparison_configuration_sha256": "ee006f7760aaccf3ec44bdd725f9bbe60ac84cccd75dc132a6ed653a3bf9ec2a",
+  "comparison_name": "comparison",
+  "comparison_numeric_marker_sha256": "cf059e2732597b45661e8428aced1cfa163ca56a719a3e6a6f975d497083ae42",
+  "comparison_path": "/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/analysis/result/sipm_gain/full_grouped/comparison",
+  "dead_channels": [],
+  "format_version": 1,
+  "label": "full_grouped",
+  "min_dacs": 2,
+  "output_label": "full_grouped_relaxed_2dac",
+  "primary_method": "multi_gaussian",
+  "reference": {
+    "bytes": 24882917,
+    "mtime_ns": 1728623077776691276,
+    "path": "/net/megsrv01/export/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Analysis_edit/share/20230504_1425_Calib_LED_all.root"
+  },
+  "reference_sha256": "1d59a74b8e8deb0aa5286d203dedbadd91b423088ab78f971383e25552baaacd",
+  "sources": {
+    "analysis/sipm_gain/common/GainIO.hh": "c430a48d99e7af9175c63f2a561c22ed55d532b6879b8a2ec7e482f698bcece4",
+    "analysis/sipm_gain/common/GainMethods.hh": "ee53a14b77acff455cda9592865a6f19c6609560a2bb5805bfbbe96711cedc56",
+    "analysis/sipm_gain/common/LEDGroups.hh": "7d9e2ca2fa91bda3e3a66392ae793f67782ddda14a86c36a0a7c0976f0513d3d",
+    "analysis/sipm_gain/common/Pipeline.hh": "ee7fa7c7fcb06dad73146a2169e5a62d486565feaf718f8eb577ca1768eb6d3c",
+    "analysis/sipm_gain/compare/CompareIO.hh": "05627675a2274f48c689fef19b277f0bcf16b6c4e668ae17e6d4c4676e22ea7b",
+    "analysis/sipm_gain_selection/Common.hh": "bfc629621039abae089c2c871b7f2674f972cd93f7eef637ed469638796f6b29",
+    "analysis/sipm_gain_selection/Makefile": "1b552e19e7e599c3956a5b18309573a24331be6878222607528ed62a97a177cf",
+    "analysis/sipm_gain_selection/Merge.cc": "76c62b1ee63a8171422575f042235f3a1648adb54877cd02cb7a849716272ebc",
+    "analysis/sipm_gain_selection/Plots.cc": "eb59ef950f85d703e74e66ed9ecec826eb2791e09b28839fb61c6b50d580449e",
+    "analysis/sipm_gain_selection/Select.cc": "7fe07080baed5610aa983a52acca77becde7ed24b1ec3c710331bd2ed3e6cc28",
+    "analysis/sipm_gain_selection/Selection.hh": "05d3aa831cb0d27be10876860d5e643b1d30a585fea828e73ca8e6da55de7adb",
+    "analysis/sipm_gain_selection/Temperature.cc": "b3989376031ddef62338afb0e564c15cf7cd7158e6b86f007d7a37cb5aa4b806"
+  },
+  "spread_fraction": 0.05,
+  "temperature_span_C": 0.5
+}

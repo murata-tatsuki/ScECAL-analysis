@@ -1,0 +1,37 @@
+2026-10-13T04:05:06+09:00
+threshold file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/analysis/result/threshold/threshold.root
+threshold 0
+Process : Simulation Digi
+=========== PedestalExtract ============
+ pedestal records loaded: 6300; missing entries use zero
+=========== HLGainRatioExtract ============
+ mean of HLRatio (EBU15, EBU10): 33.8609 , 36.0741
+ mean of calibration HG offset (EBU15, EBU10): 165.864 , 166.851; rejected records: 416; supplemented channels: 73
+=========== MIPExtract ============
+ mean of MIPPeakValue (EBU15, EBU10): 428.913 , 97.0984; accepted channels: 987 , 2891; rejected records: 2842; supplemented channels: 2422
+=========== SiPMGainExtract ============
+ channel count(15um:10um) : 1260 , 5040
+ mean of SiPM Gain : 23.4165 , 13.849
+ mean of SiPM Gain Error: 0.914001 , 0.910495
+=========== Threshold Extract ============
+ channel count(15um:10um) : 1109 , 4853
+ mean of Threshold : 195.254 , 69.7125
+ sigma of Threshold : 15.7308 , 8.83222
+========= MC Digi Start ==========
+Process : event : 0
+========= MC Digi Finish ==========
+Finish  : Simulation Digi
+start of main program
+=========== PedestalExtract ============
+=========== InterFactorExtract ============
+ mean of interFactor (EBU15, EBU10): 33.8609 , 36.0741
+ mean of intercept (EBU15, EBU10): 165.864 , 166.851; rejected records: 0; supplemented channels: 77
+=========== MIPFactorExtract ============
+ mean of mipFactor (EBU15, EBU10): 428.913 , 97.0984; accepted channels: 987 , 2891; rejected records: 2842; supplemented channels: 2842
+/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/digitization/mc/ct_input/20GeV/decode/20GeV_99.root
+ [ Prepare to processCalib : ] Total Entries : 1000 
+ [ Process : Calibration : ]  event : 0 
+ [ End of Calibration Process ]  
+end of main program
+end of RawToRoot : Time : 1.55173
+2026-10-13T04:05:25+09:00

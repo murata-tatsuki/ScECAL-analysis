@@ -1,0 +1,6 @@
+sample	run	stage	path	entries	recovered	bytes	mtime_unix_seconds	status
+data	44	decode	/home/murata_t/data_beamtest/ECAL_data/analysed/2023/sps/decode/mu-/100GeV/ECAL_Run44_20230426_235337.root	25691	0	26642385	1707993985	ok
+data	44	calib	/home/murata_t/data_beamtest/ECAL_data/analysed/2023/sps/calib/mu-/100GeV/ECAL_Run44_20230426_235337.root	25691	0	6136058	1791626111	ok
+mc	44	decode	/home/murata_t/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/mu-/mu_track/threshold_MPVwoCT/100GeV/ECAL_Run44.root	100000	0	29988516	1791829967	ok
+mc	44	calib	/home/murata_t/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/mu-/mu_track/threshold_MPVwoCT/100GeV/ECAL_Run44.root	100000	0	72570713	1791830151	ok
+mc	44	truth	/home/murata_t/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/generate/mu-/mu_track/100GeV/ECAL_Run44.root	100000	0	90616924	1791754455	ok

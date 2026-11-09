@@ -1,0 +1,39 @@
+5GeV data file 0 complete, events=635
+5GeV data file 1 complete, events=1469
+5GeV data file 2 complete, events=2275
+5GeV data file 3 complete, events=3073
+5GeV mc file 0 complete, events=474
+5GeV mc file 1 complete, events=949
+5GeV mc file 2 complete, events=1411
+5GeV mc file 3 complete, events=1888
+5GeV mc file 4 complete, events=2362
+5GeV mc file 5 complete, events=2825
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/raw_adc/comparison/20mm/5GeV/common_channel_adc_energy.png has been created
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/raw_adc/comparison/20mm/5GeV/event_adc_hits.png has been created
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/raw_adc/comparison/20mm/5GeV/occupancy_hg4000_maps.png has been created
+5GeV raw ADC review complete
+20GeV data file 0 complete, events=890
+20GeV data file 1 complete, events=1784
+20GeV mc file 0 complete, events=460
+20GeV mc file 1 complete, events=918
+20GeV mc file 2 complete, events=1376
+20GeV mc file 3 complete, events=1834
+20GeV mc file 4 complete, events=2290
+20GeV mc file 5 complete, events=2740
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/raw_adc/comparison/20mm/20GeV/common_channel_adc_energy.png has been created
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/raw_adc/comparison/20mm/20GeV/event_adc_hits.png has been created
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/raw_adc/comparison/20mm/20GeV/occupancy_hg4000_maps.png has been created
+20GeV raw ADC review complete
+100GeV data file 0 complete, events=1620
+100GeV data file 1 complete, events=3314
+100GeV data file 2 complete, events=5048
+100GeV mc file 0 complete, events=758
+100GeV mc file 1 complete, events=1514
+100GeV mc file 2 complete, events=2272
+100GeV mc file 3 complete, events=3030
+100GeV mc file 4 complete, events=3783
+100GeV mc file 5 complete, events=4541
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/raw_adc/comparison/20mm/100GeV/common_channel_adc_energy.png has been created
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/raw_adc/comparison/20mm/100GeV/event_adc_hits.png has been created
+Info in <TCanvas::Print>: png file /net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/investigations/result/e_ssa_threshold_review_20260930/20261013/raw_adc/comparison/20mm/100GeV/occupancy_hg4000_maps.png has been created
+100GeV raw ADC review complete

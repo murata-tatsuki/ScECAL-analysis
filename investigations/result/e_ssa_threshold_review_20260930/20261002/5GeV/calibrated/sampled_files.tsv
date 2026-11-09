@@ -1,0 +1,11 @@
+sample	file_index	entries_total	entries_sampled	path
+data	0	3192	2000	/megraid01/users/data_beamtest/ECAL_data/analysed/2023/ps/calib/e-/5GeV/ECAL_Run63_20230522_162547.root
+data	1	5519	2000	/megraid01/users/data_beamtest/ECAL_data/analysed/2023/ps/calib/e-/5GeV/ECAL_Run64_20230522_175643.root
+data	2	8218	2000	/megraid01/users/data_beamtest/ECAL_data/analysed/2023/ps/calib/e-/5GeV/ECAL_Run75_20230523_191602.root
+data	3	9016	2000	/megraid01/users/data_beamtest/ECAL_data/analysed/2023/ps/calib/e-/5GeV/ECAL_Run76_20230523_213529.root
+mc	0	1000	1000	/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/5GeV/5GeV_0.root
+mc	1	1000	1000	/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/5GeV/5GeV_26.root
+mc	2	1000	1000	/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/5GeV/5GeV_44.root
+mc	3	1000	1000	/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/5GeV/5GeV_62.root
+mc	4	1000	1000	/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/5GeV/5GeV_80.root
+mc	5	1000	1000	/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/5GeV/5GeV_99.root

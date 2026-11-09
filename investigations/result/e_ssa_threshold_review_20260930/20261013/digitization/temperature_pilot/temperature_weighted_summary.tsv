@@ -1,0 +1,4 @@
+condition	frozen_selected_events	mean_energy_weighted_temperature_C	std_energy_weighted_temperature_C
+ref20	1516	20	2.6354738729283e-14
+real_pde_constant	1516	22.998212198396	0.12705155386944
+real_pde_linear	1516	22.997708974379	0.12769876987252

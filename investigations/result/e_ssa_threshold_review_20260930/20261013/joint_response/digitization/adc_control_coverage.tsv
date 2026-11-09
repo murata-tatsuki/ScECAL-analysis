@@ -1,0 +1,13 @@
+energy_GeV	signal_range	selected_events	truth_good_hits_in_range	common_all_condition_gain_stable_uncapped_hits
+5	HG_edep0p6to1p2MeV	937	29702	29318
+5	HG_edep1p2to3MeV	937	22512	20675
+5	LG_edep30to100MeV	937	1	1
+5	LG_edepGE100MeV	937	0	0
+20	HG_edep0p6to1p2MeV	910	65522	64768
+20	HG_edep1p2to3MeV	910	51986	49720
+20	LG_edep30to100MeV	910	971	971
+20	LG_edepGE100MeV	910	0	0
+100	HG_edep0p6to1p2MeV	1516	255544	250550
+100	HG_edep1p2to3MeV	1516	221360	209372
+100	LG_edep30to100MeV	1516	31429	31429
+100	LG_edepGE100MeV	1516	6379	6379

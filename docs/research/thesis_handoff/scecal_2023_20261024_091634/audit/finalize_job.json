@@ -1,0 +1,15 @@
+{
+  "pid": 1084693,
+  "started_at": "2026-10-26T06:36:54.613092+00:00",
+  "wait_for_prior_worker": {
+    "pid": 1059848,
+    "start_ticks": "88293161"
+  },
+  "scope": "Only this unfinished handoff, its archive and checksum",
+  "stages": [
+    "build_bundle.py",
+    "finish_indices.py",
+    "polish_bundle.py",
+    "verify_and_archive.py"
+  ]
+}

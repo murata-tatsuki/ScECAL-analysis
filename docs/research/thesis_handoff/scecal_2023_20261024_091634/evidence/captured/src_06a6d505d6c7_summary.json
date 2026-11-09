@@ -1,0 +1,15 @@
+{
+  "bootstrap": 0,
+  "candidates": 274848,
+  "command": "'./analysis/sipm_gain/Analyze' 'compare' '--label' 'full_grouped' '--stage' 'merge'",
+  "comparison_source_sha256": "5d3303ad304a651a5b6269aa00844a63fdb20128a8e874d9807a9150e112dbb5",
+  "configuration_sha256": "ee006f7760aaccf3ec44bdd725f9bbe60ac84cccd75dc132a6ed653a3bf9ec2a",
+  "cross_sample_pairs": 317239,
+  "method_pairs": 9259908,
+  "missing": [],
+  "no_automatic_calibration_export": true,
+  "partial": false,
+  "plots": "separate_stage",
+  "rows": 6173272,
+  "statistical_compatibility": "not_evaluated"
+}

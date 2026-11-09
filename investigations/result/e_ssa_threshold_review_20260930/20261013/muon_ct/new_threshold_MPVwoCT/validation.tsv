@@ -1,0 +1,3 @@
+file	sample	run	raw_entries	calib_entries	truth_entries	sampled_raw	paired	missing_calib	duplicate_raw_events	duplicate_calib_events	reordered_pairs	ambiguous_raw_cells	ambiguous_calib_cells	crossings	observed	response	truth_hits	truth_invalid_primary_chord	truth_without_decode_identity	recovered_files	nonfinite_saved
+0	0	44	25691	25691	0	20000	20000	0	0	0	0	0	0	22666	14739	14480	0	0	0	0	0
+1	1	44	100000	100000	100000	20000	20000	0	0	0	0	0	0	517925	430320	415440	671702	174236	0	0	0

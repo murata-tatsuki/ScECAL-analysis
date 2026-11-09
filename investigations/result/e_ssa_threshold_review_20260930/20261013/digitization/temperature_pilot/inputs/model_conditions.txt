@@ -1,0 +1,1 @@
+Fixed-optical-yieldtoythermalpilot100GeVonly; temperaturesjointdata30x16bank; reference20C gain correctedusingLEDtemp; pCT quadraticovervoltage; PDEconstant/linearbracket; calibrationproduction unchanged; MIPinput unchanged;1-p0 normalisation20C only; independent RNG SetSeed(0).

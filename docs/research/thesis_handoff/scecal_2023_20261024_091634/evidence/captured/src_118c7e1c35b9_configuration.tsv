@@ -1,0 +1,28 @@
+channels	all
+collect-only	0
+current-mip	/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons/inputs/parameters/current-mip.root
+decode-dir	/home/murata_t/data_beamtest/ECAL_data/analysed/2023/sps/decode/mu-/100GeV
+factor-step	0.005
+fit-max-10	1000
+fit-max-15	2000
+hl	/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons/inputs/parameters/hl.root
+input-manifest	
+label	all_muons
+long-margin	1
+max-angle	0.05
+max-correlation	0.98
+max-events	0
+max-relative-error	0.05
+max-stability	0.05
+max-track-rms	3
+min-fit-hits	200
+min-layers	7
+no-plots	0
+pedestal	/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons/inputs/parameters/pedestal.root
+plots-only	0
+refit-from	
+runs	all
+temperature-mode	current
+threshold	/net/megsrv01/export/megraid01/users/murata_t/scecal/ScECAL_BeamTest/analysis/result/mip_calibration/all_muons/inputs/parameters/threshold.root
+trans-margin	0.25
+workers	4

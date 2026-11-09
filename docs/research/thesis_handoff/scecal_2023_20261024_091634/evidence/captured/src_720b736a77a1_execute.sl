@@ -1,0 +1,56 @@
+#!/bin/bash
+###############################################################################
+# A sample SLURM script to run analyzer on 1 node
+#
+#  usage:
+#        (0) Edit this script
+#        (1) Submit the job.
+#            % cd $MEG2SYS/analyzer
+#            % sbatch example/analyzer.sl
+#            % sbatch -o /home/murata_t/ScECAL_BeamTest/analysis/log/resolution/slurm-%j.out --error=/home/murata_t/ScECAL_BeamTest/analysis/log/resolution/slurm-%j.err execute.sl
+#            % sbatch -o /home/murata_t/ScECAL_BeamTest/analysis/log/resolution/slurm-%j.out --error=/home/murata_t/ScECAL_BeamTest/analysis/log/resolution/slurm-%j.err execute.sl
+#
+###############################################################################
+
+#SBATCH --partition=all
+#SBATCH --ntasks=1       
+#SBATCH --job-name=analyzer   
+#SBATCH --output=/home/murata_t/ScECAL_BeamTest/analysis/log/resolution/analyzer%A.out
+#SBATCH --error=/home/murata_t/ScECAL_BeamTest/analysis/log/resolution/analyzer%A.err
+
+MY_HOST=`hostname`
+MY_DATE=`date`
+#
+# Disable core dump. (Remove this line if you want to create core files)
+#
+ulimit -c 0
+
+echo "Running on $MY_HOST at $MY_DATE"
+echo "================================================================"
+
+#
+# Print envirionment
+#
+#echo "Running environment":
+#env | sort
+#echo "================================================================"
+
+#
+# Replace configuration file by yours
+#
+#./meganalyzer -i example/bartenderMode.xml -r 1 -b
+# ./mip_gain_all.sh
+# ./energy_resolution_data_all.sh 
+./energy_resolution_simulation.sh
+# ./energy_resolution_generation.sh
+
+# ./check_cog.sh 
+# ./check_cog_sim.sh 
+
+# ./energy_resolution_data_sps.sh 
+
+RET=$?
+echo "Exit status: $RET"
+echo "================================================================"
+END_DATE=`date`
+echo "End of run is $END_DATE"

@@ -1,0 +1,13 @@
+{
+  "validated_at": "2026-10-26T09:02:25.514722+00:00",
+  "manifest_parser": "JSON-compatible YAML 1.2",
+  "results": 5871,
+  "runs": 3400,
+  "figures": 31,
+  "errors": [],
+  "warnings": [],
+  "new_fits_or_event_processing": false,
+  "original_files_modified": false,
+  "scope_check": "2022/2025 measurements excluded; cross-year reference documents separately retained",
+  "validation": "internal IDs, missing/invalid handling, copied-file hashes, relative links, no symlinks/large raw files"
+}

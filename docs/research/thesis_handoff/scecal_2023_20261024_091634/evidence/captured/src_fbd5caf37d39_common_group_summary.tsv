@@ -1,0 +1,9 @@
+SiPM_um	data_MIP_adoption	mc_MIP_adoption	geometry_condition	common_valid_channel_count	median_data_temperature_MPV_over_MIP	median_mc_temperature_MPV_over_MIP	median_channel_data_over_mc_ratio
+10	individual	individual	unmatched	193	0.977487099799	0.874315049589	1.1132826167
+10	individual	individual	matched	79	0.994319215631	0.881033972015	1.1188981513
+10	fallback	fallback	unmatched	17	1.04468472592	0.836272679281	1.17730570294
+10	fallback	fallback	matched	12	1.0316270462	0.898016202339	1.21997755468
+15	individual	individual	unmatched	719	0.97225283136	0.923985352047	1.05167005155
+15	individual	individual	matched	529	0.970006044522	0.934450135764	1.03498506342
+15	fallback	fallback	unmatched	77	0.780047250546	0.920916775122	0.849777046555
+15	fallback	fallback	matched	32	0.75122040957	0.930993426023	0.808813279721

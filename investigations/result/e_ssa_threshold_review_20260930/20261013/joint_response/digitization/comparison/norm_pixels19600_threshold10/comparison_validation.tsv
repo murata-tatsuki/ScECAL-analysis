@@ -1,0 +1,3 @@
+energy_GeV	file_index	sampled_events	old_raw_entries	new_raw_entries	truth_entries	checked_old_hits	checked_new_hits	max_calibration_error_MeV	max_old_energy_cache_error_GeV	max_old_hit_cache_error	identity_and_truth_event_mapping_equal	recovered_files
+100	0	1000	1000	1000	1000	869214	839191	2.8421709430404e-14	4.999556324492e-12	0	1	0
+100	5	1000	1000	1000	1000	868205	838248	2.8421709430404e-14	4.9968917892329e-12	0	1	0

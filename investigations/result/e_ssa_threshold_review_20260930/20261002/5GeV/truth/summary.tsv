@@ -1,0 +1,2 @@
+events	primary_x_mean_mm	primary_x_RMS_mm	primary_y_mean_mm	primary_y_RMS_mm	truth_energy_mean_GeV	truth_energy_RMS_GeV	decoded_hits_mean	max_primary_energy_difference_GeV
+6000	-3.48500193886	22.0551149144	-7.7939995754	23.3153129833	0.176569202795	0.0129394978788	131.556833333	0
