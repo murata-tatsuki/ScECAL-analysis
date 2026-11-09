@@ -65,4 +65,4 @@ paralell_jobs ../result/resolution/simulation/${thre}/${cog_rage}mm ${cog_rage}
 var=`cat ../tmp/compare_resolution.txt`
 # ./threshold_finding ../result/threshold/analyze_${txt}.root ${var} ${fig_path}
 # ./MultiEnergyAnalysis ${root_path}/comparison_${path_suffix}.root ${var} ${fig_path}
-sbatch -o "${slurm_log_dir}/compare/test-%A.out" --error="${slurm_log_dir}/compare/test-%A.err" execute_paralell.sl ./MultiEnergyAnalysis ${root_path}/comparison_${cog_rage}mm.root ${var} ${fig_path}
+sbatch -o "${slurm_log_dir}/compare/test-%A.out" --error="${slurm_log_dir}/compare/test-%A.err" execute_paralell.sl ./MultiEnergyAnalysis ${root_path}/comparison_${cog_rage}mm.root ${var} ${fig_path} --skip-channel-plots

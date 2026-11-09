@@ -2,64 +2,45 @@
 set -euo pipefail
 shopt -s nullglob
 script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
-cd "$script_dir"
-result_base="$script_dir/../result/cog_channel_scan"
-
-# 単一エネルギーの全ジョブが完了してから実行する。
-thre=threshold
-path_suffix=dataThre_cog_channel
-# analysis_paralell_allCondition.sh と同じ配列にする。CoG 0 はカットなし。
-# 凡例は上から no cut → 20 → 10 → 5 mm（下ほど厳しいカット）。
-cog_ranges=(0 20 10 5)
-channel_ranges=(68.2 22.5)
-fig_path="$result_base/figures/comparison/$path_suffix"
-files=()
-reference_energies=()
-count=0
-
-for cog_range in "${cog_ranges[@]}"; do
-  for channel_range in "${channel_ranges[@]}"; do
-    condition="cog${cog_range}mm_channel${channel_range}mm"
-    for sample in data mc; do
-      sample_path="$sample/channel${channel_range}mm/${cog_range}mm"
-      legacy_sample=$sample
-      if [[ $sample == mc ]]; then
-        sample_path="mc/$thre/channel${channel_range}mm/${cog_range}mm"
-        legacy_sample="simulation/$thre"
-      fi
-      input_dir="$result_base/$sample_path"
-      # Never mix old and new files within one CoG/channel selection.
-      if [[ ! -d $input_dir && -d $result_base/$legacy_sample/$condition ]]; then
-        input_dir="$result_base/$legacy_sample/$condition"
-      fi
-      sample_files=("$input_dir/"*"_${condition}.root")
-      if ((${#sample_files[@]} == 0)); then
-        echo "No input ROOT files: $input_dir" >&2
-        exit 1
-      fi
-      energies=()
-      for file in "${sample_files[@]}"; do
-        name=${file##*/}
-        energies+=("${name%_${condition}.root}")
+result_base=${RESULT_BASE:-"$script_dir/../result/cog_channel_scan"}
+read -r -a cog_ranges <<< "${COG_RANGES:-0 20 10 5}"
+read -r -a channel_ranges <<< "${CHANNEL_RANGES:-68.2 22.5}"
+read -r -a energies <<< "${ENERGIES:-0.5 1 2 3 4 5 10 20 30 40 50 60 70 80 100 120 150 200 250}"
+# Only the current e_ssa / tail-excluded-data products are accepted.
+for mode in dataThre_cog_channel dataThre; do
+  selected_cogs=("${cog_ranges[@]}")
+  if [[ $mode == dataThre ]]; then
+    [[ " ${cog_ranges[*]} " == *' 0 '* ]] || continue
+    selected_cogs=(0)
+  fi
+  files=()
+  for cog in "${selected_cogs[@]}"; do
+    for channel in "${channel_ranges[@]}"; do
+      condition="cog${cog}mm_channel${channel}mm"
+      for sample in data mc; do
+        selection="data/exclude/channel${channel}mm/${cog}mm"
+        [[ $sample != mc ]] || selection="mc/threshold/e_ssa/channel${channel}mm/${cog}mm"
+        for energy in "${energies[@]}"; do
+          file="$result_base/$selection/${energy}GeV_${condition}.root"
+          [[ -f $file ]] || { echo "Missing current result: $file" >&2; exit 1; }
+          files+=("$file")
+        done
       done
-      if ((count == 0)); then
-        count=${#sample_files[@]}
-        reference_energies=("${energies[@]}")
-      elif [[ "${energies[*]}" != "${reference_energies[*]}" ]]; then
-        echo "Energy files do not match: $sample, $condition" >&2
-        exit 1
-      fi
-      files+=("${sample_files[@]}")
     done
   done
+  figures="$result_base/figures/comparison/$mode"
+  command=("$script_dir/MultiEnergyAnalysis" "$result_base/comparison_${mode}.root"
+    "$((2*${#selected_cogs[@]}*${#channel_ranges[@]}))" "${#energies[@]}" "${files[@]}" "$figures"
+    --require-e-ssa-data-tail)
+  if [[ ${DRY_RUN:-0} == 1 ]]; then
+    printf '%q ' "${command[@]}"; printf '\n'
+  else
+    mkdir -p "$figures"
+    {
+      TZ=Asia/Tokyo date --iso-8601=seconds
+      printf 'Comparison: %s; data tail excluded; MC e_ssa/threshold tail kept\n' "$mode"
+      printf 'Command: '; printf '%q ' "${command[@]}"; printf '\n'
+    } >> "$result_base/run.log"
+    "${command[@]}"
+  fi
 done
-
-command=("$script_dir/MultiEnergyAnalysis" "$result_base/comparison_${path_suffix}.root"
-  "$((2 * ${#cog_ranges[@]} * ${#channel_ranges[@]}))" "$count" "${files[@]}" "$fig_path")
-if [[ ${DRY_RUN:-0} == 1 ]]; then
-  printf '%q ' "${command[@]}"
-  printf '\n'
-else
-  mkdir -p "$fig_path"
-  "${command[@]}"
-fi

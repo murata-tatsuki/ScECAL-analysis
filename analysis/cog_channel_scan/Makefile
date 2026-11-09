@@ -1,8 +1,11 @@
 TARGET = SingleEnergyAnalysis MultiEnergyAnalysis
+.DEFAULT_GOAL := all
 CXX = g++
 CXXFLAGS = -O2 -Wall -Wno-deprecated
 ROOTFLAG := $(shell root-config --cflags)
 ROOTLIBS := $(shell root-config --libs)
+
+SingleEnergyAnalysis.o MultiEnergyAnalysis.o: ../resolution/HLTailSelection.hh
 
 .PHONY: all clean cleanall
 all: $(TARGET)

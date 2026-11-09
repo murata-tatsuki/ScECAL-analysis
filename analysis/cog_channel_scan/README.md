@@ -20,61 +20,89 @@ energy–Nhit カットは範囲内 channel の energy と Nhit で計算する�
 同じ Nhit での energy は各 ROOT の `beforeEventCut/hit_vs_e_<energy>GeV`
 （x: energy、y: Nhit）から確認できる。
 
+## 入力と tail 除外
+
+MCは `Result_MC/calib/e-/e_ssa/threshold/<energy>GeV/*.root` を使用する。
+旧 `e-/sps/threshold` は使用しない。e_ssaのファイル名には `e-` prefixがないため、`*.root` を読む。
+dataは従来と同じ2023 PS/SPSのcalibration入力を使用し、**HG–LG低側tail-richイベントを除外する**。
+低側 `z < -5` が異なる物理channelに3個以上あるイベントを丸ごと除外し、MCはtailイベントを保持する。
+
+判定は既存 `../result/channel_response/hg_lg_tail/threshold/e_ssa/<energy>GeV/` の
+`tail_study.root` と `inputs/{data,mc}.tsv` を、resolution共通の `HLTailSelection.hh` で読む。
+`selected` は使わず、本解析独自のCoG/event cutを維持する。
+calibration実パス・全entry・Run_Num/Event_Time/Event_Numを照合し、未登録入力、
+判定の欠落、ID不一致、tail判定より新しいcalibrationは出力作成前にエラーにする。
+`TAIL_RESULTS` で別の判定元を指定できるが、同じ入力を全event処理した結果が必要。
+
 ## 実行
 
-ROOT と g++ を使える環境で、このディレクトリから実行する。
+ROOTとg++を使える環境で、このディレクトリから実行する。
 
 ```bash
-make
-# コマンドの確認のみ（ジョブは投入しない）
+make -j2
+# コマンドと入力を確認するだけ。ファイル作成・ジョブ投入なし。
 DRY_RUN=1 bash analysis_paralell_allCondition.sh
-# エネルギーごとの ROOT を生成する SLURM ジョブを投入
-bash analysis_paralell_allCondition.sh
-# 上記の全ジョブが完了してから data / simulation を比較
-bash compare_ds_allCondition.sh
+# dataとMCを再生成。表示される配列job IDを控える。
+MAX_PARALLEL=24 bash analysis_paralell_allCondition.sh
 ```
 
-**両方の shell で同じ配列を設定する。** 初期設定は次の8通り。
+19 energy（0.5, 1, 2, 3, 4, 5, 10, 20, 30, 40, 50, 60, 70, 80, 100, 120, 150, 200, 250 GeV）
+× CoGなし/20/10/5 mm × channel半幅68.2/22.5 mm × data/MCの**304 task**をSlurm配列jobで投入する。
+既定は最大24 task同時、各taskは1 CPU・4 GiB。配列jobを二重投入しないよう、同名jobが残っている場合は停止する。
+`CoG=0` はカットなし。200 mmは重心を定義できないイベントを除外するため0とは異なる。
+
+比較は、全SingleEnergy taskの正常終了後に実行する。Slurmの依存関係を使う例：
 
 ```bash
-cog_ranges=(0 20 10 5)
-channel_ranges=(68.2 22.5)
+# ARRAY_JOB_IDを、上で表示された配列job IDに置き換える。
+ARRAY_JOB_ID=1234567
+sbatch --dependency="afterok:${ARRAY_JOB_ID}" \
+  --output="$PWD/../log/cog_channel_scan/compare-%j.out" \
+  --error="$PWD/../log/cog_channel_scan/compare-%j.err" \
+  execute_paralell.sl bash "$PWD/compare_ds_allCondition.sh"
+squeue -u "$USER"
 ```
 
-CoG なし/20/10/5 mm × channel 68.2/22.5 mm の全組合せを回す。
-凡例も配列の順に表示し、上から下へ CoG カットが厳しくなるようにする。
-例えば `cog_ranges=(0 20 10 5 2.5)` と `channel_ranges=(22.5)` なら
-22.5 mm の channel 集計で CoG の条件だけを比較する。小数も指定できる。
-両 shell では小数の表記も一致させる（`5` と `5.0` は別の出力パス）。
-200 mm の CoG カットは、CoG を定義できないイベントも除外するため、0 と異なる。
-calibration の入力先と simulation の threshold 条件は既存設定を引き継いでいる。
+完了済みのSingleEnergy結果からローカルで比較する場合は `bash compare_ds_allCondition.sh`。
+`dataThre_cog_channel`（8条件×data/MC）と `dataThre`（CoGなし、hit範囲2条件×data/MC）の両方を生成する。
+比較前に、全入力が完了済み・dataはtail除外済み・MCはe_ssa/thresholdでtail保持、
+かつROOTのCoG/channelメタデータがファイル名と一致することを検証する。旧SPS結果へのfallbackはしない。
+
+対象を絞る場合は、**生成・比較で同じ環境変数**を指定する。
+
+```bash
+# 例: 100 GeVだけ、CoGなしと5 mm、hit範囲2条件（8 task）
+ENERGIES=100 COG_RANGES="0 5" DRY_RUN=1 bash analysis_paralell_allCondition.sh
+# 同じ条件で比較する場合:
+ENERGIES=100 COG_RANGES="0 5" bash compare_ds_allCondition.sh
+```
+
+`CHANNEL_RANGES`、`RESULT_BASE`も両script共通。生成側の `SAMPLES=data` / `SAMPLES=mc` で片方のみ再生成可能。
+比較側には両sampleの結果が必要。CoGの指定に0がない場合は `dataThre` を生成しない。
+小数の表記はファイル名に使うため、両scriptで一致させる（5と5.0は別パス）。
 
 ## 出力
 
-出力先は `../result/cog_channel_scan/`。
-ディレクトリは **対象（`data` / `mc`）→ 比較条件 → CoG** の順にする。
-channel範囲を `channel<channel_range>mm`、CoGを `<cog_range>mm` に分ける。
-MCはthreshold条件も保持し、`mc/<threshold>/channel<channel_range>mm/<cog_range>mm/` とする。
-CoGカットなしは、この解析の引数に合わせて `0mm` に保存する（200 mmのカットとは異なる）。
-ROOTファイル名は読込互換のため `condition=cog<cog_range>mm_channel<channel_range>mm` を維持する。
+基点は `../result/cog_channel_scan/`。退避済みの `cog_channel_scan.bak/` は変更しない。
+ROOTファイル名は `condition=cog<cog_range>mm_channel<channel_range>mm` を維持する。
 
-- `data/channel<channel_range>mm/<cog_range>mm/<energy>GeV_<condition>.root`
-- `mc/<threshold>/channel<channel_range>mm/<cog_range>mm/<energy>GeV_<condition>.root`
-- 図: `figures/data/channel<channel_range>mm/<cog_range>mm/`、`figures/mc/<threshold>/channel<channel_range>mm/<cog_range>mm/`（energy別の図はその下）
-- 比較 ROOT: `comparison_dataThre_cog_channel.root`
-- 比較図: `figures/comparison/dataThre_cog_channel/`
+- data ROOT: `data/exclude/channel<channel_range>mm/<cog_range>mm/<energy>GeV_<condition>.root`
+- MC ROOT: `mc/threshold/e_ssa/channel<channel_range>mm/<cog_range>mm/<energy>GeV_<condition>.root`
+- 図: ROOTと同じ階層を `figures/` の下に置く。energy別PNGはその下。
+- 比較ROOT: `comparison_dataThre_cog_channel.root` と `comparison_dataThre.root`
+- 比較図: `figures/comparison/dataThre_cog_channel/` と `figures/comparison/dataThre/`
+- 再現用記録: `run.log`、`inputs/source_checksums.txt`。各ROOTにも全calibration実パスとsample名を保存。
+- Slurmログ: `../log/cog_channel_scan/single-<array ID>_<task ID>.out/.err`
+- 投入記録・全引数のtask manifest: 同ログディレクトリの `submission_<run ID>.tsv`、`tasks_<run ID>.tsv`
 
-例: `data/channel22.5mm/5mm/100GeV_cog5mm_channel22.5mm.root`、
-`mc/threshold/channel22.5mm/5mm/100GeV_cog5mm_channel22.5mm.root`。
+各単一energy ROOTには `cog_range_mm`、`channel_range_mm`、`analysis_sample`、`calibration_inputs`、
+`input_events`、`hl_tail_excluded`、`hl_tail_checked_events`、`hl_tail_rejected_events`、
+`hl_tail_events_after_cog`、`hl_tail_source`、`hl_tail_definition`、`hl_tail_status` を保存する。
+`complete` のstatusは全処理終了時だけ書く。tail除外件数はCoG適用前で、2回のeventループを重複計数しない。
 
-比較スクリプトは新配置を優先し、その条件の新ディレクトリが存在しない場合だけ、
-旧 `data/<condition>/`・`simulation/<threshold>/<condition>/` を読む。
-新ディレクトリが空の場合や系列間でenergyが揃わない場合はエラーにし、旧結果で補完しない。
-既存結果は移動しない。`MultiEnergyAnalysis` は新旧どちらのMCパスも認識する。
-新パスを使う比較の前には `make MultiEnergyAnalysis` で実行ファイルを更新する。
-各単一エネルギー ROOT の最上位に `cog_range_mm` と `channel_range_mm` も保存する。
-以前の channel のみの結果、`../result/resolution/` の結果とは別に保存する。
-SLURM ログは `../log/cog_channel_scan/test-<job ID>.out` / `.err`。
+生成scriptは `--skip-channel-plots` を渡し、360枚/energyのchannel別canvasを省略する。
+energy・Nhit・layer別・CoG・SiPM別の集計と比較図は通常どおり生成する。
+channel別canvasも必要なら、SingleEnergyを直接呼び出してこのオプションを省く。
 
 比較図は CoG/channel の組合せごとに色・形を割り当て、同条件の data は
 塗りつぶし＋実線、simulation は白抜き＋破線で表示する。
@@ -125,10 +153,14 @@ simulation の threshold が複数ある場合は、それぞれ data と1対1�
 ## 単独実行・従来形式
 
 ```text
-SingleEnergyAnalysis output.root Nenergy E1...En E1Nfiles...EnNfiles input1.root ... cog_range_mm channel_range_mm b_only_best figure_path
+SingleEnergyAnalysis output.root Nenergy E1...En E1Nfiles...EnNfiles input1.root ... cog_range_mm channel_range_mm b_only_best figure_path [options]
 ```
 
 末尾の範囲引数は CoG、channel の順。
+オプションは `--exclude-tail-events` / `--keep-tail-events`、`--tail-results DIR`、
+`--sample-label data|e_ssa`、`--skip-channel-plots`。直接実行時は従来互換のためtail保持が既定であり、
+生成scriptはdataの除外とMCの保持を必ず明示する。
+比較プログラムは末尾の `--require-e-ssa-data-tail` で本番条件と来歴を検証する（比較scriptが自動指定）。
 以前の channel のみの呼出し（`cog_range_mm` 省略）も CoG カットなしとして利用可能。
 `MultiEnergyAnalysis` は旧 `100GeV_22.5mm.root` 形式も読み込める。
 

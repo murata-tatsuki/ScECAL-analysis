@@ -63,11 +63,39 @@ mkdir -p "${slurm_log_dir}"
 
 outPath_=../../result/trackFit3D/efficiency
 
-track_path_=/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/trackFit3D/mu-/mu_track/threshold/100GeV
-paralell_jobs ${track_path_} simulation ${outPath_}
+# track_path_=/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/trackFit3D/mu-/mu_track/threshold/100GeV
+# paralell_jobs ${track_path_} simulation ${outPath_}
 
-track_path_=/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/trackFit3D/mu-/mu_track/threshold/10GeV
-paralell_jobs ${track_path_} simulation ${outPath_}
+# track_path_=/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/trackFit3D/mu-/mu_track/threshold/10GeV
+# paralell_jobs ${track_path_} simulation ${outPath_}
 
 
 
+# outPath_=../../result/trackFit/efficiency/mu_track/threshold
+# track_path_=/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/trackFit/mu-/mu_track/threshold/100GeV
+# paralell_jobs ${track_path_} simulation ${outPath_}
+
+# outPath_=../../result/trackFit/efficiency/mu_track/threshold_MPVwoCT
+# track_path_=/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/trackFit/mu-/mu_track/threshold_MPVwoCT/100GeV
+# paralell_jobs ${track_path_} simulation ${outPath_}
+
+# outPath_=../../result/trackFit/efficiency/mu_track_slope_2_14/threshold
+# track_path_=/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/trackFit/mu-/mu_track_slope_2_14/threshold/100GeV
+# paralell_jobs ${track_path_} simulation ${outPath_}
+
+# outPath_=../../result/trackFit/efficiency/mu_track_slope_2_14/threshold_MPVwoCT
+# track_path_=/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/trackFit/mu-/mu_track_slope_2_14/threshold_MPVwoCT/100GeV
+# paralell_jobs ${track_path_} simulation ${outPath_}
+
+
+# slopes=("mu_track" "mu_track_slope_2_14" "mu_track_slope_2s3_14" "mu_track_slope_2s6_14" "mu_track_slope_3_14" "mu_track_slope_3s3_14" "mu_track_slope_3s6_14" "mu_track_slope_4_14" "mu_track_slope_4s3_14" "mu_track_slope_4s6_14")
+slopes=("mu_track_slope_2s3_14" "mu_track_slope_2s6_14" "mu_track_slope_3_14" "mu_track_slope_3s3_14" "mu_track_slope_3s6_14" "mu_track_slope_4_14" "mu_track_slope_4s3_14" "mu_track_slope_4s6_14")
+thresholds=("threshold" "threshold_MPVwoCT")
+
+for slope in "${slopes[@]}"; do
+  for threshold in "${thresholds[@]}"; do
+    outPath_=../../result/trackFit/efficiency/${slope}/${threshold}
+    track_path_=/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/trackFit/mu-/${slope}/${threshold}/100GeV
+    paralell_jobs ${track_path_} simulation ${outPath_}
+  done
+done

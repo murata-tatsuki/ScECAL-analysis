@@ -30,6 +30,66 @@ ROOTはCoGディレクトリ内の `<energy>GeV_<CoG>mm.root`、
 `exclude/data/` や `keep/data/` 等の旧配置は、既存結果の読込互換のために参照する場合がある。
 新規出力には使用せず、既存結果の移動は明示的に依頼された場合だけ行う。
 
+## hit strip 座標で集計範囲を選ぶ
+
+SingleEnergyAnalysis に `--strip-range MM` を付けると、各 hit の校正済み strip 中心座標で
+`abs(Hit_X) < MM && abs(Hit_Y) < MM` を要求する。MM は x/y 方向の半幅 [mm] で、
+22.5 なら中央45×45 mmの範囲。境界は含まず、layer 0–29 の範囲内の hit だけを集計する。
+この指定時は layer 9/10 の CoG によるイベント選択を行わない。
+総energy、Nhit、層別energy/Nhit、1hit energy、channel別分布は同じ strip 条件を使う。
+CoG図は選択前の全good hitから計算した重心を診断用に表示する。
+選択範囲にhitがないイベントも `beforeEventCut` ではenergy/Nhitが0のイベントとして保持する。
+`afterEventCut` のenergy–Nhit選別は、その範囲の集計値とfitを使う。
+bad-channelとHG–LG tailの指定は従来どおり適用する。
+
+shellから選ぶ場合は、[strip_samples.example.sh](strip_samples.example.sh) をコピーする。
+`strip_ranges_mm=(22.5 68.2)` を編集すると、各領域のSingleEnergyと領域間比較の対象を選べる。
+
+```bash
+cd analysis/resolution
+make SingleEnergyAnalysis
+cp strip_samples.example.sh strip_samples.sh
+# strip_samples.sh の strip_ranges_mm、入力、保存先、runnerを編集
+bash run_samples.sh --dry-run single strip_samples.sh
+bash run_samples.sh single strip_samples.sh
+# 全SingleEnergy jobの正常終了後:
+bash run_samples.sh multi strip_samples.sh
+
+# 1領域のSingleEnergyだけを実行する場合:
+bash run_samples.sh --strip-range 22.5 single strip_samples.example.sh
+```
+
+設定ファイル内では `strip_range_mm=22.5` を `single_sample` の前に指定してもよい。
+stripモードでは `single_sample` のCoG引数を200とし、保存先に `channel22.5mm/200mm/` のように
+領域条件を含める。`*_200mm.root` の末尾は既存MultiEnergyとの読込互換のため保持する。
+このモードでのCoG event cutは無効であり、ROOTの `cog_range_mm` は0となる。
+MultiEnergyでは `multi_sample 'Data, strip |X|,|Y| < 22.5 mm' ...` のように凡例を指定する。
+設定例は `custom/strip_position/data/channel<半幅>mm/200mm/` と、それに対応する `figures/` に保存する。
+22.5と68.2の範囲は入れ子で、周辺だけを分離した領域ではない。
+
+従来のSlurm用shellでも次の指定が可能。CoGの4条件ループは1回にし、ROOTと図は
+`data/channel22.5mm/200mm/` または `mc/<threshold>/channel22.5mm/200mm/` に分ける。
+
+```bash
+STRIP_RANGE_MM=22.5 bash analysis_paralell_allCondition.sh
+```
+
+C++を直接呼ぶ場合は位置引数の後ろに指定する。
+
+```bash
+./SingleEnergyAnalysis output.root 1 100GeV 1 calibration.root 200 1 figures \
+  --strip-range 22.5
+```
+
+`--skip-channel-plots` はSingleEnergyでも使用でき、channel別の大量のPNG/canvasだけを省略する。
+`run_samples.sh` では設定の `single_options=(--skip-channel-plots)` で渡せる。
+stripの設定例ではこの指定を有効にしている。総energy、Nhit、層別分布、fit、summaryは保存する。
+stripモードではfit初期値を領域内の分布から求め、全検出器向け200 GeVの固定初期値は使わない。
+energy/Nhitのfit下限は0にし、狭い領域の小さい信号もfit範囲に含める。
+ROOTには `position_cut_mode` (`strip` / `cog`)、`strip_range_mm`（CoGモードでは−1）、
+`cog_range_mm`、`channel_plots_saved` を保存する。
+`--strip-range` を省略した場合は従来のCoGモードとなる。
+
 ## 任意の calibration / 条件を shell で選ぶ
 
 `calibration ROOT → SingleEnergyAnalysis → 条件別の解析 ROOT → MultiEnergyAnalysis`
@@ -378,3 +438,15 @@ C++を直接呼ぶ場合は `--labels ... --compare-tail-selections` を指定�
 `hl_tail_excluded_sample_0` 以降に0（keep）または1（exclude）で保存する。
 
 8系列比較の検証: `python3.12 tests/test_tail_comparison.py`。
+
+### compare の一時除外: data 200 GeV
+
+MultiEnergyAnalysis は、入力パスに `data/` を含む200 GeVを分解能の値（σ/μ・誤差）と分解能fitから除外します。MCの200 GeVは残します。ファイル一覧からは削除せず、`beforeEventCut` の分布を `summary_200GeV.png`、layer/channel比較と保存canvasに表示します。このdataの描画ではエネルギーfit値をrebinや軸範囲にも使いません。
+
+この対象だけは `hl_tail_status=incomplete` でもsummary用として読めますが、tail選別条件の一致と描画用ヒストグラムの存在は検査します。他の入力の完了検査は維持します。除外方針は出力ROOTの `resolution_value_exclusions` に記録します。任意名のパスや表示ラベルからdataを推測しません。
+
+### 不正なfit値を含む比較
+
+欠落したenergy fit、非正・非有限の平均/σ、非有限・負のfit誤差は、summary分布の表示を続けながら分解能の値取得から除外します。除外した系列・energy・理由・入力パスを標準エラーと比較ROOTの `resolution_skipped_points`（TSV形式のTNamed）に記録します。hit数fitが不正な場合はfit由来の軸範囲を使用しません。data 200 GeVの一時除外も維持します。
+
+未完了のdata 200 GeVでafter-cut channel canvasが存在しない場合、その組合せのafter-cut channel比較を省略してログに記録し、before-cutのsummary・layer/channel分布は表示します。他の入力の完了状態・tail条件・必須分布の検査は維持します。

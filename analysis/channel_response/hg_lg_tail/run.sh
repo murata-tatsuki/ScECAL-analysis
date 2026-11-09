@@ -94,7 +94,7 @@ printf 'Temporary cache: %s/events.root\n' "$scratch"
 printf '%s\n' "${data_pairs[@]}" > "$out/inputs/data.tsv"
 printf '%s\n' "${mc_pairs[@]}" > "$out/inputs/mc.tsv"
 for k in "${!opt[@]}";do printf '%s=%s\n' "$k" "${opt[$k]}";done | sort > "$out/inputs/configuration.txt"
-sha256sum "$HERE/HGLGTailStudy.cc" "$HERE/HGLGTailLayerMaps.hh" "$HERE/../../calibration_parameters/EBUdecode.cxx" "$HERE/run.sh" "$HERE/../../impact_studies/StudyCommon.hh" "${opt[pedestal]}" "${opt[hl]}" "${opt[mip]}" > "$out/inputs/checksums.txt"
+sha256sum "$HERE/HGLGTailStudy.cc" "$HERE/HGLGTailLayerMaps.hh" "$HERE/HGLGTailCalibration.hh" "$HERE/../../calibration_parameters/EBUdecode.cxx" "$HERE/run.sh" "$HERE/../../impact_studies/StudyCommon.hh" "${opt[pedestal]}" "${opt[hl]}" "${opt[mip]}" > "$out/inputs/checksums.txt"
 if [[ ${opt[bad-channel-source]} != none ]];then cp -- "${opt[bad-channel-source]}" "$out/inputs/comparison_source.cc";opt[bad-channel-source]=$out/inputs/comparison_source.cc;fi
 command=("$HERE/HGLGTailStudy" --data-manifest "$out/inputs/data.tsv" --mc-manifest "$out/inputs/mc.tsv" --out "$out" --scratch "$scratch")
 for k in energy pedestal hl mip bad-channel-source max-events max-files events-per-file hg-min hg-max nsigma min-hits min-tail-channels selection reference-energy;do command+=("--$k" "${opt[$k]}");done

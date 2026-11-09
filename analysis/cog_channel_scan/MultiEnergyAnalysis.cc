@@ -1,5 +1,7 @@
 #include <iostream>
+#include "../resolution/HLTailSelection.hh"
 #include <fstream>
+#include <sstream>
 #include "TROOT.h"
 #include "TFile.h"
 #include "TMath.h"
@@ -147,6 +149,8 @@ nameStrings find_name_of_file(string filePath){
 
   result.isData   = (result.dataType == "data");
   result.calibIdx = threIds[result.threshold];
+  if (!result.isData && path.find("/e_ssa/") != string::npos) result.dataType = "sim e_ssa";
+  if (result.isData && path.find("/data/exclude/") != string::npos) result.dataType = "data tail-excl.";
   
   return result;
 } 
@@ -319,7 +323,7 @@ void SaveResolutionPairs(TGraphErrors* const* graphs,
           string formula = "#frac{" + ResolutionCoefficient(curve->GetParameter(0)) + "}{#sqrt{E}}";
           if(withNoise) formula += " #oplus #frac{" + ResolutionCoefficient(curve->GetParameter(1)) + "}{E}";
           formula += " #oplus " + ResolutionCoefficient(curve->GetParameter(withNoise ? 2 : 1));
-          const string label = string(isData ? "data" : "sim") + ": #sigma(E)/E = " + formula;
+          const string label = settings[ds].dataType + ": #sigma(E)/E = " + formula;
           legend->AddEntry(graph, label.c_str(), "lp");
           pairGraphs.push_back(graph);
           pairCurves.push_back(curve);
@@ -499,8 +503,10 @@ int CalculateLandauRebinFactor(const TH1* h, int targetBinsOnRise = 10) {
     return std::max(1, rebinFactor);
 }
 
-int main(int argc, char* argv[])
-{ 
+int main(int argc, char* argv[]) try
+{
+  const bool requireProduction = argc > 1 && std::string(argv[argc-1]) == "--require-e-ssa-data-tail";
+  if (requireProduction) --argc;
     if(argc < 3){                                                     //エラー処理
         cout << "usage: ./between_files  output.root N_datasim N_files input_1.root ... input_Ndata.root input_1.root ... input_Nsim.root ...  figure_path " << endl;
         return 1;
@@ -529,6 +535,34 @@ int main(int argc, char* argv[])
     }
   }
   for(int ii=0; ii<Ndatasim; ii++) sort(filenames[ii].begin(),filenames[ii].end());
+
+  // Reject stale SPS/keep-data/incomplete products before creating comparison output.
+  if (requireProduction) {
+    for (int ds = 0; ds < Ndatasim; ++ds) {
+      for (const auto& input : filenames[ds]) {
+        auto file = hl_tail::open(argv[input.second]);
+        const auto setting = find_name_of_file(argv[input.second]);
+        hl_tail::checkAnalysis(*file, setting.isData);
+        const std::string label = hl_tail::object<TNamed>(*file, "analysis_sample")->GetTitle();
+        hl_tail::require(label == (setting.isData ? "data" : "e_ssa"), "wrong production sample in " + std::string(file->GetName()));
+        if (!setting.isData) {
+          std::istringstream inputs(hl_tail::object<TNamed>(*file, "calibration_inputs")->GetTitle());
+          std::string path;
+          int count = 0;
+          while (std::getline(inputs, path)) {
+            hl_tail::require(path.find("/calib/e-/e_ssa/threshold/") != std::string::npos,
+                             "expected e_ssa/threshold calibration: " + path);
+            ++count;
+          }
+          hl_tail::require(count > 0, "missing MC calibration provenance");
+        }
+        hl_tail::require(hl_tail::object<TParameter<double>>(*file, "cog_range_mm")->GetVal() == setting.cog_range &&
+                         hl_tail::object<TParameter<double>>(*file, "channel_range_mm")->GetVal() == setting.channel_range,
+                         "CoG/channel metadata mismatch");
+      }
+    }
+  }
+
   
 
 	// int rawfilenum = argc - 2 - 2*rawfilenum - 3;
@@ -582,6 +616,11 @@ int main(int argc, char* argv[])
 
 
 	TFile fileout(argv[1],"RECREATE");
+  hl_tail::require(!fileout.IsZombie(), "cannot create comparison ROOT");
+  if (requireProduction) {
+    TNamed("comparison_selection", "data: HL-tail-rich events excluded; MC: e_ssa/threshold, tail events kept").Write();
+    TNamed("comparison_status", "incomplete").Write();
+  }
   fileout.mkdir("simulation");
   fileout.mkdir("data");
 	// gain_histo->Write();
@@ -1100,4 +1139,11 @@ int main(int argc, char* argv[])
   // --- 4. 保存処理 ---
   SaveResolutionViews(resolution_plots_noise, Eres, Ndatasim, drawSettings, show_cog_ranges, "resolution_with_noise", argv[argc-1], res_func_low);
 
+  fileout.cd();
+  if (requireProduction) TNamed("comparison_status", "complete").Write("comparison_status", TObject::kOverwrite);
+  fileout.Close();
+  return 0;
+} catch (const std::exception& error) {
+  std::cerr << error.what() << std::endl;
+  return 1;
 }

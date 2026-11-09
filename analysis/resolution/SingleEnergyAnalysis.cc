@@ -51,6 +51,11 @@ bool cog_position_check(double x, double y, double range=200){
   return !cog_cut || (abs(x)<range && abs(y)<range);
 }
 
+bool strip_position_check(double x, double y, double range){
+  return std::isfinite(x) && std::isfinite(y) &&
+         std::abs(x) < range && std::abs(y) < range;
+}
+
 int sipmtypes(int layer){
   // layer 4~27 は10 umのもの    return 0
   // それ以外のlayerは15 umのもの return 1
@@ -121,8 +126,9 @@ bool eventCutConditions(double edep_event, double nhit_event, double edep_mean, 
 int main(int argc, char* argv[]) try
 {
   if (argc < 3 || std::string(argv[1]) == "--help") {
-    cout << "Usage: SingleEnergyAnalysis output.root Nenergy E1...En E1Nfiles...EnNfiles input.root... cog_range only_best figure_path [--exclude-tail-events|--keep-tail-events] [--tail-results DIR]" << endl;
+    cout << "Usage: SingleEnergyAnalysis output.root Nenergy E1...En E1Nfiles...EnNfiles input.root... cog_range only_best figure_path [--strip-range MM] [--skip-channel-plots] [--exclude-tail-events|--keep-tail-events] [--tail-results DIR]" << endl;
     cout << "Default: exclude tail-rich events (>=3 distinct low-tail channels). DIR contains <energy>GeV/tail_study.root and inputs/." << endl;
+    cout << "--strip-range selects hits with abs(Hit_X/Y) < MM and disables the CoG event cut." << endl;
     return argc == 2 && std::string(argv[1]) == "--help" ? 0 : 1;
   }
   const int nEnergy = std::stoi(argv[2]);
@@ -137,6 +143,8 @@ int main(int argc, char* argv[]) try
   hl_tail::require(positionalArgc <= argc, "input file count does not match arguments");
   bool excludeTailEvents = true;
   bool tailModeSpecified = false;
+  bool stripCut = false, skipChannelPlots = false;
+  double stripRange = 200;
   std::filesystem::path tailResults = std::filesystem::canonical(argv[0]).parent_path() /
       "../result/channel_response/hg_lg_tail/threshold/e_ssa";
   for (int i = int(positionalArgc); i < argc; ++i) {
@@ -148,6 +156,16 @@ int main(int argc, char* argv[]) try
     } else if (option == "--tail-results") {
       hl_tail::require(i + 1 < argc, "--tail-results requires a directory");
       tailResults = argv[++i];
+    } else if (option == "--strip-range") {
+      hl_tail::require(!stripCut && i + 1 < argc, "specify --strip-range once with a positive range in mm");
+      const std::string value = argv[++i];
+      size_t end = 0;
+      stripRange = std::stod(value, &end);
+      hl_tail::require(end == value.size() && std::isfinite(stripRange) && stripRange > 0,
+                       "--strip-range must be positive and finite");
+      stripCut = true;
+    } else if (option == "--skip-channel-plots") {
+      skipChannelPlots = true;
     } else {
       throw std::runtime_error("Unknown option: " + option);
     }
@@ -173,6 +191,8 @@ int main(int argc, char* argv[]) try
   int cog_range = atoi(argv[argc-3]);
   int bool_only_best = atoi(argv[argc-2]);
   string bestChannel = bool_only_best == 1 ? "_bestChannels" : "";
+  if (stripCut) cout << "Hit strip cut: abs(Hit_X), abs(Hit_Y) < " << stripRange
+                     << " mm; CoG event cut disabled" << endl;
 
 
   // Validate complete event coverage and identities before creating any output.
@@ -255,6 +275,10 @@ int main(int argc, char* argv[]) try
   hl_tail::require(!fileout.IsZombie(), "cannot create output ROOT");
   TParameter<int>("hl_tail_excluded", int(excludeTailEvents)).Write();
   TNamed("hl_tail_status", "incomplete").Write();
+  TNamed("position_cut_mode", stripCut ? "strip" : "cog").Write();
+  TParameter<double>("cog_range_mm", stripCut ? 0. : cog_range).Write();
+  TParameter<double>("strip_range_mm", stripCut ? stripRange : -1.).Write();
+  TParameter<int>("channel_plots_saved", int(!skipChannelPlots)).Write();
   fileout.mkdir("beforeEventCut");
   fileout.mkdir("afterEventCut");
   fileout.cd();
@@ -387,7 +411,7 @@ int main(int argc, char* argv[]) try
 		if(Nenegry>1) cout << energy[ienergy] << " GeV" << endl;
 
     TH1F* edep_channel[layerNu][chipNu][channelNu];
-    for (int i_layer = 0; i_layer < layerNu; ++i_layer) {
+    for (int i_layer = 0; !skipChannelPlots && i_layer < layerNu; ++i_layer) {
       for (int i_chip = 0; i_chip < chipNu; ++i_chip) {
         for (int i_channel = 0; i_channel < channelNu; ++i_channel) {
           edep_channel[i_layer][i_chip][i_channel] = new TH1F(Form("edep_channel_%d_%d_%d",i_layer, i_chip, i_channel),Form("%g GeV layer%d chip%d channel%d",energy[ienergy], i_layer, i_chip, i_channel),2000,0,2);
@@ -430,6 +454,7 @@ int main(int argc, char* argv[]) try
         double sumEdep_all = 0;
         double cog_x[32] = {0};
         double cog_y[32] = {0};
+        double cog_energies[32] = {0};
         int nhits[32] = {0};
         int n_of_hits[2] = {0};
         double energies[32] = {0};
@@ -445,23 +470,34 @@ int main(int argc, char* argv[]) try
           if(_layerID==0) nhit_firstLayer++;
           if( (_chipID<0 || _chipID>5) || (_chanID<0 || _chanID>35) ) cout << "error in cellId " << cellID->at(ihit) << endl;
           if(Hit_Energy->at(ihit)<0) continue;
-          n_of_hits[0]++;
+          const bool selectedStrip = !stripCut ||
+              strip_position_check(Hit_X->at(ihit), Hit_Y->at(ihit), stripRange);
+          if (selectedStrip) n_of_hits[0]++;
           const int currentCellId = cellID->at(ihit);
           if(bool_only_best) if(bad_channels.find(currentCellId) != bad_channels.end()) continue;
-          n_of_hits[1]++;
+          // CoG diagnostics always use all good hits, before selecting strips.
           cog_x[_layerID] += Hit_X->at(ihit) * Hit_Energy->at(ihit);
           cog_y[_layerID] += Hit_Y->at(ihit) * Hit_Energy->at(ihit);
+          cog_energies[_layerID] += Hit_Energy->at(ihit);
+          if (!selectedStrip) continue;
+          n_of_hits[1]++;
           energies[_layerID] += Hit_Energy->at(ihit);
           sumEdep_all += Hit_Energy->at(ihit);
           cut_nhit++;
         }
-        double distance_cog0 = sqrt(pow(cog_x[0]/energies[0],2)+pow(cog_y[0]/energies[0],2));
-        double distance_cog9 = sqrt(pow(cog_x[9]/energies[9],2)+pow(cog_y[9]/energies[9],2));
-        double distance_cog10 = sqrt(pow(cog_x[10]/energies[10],2)+pow(cog_y[10]/energies[10],2));
-        firstLayerHit_vs_cog[ienergy][0]->Fill(distance_cog0, distance_cog9);
-        firstLayerHit_vs_cog[ienergy][1]->Fill(distance_cog0, distance_cog10);
+        if (cog_energies[0] > 0) {
+          const double distance_cog0 = std::hypot(cog_x[0]/cog_energies[0], cog_y[0]/cog_energies[0]);
+          for (int layer : {9, 10}) {
+            if (cog_energies[layer] > 0) {
+              const double distance_cog = std::hypot(cog_x[layer]/cog_energies[layer], cog_y[layer]/cog_energies[layer]);
+              firstLayerHit_vs_cog[ienergy][layer-9]->Fill(distance_cog0, distance_cog);
+            }
+          }
+        }
         // if(nhit_firstLayer>1) continue;
-        if(!(cog_position_check(cog_x[9]/energies[9], cog_y[9]/energies[9], cog_range) && cog_position_check(cog_x[10]/energies[10], cog_y[10]/energies[10], cog_range))) continue;
+        if(!stripCut && !(cog_energies[9] > 0 && cog_energies[10] > 0 &&
+            cog_position_check(cog_x[9]/cog_energies[9], cog_y[9]/cog_energies[9], cog_range) &&
+            cog_position_check(cog_x[10]/cog_energies[10], cog_y[10]/cog_energies[10], cog_range))) continue;
         if (eventCut == 0) ++eventsAfterCoG;
         if(eventCut==1 && eventCutConditions(sumEdep_all, cut_nhit, edep_mean, edep_sigma, nhit_mean, nhit_sigma)) continue;
         // energy_deposition[ienergy]->Fill(sumEdep_all);
@@ -472,7 +508,8 @@ int main(int argc, char* argv[]) try
           if(_layerID>=30) continue;
           if( (_chipID<0 || _chipID>5) || (_chanID<0 || _chanID>35) ) cout << "error in cellId " << cellID->at(ihit) << endl;
           if(Hit_Energy->at(ihit)<0) continue;
-          edep_channel[_layerID][_chipID][_chanID]->Fill(Hit_Energy->at(ihit));
+          if (stripCut && !strip_position_check(Hit_X->at(ihit), Hit_Y->at(ihit), stripRange)) continue;
+          if (!skipChannelPlots) edep_channel[_layerID][_chipID][_chanID]->Fill(Hit_Energy->at(ihit));
           // layerSSA.push_back(_layerID);
           // xSSA.push_back(Hit_X->at(ihit));
           // ySSA.push_back(Hit_Y->at(ihit));
@@ -516,14 +553,14 @@ int main(int argc, char* argv[]) try
             hit_vs_e_per_layer[ienergy][i]->Fill(energies[i], nhits[i]);
             layer_vs_edep[ienergy]->Fill(i, energies[i]);
             layer_vs_nhits[ienergy]->Fill(i, nhits[i]);
-            layer_vs_temp[ienergy]->Fill(i, average_temperature[i]/nhits[i]);
+            if (nhits[i] > 0) layer_vs_temp[ienergy]->Fill(i, average_temperature[i]/nhits[i]);
             edep_per_layer[ienergy][i]->Fill(energies[i]);
             hit_per_layer[ienergy][i]->Fill(nhits[i]);
           }
         // }
 
         for (int ilayer = 0; ilayer < layerNu; ++ilayer) {
-          cog[ienergy][ilayer]->Fill(cog_x[ilayer]/energies[ilayer], cog_y[ilayer]/energies[ilayer]);
+          if (cog_energies[ilayer] > 0) cog[ienergy][ilayer]->Fill(cog_x[ilayer]/cog_energies[ilayer], cog_y[ilayer]/cog_energies[ilayer]);
         }
 	  	}
 
@@ -541,7 +578,7 @@ int main(int argc, char* argv[]) try
     // fileout.cd(Form("%s",dirName[eventCut].c_str()));
     if(eventCut==0) fileout.mkdir(Form("%dGeV", (int)energy[ienergy]));
     fileout.cd(Form("%dGeV", (int)energy[ienergy]));
-    for (int i_layer = 0; i_layer < 30; ++i_layer) {
+    for (int i_layer = 0; !skipChannelPlots && i_layer < 30; ++i_layer) {
       for (int i_chip = 0; i_chip < chipNu; ++i_chip) {
         TCanvas* c1 = new TCanvas(Form("edep_Layer%d_Chip%d", i_layer, i_chip), Form("Layer%d Chip%d", i_layer, i_chip), 2560, 1440);
         c1->Divide(6, 6);
@@ -578,17 +615,21 @@ int main(int argc, char* argv[]) try
     C_res[ienergy]->cd();
     gStyle->SetOptFit(1111111);
 
-    energy_deposition[ienergy]->GetXaxis()->SetRange(200,range_maximum);
-    if(energy[ienergy]<=5) energy_deposition[ienergy]->GetXaxis()->SetRange(10/binWidth_PS,range_maximum_PS/binWidth_PS);
+    if (stripCut) energy_deposition[ienergy]->GetXaxis()->SetRange(0,0);
+    else {
+      energy_deposition[ienergy]->GetXaxis()->SetRange(200,range_maximum);
+      if(energy[ienergy]<=5) energy_deposition[ienergy]->GetXaxis()->SetRange(10/binWidth_PS,range_maximum_PS/binWidth_PS);
+    }
     double amp = energy_deposition[ienergy]->GetMaximum();
     double mean = energy_deposition[ienergy]->GetMean();
     double sigma = energy_deposition[ienergy]->GetStdDev();
     // Seed the 200 GeV shower peak without the broad low-energy component (MeV).
-    if (energy[ienergy] == 200) {
+    if (!stripCut && energy[ienergy] == 200) {
       mean = 8000;
       sigma = 300;
     }
-    double fit_range_low = 15 > mean-3*sigma ? 15 : mean-3*sigma;
+    const double fit_minimum = stripCut ? 0. : 15.;
+    double fit_range_low = std::max(fit_minimum, mean-3*sigma);
     // double mean = energy_deposition[ienergy]->GetMaximumBin();
     // if(energy[ienergy]<=5){
     //   amp = 50;
@@ -601,7 +642,7 @@ int main(int argc, char* argv[]) try
     energy_deposition[ienergy]->Fit("gaussian","","NQ",fit_range_low,mean+3*sigma);
     mean = gaussian->GetParameter(1);
     sigma = gaussian->GetParameter(2);
-    fit_range_low = 15 > mean-1.5*sigma ? 15 : mean-1.5*sigma;
+    fit_range_low = std::max(fit_minimum, mean-1.5*sigma);
     energy_deposition[ienergy]->Fit("gaussian","","NQ",fit_range_low,mean+1.5*sigma);
     // if(energy[ienergy]>5) energy_deposition[ienergy]->Fit("gaussian","","NQ",mean-50*(energy[ienergy]/20),mean+50*(energy[ienergy]/20));
     // else energy_deposition[ienergy]->Fit("gaussian","","NQ",mean-20*energy[ienergy],mean+20*energy[ienergy]);
@@ -735,14 +776,14 @@ int main(int argc, char* argv[]) try
     double amp = number_of_hits[ienergy]->GetMaximum();
     double mean = number_of_hits[ienergy]->GetMean();
     double sigma = number_of_hits[ienergy]->GetStdDev();
-    double fit_range_low = 7 > mean-3*sigma ? 7 : mean-3*sigma;
+    double fit_range_low = std::max(stripCut ? 0. : 7., mean-3*sigma);
     gaussian_hit->SetParameter(0,amp);
     gaussian_hit->SetParameter(1,mean);
     gaussian_hit->SetParameter(2,sigma);
     number_of_hits[ienergy]->Fit("gaussian_hit","","NQ",fit_range_low,mean+3*sigma);
     mean = gaussian_hit->GetParameter(1);
     sigma = gaussian_hit->GetParameter(2);
-    fit_range_low = 15 > mean-1.5*sigma ? 15 : mean-1.5*sigma;
+    fit_range_low = std::max(stripCut ? 0. : 15., mean-1.5*sigma);
     number_of_hits[ienergy]->Fit("gaussian_hit","","NQ",fit_range_low,mean+1.5*sigma);
     number_of_hits[ienergy]->Write(Form("nhits_%dGeV", (int)energy[ienergy]));
     nhit_mean = gaussian_hit->GetParameter(1);

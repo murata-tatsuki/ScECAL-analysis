@@ -10,6 +10,7 @@ analysis/channel_response/
   hl_intercept/           intercept修正前後の全channel比較・HG–LG再fit
   hg_lg_tail/             tailとevent内同時発生のC++・shell
   calibration_residual/   run・温度別のHG/LG校正残差と切替点の診断
+  muon_mip_response/      muon truth→ADC→MIP再現、位置・温度・run依存のC++・shell
   temperature_calibration/ PSのHG-only MIP温度補正・HG/LG接続・pedestal診断
 
 analysis/log/channel_response/
@@ -17,6 +18,7 @@ analysis/log/channel_response/
   hg_lg_tail/             tail解析のジョブログ・投入記録
   calibration_residual/   校正残差解析のジョブログ・投入記録
   mip_closure/            muon校正のジョブログ・投入記録
+  muon_mip_response/      muon MIP応答再現のSlurmログ・投入記録
   temperature_calibration/ 温度校正のジョブログ・入力manifest
 
 analysis/result/channel_response/
@@ -24,12 +26,14 @@ analysis/result/channel_response/
   hl_intercept/           修正前後の入力ROOT・3sampleのfit ROOT・比較結果
   hg_lg_tail/             tail解析のROOT・PNG・集計表・入力設定
   calibration_residual/   校正残差のROOT・PNG・統計表・定数監査
+  muon_mip_response/      muon MIP応答再現のROOT・PNG・集計表・入力監査
 ```
 
 - [adc_energyの説明・実行方法](adc_energy/README.md)
 - [hl_interceptの説明・実行方法](hl_intercept/README.md)
 - [hg_lg_tailの説明・実行方法](hg_lg_tail/README.md)
 - [calibration_residualの説明・実行方法](calibration_residual/README.md)
+- [muon_mip_responseの説明・実行方法](muon_mip_response/README.md)
 - [temperature_calibrationの説明・実行方法](temperature_calibration/README.md)
 
 共通のSlurm実行wrapperは直下の`execute.sl`、C++・ROOTのビルド設定は`root.mk`にまとめています。各解析の`submit.sh`・`Makefile`がこれらを参照します。解析ごとのジョブ名・ログ保存先はそれぞれの`submit.sh`で設定します。

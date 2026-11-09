@@ -4,13 +4,25 @@ mkdir -p -- "$slurm_log_dir"
 
 source /megraid01/users/data_beamtest/analysis/ECAL_Analysis_LCIO/run/global_config
 
+# Example: STRIP_RANGE_MM=22.5 bash analysis_paralell_allCondition.sh
+strip_options=()
+if [[ -n ${STRIP_RANGE_MM:-} ]]; then
+  if [[ ! $STRIP_RANGE_MM =~ ^[0-9]+([.][0-9]+)?$ || -z ${STRIP_RANGE_MM//[0.]/} ]]; then
+    echo 'STRIP_RANGE_MM must be a positive range in mm' >&2
+    exit 1
+  fi
+  strip_options=(--strip-range "$STRIP_RANGE_MM")
+fi
+
 paralell_jobs () {
-  Calib_path=$1
-  fig_path=$2
-  cog_rage=$3
-  root_path=$4
-  preffix=$5
-  suffix=$6
+  local Calib_path=$1 fig_path=$2 cog_rage=$3 root_path=$4 preffix=$5 suffix=$6
+  if [[ -n ${STRIP_RANGE_MM:-} ]]; then
+    cog_rage=200
+    root_path="${root_path%/*}/channel${STRIP_RANGE_MM}mm/200mm"
+    fig_path="${fig_path%/*}/channel${STRIP_RANGE_MM}mm/200mm"
+    root_path=${root_path/\/simulation\//\/mc\/}
+    fig_path=${fig_path/\/simulation\//\/mc\/}
+  fi
   mkdir -p ${root_path}
   
   for txt in $( ls ${Calib_path} ); do
@@ -26,7 +38,8 @@ paralell_jobs () {
     echo -n ${count} >> ../tmp/analyze_${suffix}_${txt}.txt
     echo -n " " >> ../tmp/analyze_${suffix}_${txt}.txt
 
-    for txtRoot in $( ls ${Calib_path}/${txt}/${preffix}*.root ); do
+    for txtRoot in $( ls ${Calib_path}/${txt}/*.root ); do
+    # for txtRoot in $( ls ${Calib_path}/${txt}/${preffix}*.root ); do
       echo -n ${txtRoot} >> ../tmp/analyze_${suffix}_${txt}.txt
       echo -n " " >> ../tmp/analyze_${suffix}_${txt}.txt
     #  ./between_files_mip_analysis tmp/mip/${i} ${SSA_path}/${i} ${Decode_path}/${i}
@@ -34,7 +47,7 @@ paralell_jobs () {
 
     var=`cat ../tmp/analyze_${suffix}_${txt}.txt`
     # ./threshold_finding ../result/threshold/analyze_${txt}.root ${var} ${fig_path}
-    sbatch -o "${slurm_log_dir}/singleEnergy/test-%A.out" --error="${slurm_log_dir}/singleEnergy/test-%A.err" execute_paralell.sl ./SingleEnergyAnalysis ${root_path}/${txt}_${cog_rage}mm.root ${var} ${cog_rage} 1 ${fig_path}
+    sbatch -o "${slurm_log_dir}/singleEnergy/test-%A.out" --error="${slurm_log_dir}/singleEnergy/test-%A.err" execute_paralell.sl ./SingleEnergyAnalysis ${root_path}/${txt}_${cog_rage}mm.root ${var} ${cog_rage} 1 ${fig_path} "${strip_options[@]}"
   done
 }
 
@@ -42,7 +55,9 @@ paralell_jobs () {
 mkdir -p "${slurm_log_dir}/singleEnergy"
 
 ranges=(200 20 10 5)
-thres=("threshold" "threshold0" "threshold50")
+if [[ -n ${STRIP_RANGE_MM:-} ]]; then ranges=(200); fi
+# thres=("threshold" "threshold0" "threshold50")
+thres=("threshold")
 
 
 #Calib_path=${data_dir}/${data_year}/2023/sps/calib/e-_noIntercept
@@ -63,7 +78,7 @@ for cog_rage in ${ranges[@]}; do
 
 
   for thre in ${thres[@]}; do
-    Calib_path_simulation=/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/sps/${thre}
+    Calib_path_simulation=/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/${thre}
     fig_path=../result/resolution/figures/simulation/${thre}/${cog_rage}mm
     root_path=../result/resolution/simulation/${thre}/${cog_rage}mm
     mkdir -p ${root_path}

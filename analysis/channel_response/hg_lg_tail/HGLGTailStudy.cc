@@ -1,6 +1,6 @@
 // Joint hit/event analysis. Original raw/calibrated trees are read once.
 // A temporary ROOT cache permits exact channel medians and one shared tail rule.
-#include "StudyCommon.hh"
+#include "HGLGTailCalibration.hh"
 #include "HGLGTailLayerMaps.hh"
 #include <TROOT.h>
 #include <TStyle.h>
@@ -66,7 +66,7 @@ int main(int argc,char**argv)try {
  require(maxEvents>=0&&perFile>=0&&maxFiles>=0&&minHits>=2&&minTail>=1,"Invalid count option");require(std::isfinite(hmin)&&std::isfinite(hmax)&&std::isfinite(nsigma)&&std::isfinite(beam)&&hmin>=0&&hmax>hmin&&hmax<=2600&&nsigma>0&&beam>0,"Invalid ADC/significance/beam range");
  require(o["selection"]=="all"||o["selection"]=="cog20"||o["selection"]=="shower-cog20","Unknown event selection");
  fs::path out=o["out"];require(!out.empty()&&!o["scratch"].empty(),"Output and scratch required");require(!fs::exists(out/"tail_study.root"),"Completed output exists");fs::create_directories(out/"figures");
- auto pars=parameters(o["hl"],o["mip"],o["pedestal"]);auto excluded=readMask(o["bad-channel-source"]);std::map<int,Channel> channels;
+ auto pars=tailParameters(o["hl"],o["mip"],o["pedestal"]);auto excluded=readMask(o["bad-channel-source"]);std::map<int,Channel> channels;
  for(auto&[id,p]:pars){channels[id].p=p;channels[id].good=p.mip>0&&!excluded.count(id);}
  {auto f=openFile(o["pedestal"]);auto*t=object<TTree>(*f,"ChnLevel");std::vector<int>*id=nullptr;std::vector<double>*sh=nullptr,*sl=nullptr;bind(t,"CellID",&id);bind(t,"PedHighSig",&sh);bind(t,"PedLowSig",&sl);
   for(Long64_t i=0;i<t->GetEntries();++i){t->GetEntry(i);require(id->size()==sh->size()&&id->size()==sl->size(),"Pedestal vector size mismatch");for(size_t j=0;j<id->size();++j){int cell=physical(id->at(j));if(!channels.count(cell))continue;auto&c=channels.at(cell);require(std::isfinite(sh->at(j))&&std::isfinite(sl->at(j))&&sh->at(j)>0&&sl->at(j)>0,"Invalid pedestal noise");c.sigma=std::sqrt(sl->at(j)*sl->at(j)+std::pow(sh->at(j)/c.p.gain,2)+1./12);}}
@@ -99,7 +99,9 @@ int main(int argc,char**argv)try {
      for(size_t j=0;j<ci->size();++j){int full=ci->at(j),id=physical(full);if(!connected(id))continue;require(used.insert(full).second,"Duplicate calibrated full CellID");require(index.count(full),"Calibrated hit missing in raw");size_t k=index.at(full);auto&ch=channels.at(id);const auto&p=ch.p;
       double h=rh->at(k),l=rl->at(k),H=h-p.ph,L=l-p.pl,C=1-(temp->at(j)-20)*(group(id)?1.6/135:3.5/230),f=.305/p.mip;
       double expectedH=f*C*H,expectedL=f*(C*L*p.gain+p.intercept),errH=std::abs(eh->at(j)-expectedH),errL=std::abs(el->at(j)-expectedL);
-      require(std::isfinite(expectedH)&&std::isfinite(expectedL)&&std::isfinite(en->at(j))&&std::isfinite(eh->at(j))&&std::isfinite(el->at(j))&&std::isfinite(x->at(j))&&std::isfinite(y->at(j)),"Nonfinite hit");require(errH<=1e-5+1e-6*std::abs(expectedH)&&errL<=1e-5+1e-6*std::abs(expectedL),"Calibration closure failed: "+std::to_string(id));require(std::abs(en->at(j)-(h>=2600?el->at(j):eh->at(j)))<1e-9,"Unexpected gain selection");++checked[s];maxH[s]=std::max(maxH[s],errH);maxL[s]=std::max(maxL[s],errL);
+      require(std::isfinite(expectedH)&&std::isfinite(expectedL)&&std::isfinite(en->at(j))&&std::isfinite(eh->at(j))&&std::isfinite(el->at(j))&&std::isfinite(x->at(j))&&std::isfinite(y->at(j)),"Nonfinite hit");if(!(errH<=1e-5+1e-6*std::abs(expectedH)&&errL<=1e-5+1e-6*std::abs(expectedL))){
+       std::ostringstream message;message<<std::setprecision(17)<<"Calibration closure failed: sample="<<(s?"mc":"data")<<" file="<<files[fi].second<<" entry="<<entry<<" cell="<<id<<" HG(saved/expected)="<<eh->at(j)<<"/"<<expectedH<<" LG(saved/expected)="<<el->at(j)<<"/"<<expectedL<<" mip="<<p.mip<<" gain="<<p.gain<<" intercept="<<p.intercept;throw std::runtime_error(message.str());
+      }require(std::abs(en->at(j)-(h>=2600?el->at(j):eh->at(j)))<1e-9,"Unexpected gain selection");++checked[s];maxH[s]=std::max(maxH[s],errH);maxL[s]=std::max(maxL[s],errL);
       if(!ch.good)continue;
       if(h>=2600){++event.lgHits;if(en->at(j)<0){++event.negativeLGHits;event.negativeLG+=en->at(j);}else event.lgEnergy+=en->at(j)/1000;}
       if(en->at(j)>=0){event.energy+=en->at(j)/1000;++event.goodHits;int layer=id/100000;le[layer]+=en->at(j);lx[layer]+=x->at(j)*en->at(j);ly[layer]+=y->at(j)*en->at(j);}

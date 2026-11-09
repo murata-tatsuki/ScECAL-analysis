@@ -124,6 +124,32 @@ struct nameStrings {
   int conditionIndex = -1; // Same condition across different CoG selections.
 };
 
+// Temporary comparison policy: retain data 200 GeV distributions, but do not
+// consume their fit values. Identify data by an explicit path component, never
+// by sample order or a caller-supplied display label.
+bool SummaryOnlyData200(double energy, const std::string& filename) {
+  if (energy != 200) return false;
+  const auto path = std::filesystem::path(filename).lexically_normal();
+  for (const auto& part : path)
+    if (part == "simulation" || part == "mc") return false;
+  for (const auto& part : path) if (part == "data") return true;
+  return false;
+}
+
+bool UsableComparisonFit(const TF1* fit, bool checkErrors = false) {
+  if (!fit || fit->GetNpar() < 3) return false;
+  for (int parameter : {1, 2}) {
+    if (!std::isfinite(fit->GetParameter(parameter)) || fit->GetParameter(parameter) <= 0) return false;
+    if (checkErrors && (!std::isfinite(fit->GetParError(parameter)) || fit->GetParError(parameter) < 0)) return false;
+  }
+  if (checkErrors) {
+    const double mean = fit->GetParameter(1), sigma = fit->GetParameter(2);
+    return std::isfinite(sigma/mean) && std::isfinite(std::hypot(fit->GetParError(2)/mean,
+                                                    (sigma/mean)*(fit->GetParError(1)/mean)));
+  }
+  return true;
+}
+
 nameStrings find_name_of_file(string filePath){
   nameStrings result;
   cout << filePath << "   ";
@@ -492,6 +518,7 @@ bool SaveChannelEnergyPair(TFile* const* inputs, int samples, const nameStrings*
     cerr << "Cannot create channel comparison directory: " << rawPath << endl;
     return false;
   }
+  bool renderAfterCut = true;
   vector<TDirectory*> inputDirectories(samples);
   vector<int> colors(samples);
   for(int ds=0; ds<samples; ++ds){
@@ -510,6 +537,12 @@ bool SaveChannelEnergyPair(TFile* const* inputs, int samples, const nameStrings*
         for(int chip=0; chip<chips; ++chip){
           const string key = Form("%sedep_Layer%d_Chip%d", prefix, layer, chip);
           if(!inputDirectories[ds]->GetKey(key.c_str())){
+            auto* status = dynamic_cast<TNamed*>(inputs[ds]->Get("hl_tail_status"));
+            if (*prefix && SummaryOnlyData200(energy, inputs[ds]->GetName()) && status &&
+                std::string(status->GetTitle()) == "incomplete") {
+              renderAfterCut = false;
+              continue;
+            }
             cerr << "Missing raw canvas " << key << " in " << inputs[ds]->GetName() << endl;
             return false;
           }
@@ -521,7 +554,11 @@ bool SaveChannelEnergyPair(TFile* const* inputs, int samples, const nameStrings*
   if(!energyDirectory) energyDirectory = output.mkdir(energyName.c_str());
   TDirectory* rawDirectory = energyDirectory->GetDirectory("raw");
   if(!rawDirectory) rawDirectory = energyDirectory->mkdir("raw");
+  if (!renderAfterCut)
+    cerr << "Skipping unavailable after-cut channel comparison for " << energyName
+         << "; incomplete summary-only data 200 GeV input" << endl;
   for(int eventCut=0; eventCut<2; ++eventCut){
+    if (eventCut && !renderAfterCut) continue;
     const char* prefix = eventCut ? "cut_" : "";
     for(int layer=0; layer<layers; ++layer){
       cout << "Channel edep: " << energyName << ", " << (eventCut ? "after" : "before")
@@ -845,7 +882,20 @@ int main(int argc, char* argv[]) try
         selection = hl_tail::object<TParameter<int>>(*input, "hl_tail_excluded")->GetVal();
         hl_tail::require(selection == 0 || selection == 1, "expected SingleEnergy selection flag 0 or 1");
       }
-      hl_tail::checkAnalysis(*input, selection == 1);
+      if (SummaryOnlyData200(item.first, argv[argument])) {
+        // Only this explicitly excluded input may be incomplete. Histograms
+        // required by the summary are still checked below before drawing.
+        auto* flag = dynamic_cast<TParameter<int>*>(input->Get("hl_tail_excluded"));
+        hl_tail::require(flag ? flag->GetVal() == selection : selection == 0,
+                         "tail selection mismatch in summary-only input " + std::string(argv[argument]));
+        if (flag) {
+          const std::string status = hl_tail::object<TNamed>(*input, "hl_tail_status")->GetTitle();
+          hl_tail::require(status == "complete" || status == "incomplete", "invalid summary-only analysis status");
+        }
+        cout << "Summary only (excluded from resolution values): " << argv[argument] << endl;
+      } else {
+        hl_tail::checkAnalysis(*input, selection == 1);
+      }
       hl_tail::require(sampleTailSelection[ds] == -1 || sampleTailSelection[ds] == selection,
                        "tail selection changes across energies in sample " + std::to_string(ds+1));
       sampleTailSelection[ds] = selection;
@@ -913,6 +963,9 @@ int main(int argc, char* argv[]) try
   TParameter<int>("hl_tail_excluded", compareTailSelections ? -1 : int(excludeTailEvents)).Write();
   for (int ds = 0; ds < Ndatasim; ++ds)
     TParameter<int>(Form("hl_tail_excluded_sample_%d", ds), sampleTailSelection[ds]).Write();
+  TNamed("resolution_value_exclusions", "data 200 GeV and missing/invalid energy fits: summary only; excluded from resolution points and fits").Write();
+  std::ostringstream skippedPoints;
+  skippedPoints << "sample\tenergy_GeV\treason\tinput\n";
   fileout.mkdir("simulation");
   fileout.mkdir("data");
 	// gain_histo->Write();
@@ -1055,6 +1108,7 @@ int main(int argc, char* argv[]) try
 
     // data (0) or simulation (1)
     for(int ds=0;ds<Ndatasim;ds++){
+      bool summaryOnly = SummaryOnlyData200(_energy, argv[filenames[ds][ienergy].second]);
       filein[ds] = new TFile(argv[filenames[ds][ienergy].second]);
       if(filein[ds]->IsZombie()){
         cerr << "Cannot read " << filein[ds]->GetName() << endl;
@@ -1074,14 +1128,19 @@ int main(int argc, char* argv[]) try
           return 1;
         }
       }
-      for(const char* name : {"fit_gaus", "fit_gaus_nhit"}){
-        const string key = dirNames[0] + "/" + name;
-        TF1* fit = dynamic_cast<TF1*>(filein[ds]->Get(key.c_str()));
-        if(!fit || fit->GetNpar() < 3 || !isfinite(fit->GetParameter(1)) ||
-           fit->GetParameter(1) <= 0 || !isfinite(fit->GetParameter(2)) || fit->GetParameter(2) <= 0){
-          cerr << "Missing or invalid fit " << key << " in " << filein[ds]->GetName() << endl;
-          return 1;
-        }
+      auto* energyFit = dynamic_cast<TF1*>(filein[ds]->Get((dirNames[0]+"/fit_gaus").c_str()));
+      auto* hitFit = dynamic_cast<TF1*>(filein[ds]->Get((dirNames[0]+"/fit_gaus_nhit").c_str()));
+      std::string skipReason;
+      if (summaryOnly) skipReason = "data 200 GeV temporarily excluded";
+      else if (!UsableComparisonFit(energyFit, true)) {
+        summaryOnly = true;
+        skipReason = "missing or invalid energy fit";
+        if (energyFit && energyFit->GetNpar() >= 3)
+          skipReason += ": mean="+std::to_string(energyFit->GetParameter(1))+", sigma="+std::to_string(energyFit->GetParameter(2));
+      }
+      if (summaryOnly) {
+        cerr << "Skipping resolution value; keeping summary: " << filein[ds]->GetName() << "; " << skipReason << endl;
+        skippedPoints << ds << "\t" << _energy << "\t" << skipReason << "\t" << filein[ds]->GetName() << "\n";
       }
       filein[ds]->cd();
 
@@ -1093,27 +1152,29 @@ int main(int argc, char* argv[]) try
       gStyle->SetOptStat(0);
       gStyle->SetOptFit(0);
       energy_deposition[ienergy][ds] = (TH1F*)filein[ds]->Get(Form("%s/edep_%dGeV",dirNames[0].c_str(),(int)_energy));
-      fit_gaus[ienergy][ds] = (TF1*)filein[ds]->Get(Form("%s/fit_gaus",dirNames[0].c_str()));
       ApplySampleStyle(energy_deposition[ienergy][ds], drawSettings[ds], 2);
-      int rebinFactor = CalculateRebinFactor(energy_deposition[ienergy][ds], fit_gaus[ienergy][ds]->GetParameter(2));
-      energy_deposition[ienergy][ds]->Rebin(rebinFactor);
-      fit_gaus[ienergy][ds]->SetParameter(0, fit_gaus[ienergy][ds]->GetParameter(0) * rebinFactor);
-      fit_gaus[ienergy][ds]->SetNpx(1000);
-      // energy_deposition[ienergy][ds]->SetLineColor(histo_colors[ds]);
-      energy_deposition[ienergy][ds]->GetXaxis()->SetRangeUser(fit_gaus[ienergy][ds]->GetParameter(1)-10*fit_gaus[ienergy][ds]->GetParameter(2),fit_gaus[ienergy][ds]->GetParameter(1)+10*fit_gaus[ienergy][ds]->GetParameter(2));
+      if (summaryOnly) {
+        // Do not use an invalid fit for rebinning, display limits or values.
+        energy_deposition[ienergy][ds]->GetXaxis()->SetRange(0, 0);
+      } else {
+        fit_gaus[ienergy][ds] = (TF1*)filein[ds]->Get(Form("%s/fit_gaus",dirNames[0].c_str()));
+        auto* fit = fit_gaus[ienergy][ds];
+        int rebinFactor = CalculateRebinFactor(energy_deposition[ienergy][ds], fit->GetParameter(2));
+        energy_deposition[ienergy][ds]->Rebin(rebinFactor);
+        fit->SetParameter(0, fit->GetParameter(0) * rebinFactor);
+        fit->SetNpx(1000);
+        energy_deposition[ienergy][ds]->GetXaxis()->SetRangeUser(fit->GetParameter(1)-10*fit->GetParameter(2),fit->GetParameter(1)+10*fit->GetParameter(2));
+        ApplySampleStyle(fit, drawSettings[ds], 1, true);
+        double mean = fit->GetParameter(1), mean_error = fit->GetParError(1);
+        double sigma = fit->GetParameter(2), sigma_error = fit->GetParError(2);
+        double res_error = sqrt(pow(sigma_error/mean,2) + pow(sigma*mean_error/mean/mean,2));
+        // Append so omitting 200 GeV does not introduce a dummy (0,0) point.
+        const int point = Eres[ds]->GetN();
+        Eres[ds]->SetPoint(point, _energy, sigma/mean);
+        Eres[ds]->SetPointError(point, 0, res_error);
+      }
       energy_deposition[ienergy][ds]->Draw(histoDrawOptions[ds].c_str());
-      ApplySampleStyle(fit_gaus[ienergy][ds], drawSettings[ds], 1, true);
-      // fit_gaus[ienergy][ds]->SetLineColor(fit_colors[ds]);
-      // fit_gaus[ienergy][ds]->Draw("same");
 
-      double mean = fit_gaus[ienergy][ds]->GetParameter(1);
-      double mean_error = fit_gaus[ienergy][ds]->GetParError(1);
-      double sigma = fit_gaus[ienergy][ds]->GetParameter(2);
-      double sigma_error = fit_gaus[ienergy][ds]->GetParError(2);
-      double res_error = sqrt( pow(sigma_error/mean,2) + pow(sigma*mean_error/mean/mean,2));
-      Eres[ds]->SetPoint(ienergy, _energy, sigma/mean);
-      Eres[ds]->SetPointError(ienergy, 0, res_error);
-      
       C_e_summary->cd(2);
       gStyle->SetOptStat(0);
       gStyle->SetOptFit(0);
@@ -1122,7 +1183,8 @@ int main(int argc, char* argv[]) try
       // number_of_hits[ienergy][ds]->SetLineColor(histo_colors[ds]);
       fit_gaus_nhit[ienergy][ds] = (TF1*)filein[ds]->Get(Form("%s/fit_gaus_nhit",dirNames[0].c_str()));
       // fitFunc = number_of_hits[ienergy][ds]->GetFunction("gaussian");
-      if(ds==0) number_of_hits[ienergy][ds]->GetXaxis()->SetRangeUser(fit_gaus_nhit[ienergy][ds]->GetParameter(1)-10*fit_gaus_nhit[ienergy][ds]->GetParameter(2),fit_gaus_nhit[ienergy][ds]->GetParameter(1)+10*fit_gaus_nhit[ienergy][ds]->GetParameter(2));
+      if (summaryOnly || !UsableComparisonFit(hitFit)) number_of_hits[ienergy][ds]->GetXaxis()->SetRange(0, 0);
+      if(ds==0 && !summaryOnly && UsableComparisonFit(hitFit)) number_of_hits[ienergy][ds]->GetXaxis()->SetRangeUser(fit_gaus_nhit[ienergy][ds]->GetParameter(1)-10*fit_gaus_nhit[ienergy][ds]->GetParameter(2),fit_gaus_nhit[ienergy][ds]->GetParameter(1)+10*fit_gaus_nhit[ienergy][ds]->GetParameter(2));
       number_of_hits[ienergy][ds]->Draw(histoDrawOptions[ds].c_str());
       
       // C_e_summary->cd(4);
@@ -1515,6 +1577,7 @@ int main(int argc, char* argv[]) try
   resolution_summary->SaveAs(Form("%s/summary_resolution.png",argv[argc-1]));
 
   fileout.cd();
+  TNamed("resolution_skipped_points", skippedPoints.str().c_str()).Write();
   TNamed("hl_tail_status", "complete").Write();
   return 0;
 } catch (const std::exception& error) {

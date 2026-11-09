@@ -451,6 +451,33 @@ int main(int argc, char* argv[])
       gPad->SetGrid(1,1);
       h_intercept_error[ixy]->Draw();
     }
+    TCanvas *fitParameterZoomCanvas = new TCanvas(Form("fitParameterZoomCanvas"),Form("fit parameters"), 2560, 1440);
+    fitParameterZoomCanvas->Divide(4, 2);
+    gStyle->SetOptStat(1111);
+    fitParameterZoomCanvas->cd();
+    for(int ixy=0;ixy<2;ixy++){
+      fitParameterZoomCanvas->cd(ixy*4 + 1);
+      gPad->SetLogy(1);
+      gPad->SetGrid(1,1);
+      h_slope[ixy]->SetRangeUser(-0.02,0.045);
+      h_slope[ixy]->Draw();
+
+      fitParameterZoomCanvas->cd(ixy*4 + 2);
+      gPad->SetLogy(1);
+      gPad->SetGrid(1,1);
+      h_slope_error[ixy]->Draw();
+
+      fitParameterZoomCanvas->cd(ixy*4 + 3);
+      gPad->SetLogy(1);
+      gPad->SetGrid(1,1);
+      h_intercept[ixy]->Draw();
+
+      fitParameterZoomCanvas->cd(ixy*4 + 4);
+      gPad->SetLogy(1);
+      gPad->SetGrid(1,1);
+      h_intercept_error[ixy]->Draw();
+    }
+
     if(writeCanvas){
       hitCanvas[0]->SaveAs(Form("%s/hitCanvas_even.png",argv[argc-1]));
       hitCanvas[1]->SaveAs(Form("%s/hitCanvas_odd.png",argv[argc-1]));
@@ -461,6 +488,7 @@ int main(int argc, char* argv[])
       effCanvas[0]->SaveAs(Form("%s/effCanvas_even.png",argv[argc-1]));
       effCanvas[1]->SaveAs(Form("%s/effCanvas_odd.png",argv[argc-1]));
       fitParameterCanvas->SaveAs(Form("%s/trackFit_parameters.png",argv[argc-1]));
+      fitParameterZoomCanvas->SaveAs(Form("%s/trackFit_parameters_zoom.png",argv[argc-1]));
     }
   }
 }

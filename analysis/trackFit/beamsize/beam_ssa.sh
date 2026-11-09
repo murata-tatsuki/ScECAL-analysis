@@ -32,7 +32,41 @@ paralell_jobs () {
   outfile=${outPath}/${beam}/${particle}/${energy}.root
   fig_path=${outPath}/figures/${beam}/${particle}/${energy}
   mkdir -p ${fig_path}
-  # sbatch -o "${slurm_log_dir}/test-%A.out" --error="${slurm_log_dir}/test-%A.err" execute.sl ./beamsize_ssa ${outfile} ${var} ${fig_path}
+  sbatch -o "${slurm_log_dir}/test-%A.out" --error="${slurm_log_dir}/test-%A.err" execute.sl ./beamsize_ssa ${outfile} ${var} ${fig_path}
+}
+
+
+paralell_jobs_sim_e () {
+  track_path=$1
+  beam=$2
+  outPath=$3
+  particle=$4
+  ene=$5
+
+  rm ../../tmp/beamsize_${ene}.txt
+  touch ../../tmp/beamsize_${ene}.txt
+  
+  for dat_name in $(ls ${track_path}/*.root)
+  do
+    prefix=`basename $dat_name`
+    mkdir -p ${outPath}/${beam}/${particle}
+    outfile=${outPath}/${beam}/${particle}/${prefix}
+    prefix="${prefix:0:-5}"
+    fig_path=${outPath}/figures/${beam}/${particle}/${prefix}
+    # mkdir -p ${fig_path}
+
+    echo -n ${dat_name} >> ../../tmp/beamsize_${ene}.txt
+    echo -n " " >> ../../tmp/beamsize_${ene}.txt
+  
+    # echo sbatch -o "${slurm_log_dir}/test-%A.out" --error="${slurm_log_dir}/test-%A.err" execute.sl ./beamsize_ssa ${outfile} ${dat_name} ${fig_path}
+  done
+
+  var=`cat ../../tmp/beamsize_${ene}.txt`
+  energy=`basename $track_path`
+  outfile=${outPath}/${beam}/${particle}/${energy}.root
+  fig_path=${outPath}/figures/${beam}/${particle}/${energy}
+  mkdir -p ${fig_path}
+  sbatch -o "${slurm_log_dir}/test-%A.out" --error="${slurm_log_dir}/test-%A.err" execute.sl ./beamsize_ssa ${outfile} ${var} ${fig_path}
 }
 
 
@@ -67,8 +101,14 @@ outPath_=../../result/trackFit/beamsize_ssa
 
 ## simulation
 
-track_path_=/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/ssaCalib/mu-/mu_track/threshold/100GeV
-paralell_jobs ${track_path_} simulation ${outPath_} mu-
+# track_path_=/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/ssaCalib/mu-/mu_track/threshold/100GeV
+# paralell_jobs ${track_path_} simulation ${outPath_} mu-
 
 # track_path_=/megraid01/users/data_beamtest/ECAL_data/analysed/2023/ps/ssaCalib/mu-/10GeV/
 # paralell_jobs ${track_path_} ps ${outPath_} mu-
+
+track_path_=/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/ssaCalib/e-/e_ssa/threshold
+for enregy in $(ls ${track_path_})
+do
+  paralell_jobs_sim_e ${track_path_}/${enregy} simulation ${outPath_} e- ${enregy}
+done

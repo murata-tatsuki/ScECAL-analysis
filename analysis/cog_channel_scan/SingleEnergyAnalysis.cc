@@ -1,4 +1,5 @@
 #include <iostream>
+#include "../resolution/HLTailSelection.hh"
 #include <fstream>
 #include "TROOT.h"
 #include "TFile.h"
@@ -118,10 +119,37 @@ bool eventCutConditions(double edep_event, double nhit_event, double edep_mean, 
   return (edep_square + nhit_square) > 1;
 }
 
-int main(int argc, char* argv[])
-{ 
+int main(int argc, char* argv[]) try
+{
+  const int fullArgc = argc;
+  int optionStart = argc;
+  for (int i = 3; i < argc; ++i) {
+    if (std::string(argv[i]).rfind("--", 0) == 0) { optionStart = i; break; }
+  }
+  // Legacy calls keep events; production scripts specify the veto explicitly.
+  bool excludeTailEvents = false, tailModeSpecified = false, skipChannelPlots = false;
+  std::string sampleLabel = "unspecified";
+  std::filesystem::path tailResults = std::filesystem::canonical(argv[0]).parent_path() /
+      "../result/channel_response/hg_lg_tail/threshold/e_ssa";
+  for (int i = optionStart; i < fullArgc; ++i) {
+    const std::string option = argv[i];
+    if (option == "--exclude-tail-events" || option == "--keep-tail-events") {
+      hl_tail::require(!tailModeSpecified, "specify one tail selection option");
+      excludeTailEvents = option == "--exclude-tail-events";
+      tailModeSpecified = true;
+    } else if (option == "--tail-results" || option == "--sample-label") {
+      hl_tail::require(i + 1 < fullArgc, option + " requires a value");
+      if (option == "--tail-results") tailResults = argv[++i];
+      else sampleLabel = argv[++i];
+    } else if (option == "--skip-channel-plots") {
+      skipChannelPlots = true;
+    } else {
+      throw std::runtime_error("Unknown option: " + option);
+    }
+  }
+  argc = optionStart;
     if(argc < 3){                                                     //エラー処理
-        cout << "usage: ./SingleEnergyAnalysis output.root Nenegry E1...En E1Nfiles...EnNfiles input1.root input2.root ... [cog_range_mm] channel_range_mm b_only_best figure_path" << endl;
+        cout << "usage: ./SingleEnergyAnalysis output.root Nenegry E1...En E1Nfiles...EnNfiles input1.root input2.root ... [cog_range_mm] channel_range_mm b_only_best figure_path [--exclude-tail-events|--keep-tail-events] [--tail-results DIR] [--sample-label LABEL] [--skip-channel-plots]" << endl;
         return 1;
     }
   gROOT->SetBatch(kTRUE);
@@ -177,6 +205,38 @@ int main(int argc, char* argv[])
   int bool_only_best = atoi(argv[argc-2]);
   string bestChannel = bool_only_best == 1 ? "_bestChannels" : "";
 
+  std::map<int, std::vector<unsigned char>> tailMasks;
+  std::string tailDefinition, calibrationInputs;
+  Long64_t tailChecked = 0, tailRejected = 0, eventsAfterCoG = 0, inputEvents = 0;
+  std::set<std::string> uniqueInputs;
+  int inputArgument = 3 + 2*Nenegry;
+  for (int i = 0; i < Nenegry; ++i) {
+    std::unique_ptr<hl_tail::Selection> selection;
+    if (excludeTailEvents) {
+      selection = std::make_unique<hl_tail::Selection>(tailResults / Form("%gGeV", energy[i]));
+      tailDefinition = selection->definition();
+    }
+    for (int j = 0; j < energy_files[i]; ++j, ++inputArgument) {
+      const auto input = std::filesystem::canonical(argv[inputArgument]).string();
+      hl_tail::require(uniqueInputs.insert(input).second, "duplicate calibrated input " + input);
+      hl_tail::require(std::filesystem::weakly_canonical(argv[1]) != input, "output would overwrite input");
+      calibrationInputs += input + "\n";
+      std::cout << "Calibration input: " << input << std::endl;
+      if (selection) {
+        const auto tailFile = tailResults / Form("%gGeV", energy[i]) / "tail_study.root";
+        hl_tail::require(std::filesystem::last_write_time(input) <= std::filesystem::last_write_time(tailFile),
+                         "calibration is newer than tail classification: " + input);
+        auto mask = selection->mask(input);
+        tailChecked += mask.size();
+        tailRejected += std::count(mask.begin(), mask.end(), 1);
+        tailMasks.emplace(inputArgument, std::move(mask));
+      }
+    }
+  }
+  std::cout << "Sample: " << sampleLabel << "; tail=" << (excludeTailEvents ? "exclude" : "keep")
+            << "; checked=" << tailChecked << "; rejected=" << tailRejected << std::endl;
+
+
 
 	// double cycleID, triggerID;
 	// vector<int> *cellIDs = nullptr;
@@ -227,6 +287,12 @@ int main(int argc, char* argv[])
 
 
 	TFile fileout(argv[1],"RECREATE");
+  hl_tail::require(!fileout.IsZombie(), "cannot create output ROOT");
+  TNamed("hl_tail_status", "incomplete").Write();
+  TNamed("analysis_sample", sampleLabel.c_str()).Write();
+  TNamed("calibration_inputs", calibrationInputs.c_str()).Write();
+  TParameter<int>("hl_tail_excluded", int(excludeTailEvents)).Write();
+  TParameter<int>("channel_plots_saved", int(!skipChannelPlots)).Write();
   fileout.mkdir("beforeEventCut");
   fileout.mkdir("afterEventCut");
   fileout.cd();
@@ -371,11 +437,13 @@ int main(int argc, char* argv[])
 
     TFile *filein[energy_files[ienergy]];
     TTree *tree[energy_files[ienergy]];
-    int entry_max[energy_files[ienergy]];
+    Long64_t entry_max[energy_files[ienergy]];
     for(int i=0; i<energy_files[ienergy]; i++){
 	  	filein[i] = new TFile(argv[irawfilenum+i]);
 	  	tree[i] = (TTree*) filein[i]->Get("Calib_Hit");
-	  	entry_max[i] = tree[i]->GetEntries();
+      hl_tail::require(!filein[i]->IsZombie() && tree[i], "missing Calib_Hit input");
+      entry_max[i] = tree[i]->GetEntries();
+      if (eventCut == 0) inputEvents += entry_max[i];
     }
 
     for(int irawfile=0; irawfile<energy_files[ienergy]; irawfile++){
@@ -393,9 +461,10 @@ int main(int argc, char* argv[])
 		  tree[irawfile]->SetBranchAddress("Hit_Z", &Hit_Z);
 		  tree[irawfile]->SetBranchAddress("NewTemperature", &NewTemperature);
 
-	  	for(int ientry=0; ientry<entry_max[irawfile]; ientry++){
+      for(Long64_t ientry=0; ientry<entry_max[irawfile]; ientry++){
+        if (excludeTailEvents && tailMasks.at(irawfilenum+irawfile).at(ientry)) continue;
         // if(ientry%1000==0) cout << ientry << "/" << entry_max[irawfile] << endl;
-	  		tree[irawfile]->GetEntry(ientry);
+        hl_tail::require(tree[irawfile]->GetEntry(ientry) > 0, "cannot read calibrated hit event");
         
 
         double sumEdep = 0;
@@ -460,6 +529,7 @@ int main(int argc, char* argv[])
           }
           if(!pass_cog) continue;
         }
+        if (eventCut == 0) ++eventsAfterCoG;
         // if(nhit_firstLayer>1) continue;
         if(eventCut==1 && eventCutConditions(sumEdep_all, cut_nhit, edep_mean, edep_sigma, nhit_mean, nhit_sigma)) continue;
         // energy_deposition[ienergy]->Fill(sumEdep_all);
@@ -536,24 +606,27 @@ int main(int argc, char* argv[])
     // fileout.cd(Form("%s",dirName[eventCut].c_str()));
     if(eventCut==0) fileout.mkdir(Form("%dGeV", (int)energy[ienergy]));
     fileout.cd(Form("%dGeV", (int)energy[ienergy]));
-    for (int i_layer = 0; i_layer < 30; ++i_layer) {
-      for (int i_chip = 0; i_chip < chipNu; ++i_chip) {
-        TCanvas* c1 = new TCanvas(Form("edep_Layer%d_Chip%d", i_layer, i_chip), Form("Layer%d Chip%d", i_layer, i_chip), 2560, 1440);
-        c1->Divide(6, 6);
-        for (int i_channel = 0; i_channel < channelNu; ++i_channel) {
-          c1->cd();
-          c1->cd(i_channel+1);
-          edep_channel[i_layer][i_chip][i_channel]->Draw();
-        }
-        c1->Update();
-        c1->Write(Form("%sedep_Layer%d_Chip%d", saveName[eventCut].c_str(),i_layer, i_chip));
-        c1->SaveAs(Form("%s/%gGeV/raw/%s%gGeV_layer%dchip%d.png",argv[argc-1],energy[ienergy],saveName[eventCut].c_str(),energy[ienergy],i_layer,i_chip));
-        delete c1;
-        for (int i_channel = 0; i_channel < channelNu; ++i_channel) {
-          delete edep_channel[i_layer][i_chip][i_channel];
+    if (!skipChannelPlots) {
+      for (int i_layer = 0; i_layer < 30; ++i_layer) {
+        for (int i_chip = 0; i_chip < chipNu; ++i_chip) {
+          TCanvas* c1 = new TCanvas(Form("edep_Layer%d_Chip%d", i_layer, i_chip), Form("Layer%d Chip%d", i_layer, i_chip), 2560, 1440);
+          c1->Divide(6, 6);
+          for (int i_channel = 0; i_channel < channelNu; ++i_channel) {
+            c1->cd();
+            c1->cd(i_channel+1);
+            edep_channel[i_layer][i_chip][i_channel]->Draw();
+          }
+          c1->Update();
+          c1->Write(Form("%sedep_Layer%d_Chip%d", saveName[eventCut].c_str(),i_layer, i_chip));
+          c1->SaveAs(Form("%s/%gGeV/raw/%s%gGeV_layer%dchip%d.png",argv[argc-1],energy[ienergy],saveName[eventCut].c_str(),energy[ienergy],i_layer,i_chip));
+          delete c1;
         }
       }
     }
+    for (int layer = 0; layer < layerNu; ++layer)
+      for (int chip = 0; chip < chipNu; ++chip)
+        for (int channel = 0; channel < channelNu; ++channel)
+          delete edep_channel[layer][chip][channel];
     fileout.cd();
     irawfilenum += energy_files[ienergy];
   }
@@ -807,4 +880,17 @@ int main(int argc, char* argv[])
 
   }
   
+  fileout.cd();
+  TParameter<Long64_t>("input_events", inputEvents).Write();
+  TParameter<Long64_t>("hl_tail_checked_events", tailChecked).Write();
+  TParameter<Long64_t>("hl_tail_rejected_events", tailRejected).Write();
+  TParameter<Long64_t>("hl_tail_events_after_cog", eventsAfterCoG).Write();
+  TNamed("hl_tail_source", excludeTailEvents ? std::filesystem::canonical(tailResults).c_str() : "none").Write();
+  TNamed("hl_tail_definition", tailDefinition.c_str()).Write();
+  TNamed("hl_tail_status", "complete").Write("hl_tail_status", TObject::kOverwrite);
+  fileout.Close();
+  return 0;
+} catch (const std::exception& error) {
+  std::cerr << error.what() << std::endl;
+  return 1;
 }

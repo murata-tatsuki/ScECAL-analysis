@@ -1,3 +1,15 @@
 *.err
 *.out
 *.o
+*.png
+*.pdf
+*.root
+*.root.tmp
+*.bin
+
+/analysis/result/**/residual_bins.tsv
+/analysis/result/**/switch_bins.tsv
+/analysis/result/**/channels.tsv
+/analysis/result/**/events.tsv
+/analysis/result/**/event_energy.tsv
+/analysis/result/**/matching_bins.tsv

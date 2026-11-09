@@ -27,7 +27,7 @@ bash submit.sh --energies 5,100 --label comparison_v1
 
 Slurmの`sbatch`を使用します。`bjobs`または`squeue -u "$USER"`で確認できます。1 energyにつき1ジョブ・1 CPUです。各ジョブが集計とPNG保存まで実行するので、異なるenergyはスケジューラが許す範囲で並列に処理されます。同じenergy内は順次処理します。ログは`analysis/log/channel_response/hg_lg_tail/`、投入したjob IDはその中の`submissions_*.tsv`に保存します。`--partition`、`--mem`、`--time`、`--log-dir`も指定できます。指定しないメモリ・時間制限はクラスタの既定値です。
 
-全energyはPSの0.5, 1, 2, 3, 4, 5 GeVと、SPSの10, 20, 30, 40, 50, 60, 70, 80, 100, 120, 150, 200, 250 GeVです。dataのPS/SPSをenergyから自動選択します。MCは既存の配置どおり、PS相当energyも`Result_MC/{decode,calib}/e-/sps/<mc-tag>/`から読みます。
+全energyはPSの0.5, 1, 2, 3, 4, 5 GeVと、SPSの10, 20, 30, 40, 50, 60, 70, 80, 100, 120, 150, 200, 250 GeVです。dataのPS/SPSをenergyから自動選択します。MCは、PS相当energyも`Result_MC/{decode,calib}/e-/e_ssa/<mc-tag>/`から読みます。
 
 少量の診断例：
 
@@ -36,6 +36,20 @@ bash run.sh --energy 100 --max-files 3 --events-per-file 2000 --label sample_3fi
 ```
 
 `--events-per-file N`は各ファイルを10区間に分けて決定的に抽出します。`--max-events N`はdata・MCそれぞれについて、全ファイル合計の上限です。これらと`--max-files`の既定値0は制限なしです。少量サンプルでは共通channel数が減るので、必要なら`--min-hits`を明示的に調整してください。どのファイルから何eventを読んだかは保存されます。
+
+
+SSA / calibration 再実行後、resolutionの既定入力を生成する場合:
+
+```bash
+TMPDIR=/tmp bash submit.sh --energy all --mc-tag threshold --label e_ssa
+```
+
+保存先は`analysis/result/channel_response/hg_lg_tail/threshold/e_ssa/<energy>GeV/`です。
+resolutionで使う判定結果には全入力・全eventが必要なので、サンプリングオプションを付けません。
+全ジョブが正常終了してからresolutionを実行します。
+`--dry-run`はパスとファイルの対応のみを検証し、ROOT内の校正整合性は実処理で検査します。
+`Calibration closure failed`にはsample、入力ファイル、entry、channel、HG/LGの保存値と再計算値を表示します。
+古いcalibrationで作成した入力は、現行の係数補完と一致しない場合に停止します。
 
 ## 判定と集計
 
@@ -110,7 +124,7 @@ ROOTの`events`は全読み込みeventを保存し、`selected`と`tail_rich`、
 
 入力・校正パラメータは既存解析と同じ既定値を使用します。変更する場合は`bash run.sh --help`にある`--data-decode`、`--data-calib`、`--mc-decode`、`--mc-calib`、`--pedestal`、`--hl`、`--mip`を指定します。decode/calibにディレクトリを指定すると同名ROOTを対応づけます。個々のROOTファイルを指定することもできます。maskを使わない診断は`--bad-channel-source none`です。
 
-イベント数・Run/Event_Time/Triggerの一致、full CellIDの対応、重複、保存済みHG/LG energyとraw ADCから再計算したenergyの一致を検査します。使用する校正式・係数のfallbackは`../../impact_studies/StudyCommon.hh`を共用しますが、impact studyの実行結果は不要です。校正条件や入力の組合せが合わない場合は停止します。decode→calibrationのhit残存率は解析しません。
+イベント数・Run/Event_Time/Triggerの一致、full CellIDの対応、重複、保存済みHG/LG energyとraw ADCから再計算したenergyの一致を検査します。使用する係数の読込・fallbackは`HGLGTailCalibration.hh`で現行の`Calibration.cxx`に合わせます。有効な物理channelを各1回、layer 0–29のSiPMグループ別平均に数え、無効なHG–LG fitはgainと切片の両方を平均で補完します。MIPは正のMPV・NDF、非負のχ²と既存のχ²/NDF上限を検査し、無効なchannelを平均で補完します。pedestalはcalibration側と同じfloat丸めを維持します。旧impact study用のsentinel判定は使いません。impact studyの実行結果は不要です。校正条件や入力の組合せが合わない場合は停止します。decode→calibrationのhit残存率は解析しません。
 
 元のROOTは必要branchだけを各sampleにつき1回読みます。中央値の確定後にhitとeventを同じ定義で分類するため、比較範囲内のhitを一時ROOTに保存し、そこを再読込します。中央値は近似せず、残差をsampleごとにメモリに保持して算出します。比較範囲内のhitがN個なら残差の数値だけで約8N byte、加えてvectorの余剰容量等が必要です。全event実行ではI/O・メモリ・一時領域が増えます。重いchannelごとのPNG一括描画は行いません。
 
