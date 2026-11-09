@@ -13,3 +13,7 @@
 /analysis/result/**/events.tsv
 /analysis/result/**/event_energy.tsv
 /analysis/result/**/matching_bins.tsv
+
+/results/
+/simulation/
+/takatsu_macro/
