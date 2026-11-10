@@ -5,3 +5,12 @@
 *.root
 tmp/*.txt
 /log/
+
+# Executables built by resolution/Makefile
+/resolution/between_files_energy_resolution_simulation
+/resolution/between_files_energy_resolution
+/resolution/between_files_cog
+/resolution/between_files_energy_resolution_generation
+/resolution/SingleEnergyAnalysis
+/resolution/MultiEnergyAnalysis
+/resolution/SingleEnergyAnalysisPosDep
