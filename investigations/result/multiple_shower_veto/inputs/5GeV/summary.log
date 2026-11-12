@@ -1,0 +1,8 @@
+{"energy_GeV": 5, "sample": "data", "cog_mm": 200, "condition": "nominal", "before": 13549, "removed": 302, "removed_fraction": 0.02228946785740645, "binomial_se": 0.0012682397922486343, "evaluable": 12275, "both_views": 20}
+{"energy_GeV": 5, "sample": "data", "cog_mm": 20, "condition": "nominal", "before": 7979, "removed": 108, "removed_fraction": 0.0135355307682667, "binomial_se": 0.001293612300088872, "evaluable": 7517, "both_views": 4}
+{"energy_GeV": 5, "sample": "data", "cog_mm": 10, "condition": "nominal", "before": 2953, "removed": 33, "removed_fraction": 0.011175076193701321, "binomial_se": 0.0019344309194109278, "evaluable": 2800, "both_views": 0}
+{"energy_GeV": 5, "sample": "data", "cog_mm": 5, "condition": "nominal", "before": 718, "removed": 9, "removed_fraction": 0.012534818941504178, "binomial_se": 0.0041520034523080005, "evaluable": 675, "both_views": 0}
+{"energy_GeV": 5, "sample": "mc", "cog_mm": 200, "condition": "nominal", "before": 19838, "removed": 2, "removed_fraction": 0.00010081661457808247, "binomial_se": 7.128451822080973e-05, "evaluable": 19830, "both_views": 0}
+{"energy_GeV": 5, "sample": "mc", "cog_mm": 20, "condition": "nominal", "before": 9728, "removed": 1, "removed_fraction": 0.00010279605263157894, "binomial_se": 0.00010279076898157255, "evaluable": 9725, "both_views": 0}
+{"energy_GeV": 5, "sample": "mc", "cog_mm": 10, "condition": "nominal", "before": 3213, "removed": 1, "removed_fraction": 0.0003112356053532524, "binomial_se": 0.0003111871677830652, "evaluable": 3212, "both_views": 0}
+{"energy_GeV": 5, "sample": "mc", "cog_mm": 5, "condition": "nominal", "before": 749, "removed": 0, "removed_fraction": 0.0, "binomial_se": 0.0, "evaluable": 749, "both_views": 0}

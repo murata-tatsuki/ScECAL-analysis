@@ -1,0 +1,17 @@
+[
+  {
+    "source": "/gpfs/group/ilc/users/murata/ScECAL_BeamTest/investigations/nhit_left_population/channel_residual.py",
+    "snapshot": "/gpfs/group/ilc/users/murata/ScECAL_BeamTest/investigations/result/nhit_left_population/channel_residual/inputs/channel_residual.py",
+    "sha256": "e670572d7ee8e3bc209bba9eb5a3874c59d432c6db2bf575e3f39011982dc63a"
+  },
+  {
+    "source": "/gpfs/group/ilc/users/murata/ScECAL_BeamTest/investigations/e_ssa_threshold_review_20260930/CurrentParameters.hh",
+    "snapshot": "/gpfs/group/ilc/users/murata/ScECAL_BeamTest/investigations/result/nhit_left_population/channel_residual/inputs/CurrentParameters.hh",
+    "sha256": "44383c86a51a75702a3dc2c9f28533cc8bf8376669a63a7c81a3e4defd52ba24"
+  },
+  {
+    "source": "/gpfs/group/ilc/users/murata/data_beamtest/analysis/ECAL_Analysis_LCIO/src/Calibration.cxx",
+    "snapshot": "/gpfs/group/ilc/users/murata/ScECAL_BeamTest/investigations/result/nhit_left_population/channel_residual/inputs/Calibration.cxx",
+    "sha256": "259e54e24fc848a0c37db5d61140ca01f939da53ff4f0a3f68ab140645d09589"
+  }
+]

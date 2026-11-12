@@ -1,0 +1,140 @@
+[
+  {
+    "file_index": 0,
+    "entries": 2397,
+    "sampled": 120,
+    "spans": [
+      [
+        194,
+        234
+      ],
+      [
+        1169,
+        1209
+      ],
+      [
+        1884,
+        1924
+      ]
+    ],
+    "path": "/gpfs/group/ilc/users/murata/data_beamtest/ECAL_data/analysed/2023/sps/calib_original/pi-/100GeV/ECAL_Run61_20230427_155106.root",
+    "bytes": 11238059,
+    "mtime_ns": 1714098630425747149
+  },
+  {
+    "file_index": 1,
+    "entries": 93096,
+    "sampled": 4662,
+    "spans": [
+      [
+        2359,
+        2748
+      ],
+      [
+        7765,
+        8154
+      ],
+      [
+        20152,
+        20541
+      ],
+      [
+        30106,
+        30495
+      ],
+      [
+        33580,
+        33969
+      ],
+      [
+        43835,
+        44224
+      ],
+      [
+        51303,
+        51691
+      ],
+      [
+        55421,
+        55809
+      ],
+      [
+        67558,
+        67946
+      ],
+      [
+        72677,
+        73065
+      ],
+      [
+        78325,
+        78713
+      ],
+      [
+        91901,
+        92289
+      ]
+    ],
+    "path": "/gpfs/group/ilc/users/murata/data_beamtest/ECAL_data/analysed/2023/sps/calib_original/pi-/100GeV/ECAL_Run77_20230428_220518.root",
+    "bytes": 431720484,
+    "mtime_ns": 1714098714842155743
+  },
+  {
+    "file_index": 2,
+    "entries": 24321,
+    "sampled": 1218,
+    "spans": [
+      [
+        1622,
+        1724
+      ],
+      [
+        3426,
+        3528
+      ],
+      [
+        4299,
+        4401
+      ],
+      [
+        7284,
+        7386
+      ],
+      [
+        9776,
+        9878
+      ],
+      [
+        10175,
+        10277
+      ],
+      [
+        13495,
+        13596
+      ],
+      [
+        15949,
+        16050
+      ],
+      [
+        17875,
+        17976
+      ],
+      [
+        19679,
+        19780
+      ],
+      [
+        20412,
+        20513
+      ],
+      [
+        22835,
+        22936
+      ]
+    ],
+    "path": "/gpfs/group/ilc/users/murata/data_beamtest/ECAL_data/analysed/2023/sps/calib_original/pi-/100GeV/ECAL_Run78_20230428_231514.root",
+    "bytes": 112576289,
+    "mtime_ns": 1714098737535996764
+  }
+]

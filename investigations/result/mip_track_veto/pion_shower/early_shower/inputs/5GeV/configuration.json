@@ -1,0 +1,40 @@
+{
+  "command": [
+    "investigations/mip_track_veto/pion_shower.py",
+    "--selection",
+    "early",
+    "--energy",
+    "5"
+  ],
+  "configs": {
+    "nominal": 8,
+    "loose": 6,
+    "tight": 10,
+    "interaction_only": 8,
+    "mip_only": null
+  },
+  "prefix_active_fraction": 0.75,
+  "prefix_median_MIP": [
+    0.3,
+    2.5
+  ],
+  "prefix_max4MIP_outliers": 1,
+  "prefix_strips_per_active_layer": 2.5,
+  "prefix_rms_mm": 5.3,
+  "prefix_min_layers_per_projection": 3,
+  "onset_layers": 2,
+  "onset_min_MIP": 6,
+  "onset_min_unique_positive_strips": 4,
+  "next4_average_ratio_minimum": 5,
+  "ratio_denominator": "Prefix active-layer average",
+  "total_energy_window": null,
+  "selection": "early",
+  "early_keep_maximum_start_layer": {
+    "nominal": 6,
+    "loose": 8,
+    "tight": 4
+  },
+  "early_start_definition": "First consecutive pair of layers with >=6 MIP and >=4 positive unique strips each; absent=99",
+  "note": "Nominal is previous MIP veto OR absence of shower onset at layer<=6; not pure-pion PID",
+  "source_sha256": "d938fced75140ef323b9e643707d8959da9c017332b58216719222efdf97dc61"
+}

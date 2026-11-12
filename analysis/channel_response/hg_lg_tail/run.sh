@@ -1,14 +1,15 @@
 #!/bin/bash
 set -euo pipefail
 HERE=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)
-MC=/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new
-DATA=/megraid01/users/data_beamtest/ECAL_data/analysed/2023
+MC=/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new
+DATA=/gpfs/group/ilc/users/murata/data_beamtest/ECAL_data/analysed/2023
 params=$MC/Analysis_edit/share
 usage(){ cat <<HELP
 Usage: bash run.sh [options]
   --energy VALUE            One beam energy (default: 100); use submit.sh for all
   --beam auto|ps|sps         Data beam (default: auto, PS for 0.5-5 GeV)
-  --mc-tag NAME             MC subdirectory (default: threshold)
+  --mc-tag NAME             Output group (default: threshold)
+  --mc-sample PATH          MC input below e-/ (default: e_ssa/<mc-tag>)
   --label NAME              Output label (default: default)
   --result-dir PATH         Default: analysis/result/channel_response/hg_lg_tail
   --data-decode PATH         Raw data ROOT file or directory
@@ -35,7 +36,7 @@ or impact_studies is required. Figures are PNG only; trees/histograms are ROOT.
 HELP
 }
 fail(){ echo "ERROR: $*" >&2; exit 1; }
-declare -A opt=( [energy]=100 [beam]=auto [mc-tag]=threshold [label]=default
+declare -A opt=( [energy]=100 [beam]=auto [mc-tag]=threshold [mc-sample]='' [label]=default
  [result-dir]="$HERE/../../result/channel_response/hg_lg_tail"
  [data-decode]='' [data-calib]='' [mc-decode]='' [mc-calib]=''
  [pedestal]="$params/pedestal2023_SPS.root" [hl]="$params/all_hl_electron2023_hlratio_v3.root" [mip]="$params/all_auto_muon_v4_trackfit.root"
@@ -48,6 +49,8 @@ while (($#));do
 done
 [[ ${opt[energy]} =~ ^[0-9]+([.][0-9]+)?$ ]]||fail 'energy must be one positive number'
 for k in mc-tag label;do [[ ${opt[$k]} =~ ^[A-Za-z0-9][A-Za-z0-9_.-]*$ ]]||fail "Invalid $k";done
+[[ -n ${opt[mc-sample]} ]]||opt[mc-sample]=e_ssa/${opt[mc-tag]}
+[[ ${opt[mc-sample]} =~ ^[A-Za-z0-9][A-Za-z0-9_.-]*(/[A-Za-z0-9][A-Za-z0-9_.-]*)*$ ]]||fail 'Invalid mc-sample'
 for k in max-events max-files events-per-file min-hits min-tail-channels;do [[ ${opt[$k]} =~ ^(0|[1-9][0-9]*)$ ]]||fail "Invalid integer $k";done
 ((opt[min-hits]>=2&&opt[min-tail-channels]>=1))||fail 'min-hits >=2 and min-tail-channels >=1 required'
 for k in hg-min hg-max nsigma reference-energy;do [[ ${opt[$k]} =~ ^[0-9]+([.][0-9]+)?$ ]]||fail "Invalid number $k";done
@@ -57,8 +60,8 @@ if [[ ${opt[beam]} == auto ]];then case ${opt[energy]} in 0.5|1|2|3|4|5) opt[bea
 [[ ${opt[beam]} == ps || ${opt[beam]} == sps ]]||fail 'Invalid beam'
 [[ -n ${opt[data-decode]} ]]||opt[data-decode]=$DATA/${opt[beam]}/decode/e-/${opt[energy]}GeV
 [[ -n ${opt[data-calib]} ]]||opt[data-calib]=$DATA/${opt[beam]}/calib/e-/${opt[energy]}GeV
-[[ -n ${opt[mc-decode]} ]]||opt[mc-decode]=$MC/Result_MC/decode/e-/e_ssa/${opt[mc-tag]}/${opt[energy]}GeV
-[[ -n ${opt[mc-calib]} ]]||opt[mc-calib]=$MC/Result_MC/calib/e-/e_ssa/${opt[mc-tag]}/${opt[energy]}GeV
+[[ -n ${opt[mc-decode]} ]]||opt[mc-decode]=$MC/Result_MC/decode/e-/${opt[mc-sample]}/${opt[energy]}GeV
+[[ -n ${opt[mc-calib]} ]]||opt[mc-calib]=$MC/Result_MC/calib/e-/${opt[mc-sample]}/${opt[energy]}GeV
 for k in pedestal hl mip bad-channel-source;do
  [[ $k != bad-channel-source || ${opt[$k]} != none ]]||continue
  [[ -f ${opt[$k]} ]]||fail "Missing $k: ${opt[$k]}";opt[$k]=$(realpath -e -- "${opt[$k]}")

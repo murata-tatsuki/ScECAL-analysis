@@ -1,0 +1,31 @@
+{
+  "command": [
+    "investigations/mip_track_veto/pion_shower.py",
+    "--energy",
+    "100"
+  ],
+  "configs": {
+    "nominal": 8,
+    "loose": 6,
+    "tight": 10,
+    "interaction_only": 8,
+    "mip_only": null
+  },
+  "prefix_active_fraction": 0.75,
+  "prefix_median_MIP": [
+    0.3,
+    2.5
+  ],
+  "prefix_max4MIP_outliers": 1,
+  "prefix_strips_per_active_layer": 2.5,
+  "prefix_rms_mm": 5.3,
+  "prefix_min_layers_per_projection": 3,
+  "onset_layers": 2,
+  "onset_min_MIP": 6,
+  "onset_min_unique_positive_strips": 4,
+  "next4_average_ratio_minimum": 5,
+  "ratio_denominator": "Prefix active-layer average",
+  "total_energy_window": null,
+  "note": "Nominal is previous through-going MIP veto OR MIP-prefix then shower; not pure-pion PID",
+  "source_sha256": "fefa67675541430401b227042f47dc91046c2ba5303a7250f7e547c0fb77906f"
+}

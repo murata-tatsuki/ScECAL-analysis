@@ -1,0 +1,84 @@
+{
+  "package_id": "scecal_2023_20261110_followup",
+  "prepared_date": "2026-11-10",
+  "timezone": "Asia/Tokyo",
+  "language": "ja",
+  "purpose": "Portable follow-up handoff for the original thesis-writing Codex",
+  "based_on": "Server-side investigation in this conversation; original snapshot scecal_2023_20261024_091634",
+  "entrypoints": [
+    "PROMPT.txt",
+    "HANDOFF.md"
+  ],
+  "scope": [
+    "2023 CERN PS/SPS ScECAL",
+    "Q1-Q8 follow-up findings",
+    "saved-value exports only"
+  ],
+  "not_included": [
+    "raw data and original ROOT files",
+    "full previous snapshot",
+    "literature PDF files"
+  ],
+  "validation": [
+    "six CSV row counts checked:147/38/152/16/6/4",
+    "147 graph point identities unique; series counts checked",
+    "38 five-mm before-event counts match response table",
+    "Q1-Q8 present",
+    "original request byte-identical to user attachment",
+    "independent read-only handoff review; threshold expression clarified"
+  ],
+  "evidence_note": "Confirmed records do not establish physical validity or thesis adoption. Source paths refer to the investigation server.",
+  "files": [
+    {
+      "path": "HANDOFF.md",
+      "bytes": 31250,
+      "sha256": "e11e477a4fed227d3029eb1f81440efcb89cb266f2b42e26aaeeab3059d1e38a"
+    },
+    {
+      "path": "PROMPT.txt",
+      "bytes": 3386,
+      "sha256": "a6877c31c6ef9c4e1d2580968bf9b5d2173250ed71d05aa6d218c82019856631"
+    },
+    {
+      "path": "original_request.txt",
+      "bytes": 12560,
+      "sha256": "90526829d85af769732fdc0d8ec51f6bd6a61db0199671e97bd5494d40b133b3"
+    },
+    {
+      "path": "tables/integrated_response.csv",
+      "bytes": 5859,
+      "sha256": "662de580160b1af865977b6bfe3ef5bf1540df9582571e838157a4753d8f4012",
+      "data_rows": 6
+    },
+    {
+      "path": "tables/mip_reader_status.csv",
+      "bytes": 1719,
+      "sha256": "338afbeb449e3fe76b3b6faa2d27e24e8ec810c56f7f0a96b71b81c3cc158337",
+      "data_rows": 4
+    },
+    {
+      "path": "tables/resolution_counts.csv",
+      "bytes": 60646,
+      "sha256": "ab79efe94163ebbed8ccfe4bb5fdc14b3f8513ebc838b634498e9139d8636e5f",
+      "data_rows": 152
+    },
+    {
+      "path": "tables/resolution_curve_fits.csv",
+      "bytes": 13428,
+      "sha256": "117e798f2b2e0995ada30a32be36de8cfa4ebfe1bc79f3fa6273bb154409273f",
+      "data_rows": 16
+    },
+    {
+      "path": "tables/resolution_points.csv",
+      "bytes": 102099,
+      "sha256": "35f6314eea359c9b169bc3e35892a3c4ecb020e44f83f7b9e692dd13622350cb",
+      "data_rows": 147
+    },
+    {
+      "path": "tables/response_5mm.csv",
+      "bytes": 27262,
+      "sha256": "038a48972c31a0edfe900dcc06b960ff7366886df526ea793655c90c894fc16b",
+      "data_rows": 38
+    }
+  ]
+}

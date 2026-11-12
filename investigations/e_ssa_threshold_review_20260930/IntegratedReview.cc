@@ -95,7 +95,16 @@ int main(int argc,char**argv)try {
    double gap=std::pow(widths[0]["baseline"].rms,2)-std::pow(widths[1]["baseline"].rms,2);for(auto&[condition,d]:widths[0]){auto&m=widths[1].at(condition);imp<<beam<<'\t'<<selection<<'\t'<<condition<<'\t'<<values[0][condition].size()<<'\t'<<values[1][condition].size()<<'\t'<<d.rms<<'\t'<<m.rms<<'\t'<<1-(d.rms*d.rms-m.rms*m.rms)/gap<<'\t'<<d.gaus<<'\t'<<m.gaus<<'\t'<<d.mean/widths[0]["baseline"].mean-1<<'\t'<<m.mean/widths[1]["baseline"].mean-1<<'\n';}
    if(selection=="cog20_energy_window"){TCanvas c("integrated_review","",2250,1000);c.SetCanvasSize(2250,1000);c.Divide(2,1);for(int p=0;p<2;++p){c.cd(p+1);std::string condition=p?"position_run_cv":"baseline";std::array<TH1D,2> h={TH1D("d","",100,.5,1.5),TH1D("m","",100,.5,1.5)};double ymax=0;for(int s=0;s<2;++s){auto&v=values[s][condition];double mu=mean(v);for(double x:v)h[s].Fill(x/mu);h[s].Scale(1./v.size());h[s].SetLineColor(s?kRed+1:kBlack);h[s].SetLineWidth(2);ymax=std::max(ymax,h[s].GetMaximum());}h[0].SetTitle((energy+", "+condition+";Energy / sample mean;Probability / bin").c_str());h[0].SetMaximum(1.15*ymax);auto*d=h[0].DrawCopy("HIST");auto*m=h[1].DrawCopy("HIST SAME");TLegend legend(.59,.76,.88,.88);legend.AddEntry(d,"data, LG tail excluded","l");legend.AddEntry(m,"MC e_ssa threshold","l");legend.DrawClone();}c.SaveAs((dest/"resolution_position_impact.png").c_str());}
   }
-  for(int s=0;s<2;++s)for(int cog:{200,20,10,5}){fs::path p=project/"analysis/result/resolution"/(s?"simulation/threshold":"data")/(std::to_string(cog)+"mm")/(energy+"_"+std::to_string(cog)+"mm.root");auto f=openFile(p.string());auto*flag=object<TParameter<int>>(*f,"hl_tail_excluded");for(const std::string stage:{"beforeEventCut","afterEventCut"}){auto*h=object<TH1>(*f,stage+"/edep_"+energy);auto*fit=object<TF1>(*f,stage+"/fit_gaus");auto*nh=object<TH1>(*f,stage+"/nhits_"+energy);prod<<beam<<'\t'<<(s?"mc":"data")<<'\t'<<cog<<'\t'<<stage<<'\t'<<flag->GetVal()<<'\t'<<h->GetEntries()<<'\t'<<h->GetMean()<<'\t'<<h->GetRMS()/h->GetMean()<<'\t'<<fit->GetParameter(1)<<'\t'<<fit->GetParameter(2)/fit->GetParameter(1)<<'\t'<<nh->GetMean()<<'\n';}}
+  for(int s=0;s<2;++s)for(int cog:{200,20,10,5}){
+   fs::path p=project/"analysis/result/resolution"/(s?"simulation/threshold":"data")/(std::to_string(cog)+"mm")/(energy+"_"+std::to_string(cog)+"mm.root");auto f=openFile(p.string());auto*flag=object<TParameter<int>>(*f,"hl_tail_excluded");
+   for(const std::string stage:{"beforeEventCut","afterEventCut"}){
+    if(stage=="afterEventCut"&&(!f->Get((stage+"/edep_"+energy).c_str())||!f->Get((stage+"/fit_gaus").c_str())||!f->Get((stage+"/nhits_"+energy).c_str()))){
+     std::cerr<<"Skipping afterEventCut production-resolution summary: missing after-cut objects in "<<p<<std::endl;
+     continue;
+    }
+    auto*h=object<TH1>(*f,stage+"/edep_"+energy);auto*fit=object<TF1>(*f,stage+"/fit_gaus");auto*nh=object<TH1>(*f,stage+"/nhits_"+energy);prod<<beam<<'\t'<<(s?"mc":"data")<<'\t'<<cog<<'\t'<<stage<<'\t'<<flag->GetVal()<<'\t'<<h->GetEntries()<<'\t'<<h->GetMean()<<'\t'<<h->GetRMS()/h->GetMean()<<'\t'<<fit->GetParameter(1)<<'\t'<<fit->GetParameter(2)/fit->GetParameter(1)<<'\t'<<nh->GetMean()<<'\n';
+   }
+  }
   std::cout<<energy<<" fresh review complete"<<std::endl;
  }
  truthScale(out);

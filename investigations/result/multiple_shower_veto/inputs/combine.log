@@ -1,0 +1,4 @@
+Validation: all 3 energies have audited current MC tail flags and verified input manifests.
+Each data/MC sample contains 20000 unique file/entry keys. Tag counts and histogram flows match saved metrics.
+In-memory topology checks: single peak rejected as candidate=False; persistent two peaks=True; single-layer double=False.
+Candidate and summary PNGs visually inspected.

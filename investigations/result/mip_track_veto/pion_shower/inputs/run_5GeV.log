@@ -1,0 +1,27 @@
+5GeV data: 1/4 files; 1637/13549 evaluated
+5GeV data: 2/4 files; 4570/13549 evaluated
+5GeV data: 3/4 files; 8806/13549 evaluated
+5GeV data: 4/4 files; 13549/13549 evaluated
+5GeV mc: 20/100 files; 3969/19838 evaluated
+5GeV mc: 40/100 files; 7932/19838 evaluated
+5GeV mc: 60/100 files; 11906/19838 evaluated
+5GeV mc: 80/100 files; 15875/19838 evaluated
+5GeV mc: 100/100 files; 19838/19838 evaluated
+5GeV pion_run: 1/8 files; 1534/6000 evaluated
+5GeV pion_run: 2/8 files; 1842/6000 evaluated
+5GeV pion_run: 3/8 files; 2320/6000 evaluated
+5GeV pion_run: 4/8 files; 3208/6000 evaluated
+5GeV pion_run: 5/8 files; 3697/6000 evaluated
+5GeV pion_run: 6/8 files; 4158/6000 evaluated
+5GeV pion_run: 7/8 files; 5237/6000 evaluated
+5GeV pion_run: 8/8 files; 6000/6000 evaluated
+{"energy_GeV": 5, "sample": "data", "cog_mm": 20, "condition": "nominal", "before": 7979, "removed": 197, "removed_fraction": 0.024689810753227223, "low_signal_before": 569, "low_signal_after": 378}
+{"energy_GeV": 5, "sample": "data", "cog_mm": 20, "condition": "loose", "before": 7979, "removed": 200, "removed_fraction": 0.025065797719012406, "low_signal_before": 569, "low_signal_after": 378}
+{"energy_GeV": 5, "sample": "data", "cog_mm": 20, "condition": "tight", "before": 7979, "removed": 194, "removed_fraction": 0.024313823787442037, "low_signal_before": 569, "low_signal_after": 378}
+{"energy_GeV": 5, "sample": "data", "cog_mm": 20, "condition": "interaction_only", "before": 7979, "removed": 6, "removed_fraction": 0.0007519739315703722, "low_signal_before": 569, "low_signal_after": 569}
+{"energy_GeV": 5, "sample": "data", "cog_mm": 20, "condition": "mip_only", "before": 7979, "removed": 191, "removed_fraction": 0.02393783682165685, "low_signal_before": 569, "low_signal_after": 378}
+{"energy_GeV": 5, "sample": "mc", "cog_mm": 20, "condition": "nominal", "before": 9728, "removed": 0, "removed_fraction": 0.0, "low_signal_before": 0, "low_signal_after": 0}
+{"energy_GeV": 5, "sample": "mc", "cog_mm": 20, "condition": "loose", "before": 9728, "removed": 2, "removed_fraction": 0.00020559210526315788, "low_signal_before": 0, "low_signal_after": 0}
+{"energy_GeV": 5, "sample": "mc", "cog_mm": 20, "condition": "tight", "before": 9728, "removed": 0, "removed_fraction": 0.0, "low_signal_before": 0, "low_signal_after": 0}
+{"energy_GeV": 5, "sample": "mc", "cog_mm": 20, "condition": "interaction_only", "before": 9728, "removed": 0, "removed_fraction": 0.0, "low_signal_before": 0, "low_signal_after": 0}
+{"energy_GeV": 5, "sample": "mc", "cog_mm": 20, "condition": "mip_only", "before": 9728, "removed": 0, "removed_fraction": 0.0, "low_signal_before": 0, "low_signal_after": 0}

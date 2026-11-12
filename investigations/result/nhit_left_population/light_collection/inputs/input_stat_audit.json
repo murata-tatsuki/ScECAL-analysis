@@ -1,0 +1,30 @@
+{
+  "counts": {
+    "data_raw": {
+      "all": 28,
+      "matching_size_mtime": 28,
+      "missing": 0
+    },
+    "data_calib": {
+      "all": 28,
+      "matching_size_mtime": 28,
+      "missing": 0
+    },
+    "mc_raw": {
+      "all": 28,
+      "matching_size_mtime": 28,
+      "missing": 0
+    },
+    "mc_calib": {
+      "all": 28,
+      "matching_size_mtime": 28,
+      "missing": 0
+    },
+    "mc_truth": {
+      "all": 28,
+      "matching_size_mtime": 28,
+      "missing": 0
+    }
+  },
+  "differences": []
+}

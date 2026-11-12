@@ -1,0 +1,50 @@
+{
+  "energy": 40,
+  "target_per_sample": 20000,
+  "bootstrap": 400,
+  "seed": 20261111,
+  "pitch_mm": 5.3,
+  "MIP_MeV": 0.305,
+  "configs": {
+    "nominal": [
+      3,
+      0.15,
+      3
+    ],
+    "two_layers": [
+      3,
+      0.15,
+      2
+    ],
+    "wide_separation": [
+      4,
+      0.15,
+      3
+    ],
+    "fraction10": [
+      3,
+      0.1,
+      3
+    ],
+    "fraction20": [
+      3,
+      0.2,
+      3
+    ]
+  },
+  "layer_range": [
+    0,
+    7
+  ],
+  "projected_bin_threshold_MIP": 0.5,
+  "component_minimum_MIP": 1,
+  "matching_tolerance_mm": 5.3,
+  "mask_confirmation": "same two axes with and without bad-channel mask",
+  "existing_selection": "HG-LG tail-rich excluded; nonnegative good-hit sum; layer9/10 square CoG",
+  "source_sha256": "37ebcbd4d151c2075c037538ef5680f7a24e0310e8e3fa091052fa0f1315845a",
+  "source_mask_sha256": "c102a2c68a02d52b24b60c98ae106fc1283950f8dca8d281ab5da77452a8364e",
+  "python": "3.11.9 (main, Oct  3 2024, 21:08:23) [GCC 14.2.0]",
+  "numpy": "1.26.4",
+  "uproot": "5.0.5",
+  "caveat": "Topology candidates, not identified multiple particles; current source cannot prove historical production"
+}

@@ -1,0 +1,2 @@
+energy_GeV,sample,cog_mm,condition,stage,n,mean_GeV,rms_mean,w68_median,gaussian_core,gaussian_error,fit_lo_GeV,fit_hi_GeV
+5,mc,5,interaction_only,removed,0,nan,nan,nan,nan,nan,0.1645524618384156,0.20189405549730627

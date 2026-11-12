@@ -1,0 +1,22 @@
+添付の scecal_2023_20261110_followup.zip を読み、ScECALの2023年CERN PS・SPSビーム試験について、博士論文執筆用の既存調査資料へ今回の追加調査を統合してください。
+
+最初にHANDOFF.md、original_request.txt、tables/のCSV、manifest.jsonを読んでください。このZIPは新サーバーで実際にコード・設定・log・保存結果を読み出した追加調査の引継ぎです。新しい性能測定や再fitの結果ではありません。過去のsnapshot scecal_2023_20261024_091634、および執筆側のチャット再構成版 scecal_2023_20261026_164835_chat と併用してください。今回のZIPは追加調査であり、旧snapshotの全文・全一次資料を同梱したものではありません。
+
+守るべき区別は以下です。
+1. 10月12日の分解能比較、10月13日の応答・digitization診断、新MIP候補、10月29日のstrip選択、11月10日のmomentum-spread追加を別系列とする。
+2. 147点は8系列の保存Gaussian sigma/mu点の合計。執筆側results.csvの40行は別metricを含む抜粋で、「147点中40点」ではない。
+3. 10月12日の比較はtail除去・bad mask・CoG cut後のbeforeEventCutを使う。ellipse cut後の分解能として書かない。
+4. 保存値、現在のsource、結果生成時source、採用判断を分離する。sourceのSHA一致・現在のGit commit・mtimeだけで生成条件を確定しない。
+5. 確認済み／推定／不明・未検証と、採用済み／暫定／著者判断待ち、およびvalid=true/false/unknownを別の軸として記録する。確認済みは資料の直接確認で、物理的妥当性の保証ではない。
+6. dataのnominal label、beam momentum [GeV/c]、入射kinetic/total energy、active-layer信号和、scale・unit-area規格化を区別する。
+7. 新MIP・新gain・CT入力修正・温度モデルの正式採用は未確認。今回の引継ぎを採用の承認と解釈しない。
+8. 2022年SPS・2025年KEKの測定結果、SiECALを含むGNN/PFAは対象外。他年定数や後年の装置紹介は依存・参考として区別する。
+
+ZIP内の絶対pathは調査元サーバーの参照先です。この執筆環境で存在するとは限りません。アクセスできない資料を読んだ・再検証したとは書かず、「新サーバー調査で確認」として引用してください。CSVのsource/object locatorとHANDOFFの参照箇所を残してください。不足値・誤差を補間したり、見つからない資料を不存在と断定したりしないでください。
+
+取り込み後、次を日本語本文と表で回答してください。
+・既存の認識から追加・訂正された事項。
+・第3章（実機・装置）、第4章（実験・較正・再構成・選択）、第5章（simulation・digitization・応答・data/MC比較）ごとに、今書ける記述と、暫定条件を明記した本文案。
+・主結果の採用に残る不足と、本当に著者判断・著者所蔵記録が必要な事項。
+
+原稿編集については、この執筆環境で既に依頼されている範囲とAGENTS.mdに従ってください。新規simulation、digitization、全event再処理、再fit、元データ・保存結果の修正は今回の引継ぎ指示に含みません。

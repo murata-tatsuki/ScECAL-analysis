@@ -1,0 +1,25 @@
+energy_GeV,sample,cog_mm,condition,before,removed,removed_fraction,caveat
+40,pion_setting_reference,200,nominal,3673,2588,0.7046011434794446,Not pure-pion efficiency; older calibration; no matched HG-LG tail selection
+40,pion_setting_reference,200,loose,3673,2366,0.6441600871222434,Not pure-pion efficiency; older calibration; no matched HG-LG tail selection
+40,pion_setting_reference,200,tight,3673,2865,0.7800163354206371,Not pure-pion efficiency; older calibration; no matched HG-LG tail selection
+40,pion_setting_reference,200,interaction_only,3673,26,0.007078682276068609,Not pure-pion efficiency; older calibration; no matched HG-LG tail selection
+40,pion_setting_reference,200,mip_only,3673,279,0.07595970596242853,Not pure-pion efficiency; older calibration; no matched HG-LG tail selection
+40,pion_setting_reference,200,early_only,3673,2588,0.7046011434794446,Not pure-pion efficiency; older calibration; no matched HG-LG tail selection
+40,pion_setting_reference,20,nominal,2253,1648,0.7314691522414558,Not pure-pion efficiency; older calibration; no matched HG-LG tail selection
+40,pion_setting_reference,20,loose,2253,1508,0.669329782512206,Not pure-pion efficiency; older calibration; no matched HG-LG tail selection
+40,pion_setting_reference,20,tight,2253,1815,0.8055925432756325,Not pure-pion efficiency; older calibration; no matched HG-LG tail selection
+40,pion_setting_reference,20,interaction_only,2253,20,0.00887705281846427,Not pure-pion efficiency; older calibration; no matched HG-LG tail selection
+40,pion_setting_reference,20,mip_only,2253,239,0.10608078118064802,Not pure-pion efficiency; older calibration; no matched HG-LG tail selection
+40,pion_setting_reference,20,early_only,2253,1648,0.7314691522414558,Not pure-pion efficiency; older calibration; no matched HG-LG tail selection
+40,pion_setting_reference,10,nominal,839,624,0.7437425506555423,Not pure-pion efficiency; older calibration; no matched HG-LG tail selection
+40,pion_setting_reference,10,loose,839,577,0.6877234803337307,Not pure-pion efficiency; older calibration; no matched HG-LG tail selection
+40,pion_setting_reference,10,tight,839,690,0.8224076281287247,Not pure-pion efficiency; older calibration; no matched HG-LG tail selection
+40,pion_setting_reference,10,interaction_only,839,8,0.009535160905840286,Not pure-pion efficiency; older calibration; no matched HG-LG tail selection
+40,pion_setting_reference,10,mip_only,839,86,0.10250297973778308,Not pure-pion efficiency; older calibration; no matched HG-LG tail selection
+40,pion_setting_reference,10,early_only,839,624,0.7437425506555423,Not pure-pion efficiency; older calibration; no matched HG-LG tail selection
+40,pion_setting_reference,5,nominal,238,188,0.7899159663865546,Not pure-pion efficiency; older calibration; no matched HG-LG tail selection
+40,pion_setting_reference,5,loose,238,181,0.7605042016806722,Not pure-pion efficiency; older calibration; no matched HG-LG tail selection
+40,pion_setting_reference,5,tight,238,207,0.8697478991596639,Not pure-pion efficiency; older calibration; no matched HG-LG tail selection
+40,pion_setting_reference,5,interaction_only,238,4,0.01680672268907563,Not pure-pion efficiency; older calibration; no matched HG-LG tail selection
+40,pion_setting_reference,5,mip_only,238,32,0.13445378151260504,Not pure-pion efficiency; older calibration; no matched HG-LG tail selection
+40,pion_setting_reference,5,early_only,238,188,0.7899159663865546,Not pure-pion efficiency; older calibration; no matched HG-LG tail selection

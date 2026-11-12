@@ -1,0 +1,20 @@
+prefix 5GeV data: PASS same baseline/IDs/tail, unique sample, cut logic, counts and histogram flows
+prefix 5GeV mc: PASS same baseline/IDs/tail, unique sample, cut logic, counts and histogram flows
+prefix 5GeV pion reference: PASS unique 6000 samples and reference counts
+prefix 40GeV data: PASS same baseline/IDs/tail, unique sample, cut logic, counts and histogram flows
+prefix 40GeV mc: PASS same baseline/IDs/tail, unique sample, cut logic, counts and histogram flows
+prefix 40GeV pion reference: PASS unique 6000 samples and reference counts
+prefix 100GeV data: PASS same baseline/IDs/tail, unique sample, cut logic, counts and histogram flows
+prefix 100GeV mc: PASS same baseline/IDs/tail, unique sample, cut logic, counts and histogram flows
+prefix 100GeV pion reference: PASS unique 6000 samples and reference counts
+early 5GeV data: PASS same baseline/IDs/tail, unique sample, cut logic, counts and histogram flows
+early 5GeV mc: PASS same baseline/IDs/tail, unique sample, cut logic, counts and histogram flows
+early 5GeV pion reference: PASS unique 6000 samples and reference counts
+early 40GeV data: PASS same baseline/IDs/tail, unique sample, cut logic, counts and histogram flows
+early 40GeV mc: PASS same baseline/IDs/tail, unique sample, cut logic, counts and histogram flows
+early 40GeV pion reference: PASS unique 6000 samples and reference counts
+early 100GeV data: PASS same baseline/IDs/tail, unique sample, cut logic, counts and histogram flows
+early 100GeV mc: PASS same baseline/IDs/tail, unique sample, cut logic, counts and histogram flows
+early 100GeV pion reference: PASS unique 6000 samples and reference counts
+Prefix classifier 17 boundary cases, independent OLS 8000 cases, early classifier 12 boundary cases passed in memory.
+Candidate and comparison figures visually inspected.

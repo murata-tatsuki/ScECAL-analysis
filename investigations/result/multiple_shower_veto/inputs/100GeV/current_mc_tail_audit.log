@@ -1,0 +1,6 @@
+100 GeV: 20/100 files, 4000 sampled events
+100 GeV: 40/100 files, 8000 sampled events
+100 GeV: 60/100 files, 12000 sampled events
+100 GeV: 80/100 files, 16000 sampled events
+100 GeV: 100/100 files, 20000 sampled events
+{"energy_GeV": 100, "sampled": 20000, "current_tail_rich": 0, "old_tail_rich": 0, "events_with_any_low_tail": 1, "maximum_low_tail_channels": 1}

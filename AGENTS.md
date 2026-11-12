@@ -53,6 +53,8 @@
 
 ## 条件比較の解析・描画
 
+- resolutionは以下の専用配置を優先する。ROOTは `analysis/result/resolution/single/<data|mc>/<sample>/<selection>/<CoG>mm/`、比較ROOTは `multi/<data_vs_mc|mc_vs_mc|data_vs_data>/<comparison>/<selection>/comparison.root`。図は `analysis/result/resolution/figures/` 以下で同じ `single/`・`multi/` 階層を使う。実行記録は各条件の `inputs/` に置く。
+- resolutionで入力sampleや選択条件を確定できない既存結果は `analysis/result/resolution/unknown/` 以下に移動前の相対構造を保つ。旧run.log・ROOT内の入力パスは当時の記録として保持し、`inputs/layout_migration_20261112/` の対応表で移動先を調べる。新配置に `default/`・`custom/`・`simulation/` を再作成しない（旧入口の不明結果は `unknown/` 内に保持する）。
 - 今後新規に生成する条件別の解析結果は、保存先の基点から **対象（`data` / `mc`）→ 比較条件 → CoG** の順に統一する。形式は `<基点>/<data または mc>/<比較条件>/<CoG>mm/` とし、MCのディレクトリ名は小文字の `mc` を使う。
 - tail比較の例は `data/exclude/<CoG>mm/`、`data/keep/<CoG>mm/`、`mc/exclude/<CoG>mm/`、`mc/keep/<CoG>mm/`。before/after比較も `data/before/<CoG>mm/`、`data/after/<CoG>mm/`、`mc/before/<CoG>mm/`、`mc/after/<CoG>mm/` とする。その他の比較条件にも同じ階層順を適用する。
 - CoG/channel scanでは `data/channel<範囲>mm/<CoG>mm/`、`mc/<threshold>/channel<範囲>mm/<CoG>mm/` とし、比較条件が複数ある場合もそれらをCoGより上の階層に置く。ROOTファイル名内の条件表記は読込互換のため維持してよい。
@@ -61,6 +63,7 @@
 - 複数条件を重ねる図では、同じCoGの色・marker形状を固定し、比較条件を線種・markerの塗り分けで表す。色を系列の登録順だけで変更しない。
 - CoG 200 mmは図・凡例では `nocut` と表示する。保存先の `200mm` は保持する。
 - resolutionの標準比較は2条件×4 CoG（200/20/10/5 mm）を同時表示する。実行設定では全系列を登録した後に比較を1回実行する。
+- resolutionではHG–LG tail-rich eventを既定で除外する。保持は `--keep-tail-events` を明示した場合だけとし、判定結果が不足している場合は先に用意する。判定結果の不足を理由にkeepへ自動で切り替えない。
 - resolution図はlinear版を維持し、同じ点・fit値のlog–log版もPNGとROOTに保存する。linearの表示範囲はx=0–130 GeV、y=0–0.3。log–logでは正の軸範囲を用い、全入力energyを確認できるようにする。
 - 表示変更を理由にfit・event選択・校正値を変更しない。保存済みcanvasの色・線種・軸・凡例と数値の維持を検証する。
 

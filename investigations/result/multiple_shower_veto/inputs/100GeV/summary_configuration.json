@@ -1,0 +1,10 @@
+{
+  "command": [
+    "investigations/multiple_shower_veto/check.py",
+    "--energy",
+    "100",
+    "--summarize-only"
+  ],
+  "bootstrap": 400,
+  "source_sha256": "27a0f51c25c5687cc27143e6e2ab2aa9e068230b576dc0cc13a11a6cf00eae13"
+}

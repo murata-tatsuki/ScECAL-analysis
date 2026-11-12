@@ -1,0 +1,7 @@
+{
+  "command": [
+    "investigations/multiple_shower_veto/check.py",
+    "--combine"
+  ],
+  "source_sha256": "ca21b1cdfcc9e0d0d2dd971896d0cc705d246fcaa2298b2ddb01d07bf9573a4b"
+}

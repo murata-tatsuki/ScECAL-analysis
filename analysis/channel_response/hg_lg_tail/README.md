@@ -4,10 +4,11 @@ HG–LGの低側tailがどのchannelにあり、どのeventに集中し、負の
 
 ## 実行
 
-Slurm実行wrapperは共通の`../execute.sl`、C++・ROOTビルド設定は`../root.mk`を使用します。
+KEKCCではLSFの`bsub`で`run.sh`を実行します。C++・ROOTビルド設定は`../root.mk`を使用し、
+この解析のMakefileで使用compilerのC++ runtimeへのrpathを追加します。
 
 ```bash
-cd ~/ScECAL_BeamTest/analysis/channel_response/hg_lg_tail
+cd /gpfs/group/ilc/users/murata/ScECAL_BeamTest/analysis/channel_response/hg_lg_tail
 
 # 入力と保存先の確認のみ。ファイル作成・ジョブ投入なし
 bash submit.sh --energy 100 --dry-run
@@ -25,9 +26,9 @@ bash submit.sh --energy all
 bash submit.sh --energies 5,100 --label comparison_v1
 ```
 
-Slurmの`sbatch`を使用します。`bjobs`または`squeue -u "$USER"`で確認できます。1 energyにつき1ジョブ・1 CPUです。各ジョブが集計とPNG保存まで実行するので、異なるenergyはスケジューラが許す範囲で並列に処理されます。同じenergy内は順次処理します。ログは`analysis/log/channel_response/hg_lg_tail/`、投入したjob IDはその中の`submissions_*.tsv`に保存します。`--partition`、`--mem`、`--time`、`--log-dir`も指定できます。指定しないメモリ・時間制限はクラスタの既定値です。
+`bjobs`で確認できます。1 energyにつき1ジョブ・1 CPUです。各ジョブが集計とPNG保存まで実行するので、異なるenergyはスケジューラが許す範囲で並列に処理されます。同じenergy内は順次処理します。ログは`analysis/log/channel_response/hg_lg_tail/<energy>GeV-%J.out` / `.err`、投入したjob IDはその中の`submissions_*.tsv`に保存します。キューは`${LSF_QUEUE:-s}`、`--queue l`などで変更できます。`--mem`はMBの正整数（LSFの`-M`と`rusage[mem]`）、`--time`はLSFの分数または`HH:MM`、`--log-dir`も指定できます。指定しないメモリ・時間制限はクラスタの既定値です。
 
-全energyはPSの0.5, 1, 2, 3, 4, 5 GeVと、SPSの10, 20, 30, 40, 50, 60, 70, 80, 100, 120, 150, 200, 250 GeVです。dataのPS/SPSをenergyから自動選択します。MCは、PS相当energyも`Result_MC/{decode,calib}/e-/e_ssa/<mc-tag>/`から読みます。
+全energyはPSの0.5, 1, 2, 3, 4, 5 GeVと、SPSの10, 20, 30, 40, 50, 60, 70, 80, 100, 120, 150, 200, 250 GeVです。dataのPS/SPSをenergyから自動選択します。MCは、PS相当energyも`Result_MC/{decode,calib}/e-/<mc-sample>/`から読みます。`--mc-sample`を省略すると従来の`e_ssa/<mc-tag>`を使用します。入出力と定数の既定パスは`/gpfs/group/ilc/users/murata/data_beamtest/`以下です。
 
 少量の診断例：
 
@@ -38,15 +39,25 @@ bash run.sh --energy 100 --max-files 3 --events-per-file 2000 --label sample_3fi
 `--events-per-file N`は各ファイルを10区間に分けて決定的に抽出します。`--max-events N`はdata・MCそれぞれについて、全ファイル合計の上限です。これらと`--max-files`の既定値0は制限なしです。少量サンプルでは共通channel数が減るので、必要なら`--min-hits`を明示的に調整してください。どのファイルから何eventを読んだかは保存されます。
 
 
-SSA / calibration 再実行後、resolutionの既定入力を生成する場合:
+momentum spreadあり/なしのresolution比較に必要なtail判定を生成する場合:
 
 ```bash
-TMPDIR=/tmp bash submit.sh --energy all --mc-tag threshold --label e_ssa
+# 旧MC：19ジョブ
+bash submit.sh --queue l --energy all --mc-sample e_ssa/threshold \
+  --mc-tag threshold --label e_ssa_kekcc
+
+# momentum spreadありMC：19ジョブ
+bash submit.sh --queue l --energy all --mc-sample momentum_spread/default \
+  --mc-tag momentum_spread --label default
+bjobs
 ```
 
-保存先は`analysis/result/channel_response/hg_lg_tail/threshold/e_ssa/<energy>GeV/`です。
+保存先は`analysis/result/channel_response/hg_lg_tail/threshold/e_ssa_kekcc/<energy>GeV/`と
+`analysis/result/channel_response/hg_lg_tail/momentum_spread/default/<energy>GeV/`です。
+旧`threshold/e_ssa`は旧サーバーのmanifestを保持しているため上書きせず、新しいlabelへ生成します。
 resolutionで使う判定結果には全入力・全eventが必要なので、サンプリングオプションを付けません。
 全ジョブが正常終了してからresolutionを実行します。
+この2種類の出力は`analysis/resolution/momentum_spread_samples.sh`の判定元と一致します。
 `--dry-run`はパスとファイルの対応のみを検証し、ROOT内の校正整合性は実処理で検査します。
 `Calibration closure failed`にはsample、入力ファイル、entry、channel、HG/LGの保存値と再計算値を表示します。
 古いcalibrationで作成した入力は、現行の係数補完と一致しない場合に停止します。

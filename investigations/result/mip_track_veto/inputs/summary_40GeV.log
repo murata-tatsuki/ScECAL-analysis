@@ -1,0 +1,8 @@
+{"energy_GeV": 40, "sample": "data", "cog_mm": 200, "condition": "nominal", "before": 17710, "removed": 9, "removed_fraction": 0.0005081874647092038, "low_signal_before": 142, "low_signal_after": 133}
+{"energy_GeV": 40, "sample": "data", "cog_mm": 20, "condition": "nominal", "before": 14458, "removed": 6, "removed_fraction": 0.00041499515838981876, "low_signal_before": 44, "low_signal_after": 38}
+{"energy_GeV": 40, "sample": "data", "cog_mm": 10, "condition": "nominal", "before": 5711, "removed": 3, "removed_fraction": 0.0005253020486779899, "low_signal_before": 13, "low_signal_after": 10}
+{"energy_GeV": 40, "sample": "data", "cog_mm": 5, "condition": "nominal", "before": 1473, "removed": 2, "removed_fraction": 0.0013577732518669382, "low_signal_before": 5, "low_signal_after": 3}
+{"energy_GeV": 40, "sample": "mc", "cog_mm": 200, "condition": "nominal", "before": 20000, "removed": 0, "removed_fraction": 0.0, "low_signal_before": 0, "low_signal_after": 0}
+{"energy_GeV": 40, "sample": "mc", "cog_mm": 20, "condition": "nominal", "before": 14651, "removed": 0, "removed_fraction": 0.0, "low_signal_before": 0, "low_signal_after": 0}
+{"energy_GeV": 40, "sample": "mc", "cog_mm": 10, "condition": "nominal", "before": 5971, "removed": 0, "removed_fraction": 0.0, "low_signal_before": 0, "low_signal_after": 0}
+{"energy_GeV": 40, "sample": "mc", "cog_mm": 5, "condition": "nominal", "before": 1479, "removed": 0, "removed_fraction": 0.0, "low_signal_before": 0, "low_signal_after": 0}

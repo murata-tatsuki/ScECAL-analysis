@@ -1,0 +1,10 @@
+{"energy_GeV": 5, "sample": "data", "cog_mm": 20, "condition": "nominal", "before": 7979, "removed": 1267, "removed_fraction": 0.15879182854994361, "low_signal_before": 569, "low_signal_after": 2}
+{"energy_GeV": 5, "sample": "data", "cog_mm": 20, "condition": "loose", "before": 7979, "removed": 790, "removed_fraction": 0.09900990099009901, "low_signal_before": 569, "low_signal_after": 4}
+{"energy_GeV": 5, "sample": "data", "cog_mm": 20, "condition": "tight", "before": 7979, "removed": 4049, "removed_fraction": 0.5074570748214062, "low_signal_before": 569, "low_signal_after": 0}
+{"energy_GeV": 5, "sample": "data", "cog_mm": 20, "condition": "interaction_only", "before": 7979, "removed": 6, "removed_fraction": 0.0007519739315703722, "low_signal_before": 569, "low_signal_after": 569}
+{"energy_GeV": 5, "sample": "data", "cog_mm": 20, "condition": "mip_only", "before": 7979, "removed": 191, "removed_fraction": 0.02393783682165685, "low_signal_before": 569, "low_signal_after": 378}
+{"energy_GeV": 5, "sample": "mc", "cog_mm": 20, "condition": "nominal", "before": 9728, "removed": 493, "removed_fraction": 0.05067845394736842, "low_signal_before": 0, "low_signal_after": 0}
+{"energy_GeV": 5, "sample": "mc", "cog_mm": 20, "condition": "loose", "before": 9728, "removed": 72, "removed_fraction": 0.007401315789473684, "low_signal_before": 0, "low_signal_after": 0}
+{"energy_GeV": 5, "sample": "mc", "cog_mm": 20, "condition": "tight", "before": 9728, "removed": 3712, "removed_fraction": 0.3815789473684211, "low_signal_before": 0, "low_signal_after": 0}
+{"energy_GeV": 5, "sample": "mc", "cog_mm": 20, "condition": "interaction_only", "before": 9728, "removed": 0, "removed_fraction": 0.0, "low_signal_before": 0, "low_signal_after": 0}
+{"energy_GeV": 5, "sample": "mc", "cog_mm": 20, "condition": "mip_only", "before": 9728, "removed": 0, "removed_fraction": 0.0, "low_signal_before": 0, "low_signal_after": 0}

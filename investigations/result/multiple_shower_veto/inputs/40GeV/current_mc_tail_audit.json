@@ -1,0 +1,4372 @@
+{
+  "energy_GeV": 40,
+  "sampled": 20000,
+  "current_tail_rich": 0,
+  "old_tail_rich": 0,
+  "events_with_any_low_tail": 1,
+  "maximum_low_tail_channels": 1,
+  "model_condition": "Saved common mask, MC median, sigma and HL factors fixed; current decode reclassified. Not a full refit of the current MC residual population.",
+  "formula": "z=((LG-pedLG)-(HG-pedHG)/A+B/A-mc_median)/noise_sigma_LG_ADC; low iff z<-5; event iff >=3 distinct physical cells",
+  "hit_selection": "HitTag=1; 800<=HG_raw<2200; saved common=1 (connected good channels); physical CellID present in current Calib_Hit",
+  "pedestal_sha256": "9310639a8738c1e3bba07288bf4cffea07df2826e1f042049e5a2ff12adc5b4c",
+  "saved_pedestal_sha256": "9310639a8738c1e3bba07288bf4cffea07df2826e1f042049e5a2ff12adc5b4c",
+  "pedestal_float32_cast": true,
+  "model": {
+    "path": "/gpfs/group/ilc/users/murata/ScECAL_BeamTest/analysis/result/channel_response/hg_lg_tail/threshold/e_ssa/40GeV/channels.tsv",
+    "bytes": 903174,
+    "mtime_ns": 1791668421597675963,
+    "sha256": "e41710b5e412ef5830e3e773a958ecc3be115af00c9b1f2aa1e39ab625d6dd0e"
+  },
+  "old_tail_source": {
+    "path": "/gpfs/group/ilc/users/murata/ScECAL_BeamTest/analysis/result/channel_response/hg_lg_tail/threshold/e_ssa/40GeV/tail_study.root",
+    "bytes": 9684592,
+    "mtime_ns": 1791668421345675955
+  },
+  "sampling_records": [
+    {
+      "file_index": 0,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          129,
+          169
+        ],
+        [
+          359,
+          399
+        ],
+        [
+          511,
+          551
+        ],
+        [
+          667,
+          707
+        ],
+        [
+          946,
+          986
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_0.root",
+      "bytes": 15194582,
+      "mtime_ns": 1791713611844222030
+    },
+    {
+      "file_index": 1,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          117,
+          157
+        ],
+        [
+          266,
+          306
+        ],
+        [
+          491,
+          531
+        ],
+        [
+          668,
+          708
+        ],
+        [
+          912,
+          952
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_1.root",
+      "bytes": 15252252,
+      "mtime_ns": 1791713612291222046
+    },
+    {
+      "file_index": 2,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          88,
+          128
+        ],
+        [
+          290,
+          330
+        ],
+        [
+          497,
+          537
+        ],
+        [
+          609,
+          649
+        ],
+        [
+          823,
+          863
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_10.root",
+      "bytes": 15219808,
+      "mtime_ns": 1791713739473226397
+    },
+    {
+      "file_index": 3,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          93,
+          133
+        ],
+        [
+          300,
+          340
+        ],
+        [
+          428,
+          468
+        ],
+        [
+          703,
+          743
+        ],
+        [
+          934,
+          974
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_11.root",
+      "bytes": 15234394,
+      "mtime_ns": 1791713701136225085
+    },
+    {
+      "file_index": 4,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          121,
+          161
+        ],
+        [
+          319,
+          359
+        ],
+        [
+          556,
+          596
+        ],
+        [
+          646,
+          686
+        ],
+        [
+          909,
+          949
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_12.root",
+      "bytes": 15233570,
+      "mtime_ns": 1791713746177226626
+    },
+    {
+      "file_index": 5,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          66,
+          106
+        ],
+        [
+          336,
+          376
+        ],
+        [
+          457,
+          497
+        ],
+        [
+          672,
+          712
+        ],
+        [
+          887,
+          927
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_13.root",
+      "bytes": 15252140,
+      "mtime_ns": 1791713756475226979
+    },
+    {
+      "file_index": 6,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          118,
+          158
+        ],
+        [
+          328,
+          368
+        ],
+        [
+          415,
+          455
+        ],
+        [
+          669,
+          709
+        ],
+        [
+          951,
+          991
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_14.root",
+      "bytes": 15250340,
+      "mtime_ns": 1791713701219225088
+    },
+    {
+      "file_index": 7,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          54,
+          94
+        ],
+        [
+          276,
+          316
+        ],
+        [
+          479,
+          519
+        ],
+        [
+          616,
+          656
+        ],
+        [
+          827,
+          867
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_15.root",
+      "bytes": 15228048,
+      "mtime_ns": 1791713701167225086
+    },
+    {
+      "file_index": 8,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          133,
+          173
+        ],
+        [
+          289,
+          329
+        ],
+        [
+          542,
+          582
+        ],
+        [
+          758,
+          798
+        ],
+        [
+          936,
+          976
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_16.root",
+      "bytes": 15269678,
+      "mtime_ns": 1791713751747226817
+    },
+    {
+      "file_index": 9,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          122,
+          162
+        ],
+        [
+          233,
+          273
+        ],
+        [
+          495,
+          535
+        ],
+        [
+          637,
+          677
+        ],
+        [
+          887,
+          927
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_17.root",
+      "bytes": 15226341,
+      "mtime_ns": 1791713745526226604
+    },
+    {
+      "file_index": 10,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          84,
+          124
+        ],
+        [
+          321,
+          361
+        ],
+        [
+          406,
+          446
+        ],
+        [
+          653,
+          693
+        ],
+        [
+          868,
+          908
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_18.root",
+      "bytes": 15230466,
+      "mtime_ns": 1791713735359226256
+    },
+    {
+      "file_index": 11,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          147,
+          187
+        ],
+        [
+          310,
+          350
+        ],
+        [
+          495,
+          535
+        ],
+        [
+          602,
+          642
+        ],
+        [
+          857,
+          897
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_19.root",
+      "bytes": 15218620,
+      "mtime_ns": 1791713744647226574
+    },
+    {
+      "file_index": 12,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          48,
+          88
+        ],
+        [
+          333,
+          373
+        ],
+        [
+          429,
+          469
+        ],
+        [
+          749,
+          789
+        ],
+        [
+          808,
+          848
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_2.root",
+      "bytes": 15248858,
+      "mtime_ns": 1791713701243225089
+    },
+    {
+      "file_index": 13,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          45,
+          85
+        ],
+        [
+          204,
+          244
+        ],
+        [
+          441,
+          481
+        ],
+        [
+          711,
+          751
+        ],
+        [
+          897,
+          937
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_20.root",
+      "bytes": 15244693,
+      "mtime_ns": 1791713701191225087
+    },
+    {
+      "file_index": 14,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          84,
+          124
+        ],
+        [
+          264,
+          304
+        ],
+        [
+          446,
+          486
+        ],
+        [
+          610,
+          650
+        ],
+        [
+          836,
+          876
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_21.root",
+      "bytes": 15233244,
+      "mtime_ns": 1791713699047225014
+    },
+    {
+      "file_index": 15,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          82,
+          122
+        ],
+        [
+          343,
+          383
+        ],
+        [
+          414,
+          454
+        ],
+        [
+          729,
+          769
+        ],
+        [
+          810,
+          850
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_22.root",
+      "bytes": 15259184,
+      "mtime_ns": 1791713700889225077
+    },
+    {
+      "file_index": 16,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          11,
+          51
+        ],
+        [
+          277,
+          317
+        ],
+        [
+          440,
+          480
+        ],
+        [
+          628,
+          668
+        ],
+        [
+          945,
+          985
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_23.root",
+      "bytes": 15232337,
+      "mtime_ns": 1791713757513227014
+    },
+    {
+      "file_index": 17,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          97,
+          137
+        ],
+        [
+          261,
+          301
+        ],
+        [
+          422,
+          462
+        ],
+        [
+          642,
+          682
+        ],
+        [
+          859,
+          899
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_24.root",
+      "bytes": 15235499,
+      "mtime_ns": 1791713757555227015
+    },
+    {
+      "file_index": 18,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          134,
+          174
+        ],
+        [
+          325,
+          365
+        ],
+        [
+          503,
+          543
+        ],
+        [
+          683,
+          723
+        ],
+        [
+          820,
+          860
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_25.root",
+      "bytes": 15244752,
+      "mtime_ns": 1791713657914223607
+    },
+    {
+      "file_index": 19,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          52,
+          92
+        ],
+        [
+          280,
+          320
+        ],
+        [
+          491,
+          531
+        ],
+        [
+          688,
+          728
+        ],
+        [
+          896,
+          936
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_26.root",
+      "bytes": 15237046,
+      "mtime_ns": 1791713657987223609
+    },
+    {
+      "file_index": 20,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          116,
+          156
+        ],
+        [
+          232,
+          272
+        ],
+        [
+          481,
+          521
+        ],
+        [
+          745,
+          785
+        ],
+        [
+          820,
+          860
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_27.root",
+      "bytes": 15229866,
+      "mtime_ns": 1791713657621223596
+    },
+    {
+      "file_index": 21,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          84,
+          124
+        ],
+        [
+          281,
+          321
+        ],
+        [
+          553,
+          593
+        ],
+        [
+          668,
+          708
+        ],
+        [
+          825,
+          865
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_28.root",
+      "bytes": 15255331,
+      "mtime_ns": 1791713657714223600
+    },
+    {
+      "file_index": 22,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          96,
+          136
+        ],
+        [
+          260,
+          300
+        ],
+        [
+          417,
+          457
+        ],
+        [
+          748,
+          788
+        ],
+        [
+          900,
+          940
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_29.root",
+      "bytes": 15238921,
+      "mtime_ns": 1791713657790223602
+    },
+    {
+      "file_index": 23,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          134,
+          174
+        ],
+        [
+          245,
+          285
+        ],
+        [
+          453,
+          493
+        ],
+        [
+          710,
+          750
+        ],
+        [
+          950,
+          990
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_3.root",
+      "bytes": 15225452,
+      "mtime_ns": 1791713657833223604
+    },
+    {
+      "file_index": 24,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          1,
+          41
+        ],
+        [
+          202,
+          242
+        ],
+        [
+          429,
+          469
+        ],
+        [
+          623,
+          663
+        ],
+        [
+          938,
+          978
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_30.root",
+      "bytes": 15244056,
+      "mtime_ns": 1791713610012221968
+    },
+    {
+      "file_index": 25,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          137,
+          177
+        ],
+        [
+          204,
+          244
+        ],
+        [
+          427,
+          467
+        ],
+        [
+          687,
+          727
+        ],
+        [
+          941,
+          981
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_31.root",
+      "bytes": 15243865,
+      "mtime_ns": 1791713657421223590
+    },
+    {
+      "file_index": 26,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          17,
+          57
+        ],
+        [
+          242,
+          282
+        ],
+        [
+          406,
+          446
+        ],
+        [
+          750,
+          790
+        ],
+        [
+          811,
+          851
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_32.root",
+      "bytes": 15202094,
+      "mtime_ns": 1791713656712223565
+    },
+    {
+      "file_index": 27,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          132,
+          172
+        ],
+        [
+          268,
+          308
+        ],
+        [
+          426,
+          466
+        ],
+        [
+          759,
+          799
+        ],
+        [
+          928,
+          968
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_33.root",
+      "bytes": 15250918,
+      "mtime_ns": 1791713656742223566
+    },
+    {
+      "file_index": 28,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          3,
+          43
+        ],
+        [
+          293,
+          333
+        ],
+        [
+          490,
+          530
+        ],
+        [
+          612,
+          652
+        ],
+        [
+          895,
+          935
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_34.root",
+      "bytes": 15235184,
+      "mtime_ns": 1791713657007223575
+    },
+    {
+      "file_index": 29,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          21,
+          61
+        ],
+        [
+          305,
+          345
+        ],
+        [
+          476,
+          516
+        ],
+        [
+          704,
+          744
+        ],
+        [
+          829,
+          869
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_35.root",
+      "bytes": 15265175,
+      "mtime_ns": 1791713624356222458
+    },
+    {
+      "file_index": 30,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          23,
+          63
+        ],
+        [
+          307,
+          347
+        ],
+        [
+          506,
+          546
+        ],
+        [
+          615,
+          655
+        ],
+        [
+          877,
+          917
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_36.root",
+      "bytes": 15239156,
+      "mtime_ns": 1791713612238222044
+    },
+    {
+      "file_index": 31,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          9,
+          49
+        ],
+        [
+          285,
+          325
+        ],
+        [
+          513,
+          553
+        ],
+        [
+          754,
+          794
+        ],
+        [
+          871,
+          911
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_37.root",
+      "bytes": 15227303,
+      "mtime_ns": 1791713656841223570
+    },
+    {
+      "file_index": 32,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          123,
+          163
+        ],
+        [
+          271,
+          311
+        ],
+        [
+          534,
+          574
+        ],
+        [
+          745,
+          785
+        ],
+        [
+          810,
+          850
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_38.root",
+      "bytes": 15244364,
+      "mtime_ns": 1791713657950223608
+    },
+    {
+      "file_index": 33,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          93,
+          133
+        ],
+        [
+          334,
+          374
+        ],
+        [
+          405,
+          445
+        ],
+        [
+          654,
+          694
+        ],
+        [
+          847,
+          887
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_39.root",
+      "bytes": 15258743,
+      "mtime_ns": 1791713657875223605
+    },
+    {
+      "file_index": 34,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          112,
+          152
+        ],
+        [
+          212,
+          252
+        ],
+        [
+          494,
+          534
+        ],
+        [
+          637,
+          677
+        ],
+        [
+          827,
+          867
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_4.root",
+      "bytes": 15269855,
+      "mtime_ns": 1791713656059223543
+    },
+    {
+      "file_index": 35,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          119,
+          159
+        ],
+        [
+          248,
+          288
+        ],
+        [
+          499,
+          539
+        ],
+        [
+          755,
+          795
+        ],
+        [
+          959,
+          999
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_40.root",
+      "bytes": 15201587,
+      "mtime_ns": 1791713656627223562
+    },
+    {
+      "file_index": 36,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          88,
+          128
+        ],
+        [
+          309,
+          349
+        ],
+        [
+          401,
+          441
+        ],
+        [
+          704,
+          744
+        ],
+        [
+          914,
+          954
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_41.root",
+      "bytes": 15261678,
+      "mtime_ns": 1791713657680223598
+    },
+    {
+      "file_index": 37,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          54,
+          94
+        ],
+        [
+          285,
+          325
+        ],
+        [
+          515,
+          555
+        ],
+        [
+          625,
+          665
+        ],
+        [
+          804,
+          844
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_42.root",
+      "bytes": 15219636,
+      "mtime_ns": 1791713657749223601
+    },
+    {
+      "file_index": 38,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          59,
+          99
+        ],
+        [
+          309,
+          349
+        ],
+        [
+          521,
+          561
+        ],
+        [
+          603,
+          643
+        ],
+        [
+          933,
+          973
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_43.root",
+      "bytes": 15245100,
+      "mtime_ns": 1791713602439221709
+    },
+    {
+      "file_index": 39,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          60,
+          100
+        ],
+        [
+          329,
+          369
+        ],
+        [
+          450,
+          490
+        ],
+        [
+          705,
+          745
+        ],
+        [
+          946,
+          986
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_44.root",
+      "bytes": 15238390,
+      "mtime_ns": 1791713656499223558
+    },
+    {
+      "file_index": 40,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          90,
+          130
+        ],
+        [
+          302,
+          342
+        ],
+        [
+          482,
+          522
+        ],
+        [
+          671,
+          711
+        ],
+        [
+          939,
+          979
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_45.root",
+      "bytes": 15243193,
+      "mtime_ns": 1791713657569223595
+    },
+    {
+      "file_index": 41,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          2,
+          42
+        ],
+        [
+          226,
+          266
+        ],
+        [
+          457,
+          497
+        ],
+        [
+          671,
+          711
+        ],
+        [
+          901,
+          941
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_46.root",
+      "bytes": 15285861,
+      "mtime_ns": 1791713655440223522
+    },
+    {
+      "file_index": 42,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          71,
+          111
+        ],
+        [
+          248,
+          288
+        ],
+        [
+          443,
+          483
+        ],
+        [
+          691,
+          731
+        ],
+        [
+          926,
+          966
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_47.root",
+      "bytes": 15260898,
+      "mtime_ns": 1791713657237223583
+    },
+    {
+      "file_index": 43,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          35,
+          75
+        ],
+        [
+          248,
+          288
+        ],
+        [
+          405,
+          445
+        ],
+        [
+          723,
+          763
+        ],
+        [
+          870,
+          910
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_48.root",
+      "bytes": 15206898,
+      "mtime_ns": 1791713657595223596
+    },
+    {
+      "file_index": 44,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          4,
+          44
+        ],
+        [
+          293,
+          333
+        ],
+        [
+          427,
+          467
+        ],
+        [
+          728,
+          768
+        ],
+        [
+          952,
+          992
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_49.root",
+      "bytes": 15234231,
+      "mtime_ns": 1791713657649223597
+    },
+    {
+      "file_index": 45,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          88,
+          128
+        ],
+        [
+          314,
+          354
+        ],
+        [
+          491,
+          531
+        ],
+        [
+          731,
+          771
+        ],
+        [
+          812,
+          852
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_5.root",
+      "bytes": 15237882,
+      "mtime_ns": 1791713748407226702
+    },
+    {
+      "file_index": 46,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          38,
+          78
+        ],
+        [
+          229,
+          269
+        ],
+        [
+          410,
+          450
+        ],
+        [
+          673,
+          713
+        ],
+        [
+          817,
+          857
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_50.root",
+      "bytes": 15279860,
+      "mtime_ns": 1791713750052226759
+    },
+    {
+      "file_index": 47,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          149,
+          189
+        ],
+        [
+          213,
+          253
+        ],
+        [
+          400,
+          440
+        ],
+        [
+          708,
+          748
+        ],
+        [
+          811,
+          851
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_51.root",
+      "bytes": 15188205,
+      "mtime_ns": 1791713621027222345
+    },
+    {
+      "file_index": 48,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          99,
+          139
+        ],
+        [
+          275,
+          315
+        ],
+        [
+          447,
+          487
+        ],
+        [
+          749,
+          789
+        ],
+        [
+          860,
+          900
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_52.root",
+      "bytes": 15229390,
+      "mtime_ns": 1791713621708222368
+    },
+    {
+      "file_index": 49,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          29,
+          69
+        ],
+        [
+          258,
+          298
+        ],
+        [
+          457,
+          497
+        ],
+        [
+          720,
+          760
+        ],
+        [
+          853,
+          893
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_53.root",
+      "bytes": 15269551,
+      "mtime_ns": 1791713618301222251
+    },
+    {
+      "file_index": 50,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          102,
+          142
+        ],
+        [
+          320,
+          360
+        ],
+        [
+          400,
+          440
+        ],
+        [
+          694,
+          734
+        ],
+        [
+          912,
+          952
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_54.root",
+      "bytes": 15239576,
+      "mtime_ns": 1791713619990222309
+    },
+    {
+      "file_index": 51,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          36,
+          76
+        ],
+        [
+          276,
+          316
+        ],
+        [
+          503,
+          543
+        ],
+        [
+          692,
+          732
+        ],
+        [
+          867,
+          907
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_55.root",
+      "bytes": 15263630,
+      "mtime_ns": 1791713621067222346
+    },
+    {
+      "file_index": 52,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          109,
+          149
+        ],
+        [
+          302,
+          342
+        ],
+        [
+          545,
+          585
+        ],
+        [
+          665,
+          705
+        ],
+        [
+          954,
+          994
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_56.root",
+      "bytes": 15227363,
+      "mtime_ns": 1791713612234222044
+    },
+    {
+      "file_index": 53,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          29,
+          69
+        ],
+        [
+          296,
+          336
+        ],
+        [
+          531,
+          571
+        ],
+        [
+          616,
+          656
+        ],
+        [
+          831,
+          871
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_57.root",
+      "bytes": 15235186,
+      "mtime_ns": 1791713611191222008
+    },
+    {
+      "file_index": 54,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          45,
+          85
+        ],
+        [
+          267,
+          307
+        ],
+        [
+          403,
+          443
+        ],
+        [
+          631,
+          671
+        ],
+        [
+          801,
+          841
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_58.root",
+      "bytes": 15245461,
+      "mtime_ns": 1791713694413224855
+    },
+    {
+      "file_index": 55,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          44,
+          84
+        ],
+        [
+          338,
+          378
+        ],
+        [
+          468,
+          508
+        ],
+        [
+          677,
+          717
+        ],
+        [
+          886,
+          926
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_59.root",
+      "bytes": 15236691,
+      "mtime_ns": 1791713694508224858
+    },
+    {
+      "file_index": 56,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          32,
+          72
+        ],
+        [
+          340,
+          380
+        ],
+        [
+          408,
+          448
+        ],
+        [
+          752,
+          792
+        ],
+        [
+          868,
+          908
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_6.root",
+      "bytes": 15220214,
+      "mtime_ns": 1791713694124224845
+    },
+    {
+      "file_index": 57,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          84,
+          124
+        ],
+        [
+          316,
+          356
+        ],
+        [
+          513,
+          553
+        ],
+        [
+          747,
+          787
+        ],
+        [
+          871,
+          911
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_60.root",
+      "bytes": 15273463,
+      "mtime_ns": 1791713621467222360
+    },
+    {
+      "file_index": 58,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          74,
+          114
+        ],
+        [
+          337,
+          377
+        ],
+        [
+          522,
+          562
+        ],
+        [
+          641,
+          681
+        ],
+        [
+          877,
+          917
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_61.root",
+      "bytes": 15247068,
+      "mtime_ns": 1791713693512224824
+    },
+    {
+      "file_index": 59,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          7,
+          47
+        ],
+        [
+          268,
+          308
+        ],
+        [
+          478,
+          518
+        ],
+        [
+          710,
+          750
+        ],
+        [
+          958,
+          998
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_62.root",
+      "bytes": 15224344,
+      "mtime_ns": 1791713694384224854
+    },
+    {
+      "file_index": 60,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          47,
+          87
+        ],
+        [
+          264,
+          304
+        ],
+        [
+          537,
+          577
+        ],
+        [
+          605,
+          645
+        ],
+        [
+          913,
+          953
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_63.root",
+      "bytes": 15201920,
+      "mtime_ns": 1791713694555224860
+    },
+    {
+      "file_index": 61,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          133,
+          173
+        ],
+        [
+          335,
+          375
+        ],
+        [
+          511,
+          551
+        ],
+        [
+          657,
+          697
+        ],
+        [
+          843,
+          883
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_64.root",
+      "bytes": 15262103,
+      "mtime_ns": 1791713694580224861
+    },
+    {
+      "file_index": 62,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          141,
+          181
+        ],
+        [
+          276,
+          316
+        ],
+        [
+          497,
+          537
+        ],
+        [
+          710,
+          750
+        ],
+        [
+          841,
+          881
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_65.root",
+      "bytes": 15190822,
+      "mtime_ns": 1791713694712224865
+    },
+    {
+      "file_index": 63,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          34,
+          74
+        ],
+        [
+          207,
+          247
+        ],
+        [
+          405,
+          445
+        ],
+        [
+          740,
+          780
+        ],
+        [
+          818,
+          858
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_66.root",
+      "bytes": 15256047,
+      "mtime_ns": 1791713694692224865
+    },
+    {
+      "file_index": 64,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          36,
+          76
+        ],
+        [
+          208,
+          248
+        ],
+        [
+          408,
+          448
+        ],
+        [
+          684,
+          724
+        ],
+        [
+          879,
+          919
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_67.root",
+      "bytes": 15251702,
+      "mtime_ns": 1791713694331224852
+    },
+    {
+      "file_index": 65,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          11,
+          51
+        ],
+        [
+          338,
+          378
+        ],
+        [
+          527,
+          567
+        ],
+        [
+          723,
+          763
+        ],
+        [
+          958,
+          998
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_68.root",
+      "bytes": 15248885,
+      "mtime_ns": 1791713694484224858
+    },
+    {
+      "file_index": 66,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          108,
+          148
+        ],
+        [
+          293,
+          333
+        ],
+        [
+          426,
+          466
+        ],
+        [
+          755,
+          795
+        ],
+        [
+          909,
+          949
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_69.root",
+      "bytes": 15243013,
+      "mtime_ns": 1791713694157224846
+    },
+    {
+      "file_index": 67,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          34,
+          74
+        ],
+        [
+          309,
+          349
+        ],
+        [
+          434,
+          474
+        ],
+        [
+          648,
+          688
+        ],
+        [
+          882,
+          922
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_7.root",
+      "bytes": 15234877,
+      "mtime_ns": 1791713694303224851
+    },
+    {
+      "file_index": 68,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          106,
+          146
+        ],
+        [
+          329,
+          369
+        ],
+        [
+          460,
+          500
+        ],
+        [
+          718,
+          758
+        ],
+        [
+          917,
+          957
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_70.root",
+      "bytes": 15215391,
+      "mtime_ns": 1791713618031222242
+    },
+    {
+      "file_index": 69,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          94,
+          134
+        ],
+        [
+          347,
+          387
+        ],
+        [
+          444,
+          484
+        ],
+        [
+          648,
+          688
+        ],
+        [
+          928,
+          968
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_71.root",
+      "bytes": 15223164,
+      "mtime_ns": 1791713693904224838
+    },
+    {
+      "file_index": 70,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          10,
+          50
+        ],
+        [
+          304,
+          344
+        ],
+        [
+          461,
+          501
+        ],
+        [
+          636,
+          676
+        ],
+        [
+          813,
+          853
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_72.root",
+      "bytes": 15227411,
+      "mtime_ns": 1791713694629224863
+    },
+    {
+      "file_index": 71,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          146,
+          186
+        ],
+        [
+          237,
+          277
+        ],
+        [
+          441,
+          481
+        ],
+        [
+          655,
+          695
+        ],
+        [
+          935,
+          975
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_73.root",
+      "bytes": 15272012,
+      "mtime_ns": 1791713694605224862
+    },
+    {
+      "file_index": 72,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          96,
+          136
+        ],
+        [
+          288,
+          328
+        ],
+        [
+          544,
+          584
+        ],
+        [
+          687,
+          727
+        ],
+        [
+          907,
+          947
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_74.root",
+      "bytes": 15250101,
+      "mtime_ns": 1791713694650224863
+    },
+    {
+      "file_index": 73,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          52,
+          92
+        ],
+        [
+          220,
+          260
+        ],
+        [
+          487,
+          527
+        ],
+        [
+          749,
+          789
+        ],
+        [
+          807,
+          847
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_75.root",
+      "bytes": 15210040,
+      "mtime_ns": 1791713694671224864
+    },
+    {
+      "file_index": 74,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          13,
+          53
+        ],
+        [
+          285,
+          325
+        ],
+        [
+          492,
+          532
+        ],
+        [
+          738,
+          778
+        ],
+        [
+          932,
+          972
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_76.root",
+      "bytes": 15237675,
+      "mtime_ns": 1791713692341224784
+    },
+    {
+      "file_index": 75,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          50,
+          90
+        ],
+        [
+          311,
+          351
+        ],
+        [
+          497,
+          537
+        ],
+        [
+          600,
+          640
+        ],
+        [
+          913,
+          953
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_77.root",
+      "bytes": 15258967,
+      "mtime_ns": 1791713654385223486
+    },
+    {
+      "file_index": 76,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          138,
+          178
+        ],
+        [
+          252,
+          292
+        ],
+        [
+          418,
+          458
+        ],
+        [
+          653,
+          693
+        ],
+        [
+          879,
+          919
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_78.root",
+      "bytes": 15255445,
+      "mtime_ns": 1791713691698224762
+    },
+    {
+      "file_index": 77,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          104,
+          144
+        ],
+        [
+          351,
+          391
+        ],
+        [
+          558,
+          598
+        ],
+        [
+          622,
+          662
+        ],
+        [
+          925,
+          965
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_79.root",
+      "bytes": 15271371,
+      "mtime_ns": 1791713691193224745
+    },
+    {
+      "file_index": 78,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          101,
+          141
+        ],
+        [
+          265,
+          305
+        ],
+        [
+          488,
+          528
+        ],
+        [
+          729,
+          769
+        ],
+        [
+          910,
+          950
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_8.root",
+      "bytes": 15252105,
+      "mtime_ns": 1791713694435224856
+    },
+    {
+      "file_index": 79,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          37,
+          77
+        ],
+        [
+          231,
+          271
+        ],
+        [
+          418,
+          458
+        ],
+        [
+          647,
+          687
+        ],
+        [
+          925,
+          965
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_80.root",
+      "bytes": 15250200,
+      "mtime_ns": 1791713694533224859
+    },
+    {
+      "file_index": 80,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          73,
+          113
+        ],
+        [
+          345,
+          385
+        ],
+        [
+          488,
+          528
+        ],
+        [
+          610,
+          650
+        ],
+        [
+          938,
+          978
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_81.root",
+      "bytes": 15248688,
+      "mtime_ns": 1791713694358224853
+    },
+    {
+      "file_index": 81,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          11,
+          51
+        ],
+        [
+          297,
+          337
+        ],
+        [
+          548,
+          588
+        ],
+        [
+          612,
+          652
+        ],
+        [
+          845,
+          885
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_82.root",
+      "bytes": 15260348,
+      "mtime_ns": 1791713694460224857
+    },
+    {
+      "file_index": 82,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          48,
+          88
+        ],
+        [
+          292,
+          332
+        ],
+        [
+          545,
+          585
+        ],
+        [
+          606,
+          646
+        ],
+        [
+          910,
+          950
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_83.root",
+      "bytes": 15249869,
+      "mtime_ns": 1791713748785226715
+    },
+    {
+      "file_index": 83,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          118,
+          158
+        ],
+        [
+          282,
+          322
+        ],
+        [
+          520,
+          560
+        ],
+        [
+          679,
+          719
+        ],
+        [
+          956,
+          996
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_84.root",
+      "bytes": 15203748,
+      "mtime_ns": 1791713754274226903
+    },
+    {
+      "file_index": 84,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          36,
+          76
+        ],
+        [
+          282,
+          322
+        ],
+        [
+          428,
+          468
+        ],
+        [
+          634,
+          674
+        ],
+        [
+          916,
+          956
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_85.root",
+      "bytes": 15266767,
+      "mtime_ns": 1791713813875228942
+    },
+    {
+      "file_index": 85,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          19,
+          59
+        ],
+        [
+          298,
+          338
+        ],
+        [
+          459,
+          499
+        ],
+        [
+          603,
+          643
+        ],
+        [
+          944,
+          984
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_86.root",
+      "bytes": 15244646,
+      "mtime_ns": 1791713689714224694
+    },
+    {
+      "file_index": 86,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          98,
+          138
+        ],
+        [
+          358,
+          398
+        ],
+        [
+          428,
+          468
+        ],
+        [
+          668,
+          708
+        ],
+        [
+          939,
+          979
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_87.root",
+      "bytes": 15222147,
+      "mtime_ns": 1791713695890224906
+    },
+    {
+      "file_index": 87,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          109,
+          149
+        ],
+        [
+          213,
+          253
+        ],
+        [
+          493,
+          533
+        ],
+        [
+          650,
+          690
+        ],
+        [
+          905,
+          945
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_88.root",
+      "bytes": 15262342,
+      "mtime_ns": 1791713689816224698
+    },
+    {
+      "file_index": 88,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          129,
+          169
+        ],
+        [
+          289,
+          329
+        ],
+        [
+          469,
+          509
+        ],
+        [
+          611,
+          651
+        ],
+        [
+          857,
+          897
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_89.root",
+      "bytes": 15215508,
+      "mtime_ns": 1791713689601224691
+    },
+    {
+      "file_index": 89,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          98,
+          138
+        ],
+        [
+          212,
+          252
+        ],
+        [
+          556,
+          596
+        ],
+        [
+          685,
+          725
+        ],
+        [
+          931,
+          971
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_9.root",
+      "bytes": 15206562,
+      "mtime_ns": 1791713689767224696
+    },
+    {
+      "file_index": 90,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          65,
+          105
+        ],
+        [
+          345,
+          385
+        ],
+        [
+          403,
+          443
+        ],
+        [
+          712,
+          752
+        ],
+        [
+          863,
+          903
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_90.root",
+      "bytes": 15209434,
+      "mtime_ns": 1791713695895224906
+    },
+    {
+      "file_index": 91,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          126,
+          166
+        ],
+        [
+          359,
+          399
+        ],
+        [
+          452,
+          492
+        ],
+        [
+          639,
+          679
+        ],
+        [
+          903,
+          943
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_91.root",
+      "bytes": 15234891,
+      "mtime_ns": 1791713690330224716
+    },
+    {
+      "file_index": 92,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          11,
+          51
+        ],
+        [
+          209,
+          249
+        ],
+        [
+          408,
+          448
+        ],
+        [
+          697,
+          737
+        ],
+        [
+          923,
+          963
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_92.root",
+      "bytes": 15267179,
+      "mtime_ns": 1791713690291224714
+    },
+    {
+      "file_index": 93,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          149,
+          189
+        ],
+        [
+          286,
+          326
+        ],
+        [
+          404,
+          444
+        ],
+        [
+          712,
+          752
+        ],
+        [
+          885,
+          925
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_93.root",
+      "bytes": 15243496,
+      "mtime_ns": 1791713689657224693
+    },
+    {
+      "file_index": 94,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          149,
+          189
+        ],
+        [
+          263,
+          303
+        ],
+        [
+          478,
+          518
+        ],
+        [
+          656,
+          696
+        ],
+        [
+          862,
+          902
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_94.root",
+      "bytes": 15265133,
+      "mtime_ns": 1791713657665223598
+    },
+    {
+      "file_index": 95,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          102,
+          142
+        ],
+        [
+          334,
+          374
+        ],
+        [
+          554,
+          594
+        ],
+        [
+          726,
+          766
+        ],
+        [
+          804,
+          844
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_95.root",
+      "bytes": 15227885,
+      "mtime_ns": 1791713657075223578
+    },
+    {
+      "file_index": 96,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          139,
+          179
+        ],
+        [
+          268,
+          308
+        ],
+        [
+          482,
+          522
+        ],
+        [
+          642,
+          682
+        ],
+        [
+          842,
+          882
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_96.root",
+      "bytes": 15245690,
+      "mtime_ns": 1791713689769224696
+    },
+    {
+      "file_index": 97,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          124,
+          164
+        ],
+        [
+          330,
+          370
+        ],
+        [
+          433,
+          473
+        ],
+        [
+          719,
+          759
+        ],
+        [
+          924,
+          964
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_97.root",
+      "bytes": 15196254,
+      "mtime_ns": 1791713689827224698
+    },
+    {
+      "file_index": 98,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          147,
+          187
+        ],
+        [
+          288,
+          328
+        ],
+        [
+          462,
+          502
+        ],
+        [
+          641,
+          681
+        ],
+        [
+          860,
+          900
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_98.root",
+      "bytes": 15248493,
+      "mtime_ns": 1791713658728223634
+    },
+    {
+      "file_index": 99,
+      "entries": 1000,
+      "sampled": 200,
+      "spans": [
+        [
+          34,
+          74
+        ],
+        [
+          293,
+          333
+        ],
+        [
+          425,
+          465
+        ],
+        [
+          611,
+          651
+        ],
+        [
+          812,
+          852
+        ]
+      ],
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_99.root",
+      "bytes": 15264462,
+      "mtime_ns": 1791713689526224688
+    }
+  ],
+  "current_inputs": [
+    {
+      "file_index": 0,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_0.root",
+        "bytes": 3915143,
+        "mtime_ns": 1791712402504180656
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_0.root",
+        "bytes": 15194582,
+        "mtime_ns": 1791713611844222030
+      }
+    },
+    {
+      "file_index": 1,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_1.root",
+        "bytes": 3930102,
+        "mtime_ns": 1791712384330180034
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_1.root",
+        "bytes": 15252252,
+        "mtime_ns": 1791713612291222046
+      }
+    },
+    {
+      "file_index": 2,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_10.root",
+        "bytes": 3920767,
+        "mtime_ns": 1791712384334180034
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_10.root",
+        "bytes": 15219808,
+        "mtime_ns": 1791713739473226397
+      }
+    },
+    {
+      "file_index": 3,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_11.root",
+        "bytes": 3925093,
+        "mtime_ns": 1791712384126180027
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_11.root",
+        "bytes": 15234394,
+        "mtime_ns": 1791713701136225085
+      }
+    },
+    {
+      "file_index": 4,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_12.root",
+        "bytes": 3924370,
+        "mtime_ns": 1791712383983180022
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_12.root",
+        "bytes": 15233570,
+        "mtime_ns": 1791713746177226626
+      }
+    },
+    {
+      "file_index": 5,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_13.root",
+        "bytes": 3929343,
+        "mtime_ns": 1791712397153180473
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_13.root",
+        "bytes": 15252140,
+        "mtime_ns": 1791713756475226979
+      }
+    },
+    {
+      "file_index": 6,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_14.root",
+        "bytes": 3929209,
+        "mtime_ns": 1791712389525180212
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_14.root",
+        "bytes": 15250340,
+        "mtime_ns": 1791713701219225088
+      }
+    },
+    {
+      "file_index": 7,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_15.root",
+        "bytes": 3924114,
+        "mtime_ns": 1791712401639180626
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_15.root",
+        "bytes": 15228048,
+        "mtime_ns": 1791713701167225086
+      }
+    },
+    {
+      "file_index": 8,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_16.root",
+        "bytes": 3932546,
+        "mtime_ns": 1791712389005180194
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_16.root",
+        "bytes": 15269678,
+        "mtime_ns": 1791713751747226817
+      }
+    },
+    {
+      "file_index": 9,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_17.root",
+        "bytes": 3924027,
+        "mtime_ns": 1791712387626180147
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_17.root",
+        "bytes": 15226341,
+        "mtime_ns": 1791713745526226604
+      }
+    },
+    {
+      "file_index": 10,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_18.root",
+        "bytes": 3924422,
+        "mtime_ns": 1791712402537180657
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_18.root",
+        "bytes": 15230466,
+        "mtime_ns": 1791713735359226256
+      }
+    },
+    {
+      "file_index": 11,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_19.root",
+        "bytes": 3921116,
+        "mtime_ns": 1791712406762180802
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_19.root",
+        "bytes": 15218620,
+        "mtime_ns": 1791713744647226574
+      }
+    },
+    {
+      "file_index": 12,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_2.root",
+        "bytes": 3928538,
+        "mtime_ns": 1791712407891180840
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_2.root",
+        "bytes": 15248858,
+        "mtime_ns": 1791713701243225089
+      }
+    },
+    {
+      "file_index": 13,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_20.root",
+        "bytes": 3928288,
+        "mtime_ns": 1791712405690180765
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_20.root",
+        "bytes": 15244693,
+        "mtime_ns": 1791713701191225087
+      }
+    },
+    {
+      "file_index": 14,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_21.root",
+        "bytes": 3925304,
+        "mtime_ns": 1791712401744180630
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_21.root",
+        "bytes": 15233244,
+        "mtime_ns": 1791713699047225014
+      }
+    },
+    {
+      "file_index": 15,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_22.root",
+        "bytes": 3930261,
+        "mtime_ns": 1791712387082180128
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_22.root",
+        "bytes": 15259184,
+        "mtime_ns": 1791713700889225077
+      }
+    },
+    {
+      "file_index": 16,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_23.root",
+        "bytes": 3924901,
+        "mtime_ns": 1791712408862180873
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_23.root",
+        "bytes": 15232337,
+        "mtime_ns": 1791713757513227014
+      }
+    },
+    {
+      "file_index": 17,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_24.root",
+        "bytes": 3924821,
+        "mtime_ns": 1791712409790180905
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_24.root",
+        "bytes": 15235499,
+        "mtime_ns": 1791713757555227015
+      }
+    },
+    {
+      "file_index": 18,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_25.root",
+        "bytes": 3927238,
+        "mtime_ns": 1791712408883180874
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_25.root",
+        "bytes": 15244752,
+        "mtime_ns": 1791713657914223607
+      }
+    },
+    {
+      "file_index": 19,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_26.root",
+        "bytes": 3926029,
+        "mtime_ns": 1791712408927180876
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_26.root",
+        "bytes": 15237046,
+        "mtime_ns": 1791713657987223609
+      }
+    },
+    {
+      "file_index": 20,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_27.root",
+        "bytes": 3924419,
+        "mtime_ns": 1791712390082180231
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_27.root",
+        "bytes": 15229866,
+        "mtime_ns": 1791713657621223596
+      }
+    },
+    {
+      "file_index": 21,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_28.root",
+        "bytes": 3930269,
+        "mtime_ns": 1791712407892180840
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_28.root",
+        "bytes": 15255331,
+        "mtime_ns": 1791713657714223600
+      }
+    },
+    {
+      "file_index": 22,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_29.root",
+        "bytes": 3925513,
+        "mtime_ns": 1791712408869180874
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_29.root",
+        "bytes": 15238921,
+        "mtime_ns": 1791713657790223602
+      }
+    },
+    {
+      "file_index": 23,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_3.root",
+        "bytes": 3922103,
+        "mtime_ns": 1791712408876180874
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_3.root",
+        "bytes": 15225452,
+        "mtime_ns": 1791713657833223604
+      }
+    },
+    {
+      "file_index": 24,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_30.root",
+        "bytes": 3926695,
+        "mtime_ns": 1791712409599180899
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_30.root",
+        "bytes": 15244056,
+        "mtime_ns": 1791713610012221968
+      }
+    },
+    {
+      "file_index": 25,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_31.root",
+        "bytes": 3927227,
+        "mtime_ns": 1791712386063180093
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_31.root",
+        "bytes": 15243865,
+        "mtime_ns": 1791713657421223590
+      }
+    },
+    {
+      "file_index": 26,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_32.root",
+        "bytes": 3917633,
+        "mtime_ns": 1791712410269180922
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_32.root",
+        "bytes": 15202094,
+        "mtime_ns": 1791713656712223565
+      }
+    },
+    {
+      "file_index": 27,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_33.root",
+        "bytes": 3928882,
+        "mtime_ns": 1791712410472180929
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_33.root",
+        "bytes": 15250918,
+        "mtime_ns": 1791713656742223566
+      }
+    },
+    {
+      "file_index": 28,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_34.root",
+        "bytes": 3924714,
+        "mtime_ns": 1791712410439180927
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_34.root",
+        "bytes": 15235184,
+        "mtime_ns": 1791713657007223575
+      }
+    },
+    {
+      "file_index": 29,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_35.root",
+        "bytes": 3932825,
+        "mtime_ns": 1791712414795181076
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_35.root",
+        "bytes": 15265175,
+        "mtime_ns": 1791713624356222458
+      }
+    },
+    {
+      "file_index": 30,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_36.root",
+        "bytes": 3926928,
+        "mtime_ns": 1791712406851180805
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_36.root",
+        "bytes": 15239156,
+        "mtime_ns": 1791713612238222044
+      }
+    },
+    {
+      "file_index": 31,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_37.root",
+        "bytes": 3922707,
+        "mtime_ns": 1791712406738180801
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_37.root",
+        "bytes": 15227303,
+        "mtime_ns": 1791713656841223570
+      }
+    },
+    {
+      "file_index": 32,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_38.root",
+        "bytes": 3927154,
+        "mtime_ns": 1791712408743180869
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_38.root",
+        "bytes": 15244364,
+        "mtime_ns": 1791713657950223608
+      }
+    },
+    {
+      "file_index": 33,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_39.root",
+        "bytes": 3930100,
+        "mtime_ns": 1791712403144180678
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_39.root",
+        "bytes": 15258743,
+        "mtime_ns": 1791713657875223605
+      }
+    },
+    {
+      "file_index": 34,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_4.root",
+        "bytes": 3934148,
+        "mtime_ns": 1791712407948180842
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_4.root",
+        "bytes": 15269855,
+        "mtime_ns": 1791713656059223543
+      }
+    },
+    {
+      "file_index": 35,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_40.root",
+        "bytes": 3916828,
+        "mtime_ns": 1791712406135180780
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_40.root",
+        "bytes": 15201587,
+        "mtime_ns": 1791713656627223562
+      }
+    },
+    {
+      "file_index": 36,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_41.root",
+        "bytes": 3932403,
+        "mtime_ns": 1791712410493180929
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_41.root",
+        "bytes": 15261678,
+        "mtime_ns": 1791713657680223598
+      }
+    },
+    {
+      "file_index": 37,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_42.root",
+        "bytes": 3921174,
+        "mtime_ns": 1791712412613181002
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_42.root",
+        "bytes": 15219636,
+        "mtime_ns": 1791713657749223601
+      }
+    },
+    {
+      "file_index": 38,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_43.root",
+        "bytes": 3927468,
+        "mtime_ns": 1791712413023181016
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_43.root",
+        "bytes": 15245100,
+        "mtime_ns": 1791713602439221709
+      }
+    },
+    {
+      "file_index": 39,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_44.root",
+        "bytes": 3926536,
+        "mtime_ns": 1791712410340180924
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_44.root",
+        "bytes": 15238390,
+        "mtime_ns": 1791713656499223558
+      }
+    },
+    {
+      "file_index": 40,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_45.root",
+        "bytes": 3927466,
+        "mtime_ns": 1791712413024181016
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_45.root",
+        "bytes": 15243193,
+        "mtime_ns": 1791713657569223595
+      }
+    },
+    {
+      "file_index": 41,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_46.root",
+        "bytes": 3936806,
+        "mtime_ns": 1791712412989181015
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_46.root",
+        "bytes": 15285861,
+        "mtime_ns": 1791713655440223522
+      }
+    },
+    {
+      "file_index": 42,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_47.root",
+        "bytes": 3931661,
+        "mtime_ns": 1791712410185180919
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_47.root",
+        "bytes": 15260898,
+        "mtime_ns": 1791713657237223583
+      }
+    },
+    {
+      "file_index": 43,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_48.root",
+        "bytes": 3917582,
+        "mtime_ns": 1791712410174180918
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_48.root",
+        "bytes": 15206898,
+        "mtime_ns": 1791713657595223596
+      }
+    },
+    {
+      "file_index": 44,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_49.root",
+        "bytes": 3925101,
+        "mtime_ns": 1791712410685180936
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_49.root",
+        "bytes": 15234231,
+        "mtime_ns": 1791713657649223597
+      }
+    },
+    {
+      "file_index": 45,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_5.root",
+        "bytes": 3926629,
+        "mtime_ns": 1791712407348180822
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_5.root",
+        "bytes": 15237882,
+        "mtime_ns": 1791713748407226702
+      }
+    },
+    {
+      "file_index": 46,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_50.root",
+        "bytes": 3936025,
+        "mtime_ns": 1791712410139180917
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_50.root",
+        "bytes": 15279860,
+        "mtime_ns": 1791713750052226759
+      }
+    },
+    {
+      "file_index": 47,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_51.root",
+        "bytes": 3913665,
+        "mtime_ns": 1791712410143180917
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_51.root",
+        "bytes": 15188205,
+        "mtime_ns": 1791713621027222345
+      }
+    },
+    {
+      "file_index": 48,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_52.root",
+        "bytes": 3923613,
+        "mtime_ns": 1791712410013180913
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_52.root",
+        "bytes": 15229390,
+        "mtime_ns": 1791713621708222368
+      }
+    },
+    {
+      "file_index": 49,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_53.root",
+        "bytes": 3933100,
+        "mtime_ns": 1791712409741180903
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_53.root",
+        "bytes": 15269551,
+        "mtime_ns": 1791713618301222251
+      }
+    },
+    {
+      "file_index": 50,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_54.root",
+        "bytes": 3926806,
+        "mtime_ns": 1791712410387180926
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_54.root",
+        "bytes": 15239576,
+        "mtime_ns": 1791713619990222309
+      }
+    },
+    {
+      "file_index": 51,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_55.root",
+        "bytes": 3931057,
+        "mtime_ns": 1791712402288180649
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_55.root",
+        "bytes": 15263630,
+        "mtime_ns": 1791713621067222346
+      }
+    },
+    {
+      "file_index": 52,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_56.root",
+        "bytes": 3924073,
+        "mtime_ns": 1791712410785180939
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_56.root",
+        "bytes": 15227363,
+        "mtime_ns": 1791713612234222044
+      }
+    },
+    {
+      "file_index": 53,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_57.root",
+        "bytes": 3924323,
+        "mtime_ns": 1791712406629180797
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_57.root",
+        "bytes": 15235186,
+        "mtime_ns": 1791713611191222008
+      }
+    },
+    {
+      "file_index": 54,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_58.root",
+        "bytes": 3927182,
+        "mtime_ns": 1791712410021180913
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_58.root",
+        "bytes": 15245461,
+        "mtime_ns": 1791713694413224855
+      }
+    },
+    {
+      "file_index": 55,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_59.root",
+        "bytes": 3925547,
+        "mtime_ns": 1791712409734180903
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_59.root",
+        "bytes": 15236691,
+        "mtime_ns": 1791713694508224858
+      }
+    },
+    {
+      "file_index": 56,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_6.root",
+        "bytes": 3921468,
+        "mtime_ns": 1791712410222180920
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_6.root",
+        "bytes": 15220214,
+        "mtime_ns": 1791713694124224845
+      }
+    },
+    {
+      "file_index": 57,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_60.root",
+        "bytes": 3934608,
+        "mtime_ns": 1791712410125180917
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_60.root",
+        "bytes": 15273463,
+        "mtime_ns": 1791713621467222360
+      }
+    },
+    {
+      "file_index": 58,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_61.root",
+        "bytes": 3927477,
+        "mtime_ns": 1791712410136180917
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_61.root",
+        "bytes": 15247068,
+        "mtime_ns": 1791713693512224824
+      }
+    },
+    {
+      "file_index": 59,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_62.root",
+        "bytes": 3921975,
+        "mtime_ns": 1791712410280180922
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_62.root",
+        "bytes": 15224344,
+        "mtime_ns": 1791713694384224854
+      }
+    },
+    {
+      "file_index": 60,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_63.root",
+        "bytes": 3917186,
+        "mtime_ns": 1791712413262181024
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_63.root",
+        "bytes": 15201920,
+        "mtime_ns": 1791713694555224860
+      }
+    },
+    {
+      "file_index": 61,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_64.root",
+        "bytes": 3931455,
+        "mtime_ns": 1791712420702181278
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_64.root",
+        "bytes": 15262103,
+        "mtime_ns": 1791713694580224861
+      }
+    },
+    {
+      "file_index": 62,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_65.root",
+        "bytes": 3914317,
+        "mtime_ns": 1791712422091181326
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_65.root",
+        "bytes": 15190822,
+        "mtime_ns": 1791713694712224865
+      }
+    },
+    {
+      "file_index": 63,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_66.root",
+        "bytes": 3930243,
+        "mtime_ns": 1791712422422181337
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_66.root",
+        "bytes": 15256047,
+        "mtime_ns": 1791713694692224865
+      }
+    },
+    {
+      "file_index": 64,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_67.root",
+        "bytes": 3929254,
+        "mtime_ns": 1791712426056181462
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_67.root",
+        "bytes": 15251702,
+        "mtime_ns": 1791713694331224852
+      }
+    },
+    {
+      "file_index": 65,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_68.root",
+        "bytes": 3928239,
+        "mtime_ns": 1791712425351181438
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_68.root",
+        "bytes": 15248885,
+        "mtime_ns": 1791713694484224858
+      }
+    },
+    {
+      "file_index": 66,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_69.root",
+        "bytes": 3927660,
+        "mtime_ns": 1791712425807181453
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_69.root",
+        "bytes": 15243013,
+        "mtime_ns": 1791713694157224846
+      }
+    },
+    {
+      "file_index": 67,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_7.root",
+        "bytes": 3924973,
+        "mtime_ns": 1791712422755181349
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_7.root",
+        "bytes": 15234877,
+        "mtime_ns": 1791713694303224851
+      }
+    },
+    {
+      "file_index": 68,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_70.root",
+        "bytes": 3920089,
+        "mtime_ns": 1791712422111181327
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_70.root",
+        "bytes": 15215391,
+        "mtime_ns": 1791713618031222242
+      }
+    },
+    {
+      "file_index": 69,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_71.root",
+        "bytes": 3921920,
+        "mtime_ns": 1791712425808181453
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_71.root",
+        "bytes": 15223164,
+        "mtime_ns": 1791713693904224838
+      }
+    },
+    {
+      "file_index": 70,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_72.root",
+        "bytes": 3923881,
+        "mtime_ns": 1791712411172180952
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_72.root",
+        "bytes": 15227411,
+        "mtime_ns": 1791713694629224863
+      }
+    },
+    {
+      "file_index": 71,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_73.root",
+        "bytes": 3934263,
+        "mtime_ns": 1791712411172180952
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_73.root",
+        "bytes": 15272012,
+        "mtime_ns": 1791713694605224862
+      }
+    },
+    {
+      "file_index": 72,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_74.root",
+        "bytes": 3928510,
+        "mtime_ns": 1791712411299180957
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_74.root",
+        "bytes": 15250101,
+        "mtime_ns": 1791713694650224863
+      }
+    },
+    {
+      "file_index": 73,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_75.root",
+        "bytes": 3918511,
+        "mtime_ns": 1791712412727181006
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_75.root",
+        "bytes": 15210040,
+        "mtime_ns": 1791713694671224864
+      }
+    },
+    {
+      "file_index": 74,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_76.root",
+        "bytes": 3926665,
+        "mtime_ns": 1791712417225181160
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_76.root",
+        "bytes": 15237675,
+        "mtime_ns": 1791713692341224784
+      }
+    },
+    {
+      "file_index": 75,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_77.root",
+        "bytes": 3931586,
+        "mtime_ns": 1791712416252181126
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_77.root",
+        "bytes": 15258967,
+        "mtime_ns": 1791713654385223486
+      }
+    },
+    {
+      "file_index": 76,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_78.root",
+        "bytes": 3931056,
+        "mtime_ns": 1791712416775181144
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_78.root",
+        "bytes": 15255445,
+        "mtime_ns": 1791713691698224762
+      }
+    },
+    {
+      "file_index": 77,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_79.root",
+        "bytes": 3933199,
+        "mtime_ns": 1791712417107181156
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_79.root",
+        "bytes": 15271371,
+        "mtime_ns": 1791713691193224745
+      }
+    },
+    {
+      "file_index": 78,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_8.root",
+        "bytes": 3928786,
+        "mtime_ns": 1791712418054181188
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_8.root",
+        "bytes": 15252105,
+        "mtime_ns": 1791713694435224856
+      }
+    },
+    {
+      "file_index": 79,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_80.root",
+        "bytes": 3929249,
+        "mtime_ns": 1791712418662181209
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_80.root",
+        "bytes": 15250200,
+        "mtime_ns": 1791713694533224859
+      }
+    },
+    {
+      "file_index": 80,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_81.root",
+        "bytes": 3928483,
+        "mtime_ns": 1791712417366181164
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_81.root",
+        "bytes": 15248688,
+        "mtime_ns": 1791713694358224853
+      }
+    },
+    {
+      "file_index": 81,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_82.root",
+        "bytes": 3931835,
+        "mtime_ns": 1791712417741181177
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_82.root",
+        "bytes": 15260348,
+        "mtime_ns": 1791713694460224857
+      }
+    },
+    {
+      "file_index": 82,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_83.root",
+        "bytes": 3929016,
+        "mtime_ns": 1791712417520181170
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_83.root",
+        "bytes": 15249869,
+        "mtime_ns": 1791713748785226715
+      }
+    },
+    {
+      "file_index": 83,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_84.root",
+        "bytes": 3918148,
+        "mtime_ns": 1791712416179181124
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_84.root",
+        "bytes": 15203748,
+        "mtime_ns": 1791713754274226903
+      }
+    },
+    {
+      "file_index": 84,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_85.root",
+        "bytes": 3933433,
+        "mtime_ns": 1791712412368180993
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_85.root",
+        "bytes": 15266767,
+        "mtime_ns": 1791713813875228942
+      }
+    },
+    {
+      "file_index": 85,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_86.root",
+        "bytes": 3928448,
+        "mtime_ns": 1791712418696181210
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_86.root",
+        "bytes": 15244646,
+        "mtime_ns": 1791713689714224694
+      }
+    },
+    {
+      "file_index": 86,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_87.root",
+        "bytes": 3922454,
+        "mtime_ns": 1791712417844181181
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_87.root",
+        "bytes": 15222147,
+        "mtime_ns": 1791713695890224906
+      }
+    },
+    {
+      "file_index": 87,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_88.root",
+        "bytes": 3932613,
+        "mtime_ns": 1791712418855181215
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_88.root",
+        "bytes": 15262342,
+        "mtime_ns": 1791713689816224698
+      }
+    },
+    {
+      "file_index": 88,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_89.root",
+        "bytes": 3921120,
+        "mtime_ns": 1791712418894181217
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_89.root",
+        "bytes": 15215508,
+        "mtime_ns": 1791713689601224691
+      }
+    },
+    {
+      "file_index": 89,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_9.root",
+        "bytes": 3918403,
+        "mtime_ns": 1791712415959181116
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_9.root",
+        "bytes": 15206562,
+        "mtime_ns": 1791713689767224696
+      }
+    },
+    {
+      "file_index": 90,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_90.root",
+        "bytes": 3918408,
+        "mtime_ns": 1791712421706181313
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_90.root",
+        "bytes": 15209434,
+        "mtime_ns": 1791713695895224906
+      }
+    },
+    {
+      "file_index": 91,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_91.root",
+        "bytes": 3926196,
+        "mtime_ns": 1791712421970181322
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_91.root",
+        "bytes": 15234891,
+        "mtime_ns": 1791713690330224716
+      }
+    },
+    {
+      "file_index": 92,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_92.root",
+        "bytes": 3932850,
+        "mtime_ns": 1791712422099181326
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_92.root",
+        "bytes": 15267179,
+        "mtime_ns": 1791713690291224714
+      }
+    },
+    {
+      "file_index": 93,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_93.root",
+        "bytes": 3927122,
+        "mtime_ns": 1791712420982181288
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_93.root",
+        "bytes": 15243496,
+        "mtime_ns": 1791713689657224693
+      }
+    },
+    {
+      "file_index": 94,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_94.root",
+        "bytes": 3932462,
+        "mtime_ns": 1791712419225181228
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_94.root",
+        "bytes": 15265133,
+        "mtime_ns": 1791713657665223598
+      }
+    },
+    {
+      "file_index": 95,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_95.root",
+        "bytes": 3923227,
+        "mtime_ns": 1791712421630181310
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_95.root",
+        "bytes": 15227885,
+        "mtime_ns": 1791713657075223578
+      }
+    },
+    {
+      "file_index": 96,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_96.root",
+        "bytes": 3928492,
+        "mtime_ns": 1791712421183181295
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_96.root",
+        "bytes": 15245690,
+        "mtime_ns": 1791713689769224696
+      }
+    },
+    {
+      "file_index": 97,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_97.root",
+        "bytes": 3915412,
+        "mtime_ns": 1791712421247181297
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_97.root",
+        "bytes": 15196254,
+        "mtime_ns": 1791713689827224698
+      }
+    },
+    {
+      "file_index": 98,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_98.root",
+        "bytes": 3928809,
+        "mtime_ns": 1791712421776181315
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_98.root",
+        "bytes": 15248493,
+        "mtime_ns": 1791713658728223634
+      }
+    },
+    {
+      "file_index": 99,
+      "raw": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/decode/e-/e_ssa/threshold/40GeV/40GeV_99.root",
+        "bytes": 3932260,
+        "mtime_ns": 1791712422421181337
+      },
+      "calib": {
+        "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold/40GeV/40GeV_99.root",
+        "bytes": 15264462,
+        "mtime_ns": 1791713689526224688
+      }
+    }
+  ],
+  "seed": 20261512,
+  "main_manifest_verified": true,
+  "content_change_evidence": {
+    "method": "Same saved event IDs, old tail event energy/good_hits compared with current calibration using saved physical good mask. Raw ADC checked against saved tail_hits.",
+    "first_ten_energy_ratio_ranges": {
+      "5": [
+        0.960456123,
+        1.039675499
+      ],
+      "40": [
+        0.980501607,
+        1.016010295
+      ],
+      "100": [
+        0.988528836,
+        1.002344633
+      ]
+    },
+    "raw_examples": [
+      {
+        "energy": 40,
+        "file_index": 33,
+        "entry": 910,
+        "cell": 1200024,
+        "old_HG": 1190,
+        "new_HG": 1280,
+        "old_LG": 455,
+        "new_LG": 474
+      },
+      {
+        "energy": 100,
+        "file_index": 12,
+        "entry": 766,
+        "cell": 1200027,
+        "old_HG": 994,
+        "new_HG": 935,
+        "old_LG": 447,
+        "new_LG": 468
+      }
+    ]
+  },
+  "source_script_sha256": "3ffe8c3954d4da0c38bc427c07053657063cdcef220b55c20aebee5c34a57a0d",
+  "main_manifest_sha256": "44fbc72e7650bcf57cf30f292792dd32c34a508599571ba59e57774f893b9ebc"
+}

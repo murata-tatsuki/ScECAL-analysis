@@ -1,0 +1,7 @@
+{
+  "path": "/gpfs/group/ilc/users/murata/ScECAL_BeamTest/investigations/result/mip_track_veto/pion_shower/data/diagnostics/5GeV/events.npz",
+  "bytes": 9872186,
+  "mtime_ns": 1794382650297943846,
+  "sha256": "28b8b48affa27591b93dad055aad8d8b9e648c5ef7e0d04b433902970ca3f339",
+  "note": "Reused verified moments, no new ROOT read; fixed early-shower selection"
+}

@@ -1,0 +1,8 @@
+5GeV data: PASS baseline identity, veto conditions, event/histogram accounting, identical peak-core bins
+5GeV mc: PASS baseline identity, veto conditions, event/histogram accounting, identical peak-core bins
+40GeV data: PASS baseline identity, veto conditions, event/histogram accounting, identical peak-core bins
+40GeV mc: PASS baseline identity, veto conditions, event/histogram accounting, identical peak-core bins
+100GeV data: PASS baseline identity, veto conditions, event/histogram accounting, identical peak-core bins
+100GeV mc: PASS baseline identity, veto conditions, event/histogram accounting, identical peak-core bins
+In-memory geometry checks passed: thin through-going track, short front shower, straight centroid with broad layers.
+Candidate and comparison PNGs visually inspected.

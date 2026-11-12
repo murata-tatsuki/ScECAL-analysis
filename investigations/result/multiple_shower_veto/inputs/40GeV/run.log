@@ -1,0 +1,16 @@
+40GeV data: file 1/2, sampled 6859
+40GeV data: file 2/2, sampled 20000
+Matplotlib is building the font cache; this may take a moment.
+40GeV mc: file 20/100, sampled 4000
+40GeV mc: file 40/100, sampled 8000
+40GeV mc: file 60/100, sampled 12000
+40GeV mc: file 80/100, sampled 16000
+40GeV mc: file 100/100, sampled 20000
+{"energy_GeV": 40, "sample": "data", "cog_mm": 200, "condition": "nominal", "before": 17710, "removed": 181, "removed_fraction": 0.010220214568040654, "binomial_se": 0.0007557706393484587, "evaluable": 17577, "both_views": 9}
+{"energy_GeV": 40, "sample": "data", "cog_mm": 20, "condition": "nominal", "before": 14458, "removed": 125, "removed_fraction": 0.008645732466454559, "binomial_se": 0.0007699477005956855, "evaluable": 14426, "both_views": 2}
+{"energy_GeV": 40, "sample": "data", "cog_mm": 10, "condition": "nominal", "before": 5711, "removed": 38, "removed_fraction": 0.0066538259499212046, "binomial_se": 0.0010757960611315217, "evaluable": 5701, "both_views": 1}
+{"energy_GeV": 40, "sample": "data", "cog_mm": 5, "condition": "nominal", "before": 1473, "removed": 7, "removed_fraction": 0.0047522063815342835, "binomial_se": 0.001791892224272735, "evaluable": 1468, "both_views": 0}
+{"energy_GeV": 40, "sample": "mc", "cog_mm": 200, "condition": "nominal", "before": 20000, "removed": 0, "removed_fraction": 0.0, "binomial_se": 0.0, "evaluable": 19999, "both_views": 0}
+{"energy_GeV": 40, "sample": "mc", "cog_mm": 20, "condition": "nominal", "before": 14651, "removed": 0, "removed_fraction": 0.0, "binomial_se": 0.0, "evaluable": 14650, "both_views": 0}
+{"energy_GeV": 40, "sample": "mc", "cog_mm": 10, "condition": "nominal", "before": 5971, "removed": 0, "removed_fraction": 0.0, "binomial_se": 0.0, "evaluable": 5971, "both_views": 0}
+{"energy_GeV": 40, "sample": "mc", "cog_mm": 5, "condition": "nominal", "before": 1479, "removed": 0, "removed_fraction": 0.0, "binomial_se": 0.0, "evaluable": 1479, "both_views": 0}

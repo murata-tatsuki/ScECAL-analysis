@@ -1,0 +1,55 @@
+{
+  "command": "python investigations/nhit_left_population/channel_residual.py",
+  "events": 5968,
+  "sample": "First 250 events of each of the original 24 stratified blocks; both 30 GeV runs",
+  "eref_GeV": 1.1337647867231997,
+  "nref": 328.0,
+  "mip_fallback": 2422,
+  "hl_fallback": 73,
+  "closure_h_absmax_MeV": 0.0,
+  "closure_l_absmax_MeV": 0.0,
+  "inputs": [
+    {
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/ECAL_data/analysed/2023/sps/calib/e-/30GeV/ECAL_Run137_20230501_130356.root",
+      "bytes": 647272911,
+      "mtime_ns": 1791619540855003635
+    },
+    {
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/ECAL_data/analysed/2023/sps/decode/e-/30GeV/ECAL_Run137_20230501_130356.root",
+      "bytes": 948736982,
+      "mtime_ns": 1707997245741683779
+    },
+    {
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/ECAL_data/analysed/2023/sps/calib/e-/30GeV/ECAL_Run138_20230501_140011.root",
+      "bytes": 703415358,
+      "mtime_ns": 1791619553210004058
+    },
+    {
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/ECAL_data/analysed/2023/sps/decode/e-/30GeV/ECAL_Run138_20230501_140011.root",
+      "bytes": 1031148751,
+      "mtime_ns": 1707997461655123723
+    }
+  ],
+  "parameters": [
+    {
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Analysis_edit/share/all_auto_muon_v4_trackfit.root",
+      "bytes": 210170,
+      "mtime_ns": 1728623077850690760,
+      "sha256": "f473241549ea9129ea075572862fb93015861e290f6b3de0ef9288838f6e18ba"
+    },
+    {
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Analysis_edit/share/all_hl_electron2023_hlratio_v3.root",
+      "bytes": 492668,
+      "mtime_ns": 1728623077858690704,
+      "sha256": "2e8ebc8daf96a201ff602b584622d07a395eb13f7ff7fecb36d5fd387f2496ae"
+    },
+    {
+      "path": "/gpfs/group/ilc/users/murata/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Analysis_edit/share/pedestal2023_SPS.root",
+      "bytes": 647484,
+      "mtime_ns": 1728623077877690572,
+      "sha256": "9310639a8738c1e3bba07288bf4cffea07df2826e1f042049e5a2ff12adc5b4c"
+    }
+  ],
+  "source_sha256": "e670572d7ee8e3bc209bba9eb5a3874c59d432c6db2bf575e3f39011982dc63a",
+  "validation": "All event keys, full CellID mapping, HitTag, selected gain, cache energy/hits and current-parameter HG/LG formula match; input size/mtime unchanged"
+}
