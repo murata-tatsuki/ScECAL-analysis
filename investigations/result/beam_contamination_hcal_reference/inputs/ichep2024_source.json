@@ -1,0 +1,14 @@
+{
+  "url": "https://inspirehep.net/files/82082766775e69152175582b920298e3",
+  "title": "CALICE scintillator-based calorimeter prototypes: highlights of developments and beamtests",
+  "doi": "10.22323/1.476.1076",
+  "sha256": "671d5282016e374589535fe887e14e91d2bd948db70efc5716cdead7de18f7cc",
+  "relevant_pages": [
+    3,
+    4,
+    5
+  ],
+  "figure3": "AHCAL-alone 2023 SPS-H2: electron composition 10\u2013250 GeV; MIP/hadron/electron only",
+  "stated_electron_purity": "Above 94% over available momentum range",
+  "interpretation_limit": "Not automatically the fraction after ECAL trigger/quality/CoG selection; exact run lists and denominator relative to EPJ paper not specified here"
+}

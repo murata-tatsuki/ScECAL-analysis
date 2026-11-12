@@ -28,7 +28,7 @@ analysis/result/resolution/
   figures/single/mc/<sample>/<selection>/<CoG>mm/<energy>GeV/...
   figures/multi/<比較種別>/<比較名>/<selection>/...
   unknown/<旧相対パス>
-  inputs/layout_migration_20261112/
+  unknown/inputs/layout_migration_20261112/
 ```
 
 現役設定のsampleはdataが `beam2023_reprocessed`、MCが `e_ssa_threshold` と
@@ -42,9 +42,9 @@ CoG 200 mmは保存先では `200mm`、図では `nocut` と表示する。
 `unknown/data/` から読み、比較結果も `unknown/custom/momentum_spread/comparison/` 以下へ保存する。
 再処理dataを比較に使う場合は、後述の `MOMENTUM_SPREAD_DATA_RESULTS` で明示する。
 
-移動対応は [moves.tsv](../result/resolution/inputs/layout_migration_20261112/moves.tsv)、
-全ファイル一覧は [files.tsv.gz](../result/resolution/inputs/layout_migration_20261112/files.tsv.gz)、
-実施記録は [run.log](../result/resolution/inputs/layout_migration_20261112/run.log) に保存する。
+移動対応は [moves.tsv](../result/resolution/unknown/inputs/layout_migration_20261112/moves.tsv)、
+全ファイル一覧は [files.tsv.gz](../result/resolution/unknown/inputs/layout_migration_20261112/files.tsv.gz)、
+実施記録は [run.log](../result/resolution/unknown/inputs/layout_migration_20261112/run.log) に保存する。
 既存の `run.log` とROOT内部の入力パスは、当時の実行記録として書き換えない。
 
 新規のKEKCC実行には `momentum_spread_samples.sh`、任意条件には更新済みの

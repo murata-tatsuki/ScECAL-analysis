@@ -15,3 +15,8 @@ tmp/*.txt
 /resolution/SingleEnergyAnalysis
 /resolution/MultiEnergyAnalysis
 /resolution/SingleEnergyAnalysisPosDep
+
+# Executables built by strip_end_response/Makefile
+/strip_end_response/Collect
+/strip_end_response/Draw
+/strip_end_response/Muon

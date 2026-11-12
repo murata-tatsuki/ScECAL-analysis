@@ -31,7 +31,7 @@ for energy in 5 20 100; do
  "$HERE/PrepareReference" --mc-manifest "$dir/inputs/mc.tsv" "${args[@]}" --energy "$energy" --out "$dir" > "$dir/run.log" 2>&1
  printf '%sGeV reference ready; %s MC files available\n' "$energy" "${#files[@]}"
  sha256sum "$PROJECT/analysis/result/channel_response/hg_lg_tail/threshold/e_ssa/${energy}GeV/"{tail_study.root,inputs/data.tsv} > "$dir/inputs/data_tail_checksums.txt"
- for sample in data simulation/threshold; do for cog in 200 20 10 5; do path="$PROJECT/analysis/result/resolution/$sample/${cog}mm/${energy}GeV_${cog}mm.root"; stat -c '%y\t%s\t%n' "$path"; done; done >> "$out/inputs/production_resolution_stats.tsv"
+ for sample in data simulation/threshold; do for cog in 200 20 10 5; do path="$PROJECT/analysis/result/resolution/unknown/$sample/${cog}mm/${energy}GeV_${cog}mm.root"; stat -c '%y\t%s\t%n' "$path"; done; done >> "$out/inputs/production_resolution_stats.tsv"
 done
 cd "$HERE"
 "$HERE/IntegratedReview" "$base" "$out"
