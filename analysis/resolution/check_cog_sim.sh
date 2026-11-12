@@ -36,6 +36,6 @@ done
 
 var=`cat ../tmp/resolution_simulation.txt`
 #./between_files_energy_resolution ../results/resolution/energy/Eres_all_normalgain.root ${var}
-# ./between_files_energy_resolution_simulation ../result/resolution/Eres_simulation_v0.root ${var}
-# ./between_files_energy_resolution ../result/resolution/Eres_simulation_v0_dataMacro.root ${var}
-./between_files_cog ../result/resolution/cog_simulation.root ${var}
+# ./between_files_energy_resolution_simulation ../result/resolution/unknown/Eres_simulation_v0.root ${var}
+# ./between_files_energy_resolution ../result/resolution/unknown/Eres_simulation_v0_dataMacro.root ${var}
+./between_files_cog ../result/resolution/unknown/cog_simulation.root ${var}

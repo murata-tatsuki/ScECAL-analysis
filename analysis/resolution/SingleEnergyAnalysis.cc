@@ -18,6 +18,7 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+#include <utility>
 #include <numeric>
 #include <unordered_set>
 #include <cmath>
@@ -117,18 +118,20 @@ double CalculateShowerRadiusRMS(const vector<double>& x, const vector<double>& y
 }
 */
 
-bool eventCutConditions(double edep_event, double nhit_event, double edep_mean, double edep_sigma, double nhit_mean, double nhit_sigma){
-  double edep_square = pow((edep_event-edep_mean) / (3*edep_sigma), 2);
-  double nhit_square = pow((nhit_event-nhit_mean) / (3*nhit_sigma), 2);
-  return (edep_square + nhit_square) > 1;
-}
+// The energy-Nhit ellipse cut is temporarily disabled together with afterEventCut.
+// bool eventCutConditions(double edep_event, double nhit_event, double edep_mean, double edep_sigma, double nhit_mean, double nhit_sigma){
+//   double edep_square = pow((edep_event-edep_mean) / (3*edep_sigma), 2);
+//   double nhit_square = pow((nhit_event-nhit_mean) / (3*nhit_sigma), 2);
+//   return (edep_square + nhit_square) > 1;
+// }
 
 int main(int argc, char* argv[]) try
 {
   if (argc < 3 || std::string(argv[1]) == "--help") {
-    cout << "Usage: SingleEnergyAnalysis output.root Nenergy E1...En E1Nfiles...EnNfiles input.root... cog_range only_best figure_path [--strip-range MM] [--skip-channel-plots] [--exclude-tail-events|--keep-tail-events] [--tail-results DIR]" << endl;
+    cout << "Usage: SingleEnergyAnalysis output.root Nenergy E1...En E1Nfiles...EnNfiles input.root... cog_range only_best figure_path [--front-position-range MM] [--strip-range MM] [--skip-channel-plots] [--exclude-tail-events|--keep-tail-events] [--tail-results DIR]" << endl;
     cout << "Default: exclude tail-rich events (>=3 distinct low-tail channels). DIR contains <energy>GeV/tail_study.root and inputs/." << endl;
     cout << "--strip-range selects hits with abs(Hit_X/Y) < MM and disables the CoG event cut." << endl;
+    cout << "--front-position-range adds an event cut: abs(layer 1 energy-weighted X) < MM and abs(layer 0 energy-weighted Y) < MM. The CoG setting is retained; default is disabled." << endl;
     return argc == 2 && std::string(argv[1]) == "--help" ? 0 : 1;
   }
   const int nEnergy = std::stoi(argv[2]);
@@ -145,6 +148,9 @@ int main(int argc, char* argv[]) try
   bool tailModeSpecified = false;
   bool stripCut = false, skipChannelPlots = false;
   double stripRange = 200;
+  bool frontPositionCut = false;
+  double frontPositionRange = -1;
+  Long64_t frontChecked = 0, frontInvalid = 0, frontRejected = 0, frontPassed = 0;
   std::filesystem::path tailResults = std::filesystem::canonical(argv[0]).parent_path() /
       "../result/channel_response/hg_lg_tail/threshold/e_ssa";
   for (int i = int(positionalArgc); i < argc; ++i) {
@@ -156,6 +162,14 @@ int main(int argc, char* argv[]) try
     } else if (option == "--tail-results") {
       hl_tail::require(i + 1 < argc, "--tail-results requires a directory");
       tailResults = argv[++i];
+    } else if (option == "--front-position-range") {
+      hl_tail::require(!frontPositionCut && i + 1 < argc, "specify --front-position-range once with a positive range in mm");
+      const std::string value = argv[++i];
+      size_t end = 0;
+      frontPositionRange = std::stod(value, &end);
+      hl_tail::require(end == value.size() && std::isfinite(frontPositionRange) && frontPositionRange > 0,
+                       "--front-position-range must be positive and finite");
+      frontPositionCut = true;
     } else if (option == "--strip-range") {
       hl_tail::require(!stripCut && i + 1 < argc, "specify --strip-range once with a positive range in mm");
       const std::string value = argv[++i];
@@ -193,6 +207,8 @@ int main(int argc, char* argv[]) try
   string bestChannel = bool_only_best == 1 ? "_bestChannels" : "";
   if (stripCut) cout << "Hit strip cut: abs(Hit_X), abs(Hit_Y) < " << stripRange
                      << " mm; CoG event cut disabled" << endl;
+  if (frontPositionCut) cout << "Front position event cut: abs(layer 1 X), abs(layer 0 Y) < "
+                            << frontPositionRange << " mm; centre (0,0), energy-weighted good hits" << endl;
 
 
   // Validate complete event coverage and identities before creating any output.
@@ -248,7 +264,7 @@ int main(int argc, char* argv[]) try
 	// vector<double> *posZ_ssa = nullptr;
 	// vector<int> *ssaTag_ssa = nullptr;
 
-  double EnergyDep;
+  // double EnergyDep; // Used only by the disabled ellipse-cut pass.
   vector<int> *cellID = nullptr;
   vector<double> *Hit_Energy = nullptr;
   vector<double> *Hit_X = nullptr;
@@ -279,18 +295,23 @@ int main(int argc, char* argv[]) try
   TParameter<double>("cog_range_mm", stripCut ? 0. : cog_range).Write();
   TParameter<double>("strip_range_mm", stripCut ? stripRange : -1.).Write();
   TParameter<int>("channel_plots_saved", int(!skipChannelPlots)).Write();
+  TParameter<int>("front_position_cut_enabled", int(frontPositionCut)).Write();
+  TParameter<double>("front_position_range_mm", frontPositionRange).Write();
+  TNamed("front_position_definition", "layer 1 X and layer 0 Y energy-weighted positions; positive finite energy and finite short-axis coordinate; existing only_best channel mask; centre (0,0) mm; abs(X)<range && abs(Y)<range; missing/invalid position rejected").Write();
   fileout.mkdir("beforeEventCut");
-  fileout.mkdir("afterEventCut");
+  // fileout.mkdir("afterEventCut");
   fileout.cd();
 	// gain_histo->Write();
 
   string dirName[2] = {"beforeEventCut", "afterEventCut"};
   string saveName[2] = {"", "cut_"};
 
-  double edep_mean=0, edep_sigma=0, nhit_mean=0, nhit_sigma=0;
+  // double edep_mean=0, edep_sigma=0, nhit_mean=0, nhit_sigma=0;
 
 
-  for (int eventCut = 0; eventCut < 2; ++eventCut) {
+  // Temporarily skip the second event scan, fits and outputs for afterEventCut.
+  // for (int eventCut = 0; eventCut < 2; ++eventCut) {
+  for (int eventCut = 0; eventCut < 1; ++eventCut) {
     int irawfilenum = 3 + 2*Nenegry;
     // 0 : no cut,  1 : after cut
 
@@ -438,7 +459,7 @@ int main(int argc, char* argv[]) try
       
 		  tree[irawfile]->SetBranchAddress("CellID", &cellID);
 		  tree[irawfile]->SetBranchAddress("Hit_Energy", &Hit_Energy);
-		  tree[irawfile]->SetBranchAddress("TotalEnergyDep", &EnergyDep);
+		  // tree[irawfile]->SetBranchAddress("TotalEnergyDep", &EnergyDep);
 		  tree[irawfile]->SetBranchAddress("Hit_X", &Hit_X);
 		  tree[irawfile]->SetBranchAddress("Hit_Y", &Hit_Y);
 		  tree[irawfile]->SetBranchAddress("Hit_Z", &Hit_Z);
@@ -451,7 +472,7 @@ int main(int argc, char* argv[]) try
         
 
         double sumEdep = 0;
-        double sumEdep_all = 0;
+        // double sumEdep_all = 0; // Ellipse-cut-only signal sum.
         double cog_x[32] = {0};
         double cog_y[32] = {0};
         double cog_energies[32] = {0};
@@ -459,9 +480,11 @@ int main(int argc, char* argv[]) try
         int n_of_hits[2] = {0};
         double energies[32] = {0};
         double average_temperature[32] = {0};
+        double front_position_sum[2] = {0};
+        double front_energy_sum[2] = {0};
         int nhit_firstLayer = 0;
         // vector<double> layerSSA, xSSA, ySSA, eSSA;
-        double cut_nhit=0, cut_edep=EnergyDep;
+        // double cut_nhit=0, cut_edep=EnergyDep;
         for(int ihit=0;ihit<Hit_Energy->size();ihit++){
           int _layerID = cellID->at(ihit)/1e5;
           int _chipID  = (cellID->at(ihit)%100000) /1e4;
@@ -475,6 +498,15 @@ int main(int argc, char* argv[]) try
           if (selectedStrip) n_of_hits[0]++;
           const int currentCellId = cellID->at(ihit);
           if(bool_only_best) if(bad_channels.find(currentCellId) != bad_channels.end()) continue;
+          // Use the short-axis coordinate of each front layer, before any strip selection.
+          if (frontPositionCut && _layerID >= 0 && _layerID < 2) {
+            const double e = Hit_Energy->at(ihit);
+            const double position = _layerID == 0 ? Hit_Y->at(ihit) : Hit_X->at(ihit);
+            if (std::isfinite(e) && e > 0 && std::isfinite(position)) {
+              front_position_sum[_layerID] += position * e;
+              front_energy_sum[_layerID] += e;
+            }
+          }
           // CoG diagnostics always use all good hits, before selecting strips.
           cog_x[_layerID] += Hit_X->at(ihit) * Hit_Energy->at(ihit);
           cog_y[_layerID] += Hit_Y->at(ihit) * Hit_Energy->at(ihit);
@@ -482,8 +514,8 @@ int main(int argc, char* argv[]) try
           if (!selectedStrip) continue;
           n_of_hits[1]++;
           energies[_layerID] += Hit_Energy->at(ihit);
-          sumEdep_all += Hit_Energy->at(ihit);
-          cut_nhit++;
+          // sumEdep_all += Hit_Energy->at(ihit);
+          // cut_nhit++;
         }
         if (cog_energies[0] > 0) {
           const double distance_cog0 = std::hypot(cog_x[0]/cog_energies[0], cog_y[0]/cog_energies[0]);
@@ -494,12 +526,27 @@ int main(int argc, char* argv[]) try
             }
           }
         }
+        if (frontPositionCut) {
+          if (eventCut == 0) ++frontChecked;
+          const double front_x = front_energy_sum[1] > 0 ? front_position_sum[1]/front_energy_sum[1] : NAN;
+          const double front_y = front_energy_sum[0] > 0 ? front_position_sum[0]/front_energy_sum[0] : NAN;
+          const bool valid = std::isfinite(front_energy_sum[0]) && std::isfinite(front_energy_sum[1]) &&
+                             std::isfinite(front_x) && std::isfinite(front_y);
+          if (!valid || !(std::abs(front_x) < frontPositionRange && std::abs(front_y) < frontPositionRange)) {
+            if (eventCut == 0) {
+              ++frontRejected;
+              if (!valid) ++frontInvalid;
+            }
+            continue;
+          }
+          if (eventCut == 0) ++frontPassed;
+        }
         // if(nhit_firstLayer>1) continue;
         if(!stripCut && !(cog_energies[9] > 0 && cog_energies[10] > 0 &&
             cog_position_check(cog_x[9]/cog_energies[9], cog_y[9]/cog_energies[9], cog_range) &&
             cog_position_check(cog_x[10]/cog_energies[10], cog_y[10]/cog_energies[10], cog_range))) continue;
         if (eventCut == 0) ++eventsAfterCoG;
-        if(eventCut==1 && eventCutConditions(sumEdep_all, cut_nhit, edep_mean, edep_sigma, nhit_mean, nhit_sigma)) continue;
+        // if(eventCut==1 && eventCutConditions(sumEdep_all, cut_nhit, edep_mean, edep_sigma, nhit_mean, nhit_sigma)) continue;
         // energy_deposition[ienergy]->Fill(sumEdep_all);
         for(int ihit=0;ihit<Hit_Energy->size();ihit++){
           int _layerID = cellID->at(ihit)/1e5;
@@ -564,7 +611,7 @@ int main(int argc, char* argv[]) try
         }
 	  	}
 
-      EnergyDep = 0;
+      // EnergyDep = 0;
       cellID = nullptr;
       Hit_Energy = nullptr;
       Hit_X = nullptr;
@@ -609,7 +656,7 @@ int main(int argc, char* argv[]) try
   TCanvas* C_res[Nenegry];
   TF1 *gaussian = new TF1("gaussian","gaus",200,range_maximum);
   // TF1 *gaussian_PS = new TF1("gaussian_PS","gaus",10,range_maximum_PS);
-  double energy_mean[Nenegry], energy_sigma[Nenegry], energy_mean_error[Nenegry], energy_sigma_error[Nenegry];
+  double energy_mean[Nenegry], energy_sigma[Nenegry];
   for(int ienergy=0; ienergy<Nenegry; ienergy++){
     C_res[ienergy] = new TCanvas(Form("Edep_%dGeV",(int)energy[ienergy]), Form("%g GeV energy deposit",energy[ienergy]), 1);
     C_res[ienergy]->cd();
@@ -644,6 +691,8 @@ int main(int argc, char* argv[]) try
     sigma = gaussian->GetParameter(2);
     fit_range_low = std::max(fit_minimum, mean-1.5*sigma);
     energy_deposition[ienergy]->Fit("gaussian","","NQ",fit_range_low,mean+1.5*sigma);
+    energy_mean[ienergy] = gaussian->GetParameter(1);
+    energy_sigma[ienergy] = gaussian->GetParameter(2);
     // if(energy[ienergy]>5) energy_deposition[ienergy]->Fit("gaussian","","NQ",mean-50*(energy[ienergy]/20),mean+50*(energy[ienergy]/20));
     // else energy_deposition[ienergy]->Fit("gaussian","","NQ",mean-20*energy[ienergy],mean+20*energy[ienergy]);
     // if(energy[ienergy] == 20) energy_deposition[ienergy]->Fit("gaussian","","NQ",1050,1250);
@@ -665,13 +714,13 @@ int main(int argc, char* argv[]) try
     
     fileout.cd();
     fileout.cd(Form("%s",dirName[eventCut].c_str()));
-    energy_mean[ienergy] = gaussian->GetParameter(1);
-    energy_sigma[ienergy] = gaussian->GetParameter(2);
-    energy_mean_error[ienergy] = gaussian->GetParError(1);
-    energy_sigma_error[ienergy] = gaussian->GetParError(2);
+    // energy_mean[ienergy] = gaussian->GetParameter(1);
+    // energy_sigma[ienergy] = gaussian->GetParameter(2);
+    // energy_mean_error[ienergy] = gaussian->GetParError(1);
+    // energy_sigma_error[ienergy] = gaussian->GetParError(2);
 
-    edep_mean=energy_mean[ienergy];
-    edep_sigma=energy_sigma[ienergy];
+    // edep_mean=energy_mean[ienergy];
+    // edep_sigma=energy_sigma[ienergy];
 
     delete C_res[ienergy];    
   }
@@ -756,6 +805,17 @@ int main(int argc, char* argv[]) try
   fileout.cd(Form("%s",dirName[eventCut].c_str()));
 
 
+  // Only zoom summary copies; keep the saved histograms and fit inputs unchanged.
+  auto summary_fit_range = [](const TAxis* axis, double mean, double sigma) {
+    std::pair<double,double> range(axis->GetBinLowEdge(axis->GetFirst()),
+                                  axis->GetBinUpEdge(axis->GetLast()));
+    if (std::isfinite(mean) && mean > 0 && std::isfinite(sigma) && sigma > 0) {
+      const double lower = std::max(axis->GetXmin(), mean - 5*sigma);
+      const double upper = std::min(axis->GetXmax(), mean + 5*sigma);
+      if (lower < upper) range = {lower, upper};
+    }
+    return range;
+  };
   TF1 *gaussian_hit = new TF1("gaussian_hit","gaus",0,1500);
   for(int ienergy=0; ienergy<Nenegry; ienergy++){
     fileout.cd();
@@ -765,11 +825,13 @@ int main(int argc, char* argv[]) try
     C_e_summary->Divide(4,2);
 
     C_e_summary->cd(1);
-    hit_vs_e[ienergy]->Draw("colz");
+    auto* summary_hit_vs_e = static_cast<TH2F*>(hit_vs_e[ienergy]->DrawCopy("colz"));
     hit_vs_e[ienergy]->Write(Form("hit_vs_e_%dGeV",(int)energy[ienergy]));
     C_e_summary->cd(2);
     gStyle->SetOptFit(1111111);
-    energy_deposition[ienergy]->Draw();
+    const auto energy_range = summary_fit_range(energy_deposition[ienergy]->GetXaxis(),
+                                                energy_mean[ienergy], energy_sigma[ienergy]);
+    energy_deposition[ienergy]->DrawCopy()->GetXaxis()->SetRangeUser(energy_range.first, energy_range.second);
 
     C_e_summary->cd(3);
     number_of_hits[ienergy]->Draw();
@@ -786,9 +848,15 @@ int main(int argc, char* argv[]) try
     fit_range_low = std::max(stripCut ? 0. : 15., mean-1.5*sigma);
     number_of_hits[ienergy]->Fit("gaussian_hit","","NQ",fit_range_low,mean+1.5*sigma);
     number_of_hits[ienergy]->Write(Form("nhits_%dGeV", (int)energy[ienergy]));
-    nhit_mean = gaussian_hit->GetParameter(1);
-    nhit_sigma = gaussian_hit->GetParameter(2);
+    // nhit_mean = gaussian_hit->GetParameter(1);
+    // nhit_sigma = gaussian_hit->GetParameter(2);
     gaussian_hit->Write("fit_gaus_nhit");
+
+    const auto hit_range = summary_fit_range(number_of_hits[ienergy]->GetXaxis(),
+                                             gaussian_hit->GetParameter(1), gaussian_hit->GetParameter(2));
+    number_of_hits[ienergy]->DrawCopy()->GetXaxis()->SetRangeUser(hit_range.first, hit_range.second);
+    summary_hit_vs_e->GetXaxis()->SetRangeUser(0, std::min(1.5 * energy_range.second, summary_hit_vs_e->GetXaxis()->GetXmax()));
+    summary_hit_vs_e->GetYaxis()->SetRangeUser(0, std::min(1.5 * hit_range.second, summary_hit_vs_e->GetYaxis()->GetXmax()));
 
     C_e_summary->cd(4);
     gPad->SetLogz(1);
@@ -863,6 +931,10 @@ int main(int argc, char* argv[]) try
   TParameter<Long64_t>("hl_tail_checked_events", tailChecked).Write();
   TParameter<Long64_t>("hl_tail_rejected_events", tailRejected).Write();
   TParameter<Long64_t>("hl_tail_events_after_cog", eventsAfterCoG).Write();
+  TParameter<Long64_t>("front_position_checked_events", frontChecked).Write();
+  TParameter<Long64_t>("front_position_invalid_events", frontInvalid).Write();
+  TParameter<Long64_t>("front_position_rejected_events", frontRejected).Write();
+  TParameter<Long64_t>("front_position_passed_events", frontPassed).Write();
   TNamed("hl_tail_source", excludeTailEvents ? std::filesystem::canonical(tailResults).c_str() : "none").Write();
   TNamed("hl_tail_definition", tailDefinition.c_str()).Write();
   TNamed("hl_tail_status", "complete").Write();

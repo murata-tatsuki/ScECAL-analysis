@@ -69,8 +69,8 @@ cog_rage=200
 
 for cog_rage in ${ranges[@]}; do
 
-  fig_path=../result/resolution/figures/data/${cog_rage}mm
-  root_path=../result/resolution/data/${cog_rage}mm
+  fig_path=../result/resolution/unknown/figures/data/${cog_rage}mm
+  root_path=../result/resolution/unknown/data/${cog_rage}mm
   mkdir -p ${root_path}
 
   paralell_jobs ${Calib_path_sps} ${fig_path} ${cog_rage} ${root_path} ECAL data
@@ -79,11 +79,11 @@ for cog_rage in ${ranges[@]}; do
 
   for thre in ${thres[@]}; do
     Calib_path_simulation=/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/${thre}
-    fig_path=../result/resolution/figures/simulation/${thre}/${cog_rage}mm
-    root_path=../result/resolution/simulation/${thre}/${cog_rage}mm
+    fig_path=../result/resolution/unknown/figures/simulation/${thre}/${cog_rage}mm
+    root_path=../result/resolution/unknown/simulation/${thre}/${cog_rage}mm
     mkdir -p ${root_path}
     paralell_jobs ${Calib_path_simulation} ${fig_path} ${cog_rage} ${root_path} e- sim
-    # ./between_files_energy_resolution ../result/resolution/Eres_simulation_${thre}_${cog_rage}.root ${var} ${cog_rage} 1 ${fig_path}
+    # ./between_files_energy_resolution ../result/resolution/unknown/Eres_simulation_${thre}_${cog_rage}.root ${var} ${cog_rage} 1 ${fig_path}
   done
 
 done

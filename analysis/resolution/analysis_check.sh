@@ -50,8 +50,8 @@ Calib_path_ps=/megraid01/users/data_beamtest/ECAL_data/analysed/2023/ps/calib/e-
 #Calib_path=/megraid01/users/murata_t/scecal/ScECAL_BeamTest/tmp/${year}/${beam}/calib/${date_tag} ############ for edited calibration
 
 cog_rage=200
-fig_path=../result/resolution/figures/data/${testDirName}/${cog_rage}mm
-root_path=../result/resolution/data/${testDirName}/${cog_rage}mm
+fig_path=../result/resolution/unknown/figures/data/${testDirName}/${cog_rage}mm
+root_path=../result/resolution/unknown/data/${testDirName}/${cog_rage}mm
 mkdir -p ${root_path}
 
 paralell_jobs ${Calib_path_sps} ${fig_path} ${cog_rage} ${root_path} ECAL data
@@ -62,8 +62,8 @@ paralell_jobs ${Calib_path_ps} ${fig_path} ${cog_rage} ${root_path} ECAL data
 thre=threshold
 
 Calib_path_simulation=/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/sps/${thre}
-fig_path=../result/resolution/figures/simulation/${thre}/${testDirName}/${cog_rage}mm
-root_path=../result/resolution/simulation/${thre}/${testDirName}/${cog_rage}mm
+fig_path=../result/resolution/unknown/figures/simulation/${thre}/${testDirName}/${cog_rage}mm
+root_path=../result/resolution/unknown/simulation/${thre}/${testDirName}/${cog_rage}mm
 mkdir -p ${root_path}
 # paralell_jobs ${Calib_path_simulation} ${fig_path} ${cog_rage} ${root_path} e- sim
-# ./between_files_energy_resolution ../result/resolution/Eres_simulation_${thre}_${cog_rage}.root ${var} ${cog_rage} 1 ${fig_path}
+# ./between_files_energy_resolution ../result/resolution/unknown/Eres_simulation_${thre}_${cog_rage}.root ${var} ${cog_rage} 1 ${fig_path}

@@ -6,6 +6,7 @@
 *.root
 *.root.tmp
 *.bin
+.scratch
 
 /analysis/result/**/residual_bins.tsv
 /analysis/result/**/switch_bins.tsv

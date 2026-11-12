@@ -8,7 +8,7 @@ Calib_path_ps=/megraid01/users/data_beamtest/ECAL_data/analysed/2023/ps/calib/e-
 #Calib_path=/megraid01/users/murata_t/scecal/ScECAL_BeamTest/tmp/${year}/${beam}/calib/${date_tag} ############ for edited calibration
 
 cog_rage=20
-fig_path=../result/resolution/figures/data/${cog_rage}mm
+fig_path=../result/resolution/unknown/figures/data/${cog_rage}mm
 
 rm ../tmp/Eres_allfilename_normalgain.txt
 touch ../tmp/Eres_allfilename_normalgain.txt
@@ -53,7 +53,7 @@ done
 
 
 var=`cat ../tmp/Eres_allfilename_normalgain.txt`
-./between_files_energy_resolution ../result/resolution/Eres_data_v3_${cog_rage}.root ${var} ${cog_rage} 1 ${fig_path}
+./between_files_energy_resolution ../result/resolution/unknown/Eres_data_v3_${cog_rage}.root ${var} ${cog_rage} 1 ${fig_path}
 
 
 
@@ -85,6 +85,6 @@ var=`cat ../tmp/Eres_allfilename_normalgain.txt`
 # done
 
 # var=`cat ../tmp/Eres_allfilename_normalgain.txt`
-# ./between_files_energy_resolution_2022 ../result/resolution/energy/Eres_normal_2022_all.root ${var}
+# ./between_files_energy_resolution_2022 ../result/resolution/unknown/energy/Eres_normal_2022_all.root ${var}
 
 

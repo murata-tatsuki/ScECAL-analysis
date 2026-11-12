@@ -4,10 +4,10 @@
 [[ $stage == multi ]] || fail 'This config only compares existing SingleEnergy results; use stage multi'
 [[ $tail_event_mode == keep ]] || fail 'These legacy inputs retain HL-tail events; specify --keep-tail-events'
 
-data_base=../result/resolution/default/data
-ssa_base=../result/resolution/custom/hl_intercept/mc/before
-comparison_base=../result/resolution/default/comparison/data_sim_e-_ssa
-comparison_figures=../result/resolution/figures/default/comparison/data_sim_e-_ssa
+data_base=../result/resolution/unknown/default/data
+ssa_base=../result/resolution/unknown/custom/hl_intercept/mc/before
+comparison_base=../result/resolution/unknown/default/comparison/data_sim_e-_ssa
+comparison_figures=../result/resolution/unknown/figures/default/comparison/data_sim_e-_ssa
 
 # Use the same 18 energies in all eight series. The saved data fit at
 # 0.5 GeV / 20 mm has a negative mean, so 0.5 GeV is excluded throughout.

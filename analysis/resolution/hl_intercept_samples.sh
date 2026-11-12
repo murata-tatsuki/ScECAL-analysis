@@ -5,8 +5,8 @@ slurm_log_dir=$(realpath -m -- "$(dirname -- "${BASH_SOURCE[0]}")/../log/resolut
 
 calibration_a=/home/murata_t/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold
 calibration_b=/home/murata_t/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa_noHLintercept/threshold
-result_base=../result/resolution/custom/hl_intercept
-figure_base=../result/resolution/figures/custom/hl_intercept
+result_base=../result/resolution/unknown/custom/hl_intercept
+figure_base=../result/resolution/unknown/figures/custom/hl_intercept
 
 # Submit one Slurm job per sample / CoG / energy, as in analysis_paralell.sh.
 # execute_paralell.sl sets partition=all, ntasks=1 and job-name=analyzer.

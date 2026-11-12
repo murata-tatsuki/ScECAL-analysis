@@ -103,7 +103,7 @@ def checks(work):
         out = work / mode / '10GeV_20mm.root'
         figures = work / mode / 'figures'
         (figures / '10GeV' / 'raw').mkdir(parents=True, exist_ok=True)
-        return [single, out, 1, '10GeV', 1, calib, 20, 0, figures, '--tail-results', tails]
+        return [single, out, 1, '10GeV', 1, calib, 20, 0, figures, '--tail-results', tails, '--skip-channel-plots']
     fixtures(work, omit=True)
     run(command('missing'), 'incomplete tail coverage')
     assert not (work / 'missing/10GeV_20mm.root').exists()
@@ -126,6 +126,8 @@ def checks(work):
         assert math.isfinite(fits[mode]) and fits[mode] > 0
         assert output.Get('hl_tail_excluded').GetVal() == (mode == 'exclude')
         assert output.Get('hl_tail_status').GetTitle() == 'complete'
+        assert not output.GetDirectory('afterEventCut')
+        assert not list((work / mode / 'figures').rglob('cut_*.png'))
         if mode == 'exclude':
             assert output.Get('hl_tail_checked_events').GetVal() == 1200
             assert output.Get('hl_tail_rejected_events').GetVal() == 240

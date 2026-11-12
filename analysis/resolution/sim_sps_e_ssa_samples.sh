@@ -4,10 +4,10 @@
 [[ $stage == multi ]] || fail 'This config only compares existing SingleEnergy results; use stage multi'
 [[ $tail_event_mode == keep ]] || fail 'These legacy inputs retain HL-tail events; specify --keep-tail-events'
 
-oval_base=../result/resolution/default/simulation/threshold
-ssa_base=../result/resolution/custom/hl_intercept/mc/before
-comparison_base=../result/resolution/default/comparison/sim_sps_e-_ssa
-comparison_figures=../result/resolution/figures/default/comparison/sim_sps_e-_ssa
+oval_base=../result/resolution/unknown/default/simulation/threshold
+ssa_base=../result/resolution/unknown/custom/hl_intercept/mc/before
+comparison_base=../result/resolution/unknown/default/comparison/sim_sps_e-_ssa
+comparison_figures=../result/resolution/unknown/figures/default/comparison/sim_sps_e-_ssa
 
 # CoG fixes the color/marker; oval is solid/filled, SSA hitmap dotted/open.
 for cog in 200 20 10 5; do

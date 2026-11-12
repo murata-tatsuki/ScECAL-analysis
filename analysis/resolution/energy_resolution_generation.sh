@@ -7,7 +7,7 @@ source /megraid01/users/data_beamtest/analysis/ECAL_Analysis_LCIO/run/global_con
 Calib_path=/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/truth/e-/sps
 
 cog_rage=200
-fig_path=../result/resolution/figures/generation/${cog_rage}mm
+fig_path=../result/resolution/unknown/figures/generation/${cog_rage}mm
 
 mkdir -p ${fig_path}
 
@@ -41,5 +41,5 @@ done
 
 var=`cat ../tmp/resolution_generation.txt`
 #./between_files_energy_resolution ../results/resolution/energy/Eres_all_normalgain.root ${var}
-# ./between_files_energy_resolution_generation ../result/resolution/Eres_simulation_v0.root ${var}
-./between_files_energy_resolution_generation ../result/resolution/Eres_generation_${cog_rage}.root ${var} ${cog_rage} 1 ${fig_path}
+# ./between_files_energy_resolution_generation ../result/resolution/unknown/Eres_simulation_v0.root ${var}
+./between_files_energy_resolution_generation ../result/resolution/unknown/Eres_generation_${cog_rage}.root ${var} ${cog_rage} 1 ${fig_path}

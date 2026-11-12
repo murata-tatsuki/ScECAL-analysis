@@ -33,7 +33,7 @@ for txt in $( ls ${Calib_path_sps}/*GeV/ECAL*.root ); do
 done
 
 var=`cat ../tmp/Eres_allfilename_normalgain.txt`
-./between_files_cog ../result/resolution/cog.root ${var}
+./between_files_cog ../result/resolution/unknown/cog.root ${var}
 
 
 
@@ -65,6 +65,6 @@ var=`cat ../tmp/Eres_allfilename_normalgain.txt`
 # done
 
 # var=`cat ../tmp/Eres_allfilename_normalgain.txt`
-# ./between_files_energy_resolution_2022 ../result/resolution/energy/Eres_normal_2022_all.root ${var}
+# ./between_files_energy_resolution_2022 ../result/resolution/unknown/energy/Eres_normal_2022_all.root ${var}
 
 

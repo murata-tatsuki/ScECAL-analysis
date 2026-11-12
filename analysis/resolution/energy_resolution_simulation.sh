@@ -9,7 +9,7 @@ thre=threshold
 Calib_path=/megraid01/users/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/sps/${thre}
 
 cog_rage=200
-fig_path=../result/resolution/figures/simulation/${thre}/${cog_rage}mm
+fig_path=../result/resolution/unknown/figures/simulation/${thre}/${cog_rage}mm
 
 rm ../tmp/resolution_simulation.txt
 touch ../tmp/resolution_simulation.txt
@@ -44,5 +44,5 @@ mkdir -p ${fig_path}
 
 var=`cat ../tmp/resolution_simulation.txt`
 #./between_files_energy_resolution ../results/resolution/energy/Eres_all_normalgain.root ${var}
-# ./between_files_energy_resolution_simulation ../result/resolution/Eres_simulation_v0.root ${var}
-./between_files_energy_resolution ../result/resolution/Eres_simulation_${thre}_${cog_rage}.root ${var} ${cog_rage} 1 ${fig_path}
+# ./between_files_energy_resolution_simulation ../result/resolution/unknown/Eres_simulation_v0.root ${var}
+./between_files_energy_resolution ../result/resolution/unknown/Eres_simulation_${thre}_${cog_rage}.root ${var} ${cog_rage} 1 ${fig_path}

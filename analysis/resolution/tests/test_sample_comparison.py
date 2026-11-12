@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Integration checks using synthetic SingleEnergy ROOTs (requires matching PyROOT).
 
-Run after make MultiEnergyAnalysis. --channels also renders all 360 channel plots.
+Run after make MultiEnergyAnalysis. --channels also renders all 180 before-cut channel plots.
 """
 import argparse
 import json
@@ -66,7 +66,7 @@ def add_channels(path):
         canvas.cd(channel + 1)
         hist.Draw()
         histograms.append(hist)
-    for prefix in ("", "cut_"):
+    for prefix in ("",):
         for layer in range(30):
             for chip in range(6):
                 for channel, hist in enumerate(histograms):
@@ -220,10 +220,11 @@ def checks(work, channels):
         raw = ROOT.TFile(str(raw_output))
         directory = raw.GetDirectory("samples/10GeV/raw")
         assert directory
-        for prefix in ("", "cut_"):
+        for prefix in ("",):
             for layer in range(30):
                 for chip in range(6):
                     assert directory.GetKey(f"{prefix}edep_Layer{layer}_Chip{chip}")
+                    assert not directory.GetKey(f"cut_edep_Layer{layer}_Chip{chip}")
             canvas = raw.Get(f"samples/10GeV/raw/{prefix}edep_Layer0_Chip0")
             assert legends(canvas) == LABELS
             histograms = [obj for obj in canvas.GetPad(2).GetListOfPrimitives() if obj.InheritsFrom("TH1")]
@@ -233,8 +234,8 @@ def checks(work, channels):
             empty_histograms = [obj for obj in canvas.GetPad(1).GetListOfPrimitives() if obj.InheritsFrom("TH1")]
             assert len(empty_histograms) == 3 and all(hist.Integral() == 0 for hist in empty_histograms)
         raw.Close()
-        assert len(list((work / "channel_figures/samples/10GeV/raw").glob("*.png"))) == 360
-        print("PASS: all 360 generic channel canvases/PNGs, three legends/colors, normalization and empty channels", flush=True)
+        assert len(list((work / "channel_figures/samples/10GeV/raw").glob("*.png"))) == 180
+        print("PASS: all 180 before-cut generic channel canvases/PNGs, three legends/colors, normalization and empty channels", flush=True)
 
 
 if __name__ == "__main__":

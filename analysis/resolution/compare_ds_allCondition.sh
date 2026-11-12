@@ -24,41 +24,41 @@ touch ../tmp/compare_resolution.txt
 thre=threshold
 path_suffix=dataThre
 
-root_path=../result/resolution/comparsion
-fig_path=../result/resolution/figures/comparsion/${path_suffix}
-# fig_path=../result/resolution/figures/comparsion/${cog_rage}mm
+root_path=../result/resolution/unknown/comparsion
+fig_path=../result/resolution/unknown/figures/comparsion/${path_suffix}
+# fig_path=../result/resolution/unknown/figures/comparsion/${cog_rage}mm
 
 
 mkdir -p ${fig_path}
 mkdir -p ${root_path}
 
-# count_data=$(ls ../result/resolution/data/${cog_rage}mm -U1 | wc -l)
+# count_data=$(ls ../result/resolution/unknown/data/${cog_rage}mm -U1 | wc -l)
 # echo -n ${count_data} >> ../tmp/compare_resolution.txt
 # echo -n " " >> ../tmp/compare_resolution.txt
 
 echo -n 8 >> ../tmp/compare_resolution.txt
 echo -n " " >> ../tmp/compare_resolution.txt
 
-count_sim=$(ls ../result/resolution/data/200mm -U1 | wc -l)
+count_sim=$(ls ../result/resolution/unknown/data/200mm -U1 | wc -l)
 echo -n ${count_sim} >> ../tmp/compare_resolution.txt
 echo -n " " >> ../tmp/compare_resolution.txt
 
 
 cog_rage=200
-paralell_jobs ../result/resolution/data/${cog_rage}mm ${cog_rage}
-paralell_jobs ../result/resolution/simulation/${thre}/${cog_rage}mm ${cog_rage}
+paralell_jobs ../result/resolution/unknown/data/${cog_rage}mm ${cog_rage}
+paralell_jobs ../result/resolution/unknown/simulation/${thre}/${cog_rage}mm ${cog_rage}
 
 cog_rage=20
-paralell_jobs ../result/resolution/data/${cog_rage}mm ${cog_rage}
-paralell_jobs ../result/resolution/simulation/${thre}/${cog_rage}mm ${cog_rage}
+paralell_jobs ../result/resolution/unknown/data/${cog_rage}mm ${cog_rage}
+paralell_jobs ../result/resolution/unknown/simulation/${thre}/${cog_rage}mm ${cog_rage}
 
 cog_rage=10
-paralell_jobs ../result/resolution/data/${cog_rage}mm ${cog_rage}
-paralell_jobs ../result/resolution/simulation/${thre}/${cog_rage}mm ${cog_rage}
+paralell_jobs ../result/resolution/unknown/data/${cog_rage}mm ${cog_rage}
+paralell_jobs ../result/resolution/unknown/simulation/${thre}/${cog_rage}mm ${cog_rage}
 
 cog_rage=5
-paralell_jobs ../result/resolution/data/${cog_rage}mm ${cog_rage}
-paralell_jobs ../result/resolution/simulation/${thre}/${cog_rage}mm ${cog_rage}
+paralell_jobs ../result/resolution/unknown/data/${cog_rage}mm ${cog_rage}
+paralell_jobs ../result/resolution/unknown/simulation/${thre}/${cog_rage}mm ${cog_rage}
 
 
 

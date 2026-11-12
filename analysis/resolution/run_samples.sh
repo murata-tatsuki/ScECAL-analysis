@@ -7,13 +7,16 @@ script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 dry_run=0
 tail_event_mode=exclude
 strip_range_mm=${STRIP_RANGE_MM:-}
+front_position_range_mm=${FRONT_POSITION_RANGE_MM:-}
 tail_results_dir="$script_dir/../result/channel_response/hg_lg_tail/threshold/e_ssa"
 usage() {
-  echo "Usage: bash run_samples.sh [--dry-run] [--strip-range MM] [--exclude-tail-events|--keep-tail-events] [--tail-results DIR] single|multi config.sh"
+  echo "Usage: bash run_samples.sh [--dry-run] [--front-position-range MM] [--strip-range MM] [--exclude-tail-events|--keep-tail-events] [--tail-results DIR] single|multi config.sh"
   echo "Default: exclude tail-rich events and skip MultiEnergy channel plots. Multi requires SingleEnergy results with the same selection."
   echo "--strip-range selects hit strips in abs(X/Y) < MM instead of a CoG event cut."
+  echo "--front-position-range adds a front-layer event cut while retaining the CoG setting."
 }
 tail_mode_set=0
+front_position_option_set=0
 while (( $# )); do
   case $1 in
     --dry-run) dry_run=1; shift ;;
@@ -25,6 +28,11 @@ while (( $# )); do
     --tail-results)
       (( $# >= 2 )) || { echo '--tail-results requires a directory' >&2; exit 1; }
       tail_results_dir=$(realpath -m -- "$2"); shift 2 ;;
+    --front-position-range)
+      (( $# >= 2 )) && [[ -n $2 ]] || { echo '--front-position-range requires a positive range in mm' >&2; exit 1; }
+      (( front_position_option_set == 0 )) || { echo 'Specify --front-position-range once' >&2; exit 1; }
+      front_position_option_set=1
+      front_position_range_mm=$2; shift 2 ;;
     --strip-range)
       (( $# >= 2 )) || { echo '--strip-range requires a positive range in mm' >&2; exit 1; }
       strip_range_mm=$2; shift 2 ;;
@@ -58,6 +66,9 @@ declare -A multi_outputs=() multi_figure_paths=()
 declare -A single_outputs=()
 
 fail() { echo "run_samples: $*" >&2; exit 1; }
+if [[ -n $front_position_range_mm ]]; then
+  [[ $front_position_range_mm =~ ^[0-9]+([.][0-9]+)?$ && -n ${front_position_range_mm//[0.]/} ]] || fail 'front_position_range_mm must be positive (e.g. 20)'
+fi
 run_command() {
   if (( dry_run )); then
     printf '%q ' "$@"
@@ -80,6 +91,9 @@ single_sample() {
   [[ $only_best == 0 || $only_best == 1 ]] || fail 'ONLY_BEST must be 0 or 1'
   local base directory energy file output
   local -a energies=() files=() tail_options=("--${tail_event_mode}-tail-events")
+  if [[ -n $front_position_range_mm ]]; then
+    tail_options+=(--front-position-range "$front_position_range_mm")
+  fi
   if [[ -n $strip_range_mm ]]; then
     [[ $strip_range_mm =~ ^[0-9]+([.][0-9]+)?$ && -n ${strip_range_mm//[0.]/} ]] || fail 'strip_range_mm must be a positive range in mm (e.g. 22.5)'
     [[ $cog == 200 ]] || fail 'Use CoG placeholder 200 for strip cuts; the CoG event cut is disabled'

@@ -12,6 +12,9 @@
 #include "TGraph.h"
 #include "TGraphErrors.h"
 #include "TF1.h"
+#include "TFitResultPtr.h"
+#include "TLine.h"
+#include "TArrow.h"
 #include "TLatex.h"
 #include "TRandom.h"
 #include "TRandom3.h"
@@ -154,14 +157,12 @@ nameStrings find_name_of_file(string filePath){
   nameStrings result;
   cout << filePath << "   ";
 
-  if(filePath.find("simulation") != std::string::npos) result.dataType = "sim";
-  else result.dataType = "data";
-
-  if(result.dataType == "sim"){
-    string path = filePath;
-    path.erase(0,path.rfind("simulation")+11);
-    path.erase(path.find_first_of("/"),path.length());
-    result.threshold = path;
+  const auto path = std::filesystem::path(filePath).lexically_normal();
+  for(auto part=path.begin(); part!=path.end(); ++part){
+    if(*part != "simulation" && *part != "mc") continue;
+    result.dataType = "sim";
+    auto sample = part;
+    if(++sample != path.end()) result.threshold = sample->string();
   }
 
   filePath.erase(0,filePath.find_last_of("_")+1);
@@ -304,7 +305,9 @@ void PrepareResolutionFunctions(TList* objects){
 
 // Copy each graph/curve independently; the legacy source may share objects
 // across pads, and subsequent noise fits reuse the original resolution graphs.
-void AddResolutionSummaryPanel(TCanvas* summary, TCanvas* source, int index, bool log){
+void AddResolutionSummaryPanel(TCanvas* summary, TCanvas* source, int index, bool log,
+                               const vector<int>& sampleCoGs, int cog){
+  // CoG 0 selects every sample for the combined summary.
   // ROOT axis updates and PNG export depend on gPad. Restore the caller's pad.
   TVirtualPad::TContext padContext;
   TVirtualPad* sourcePad=source;
@@ -318,10 +321,12 @@ void AddResolutionSummaryPanel(TCanvas* summary, TCanvas* source, int index, boo
   target->SetLogx(log); target->SetLogy(log); target->SetGrid();
   map<TObject*,TObject*> copies;
   bool first=true;
+  size_t sample=0;
   TIter graphs(sourcePad->GetListOfPrimitives());
   while(auto* object=graphs()){
     auto* graph=dynamic_cast<TGraph*>(object);
     if(!graph) continue;
+    if(sampleCoGs.at(sample++) != cog && cog!=0) continue;
     auto* copy=dynamic_cast<TGraph*>(graph->Clone(Form("summary_graph_%d_%zu",index,copies.size())));
     copy->GetListOfFunctions()->Delete(); // Explicit curves below use the same fitted parameters.
     copy->SetBit(TObject::kCanDelete);
@@ -331,9 +336,13 @@ void AddResolutionSummaryPanel(TCanvas* summary, TCanvas* source, int index, boo
     copies[graph]=copy;
     first=false;
   }
+  // Graphs and explicit curves are both drawn in sample order.
+  sample=0;
   TIter curves(sourcePad->GetListOfPrimitives());
   while(auto* object=curves()){
-    if(auto* fit=dynamic_cast<TF1*>(object)) fit->DrawCopy("same");
+    if(auto* fit=dynamic_cast<TF1*>(object)){
+      if(sampleCoGs.at(sample++) == cog || cog==0) fit->DrawCopy("same");
+    }
   }
   if(!log){
     auto* legend=new TLegend(.30,.54,.95,.90);
@@ -351,7 +360,8 @@ void AddResolutionSummaryPanel(TCanvas* summary, TCanvas* source, int index, boo
         auto* entry=dynamic_cast<TLegendEntry*>(entryObject);
         if(!entry) continue;
         auto copy=copies.find(entry->GetObject());
-        legend->AddEntry(copy==copies.end() ? nullptr : copy->second,entry->GetLabel(),entry->GetOption());
+        if(copy==copies.end()) continue;
+        legend->AddEntry(copy->second,entry->GetLabel(),entry->GetOption());
       }
     }
     legend->Draw();
@@ -361,7 +371,8 @@ void AddResolutionSummaryPanel(TCanvas* summary, TCanvas* source, int index, boo
 
 // Serialize linear and log views without recalculating points or fits.
 // Linear canvases retain their axes in the saved ROOT.
-void SaveResolutionViews(TCanvas* canvas, TFile& output, const string& figures, const string& name, TCanvas* summary){
+void SaveResolutionViews(TCanvas* canvas, TFile& output, const string& figures, const string& name,
+                         const map<int,TCanvas*>& summaries, const vector<int>& sampleCoGs){
   TVirtualPad::TContext padContext;
   canvas->cd();
   PrepareResolutionFunctions(canvas->GetListOfPrimitives());
@@ -413,7 +424,8 @@ void SaveResolutionViews(TCanvas* canvas, TFile& output, const string& figures, 
   }
   output.cd(); view->Write(name.c_str());
   view->SaveAs((figures+"/"+name+".png").c_str());
-  AddResolutionSummaryPanel(summary,view,name=="resolution" ? 1 : 2,false);
+  for(const auto& item : summaries)
+    AddResolutionSummaryPanel(item.second,view,name=="resolution" ? 1 : 2,false,sampleCoGs,item.first);
   if(!isfinite(xmin)) xmin=.1;
   if(!isfinite(ymin)) ymin=.001;
   visit(view, [&](TVirtualPad* pad, TGraph* graph){
@@ -426,7 +438,8 @@ void SaveResolutionViews(TCanvas* canvas, TFile& output, const string& figures, 
   view->Modified(); view->Update();
   output.cd(); view->Write((name+"_loglog").c_str());
   view->SaveAs((figures+"/"+name+"_loglog.png").c_str());
-  AddResolutionSummaryPanel(summary,view,name=="resolution" ? 3 : 4,true);
+  for(const auto& item : summaries)
+    AddResolutionSummaryPanel(item.second,view,name=="resolution" ? 3 : 4,true,sampleCoGs,item.first);
   if(divided){
     visit(view, [](TVirtualPad* pad, TGraph* graph){
       pad->SetLogx(0); pad->SetLogy(0);
@@ -435,6 +448,182 @@ void SaveResolutionViews(TCanvas* canvas, TFile& output, const string& figures, 
       pad->Modified();
     });
   }
+}
+
+// Additional views only: the existing resolution canvases and fits are already saved.
+void SaveCoGComparisonPanels(TFile& output, const string& figures,
+                             const map<int,TCanvas*>& summaries, const vector<int>& sampleCoGs,
+                             const vector<TGraphErrors*>& means, const nameStrings* settings,
+                             const vector<bool>& sampleIsMC){
+  TVirtualPad::TContext context;
+  const bool knownCoGs=any_of(sampleCoGs.begin(),sampleCoGs.end(),[](int cog){return cog!=0;});
+  const int cuts[]={200,20,10,5};
+  for(bool meanView : {false,true}){
+    const string name=meanView ? "mean_linearity_cog_comparison" : "resolution_cog_comparison";
+    auto* canvas=new TCanvas(name.c_str(),name.c_str(),2560,1440);
+    canvas->SetCanvasSize(2560,1440);
+    canvas->Divide(2,2);
+    for(int panel=0; panel<4; ++panel){
+      const int cog=!knownCoGs && panel==0 ? 0 : cuts[panel];
+      vector<int> samples;
+      for(size_t ds=0; ds<sampleCoGs.size(); ++ds)
+        if(sampleCoGs[ds]==cog) samples.push_back(ds);
+      auto* cell=canvas->cd(panel+1);
+      const string cut=cog==0 ? "CoG unspecified" : cog==200 ? "nocut" : string(Form("CoG %d mm",cog));
+      if(samples.empty()){
+        TLatex text; text.SetNDC(); text.SetTextSize(.05);
+        text.DrawLatex(.16,.55,(cut+": no samples").c_str());
+        continue;
+      }
+      auto* upper=new TPad(Form("%s_%d_upper",name.c_str(),cog),"",0,.30,1,1);
+      auto* lower=new TPad(Form("%s_%d_lower",name.c_str(),cog),"",0,0,1,.30);
+      for(auto* pad : {upper,lower}){
+        pad->SetLeftMargin(.15); pad->SetRightMargin(.04); pad->SetGrid();
+        pad->SetBit(TObject::kCanDelete);
+      }
+      upper->SetTopMargin(.10); upper->SetBottomMargin(.02);
+      lower->SetTopMargin(.025); lower->SetBottomMargin(.30);
+      cell->cd(); upper->Draw(); lower->Draw();
+
+      vector<TGraphErrors*> graphs;
+      vector<TF1*> curves(samples.size(),nullptr);
+      if(!meanView){
+        auto* source=summaries.at(cog)->GetPad(1);
+        TIter next(source->GetListOfPrimitives());
+        size_t fit=0;
+        while(auto* object=next()){
+          if(auto* graph=dynamic_cast<TGraphErrors*>(object)) graphs.push_back(graph);
+          else if(auto* function=dynamic_cast<TF1*>(object)) curves.at(fit++)=function;
+        }
+      } else {
+        for(int ds : samples) graphs.push_back(means[ds]);
+      }
+      if(graphs.size()!=samples.size()) throw runtime_error("CoG comparison sample mismatch");
+
+      double xmax=meanView ? 1. : 130., ymax=meanView ? .01 : .3;
+      if(meanView){
+        for(auto* graph : graphs) for(int i=0; i<graph->GetN(); ++i){
+          xmax=max(xmax,graph->GetPointX(i)*1.05);
+          ymax=max(ymax,(graph->GetPointY(i)+graph->GetErrorY(i))*1.2);
+        }
+      }
+      int reference=0, mcCount=0;
+      for(size_t i=0; i<samples.size(); ++i) if(sampleIsMC[samples[i]]){reference=i; ++mcCount;}
+      if(mcCount!=1) reference=0;
+      if(!meanView){
+        output.cd();
+        TNamed(Form("resolution_cog_reference_%dmm",cog),SampleCaption(settings[samples[reference]]).c_str()).Write();
+      }
+
+      upper->cd();
+      auto* frame=upper->DrawFrame(0,0,xmax,ymax);
+      frame->SetTitle((cut+(meanView ? ", mean response" : ", without noise term")).c_str());
+      frame->GetYaxis()->SetTitle(meanView ? "Gaussian mean [GeV]" : "#sigma/#mu");
+      frame->GetYaxis()->SetTitleSize(.055); frame->GetYaxis()->SetLabelSize(.045);
+      frame->GetYaxis()->SetTitleOffset(1.2);
+      frame->GetXaxis()->SetLabelSize(0); frame->GetXaxis()->SetTitleSize(0);
+      auto* legend=new TLegend(meanView ? .18 : .30,.64,.95,.88);
+      legend->SetNColumns(samples.size()>3 ? 2 : 1);
+      legend->SetTextFont(42); legend->SetTextSize(0);
+      legend->SetBorderSize(0); legend->SetFillColorAlpha(kWhite,.85);
+      legend->SetBit(TObject::kCanDelete);
+      vector<unique_ptr<TF1>> linearFits(samples.size());
+      vector<TGraphErrors*> differences;
+      for(size_t i=0; i<samples.size(); ++i){
+        const int ds=samples[i];
+        auto* copy=dynamic_cast<TGraphErrors*>(graphs[i]->Clone(Form("%s_%d_sample%d",name.c_str(),cog,ds)));
+        copy->GetListOfFunctions()->Delete();
+        ApplySampleStyle(copy,settings[ds],2);
+        copy->SetMarkerSize(2.2); copy->SetBit(TObject::kCanDelete);
+        copy->Draw("P same");
+        string caption=SampleCaption(settings[ds]);
+        if(meanView && graphs[i]->GetN()>=3){
+          auto fit=make_unique<TF1>(Form("mean_linearity_fit_%d",ds),"pol1",0,xmax,TF1::EAddToList::kNo);
+          TGraphErrors fitPoints(*graphs[i]);
+          const TFitResultPtr result=fitPoints.Fit(fit.get(),"QSN");
+          if(int(result)==0 && isfinite(fit->GetParameter(0)) && isfinite(fit->GetParameter(1))){
+            ApplySampleStyle(fit.get(),settings[ds],2,true);
+            curves[i]=fit.get();
+            caption+=Form(": %.4g E %+.4g",fit->GetParameter(1),fit->GetParameter(0));
+            linearFits[i]=std::move(fit);
+          }
+        } else if(!meanView && curves[i]){
+          caption+=Form(": %.3f/#sqrt{E} #oplus %.3f",abs(curves[i]->GetParameter(0)),abs(curves[i]->GetParameter(1)));
+        }
+        if(curves[i]) curves[i]->DrawCopy("same");
+        if(!meanView && int(i)==reference) caption+=" (ref)";
+        if(meanView && !curves[i]) caption+=" (no linear fit)";
+        legend->AddEntry(copy,caption.c_str(),"lp");
+
+        if(!meanView && int(i)==reference) continue;
+        auto* difference=new TGraphErrors();
+        difference->SetName(Form("%s_%d_difference_sample%d",name.c_str(),cog,ds));
+        ApplySampleStyle(difference,settings[ds],2);
+        difference->SetMarkerSize(1.6); difference->SetBit(TObject::kCanDelete);
+        for(int point=0; point<graphs[i]->GetN(); ++point){
+          const double energy=graphs[i]->GetPointX(point), value=graphs[i]->GetPointY(point), error=graphs[i]->GetErrorY(point);
+          double delta, uncertainty;
+          if(meanView){
+            if(!curves[i] || value<=0) continue;
+            const double predicted=curves[i]->Eval(energy);
+            delta=100*(value-predicted)/value;
+            uncertainty=100*abs(predicted)*error/(value*value); // Mean statistics; fitted line held fixed.
+          } else {
+            auto* ref=graphs[reference];
+            int matching=-1;
+            for(int j=0; j<ref->GetN(); ++j) if(ref->GetPointX(j)==energy){matching=j; break;}
+            if(matching<0 || ref->GetPointY(matching)<=0) continue;
+            const double baseline=ref->GetPointY(matching), baselineError=ref->GetErrorY(matching);
+            delta=100*(value/baseline-1);
+            uncertainty=100*hypot(error/baseline,value*baselineError/(baseline*baseline));
+          }
+          if(!isfinite(delta) || !isfinite(uncertainty)) continue;
+          const int n=difference->GetN();
+          difference->SetPoint(n,energy,delta); difference->SetPointError(n,0,uncertainty);
+        }
+        differences.push_back(difference);
+      }
+      legend->Draw(); upper->Modified(); upper->Update();
+      double extent=5.;
+      for(auto* graph : differences) for(int i=0; i<graph->GetN(); ++i)
+        if(graph->GetPointX(i)<=xmax) extent=max(extent,abs(graph->GetPointY(i))+graph->GetErrorY(i));
+      // Keep ordinary differences readable when a low-energy fit has a huge error.
+      // Preserve the full graphs and mark points outside the displayed interval.
+      extent=min(extent*1.15,meanView ? 10. : 100.);
+      lower->cd();
+      auto* residualFrame=lower->DrawFrame(0,-extent,xmax,extent);
+      residualFrame->GetXaxis()->SetTitle("Beam energy [GeV]");
+      residualFrame->GetYaxis()->SetTitle(meanView ? "(mean-fit)/mean [%]" : "(series-ref)/ref [%]");
+      residualFrame->GetXaxis()->SetTitleSize(.12); residualFrame->GetXaxis()->SetLabelSize(.10);
+      residualFrame->GetYaxis()->SetTitleSize(.10); residualFrame->GetYaxis()->SetLabelSize(.09);
+      residualFrame->GetYaxis()->SetTitleOffset(.70); residualFrame->GetYaxis()->SetNdivisions(505);
+      auto* zero=new TLine(0,0,xmax,0); zero->SetLineStyle(kDashed); zero->SetLineColor(kGray+2);
+      zero->SetBit(TObject::kCanDelete); zero->Draw();
+      int outside=0;
+      for(auto* graph : differences){
+        graph->Draw("P same");
+        for(int i=0; i<graph->GetN(); ++i){
+          const double x=graph->GetPointX(i), y=graph->GetPointY(i);
+          if(x>xmax || abs(y)<=extent) continue;
+          const double sign=y>0 ? 1. : -1.;
+          auto* arrow=new TArrow(x,sign*.70*extent,x,sign*.96*extent,.012,"|>");
+          arrow->SetLineColor(graph->GetLineColor()); arrow->SetFillColor(graph->GetLineColor());
+          arrow->SetBit(TObject::kCanDelete); arrow->Draw(); ++outside;
+        }
+      }
+      if(outside){
+        TLatex text; text.SetNDC(); text.SetTextSize(.075);
+        text.DrawLatex(.52,.81,Form("Arrows: %d out-of-range points",outside));
+      }
+      lower->Modified(); lower->Update();
+    }
+    canvas->cd(); canvas->Modified(); canvas->Update();
+    output.cd(); canvas->Write();
+    canvas->SaveAs((figures+"/"+name+".png").c_str());
+  }
+  output.cd();
+  TNamed("resolution_cog_difference_definition","100*(series/reference-1); same-energy points only; reference is the only path-identified MC in each CoG, otherwise the first series; errors assume independent series; lower display capped at +/-100%, out-of-range points marked by arrows, all points/errors retained").Write();
+  TNamed("mean_linearity_definition","Gaussian mean and error in GeV; same valid points as resolution, data 200 GeV excluded; independent pol1 fit to all valid energies, no 30/80 GeV rejection; residual 100*(mean-fit)/mean; errors from mean statistics with fitted line held fixed; lower display capped at +/-10%, out-of-range points marked by arrows, all points/errors retained").Write();
 }
 
 TLegend* CreateNiceLegend(double x1, double y1, double x2, double y2, int nCols = 2) {
@@ -518,7 +707,7 @@ bool SaveChannelEnergyPair(TFile* const* inputs, int samples, const nameStrings*
     cerr << "Cannot create channel comparison directory: " << rawPath << endl;
     return false;
   }
-  bool renderAfterCut = true;
+  // bool renderAfterCut = true; // After-cut output is temporarily disabled.
   vector<TDirectory*> inputDirectories(samples);
   vector<int> colors(samples);
   for(int ds=0; ds<samples; ++ds){
@@ -532,17 +721,19 @@ bool SaveChannelEnergyPair(TFile* const* inputs, int samples, const nameStrings*
     colors[ds] = settings[ds].conditionIndex >= 0 || settings[ds].sampleIndex < 0
                    ? CoGColor(settings[ds].cutIdx) : SampleColor(settings[ds].sampleIndex);
     // Check all raw canvases before starting to render this energy.
-    for(const char* prefix : {"", "cut_"}){
+    for(const char* prefix : {"" /*, "cut_"*/}){
       for(int layer=0; layer<layers; ++layer){
         for(int chip=0; chip<chips; ++chip){
           const string key = Form("%sedep_Layer%d_Chip%d", prefix, layer, chip);
           if(!inputDirectories[ds]->GetKey(key.c_str())){
+            /* After-cut availability check is temporarily disabled.
             auto* status = dynamic_cast<TNamed*>(inputs[ds]->Get("hl_tail_status"));
             if (*prefix && SummaryOnlyData200(energy, inputs[ds]->GetName()) && status &&
                 std::string(status->GetTitle()) == "incomplete") {
               renderAfterCut = false;
               continue;
             }
+            */
             cerr << "Missing raw canvas " << key << " in " << inputs[ds]->GetName() << endl;
             return false;
           }
@@ -554,11 +745,13 @@ bool SaveChannelEnergyPair(TFile* const* inputs, int samples, const nameStrings*
   if(!energyDirectory) energyDirectory = output.mkdir(energyName.c_str());
   TDirectory* rawDirectory = energyDirectory->GetDirectory("raw");
   if(!rawDirectory) rawDirectory = energyDirectory->mkdir("raw");
+  /* After-cut output is temporarily disabled.
   if (!renderAfterCut)
     cerr << "Skipping unavailable after-cut channel comparison for " << energyName
          << "; incomplete summary-only data 200 GeV input" << endl;
-  for(int eventCut=0; eventCut<2; ++eventCut){
-    if (eventCut && !renderAfterCut) continue;
+  */
+  for(int eventCut=0; eventCut<1 /*2*/; ++eventCut){
+    // if (eventCut && !renderAfterCut) continue;
     const char* prefix = eventCut ? "cut_" : "";
     for(int layer=0; layer<layers; ++layer){
       cout << "Channel edep: " << energyName << ", " << (eventCut ? "after" : "before")
@@ -1005,7 +1198,9 @@ int main(int argc, char* argv[]) try
   
 	// 保存形式
   TGraphErrors *Eres[Ndatasim];
+  vector<TGraphErrors*> Emean(Ndatasim);
   for(int ds=0;ds<Ndatasim;ds++){
+    Emean[ds]=new TGraphErrors();
     Eres[ds] = new TGraphErrors();
     Eres[ds]->SetTitle("Energy Resolution");
     // Eres[ds]->SetTitle("Energy Resolution (all channels)");
@@ -1025,7 +1220,7 @@ int main(int argc, char* argv[]) try
 
 
 
-  string dirNames[2] = {"beforeEventCut", "afterEventCut"};
+  string dirNames[1] = {"beforeEventCut" /*, "afterEventCut"*/};
   // string DataSim[2] = {"data", "simulation"};
   string histoDrawOptions[Ndatasim];
   string graphDrawOptions[Ndatasim];
@@ -1043,8 +1238,15 @@ int main(int argc, char* argv[]) try
 
 
   nameStrings drawSettings[Ndatasim];
+  vector<bool> sampleIsMC(Ndatasim,true);
   map<string,int> conditionIndices;
   for(int ds=0;ds<Ndatasim;ds++){      // cout << filenames[ds][ienergy].second << endl;
+    for(const auto& input : filenames[ds]){
+      bool isMC=false;
+      for(const auto& part : std::filesystem::path(argv[input.second]).lexically_normal())
+        if(part=="mc" || part=="simulation") isMC=true;
+      sampleIsMC[ds]=sampleIsMC[ds] && isMC;
+    }
     if(customLabels){
       drawSettings[ds].label = labels[ds];
       drawSettings[ds].sampleIndex = ds;
@@ -1172,6 +1374,8 @@ int main(int argc, char* argv[]) try
         const int point = Eres[ds]->GetN();
         Eres[ds]->SetPoint(point, _energy, sigma/mean);
         Eres[ds]->SetPointError(point, 0, res_error);
+        Emean[ds]->SetPoint(point, _energy, mean/1000.);
+        Emean[ds]->SetPointError(point, 0, mean_error/1000.);
       }
       energy_deposition[ienergy][ds]->Draw(histoDrawOptions[ds].c_str());
 
@@ -1349,9 +1553,23 @@ int main(int argc, char* argv[]) try
     return sqrt((p[0]*p[0]) / x[0] + (p[1]*p[1]));
   };
 
-  TCanvas *resolution_summary = new TCanvas("summary_resolution", "Resolution summary", 2560,1440);
-  resolution_summary->SetCanvasSize(2560, 1440); // Fix drawable/PNG size independently of window borders.
+  vector<int> sampleCoGs(Ndatasim);
+  auto* resolution_summary=new TCanvas("summary_resolution","Resolution summary",2560,1440);
+  resolution_summary->SetCanvasSize(2560,1440);
   resolution_summary->Divide(2,2);
+  map<int,TCanvas*> resolution_summaries{{0,resolution_summary}};
+  for(int ds=0; ds<Ndatasim; ++ds){
+    // Known CoG values also get individual summaries; generic inputs use the combined one.
+    const int cog=customLabels && drawSettings[ds].conditionIndex<0 ? 0 : drawSettings[ds].cog_range;
+    sampleCoGs[ds]=cog;
+    if(resolution_summaries.count(cog)) continue;
+    const string name=cog ? Form("summary_resolution_%dmm",cog) : "summary_resolution";
+    const string title=cog ? "Resolution summary, " + (cog==200 ? string("nocut") : string(Form("CoG %d mm",cog))) : "Resolution summary";
+    auto* summary=new TCanvas(name.c_str(),title.c_str(),2560,1440);
+    summary->SetCanvasSize(2560,1440);
+    summary->Divide(2,2);
+    resolution_summaries[cog]=summary;
+  }
 
   TCanvas *resolution_plots = new TCanvas("resolution_plots", "resolution_plots", 2560,1440); 
   resolution_plots->SetCanvasSize(2560, 1440); // Fix drawable/PNG size independently of window borders.
@@ -1439,7 +1657,7 @@ int main(int argc, char* argv[]) try
   legResSim->Draw("same");
 
   }
-  SaveResolutionViews(resolution_plots, fileout, argv[argc-1], "resolution", resolution_summary);
+  SaveResolutionViews(resolution_plots, fileout, argv[argc-1], "resolution", resolution_summaries, sampleCoGs);
 
 
 
@@ -1570,11 +1788,15 @@ int main(int argc, char* argv[]) try
   
   }
   // --- 4. 保存処理 ---
-  SaveResolutionViews(resolution_plots_noise, fileout, argv[argc-1], "resolution_with_noise", resolution_summary);
-  resolution_summary->cd();
-  resolution_summary->Modified(); resolution_summary->Update();
-  fileout.cd(); resolution_summary->Write("summary_resolution");
-  resolution_summary->SaveAs(Form("%s/summary_resolution.png",argv[argc-1]));
+  SaveResolutionViews(resolution_plots_noise, fileout, argv[argc-1], "resolution_with_noise", resolution_summaries, sampleCoGs);
+  for(const auto& item : resolution_summaries){
+    auto* summary=item.second;
+    summary->cd();
+    summary->Modified(); summary->Update();
+    fileout.cd(); summary->Write();
+    summary->SaveAs(Form("%s/%s.png",argv[argc-1],summary->GetName()));
+  }
+  SaveCoGComparisonPanels(fileout,argv[argc-1],resolution_summaries,sampleCoGs,Emean,drawSettings,sampleIsMC);
 
   fileout.cd();
   TNamed("resolution_skipped_points", skippedPoints.str().c_str()).Write();

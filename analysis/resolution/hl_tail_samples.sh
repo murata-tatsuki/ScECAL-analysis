@@ -5,8 +5,8 @@ slurm_log_dir=$(realpath -m -- "$(dirname -- "${BASH_SOURCE[0]}")/../log/resolut
 # Paths are relative to analysis/resolution/. Both modes live under custom/hl_tail.
 data_base=/home/murata_t/data_beamtest/ECAL_data/analysed/2023
 mc_calibration=/home/murata_t/data_beamtest/simulation/CEPCScECAL_SML_Portable_update_new/Result_MC/calib/e-/e_ssa/threshold
-result_base=../result/resolution/custom/hl_tail
-figure_base=../result/resolution/figures/custom/hl_tail
+result_base=../result/resolution/unknown/custom/hl_tail
+figure_base=../result/resolution/unknown/figures/custom/hl_tail
 cog_ranges=(200 20 10 5)
 
 if (( ! dry_run )); then mkdir -p "${slurm_log_dir}/hl_tail/$tail_event_mode/$stage"; fi
@@ -25,8 +25,8 @@ done
 multi_target=${HL_TAIL_MULTI_TARGET:-data}
 [[ $multi_target == data || $multi_target == mc ]] || fail "HL_TAIL_MULTI_TARGET must be data or mc: $multi_target"
 multi_options+=(--compare-tail-selections)
-tail_comparison_root=../result/resolution/custom/hl_tail
-tail_comparison_figures=../result/resolution/figures/custom/hl_tail
+tail_comparison_root=../result/resolution/unknown/custom/hl_tail
+tail_comparison_figures=../result/resolution/unknown/figures/custom/hl_tail
 read -r -a excluded_energies <<< "${HL_TAIL_MULTI_EXCLUDE_ENERGIES:-}"
 for cog in "${cog_ranges[@]}"; do
   for mode in exclude keep; do
